@@ -1,0 +1,16 @@
+
+$theme-colors: (
+    "primary":#f2c462,
+    "secondary":#222,
+    "dark":#101010
+);
+$border-radius:0px;
+$dropdown-bg:map-get($theme-colors, secondary);
+$dropdown-link-color: map-get($theme-colors, primary);
+$dropdown-link-hover-color:map-get($theme-colors, primary);
+$dropdown-link-hover-bg:map-get($theme-colors, dark);
+$dropdown-border-color: map-get($theme-colors, dark);;
+@import "~bootstrap/scss/bootstrap";
+ body{
+     background-color: map-get($theme-colors, dark);
+ }
