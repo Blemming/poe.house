@@ -11,13 +11,17 @@ const createStore = () => {
 			}
 		},
 		actions: {
-			async setUser ({ commit }, user) {
-				try {
-					const foundUserRef = await this.$fireStore.collection('accounts').where('uid', '==', user.user.uid).get();
-					const account = foundUserRef.docs[0].data();
-					commit('SET_USER', account);
-				} catch (e) {
-					return e;
+			async setUser ({ commit }, uid) {
+				if (uid) {
+					try {
+						const foundUserRef = await this.$fireStore.collection('accounts').where('uid', '==', uid).get();
+						const account = foundUserRef.docs[0].data();
+						commit('SET_USER', account);
+					} catch (e) {
+						return e;
+					}
+				} else {
+					commit('SET_USER', null);
 				}
 			},
 			resetUser ({ state }) {
@@ -35,10 +39,10 @@ const createStore = () => {
 							username: account.username,
 							email: account.email,
 							uid: createdUser.uid,
-							icon: account.icon
+							icon: account.icon || '/images/default-profile.png'
 						};
 						await newAccountRef.set(user);
-						state.dispatch('userLogin', user);
+						state.dispatch('userLogin', user.user.uid);
 					} catch (e) {
 						console.log(e);
 						return;
@@ -48,10 +52,25 @@ const createStore = () => {
 				}
 			},
 			async userLogin ({ state }, account) {
-				return this.$fireAuth.signInWithEmailAndPassword(account.email, account.password)
-					.then((user) => {
-						return this.dispatch('setUser', user);
-					});
+				const user = await this.$fireAuth.signInWithEmailAndPassword(account.email, account.password);
+				const token = await this.$fireAuth.currentUser.getIdToken(true);
+				await this.$axios.$post('/api/login', { uid: user.user.uid, token: token });
+
+				return this.dispatch('setUser', user.user.uid);
+			},
+			async userLogout ({ state }) {
+				try {
+					await this.$fireAuth.signOut();
+					await this.dispatch('setUser', null);
+					await this.$axios.post('/api/logout');
+				} catch (e) {
+					console.log(e);
+				}
+			},
+			async nuxtServerInit ({ dispatch }, { req }) {
+				if (req.session && req.session.userId) {
+					await dispatch('setUser', req.session.userId);
+				}
 			}
 		},
 		mutations: {

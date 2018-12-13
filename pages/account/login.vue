@@ -1,65 +1,69 @@
 <template>
 	<div class=" text-primary">
-		<div class="row justify-content-center">
-			<div class="col-6 text-center ">
-				<h1 class="display-3">Poe.house login</h1>
-				<h2 class="lead">Login to add hideout</h2>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-6 ">
-				<form @submit.prevent="login">
-					<div class="form-group">
-						<label>Email</label>
-						<div class="control">
-							<input
-								:class="{ 'danger': invalidEmail }"
-								v-model="email"
-								class="form-control"
-								type="email"
-								placeholder="Account Email">
-						</div>
-						<p
-							v-if="invalidEmail"
-							class="bg-danger text-white">This email is invalid</p>
+		<div class="row py-5 justify-content-center">
+			<div class="col-8">
+				<div class="card text-primary bg-secondary border border-primary">
+					<div class="card-header">
+						<h2 class="display-4">Login to add hideout</h2>
 					</div>
+					<div class="card-body">
+						<form @submit.prevent="login">
+							<div class="form-group">
+								<label>Email</label>
+								<div class="control">
+									<input
+										:class="{ 'danger': invalidEmail }"
+										v-model="email"
+										class="form-control"
+										type="email"
+										required
+										placeholder="Account Email">
+								</div>
+								<p
+									v-if="invalidEmail"
+									class="text-danger">This email is invalid</p>
+							</div>
 
-					<div class="form-group">
-						<label>Password</label>
-						<div class="control">
-							<input
-								:class="{ 'danger': invalidPassword }"
-								v-model="password"
-								class="form-control"
-								type="password"
-								placeholder="Password">
-						</div>
-						<p
-							v-if="invalidPassword"
-							class="bg-danger text-white">This password is invalid</p>
+							<div class="form-group">
+								<label>Password</label>
+								<div class="control">
+									<input
+										:class="{ 'danger': invalidPassword }"
+										v-model="password"
+										class="form-control"
+										type="password"
+										required
+										placeholder="Password">
+								</div>
+								<p
+									v-if="invalidPassword"
+									class="text-danger">This password is invalid</p>
+							</div>
+
+							<div class="form-group">
+								<div
+									v-if="formError.length > 0"
+									class="flash flash-error"
+									v-text="formError"/>
+							</div>
+
+							<div class="form-row justify-content-between">
+								<div class="col text-center">
+									<button
+										type="submit"
+										class="btn btn-primary">Log In</button>
+								</div>
+								<div class="col text-center">
+									<nuxt-link
+										to="/account/register"
+										type="submit"
+										class="btn btn-primary">Register</nuxt-link>
+								</div>
+							</div>
+						</form>
 					</div>
+				</div>
 
-					<div class="form-group">
-						<div
-							v-if="formError.length > 0"
-							class="flash flash-error"
-							v-text="formError"/>
-					</div>
-
-					<div class="form-row justify-content-between">
-						<div class="col text-center">
-							<button
-								type="submit"
-								class="btn btn-primary">Log In</button>
-						</div>
-						<div class="col text-center">
-							<button
-								type="submit"
-								class="btn btn-primary">Register</button>
-
-						</div>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>

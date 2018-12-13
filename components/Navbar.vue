@@ -66,10 +66,16 @@
 			<div
 				class="form-inline my-2 my-lg-0">
 				<nuxt-link
+					v-if="!$store.getters.isAuthenticated"
 					to="account/login"
 					class="btn btn-outline-primary my-2 my-sm-0">
 					Login
 				</nuxt-link>
+				<a
+					v-else
+					class="btn btn-outline-primary my-2 my-sm-0"
+					href="#"
+					@click.prevent="logout">Logout</a>
 			</div>
 		</div>
 	</nav>
@@ -93,6 +99,11 @@ export default {
 				// 	dropdownItems: categories
 				// }
 			];
+		}
+	},
+	methods: {
+		logout () {
+			this.$store.dispatch('userLogout');
 		}
 	}
 };

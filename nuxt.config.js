@@ -1,4 +1,6 @@
 const pkg = require('./package');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 const fireBaseConfig = require('./.firebase.json');
 
 module.exports = {
@@ -46,6 +48,9 @@ module.exports = {
 	plugins: [
 	],
 
+	router: {
+		middleware: 'auth-check'
+	},
 	/*
   ** Nuxt.js modules
   */
@@ -69,6 +74,16 @@ module.exports = {
 	axios: {
 		// See https://github.com/nuxt-community/axios-module#options
 	},
+	serverMiddleware: [
+		bodyParser.json(),
+		session({
+			secret: 'amdskfmdlkfdklfndfmdfndsmfndfnejnjheheuewytwgssa',
+			resave: false,
+			saveUninitialized: false,
+			cookie: { maxAge: 60000, secure: false }
+		}),
+		'~/api'
+	],
 
 	/*
   ** Build configuration
