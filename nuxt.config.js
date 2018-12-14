@@ -30,7 +30,7 @@ module.exports = {
 	/*
   ** Customize the progress-bar color
   */
-	loading: { color: '#fff' },
+	loading: { color: '#f2c462' },
 
 	/*
   ** Global CSS
@@ -61,15 +61,26 @@ module.exports = {
 				},
 				useOnly: ['auth', 'firestore']
 			}
-		]
-
+		],
+		['nuxt-validate', {
+			aria: true
+		}]
 	],
 	/*
   ** Axios module configuration
   */
 	axios: {
-		// See https://github.com/nuxt-community/axios-module#options
+		proxy: true
 	},
+	proxy: [
+		['/raw', {
+			target: 'https://pastebin.com/',
+			changeOrigin: true,
+			pathRewrite: {
+				'^/raw': '/raw'
+			}
+		}]
+	],
 
 	/*
   ** Markdownit module configuration

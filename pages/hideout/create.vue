@@ -13,19 +13,33 @@
 							<div class="form-group col-md-6">
 								<label for="inputTitle">Title</label>
 								<input
+									v-validate="'required|max:150'"
 									id="inputTitle"
 									v-model="nameDescription"
+									name="title"
 									required
 									type="input"
 									class="form-control"
 									placeholder="Title">
 							</div>
+							<div class="form-group col-md-6">
+								<label for="inputPastebin">Pastebin link</label>
+								<input
+									id="inputPastebin"
+									v-model="hideoutFileLink"
+									type="text"
+									placeholder="Link to pastebin"
+									class="form-control"
+									@change="resolvePastebin()">
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputDescription">Description</label>
 							<textarea
+								v-validate="'required|max:550'"
 								id="inputDescription"
 								v-model="hideoutDescription"
+								name="description"
 								required
 								type="textarea"
 								class="form-control"
@@ -35,8 +49,10 @@
 							<div class="form-group col-md-6">
 								<label for="inputVideo">Video link</label>
 								<input
+									v-validate="'url:require_protocol'"
 									id="inputVideo"
 									v-model="hideoutVideo"
+									name="Video link"
 									type="text"
 									class="form-control"
 									placeholder="Link to youtube url">
@@ -44,36 +60,65 @@
 							<div class="form-group col-md-6">
 								<label for="inputScreenshot">Screenshot link</label>
 								<input
+									v-validate="'url:require_protocol'"
 									id="inputScreenshot"
 									v-model="hideoutScreenshot"
+									name="Screenshot link"
 									type="text"
 									placeholder="Link to image url"
 									class="form-control">
 							</div>
 							<div class="form-group col-md-4">
-								<label for="inputState">Hideout</label>
-								<select
-									id="inputState"
-									v-model="hideoutType"
-									required
-									class="form-control">
-									<option
-										value=""
-										selected>Choose...</option>
-									<option
-										v-for="hideout in hideoutOptions"
-										:value="hideout.Hash"
-										:key="hideout.Hash">{{ hideout.Name }}</option>
-								</select>
+								<label for="inputHideout">Hideout</label>
+								<img
+									id="inputHideout"
+									:src="hideoutImage"
+									alt="">
 							</div>
-							<div class="form-group col-md-6">
-								<label for="inputPastebin">Pastebin link</label>
-								<input
-									id="inputPastebin"
-									v-model="hideoutFileLink"
-									type="text"
-									placeholder="Link to pastebin"
-									class="form-control">
+							<div
+								id="doodads"
+								class="col-12">
+
+								<h5 class="mb-0">
+									<a
+										href="#"
+										class="text-white"
+										data-toggle="collapse"
+										data-target="#collapseTwo"
+										aria-expanded="true"
+										aria-controls="collapseTwo">
+										Doodads +
+									</a>
+								</h5>
+
+								<div
+									id="collapseTwo"
+									class="collapse"
+									aria-labelledby="headingOne"
+									data-parent="#doodads">
+									<div class="card bg-secondary">
+										<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
+											<tbody>
+												<tr
+													v-for="doodad in getHideoutDoodads"
+													:key="doodad['Hash']">
+													<th scope="row"><img
+														:src="doodad['Icon']"
+														alt=""></th>
+													<td>{{ doodad['Count'] }}</td>
+													<td>{{ doodad['Name'] }}</td>
+													<td>{{ doodad['MasterName'] }}</td>
+													<td>{{ doodad['MasterLevel'] }}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!-- <pre class="text-primary">
+                                    <code>
+                                        {{ pastebinData }}
+                                    </code>
+								</pre> -->
 							</div>
 							<!-- <div class="form-group col-md-2">
 								<label for="inputState">Path of exile version</label>
@@ -93,6 +138,21 @@
 									type="text"
 									class="form-control"
 									placeholder="Author name">
+							</div>
+						</div>
+						<div
+							v-if="error"
+							class="row">
+							<div class="col-12">
+								<span
+									v-for="error in errors.items"
+									:key="error.id"
+									class="badge badge-danger">{{ error.msg }}</span>
+							</div>
+							<div class="col-12">
+								<span
+									v-if="errorMessage"
+									class="badge badge-danger">{{ errorMessage }}</span>
 							</div>
 						</div>
 						<div class="form-row justify-content-between my-3">
@@ -142,7 +202,6 @@
 	</div>
 </template>
 <script>
-import firebase from 'firebase/app';
 export default {
 	data () {
 		return {
@@ -154,17 +213,32 @@ export default {
 			hideoutScreenshot: '',
 			hideoutVideo: '',
 			hideoutDoodads: [],
-			hideoutDateSubmit: 12132018,
 			poeVersion: '3.5.1',
+			pastebinData: '',
 			errorMessage: ''
 		};
 	},
 	computed: {
 		error () {
-			return !!this.errorMessage;
+			return !!this.errors.items.length > 0;
+		},
+		masterMaxLevel () {
+			if (this.getHideoutDoodads) {
+				return this.$mastersObject(this.getHideoutDoodads);
+			}
 		},
 		hideoutDescriptionMD () {
 			return this.hideoutDescription;
+		},
+		hideoutImage () {
+			if (this.pastebinData) {
+				return this.hideoutScreenshot || this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'];
+			}
+		},
+		getHideoutDoodads () {
+			if (this.pastebinData) {
+				return this.$getDoodadsFromHideout(this.$store.state.doodads, this.pastebinData['Doodads']);
+			}
 		},
 		hideoutOptions () {
 			return this.$store.state.hideouts;
@@ -172,25 +246,44 @@ export default {
 	},
 	methods: {
 		async submitHideout () {
-			const hideoutRef = this.$fireStore.collection('hideouts').doc();
-			try {
-				await hideoutRef.set(this.$hideoutObject({
-					author: this.author,
-					nameDescription: this.nameDescription,
-					hideoutType: this.hideoutType,
-					hideoutFileLink: this.hideoutFileLink,
-					hideoutDescription: this.hideoutDescription,
-					hideoutScreenshot: this.hideoutScreenshot,
-					hideoutVideo: this.hideoutVideo,
-					hideoutDoodads: this.hideoutDoodads,
-					hideoutDateSubmit: firebase.firestore.FieldValue.serverTimestamp(),
-					poeVersion: this.poeVersion
-				}));
-			} catch (e) {
-				alert(e);
-				return;
+			if (!this.error) {
+				const hideoutRef = this.$fireStore.collection('hideouts').doc();
+				try {
+					await hideoutRef.set(this.$hideoutObject({
+						author: this.author,
+						nameDescription: this.nameDescription,
+						hideoutType: this.hideoutType,
+						hideoutFileLink: this.hideoutFileLink,
+						hideoutDescription: this.hideoutDescription,
+						hideoutScreenshot: this.hideoutImage,
+						hideoutVideo: this.hideoutVideo,
+						hideoutDoodads: this.getHideoutDoodads,
+						hideoutMasters: this.masterMaxLevel,
+						poeVersion: this.poeVersion
+					}));
+					this.$route.push('/hideout');
+				} catch (e) {
+					alert(e);
+				}
+			} else {
+				this.errorMessage = 'Cannot submit hideout until errors are resolved';
 			}
-			alert('Success.');
+		},
+		async resolvePastebin () {
+			const pastebin = this.hideoutFileLink;
+			if (/https:\/\/pastebin.com\//gi.test(pastebin)) {
+				const rawPastebin = pastebin.replace(/https:\/\/pastebin.com\//gi, '/raw/');
+				try {
+					const { data } = await this.$axios.get(rawPastebin);
+					const pastebinObject = this.$parseHideoutFile(data);
+					this.hideoutType = parseInt(pastebinObject['Hideout Hash']);
+					this.pastebinData = this.$parseHideoutFile(data);
+				} catch (e) {
+					return e;
+				}
+			} else {
+				this.pastebinData = 'Not a pastebin link';
+			}
 		}
 	}
 };
