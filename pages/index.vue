@@ -7,11 +7,23 @@
 			<div class="col-12">
 				<div class="card text-primary bg-secondary border border-primary">
 					<div
-						class="card-header border-bottom border-dark">
-						<h3>Path of Exile Hideout Collection of the week</h3>
+						class="d-flex column align-items-center card-header border-bottom border-dark text-white">
+						<div class="col-1">
+							<img
+								src="https://web.poecdn.com/gen/image/WzAsMSx7ImlkIjo1NzAsInNpemUiOiJhdmF0YXIifV0/0ffbaacdb5/Path_of_Exile_Gallery_Image.jpg"
+								alt=""
+								class="img-fluid">
+
+						</div>
+						<div class="col-8">
+							<h3>Bex_GGG's Hideouts Of The Week</h3>
+						</div>
+						<div class="col-3 align-self-end">
+							<small>Post taken from the Path of Exile <a href="https://www.pathofexile.com/forum/view-thread/1169026">website</a></small>
+						</div>
 					</div>
 					<div class="card-body text-primary text-left">
-						<ul/>
+						<div v-html="$store.state.bexPost"/>
 					</div>
 				</div>
 			</div>

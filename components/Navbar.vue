@@ -66,16 +66,10 @@
 			<div
 				class="form-inline my-2 my-lg-0">
 				<nuxt-link
-					v-if="!$store.getters.isAuthenticated"
-					to="account/login"
+					to="/hideout/create"
 					class="btn btn-outline-primary my-2 my-sm-0">
-					Login
+					Submit Hideout
 				</nuxt-link>
-				<a
-					v-else
-					class="btn btn-outline-primary my-2 my-sm-0"
-					href="#"
-					@click.prevent="logout">Logout</a>
 			</div>
 		</div>
 	</nav>
@@ -90,7 +84,7 @@ export default {
 					title: 'hideouts',
 					dropdownItems: false,
 					description: 'Hideouts',
-					url: '/hideouts',
+					url: '/hideout',
 					target: false
 				}
 				// {

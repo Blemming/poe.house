@@ -1,6 +1,4 @@
 const pkg = require('./package');
-const bodyParser = require('body-parser');
-const session = require('express-session');
 const fireBaseConfig = require('./.firebase.json');
 
 module.exports = {
@@ -20,7 +18,7 @@ module.exports = {
 			{ hid: 'description', name: 'description', content: pkg.description }
 		],
 		link: [
-			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico?v=1.1' },
+			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 			{ rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity: 'sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin: 'anonymous' }
 		],
 		script: [
@@ -46,17 +44,15 @@ module.exports = {
   */
 
 	plugins: [
+		'~/plugins/hideouts.js'
 	],
 
-	router: {
-		middleware: 'auth-check'
-	},
 	/*
   ** Nuxt.js modules
   */
 	modules: [
-		// Doc: https://github.com/nuxt-community/axios-module#usage
 		'@nuxtjs/axios',
+		'@nuxtjs/markdownit',
 		['nuxt-fire',
 			{
 				config: {
@@ -74,17 +70,13 @@ module.exports = {
 	axios: {
 		// See https://github.com/nuxt-community/axios-module#options
 	},
-	serverMiddleware: [
-		bodyParser.json(),
-		session({
-			secret: 'amdskfmdlkfdklfndfmdfndsmfndfnejnjheheuewytwgssa',
-			resave: false,
-			saveUninitialized: false,
-			cookie: { maxAge: 60000, secure: false }
-		}),
-		'~/api'
-	],
 
+	/*
+  ** Markdownit module configuration
+  */
+	markdownit: {
+		injected: true
+	},
 	/*
   ** Build configuration
   */

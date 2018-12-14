@@ -1,7 +1,7 @@
 <template>
 	<div class="bg-dark">
 		<navbar/>
-		<div class="container">
+		<div class="container py-3">
 			<nuxt/>
 		</div>
 	</div>
