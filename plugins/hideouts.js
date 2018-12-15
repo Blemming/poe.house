@@ -37,6 +37,7 @@ Vue.prototype.$hideoutObject = ({
 	hideoutDescription = '',
 	hideoutScreenshot = '',
 	hideoutVideo = '',
+	hideoutId = '',
 	hideoutDoodads = [],
 	hideoutMasters = [],
 	poeVersion = '3.5.1'
@@ -50,6 +51,7 @@ Vue.prototype.$hideoutObject = ({
 	hideoutVideo,
 	hideoutDoodads,
 	hideoutMasters,
+	hideoutId,
 	hideoutDateSubmit: firebase.firestore.FieldValue.serverTimestamp(),
 	poeVersion
 });

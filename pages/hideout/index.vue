@@ -9,9 +9,10 @@
 					<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
 						<thead>
 							<tr>
-								<th scope="col">Date</th>
+								<th scope="col">Doodads</th>
 								<th scope="col">Title</th>
 								<th scope="col">Type</th>
+								<th scope="col">Required Masters</th>
 								<th scope="col">Author</th>
 							</tr>
 						</thead>
@@ -19,9 +20,15 @@
 							<tr
 								v-for="(hideout,index) in hideouts"
 								:key="index">
-								<th scope="row">{{ tempDate(hideout.hideoutDateSubmit.seconds) }}</th>
+								<th scope="row">{{ hideout.hideoutDoodads.length }}</th>
 								<td>{{ hideout.nameDescription }}</td>
-								<td>{{ hideout.hideoutType }}</td>
+								<td>{{ getHideout(hideout.hideoutType) }}</td>
+								<td>
+									Alva level {{ hideout.hideoutMasters['Alva'] }}<br>
+									Einhar level {{ hideout.hideoutMasters['Einhar'] }}<br>
+									Niko level {{ hideout.hideoutMasters['Niko'] }}<br>
+									Zana level {{ hideout.hideoutMasters['Zana'] }}<br>
+								</td>
 								<td>{{ hideout.author }}</td>
 							</tr>
 						</tbody>
@@ -47,16 +54,12 @@ export default {
 		}
 	},
 	methods: {
-
-		tempDate (secs) {
-			const date = new Date(secs * 1000);
-			// Hours part from the timestamp
-			const hours = date.getHours();
-			// Minutes part from the timestamp
-			const minutes = '0' + date.getMinutes();
-			// Seconds part from the timestamp
-			const seconds = '0' + date.getSeconds();
-			return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+		getHideout (hash) {
+			if (hash) {
+				return this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === hash)[0]['Name'];
+			} else {
+				return '';
+			}
 		}
 	}
 };

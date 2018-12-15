@@ -27,6 +27,7 @@
 								<input
 									id="inputPastebin"
 									v-model="hideoutFileLink"
+									required
 									type="text"
 									placeholder="Link to pastebin"
 									class="form-control"
@@ -36,7 +37,7 @@
 						<div class="form-group">
 							<label for="inputDescription">Description</label>
 							<textarea
-								v-validate="'required|max:550'"
+								v-validate="'required|max:1550'"
 								id="inputDescription"
 								v-model="hideoutDescription"
 								name="description"
@@ -68,9 +69,22 @@
 									placeholder="Link to image url"
 									class="form-control">
 							</div>
-							<div class="form-group col-md-4">
-								<label for="inputHideout">Hideout</label>
+							<div class="form-group col-md-12">
+								<label for="inputHideout">Hideout</label><br>
+								<div
+									v-if="imgurGallery">
+									<blockquote
+										:data-id="`a/${hideoutImage}`"
+										class="imgur-embed-pub"
+										lang="en"><a :href="`//imgur.com/${hideoutImage}`"/>
+									</blockquote>
+									<script
+										async
+										src="//s.imgur.com/min/embed.js"
+										charset="utf-8"/>
+								</div>
 								<img
+									v-if="!imgurGallery"
 									id="inputHideout"
 									:src="hideoutImage"
 									alt="">
@@ -90,7 +104,6 @@
 										Doodads +
 									</a>
 								</h5>
-
 								<div
 									id="collapseTwo"
 									class="collapse"
@@ -114,11 +127,6 @@
 										</table>
 									</div>
 								</div>
-								<!-- <pre class="text-primary">
-                                    <code>
-                                        {{ pastebinData }}
-                                    </code>
-								</pre> -->
 							</div>
 							<!-- <div class="form-group col-md-2">
 								<label for="inputState">Path of exile version</label>
@@ -135,6 +143,7 @@
 								<label for="inputAuthor">Author</label>
 								<input
 									id="inputAuthor"
+									v-model="author"
 									type="text"
 									class="form-control"
 									placeholder="Author name">
@@ -157,7 +166,14 @@
 						</div>
 						<div class="form-row justify-content-between my-3">
 							<div class="col">
+								<vue-recaptcha
+									ref="recaptcha"
+									size="invisible"
+									sitekey="6Lce9oEUAAAAAArGCOuyLXTSjFGarewlLYCN9E_e"
+									@verify="onCaptchaVerified"
+									@expired="onCaptchaExpired"/>
 								<button
+									:disabled="status==='submitting'"
 									type="submit"
 									class="btn btn-primary">Submit</button>
 							</div>
@@ -202,7 +218,12 @@
 	</div>
 </template>
 <script>
+
+import VueRecaptcha from 'vue-recaptcha';
 export default {
+	components: {
+		VueRecaptcha
+	},
 	data () {
 		return {
 			author: '',
@@ -210,6 +231,7 @@ export default {
 			hideoutType: '',
 			hideoutFileLink: '',
 			hideoutDescription: '',
+			status: '',
 			hideoutScreenshot: '',
 			hideoutVideo: '',
 			hideoutDoodads: [],
@@ -230,9 +252,19 @@ export default {
 		hideoutDescriptionMD () {
 			return this.hideoutDescription;
 		},
+		imgurGallery () {
+			return !!/imgur/g.test(this.hideoutScreenshot);
+		},
 		hideoutImage () {
+			if (this.hideoutScreenshot) {
+				if (/imgur/gi.test(this.hideoutScreenshot)) {
+					return this.hideoutScreenshot.replace(/https:\/\/imgur\.com\/a\//gi, '');
+				} else {
+					return this.hideoutScreenshot;
+				}
+			}
 			if (this.pastebinData) {
-				return this.hideoutScreenshot || this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'];
+				return this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'];
 			}
 		},
 		getHideoutDoodads () {
@@ -245,11 +277,19 @@ export default {
 		}
 	},
 	methods: {
-		async submitHideout () {
+		submitHideout () {
+			console.log('called');
+			this.$refs.recaptcha.execute();
+		},
+		async onCaptchaVerified () {
+			console.log('called');
 			if (!this.error) {
+				this.status = 'submitting';
+				this.$refs.recaptcha.reset();
 				const hideoutRef = this.$fireStore.collection('hideouts').doc();
+				const newID = hideoutRef.id;
 				try {
-					await hideoutRef.set(this.$hideoutObject({
+					const newHideout = this.$hideoutObject({
 						author: this.author,
 						nameDescription: this.nameDescription,
 						hideoutType: this.hideoutType,
@@ -259,9 +299,13 @@ export default {
 						hideoutVideo: this.hideoutVideo,
 						hideoutDoodads: this.getHideoutDoodads,
 						hideoutMasters: this.masterMaxLevel,
+						hieoutId: newID,
 						poeVersion: this.poeVersion
-					}));
-					this.$route.push('/hideout');
+					});
+					await hideoutRef.set(newHideout);
+
+					this.status = '';
+					this.$router.push('/hideout');
 				} catch (e) {
 					alert(e);
 				}
@@ -284,7 +328,17 @@ export default {
 			} else {
 				this.pastebinData = 'Not a pastebin link';
 			}
+		},
+		onCaptchaExpired () {
+			this.$refs.recaptcha.reset();
 		}
+	},
+	head () {
+		return {
+			script: [
+				{ type: 'text/javascript', src: 'https://www.google.com/recaptcha/api.js', body: true }
+			]
+		};
 	}
 };
 </script>

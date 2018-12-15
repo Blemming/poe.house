@@ -44,7 +44,8 @@ module.exports = {
   */
 
 	plugins: [
-		'~/plugins/hideouts.js'
+		'~/plugins/hideouts.js',
+		{ src: '~/plugins/vue-recaptcha.js', ssr: false }
 	],
 
 	/*
