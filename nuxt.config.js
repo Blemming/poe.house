@@ -22,6 +22,8 @@ module.exports = {
 			{ rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.3.1/css/all.css', integrity: 'sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin: 'anonymous' }
 		],
 		script: [
+
+			{ type: 'text/javascript', src: 'https://www.google.com/recaptcha/api.js', body: true },
 			{ type: 'text/javascript', src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js', body: true },
 			{ type: 'text/javascript', src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js', body: true }
 		]
@@ -86,7 +88,8 @@ module.exports = {
   ** Markdownit module configuration
   */
 	markdownit: {
-		injected: true
+		injected: true,
+		breaks: true
 	},
 	/*
   ** Build configuration

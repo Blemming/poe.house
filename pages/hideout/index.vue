@@ -14,6 +14,7 @@
 								<th scope="col">Type</th>
 								<th scope="col">Required Masters</th>
 								<th scope="col">Author</th>
+								<th scope="col"/>
 							</tr>
 						</thead>
 						<tbody>
@@ -30,6 +31,9 @@
 									Zana level {{ hideout.hideoutMasters['Zana'] }}<br>
 								</td>
 								<td>{{ hideout.author }}</td>
+								<td><nuxt-link
+									:to="`/hideout/${hideout.hideoutId}`"
+									class="btn btn-primary">Details</nuxt-link></td>
 							</tr>
 						</tbody>
 					</table>

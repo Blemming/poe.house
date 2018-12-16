@@ -2,8 +2,24 @@ import Vue from 'vue';
 import uniqBy from 'lodash/uniqBy';
 import firebase from 'firebase/app';
 // Vue.prototype.$parseHideoutFile = (string) => JSON.parse(string.replace(/^\n$/gm, '').replace(/=/gm, ':').replace(/([^ ]*?)\n/g, '$1,\n').replace(/^/g, '{\n').replace(/$/g, '\n}').replace(/(^|{|,)(.*?)\s*:/gm, '$1"$2":').replace(/"\s(.*?)"/g, '"$1"'));
-Vue.prototype.$parseHideoutFile = (string) => JSON.parse(string.replace(/^\n$/gm, '').replace(/=/gm, ':').replace(/([^ ]*?)\n/g, '$1,\n').replace(/^/g, '{\n').replace(/$/g, '\n]\n}').replace(/(^|{|,)(.*?)\s*:/gm, '$1"$2":').replace(/"\s(.*?)"/g, '"$1"').replace(/(^".*?":\s)({)/gm, '$2').replace(/^{"/m, '"Doodads":[{"'));
-Vue.prototype.$getDoodadsFromHideout = (allDoodads, hideoutObjectDoodads) => {
+Vue.prototype.$parseHideoutFile = (string) => {
+	// TERRIBLE CODE TODO: Make this better
+	try {
+		return JSON.parse(
+			string.replace(/^\n$/gm, '')
+				.replace(/=/gm, ':')
+				.replace(/([^ ]*?)\n/g, '$1,\n')
+				.replace(/^/g, '{\n')
+				.replace(/$/g, '\n]\n}')
+				.replace(/(^|{|,)(.*?)\s*:/gm, '$1"$2":')
+				.replace(/"\s(.*?)"/g, '"$1"')
+				.replace(/(^".*?":\s)({)/gm, '$2')
+				.replace(/^{"/m, '"Doodads":[{"'));
+	} catch (e) {
+		return e.message;
+	}
+};
+Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = []) => {
 	const doodads = [];
 	for (const doodad of hideoutObjectDoodads) {
 		const found = allDoodads.filter(doo => parseInt(doo['Hash']) === doodad['Hash'])[0];

@@ -24,14 +24,46 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputPastebin">Pastebin link</label>
-								<input
-									id="inputPastebin"
-									v-model="hideoutFileLink"
-									required
-									type="text"
-									placeholder="Link to pastebin"
-									class="form-control"
-									@change="resolvePastebin()">
+
+								<div class="input-group">
+									<input
+										v-validate="{ required: true, regex: /https:\/\/pastebin.com\// }"
+										id="inputPastebin"
+										v-model="hideoutFileLink"
+										:disabled="pastebinSubmitted"
+										name="Pastebin Link"
+										required
+										type="text"
+										placeholder="Link to pastebin"
+										class="form-control">
+									<div
+										v-if="pastebinSubmitted"
+										class="input-group-append">
+										<a
+											href="#"
+											class="btn btn-danger"
+											@click.prevent="clearPastebin()">
+											<span>
+												<i class="fas fa-ban"/>
+											</span>
+										</a>
+									</div>
+									<div
+										v-else
+										class="input-group-append">
+										<a
+											:class="`btn btn-primary ${(!hideoutFileLink|| error)?'disabled':''}`"
+											href="#"
+											@click.prevent="resolvePastebin()">
+											<span v-if="!pastebinProcessing">
+												Process
+											</span>
+											<span v-else>
+												<i class="fas fa-spinner-third fa-spin"/>
+											</span>
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -40,6 +72,7 @@
 								v-validate="'required|max:1550'"
 								id="inputDescription"
 								v-model="hideoutDescription"
+								rows="7"
 								name="description"
 								required
 								type="textarea"
@@ -150,12 +183,13 @@
 							</div>
 						</div>
 						<div
-							v-if="error"
+							v-if="error || errorMessage"
 							class="row">
-							<div class="col-12">
+							<div
+								v-for="error in errors.items"
+								:key="error.id"
+								class="col-12 mt-1">
 								<span
-									v-for="error in errors.items"
-									:key="error.id"
 									class="badge badge-danger">{{ error.msg }}</span>
 							</div>
 							<div class="col-12">
@@ -173,7 +207,7 @@
 									@verify="onCaptchaVerified"
 									@expired="onCaptchaExpired"/>
 								<button
-									:disabled="status==='submitting'"
+									:disabled="status==='submitting' || !!error"
 									type="submit"
 									class="btn btn-primary">Submit</button>
 							</div>
@@ -206,7 +240,7 @@
 											class="card-header"/>
 										<div
 											class="card-body"
-											v-html="$md.render(hideoutDescriptionMD)"/>
+											v-html="renderedDescription"/>
 									</div>
 								</div>
 							</div>
@@ -237,6 +271,8 @@ export default {
 			hideoutDoodads: [],
 			poeVersion: '3.5.1',
 			pastebinData: '',
+			pastebinProcessing: false,
+			pastebinSubmitted: false,
 			errorMessage: ''
 		};
 	},
@@ -255,6 +291,9 @@ export default {
 		imgurGallery () {
 			return !!/imgur/g.test(this.hideoutScreenshot);
 		},
+		renderedDescription () {
+			return this.$md.render(this.hideoutDescription);
+		},
 		hideoutImage () {
 			if (this.hideoutScreenshot) {
 				if (/imgur/gi.test(this.hideoutScreenshot)) {
@@ -264,7 +303,7 @@ export default {
 				}
 			}
 			if (this.pastebinData) {
-				return this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'];
+				return this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'] || '';
 			}
 		},
 		getHideoutDoodads () {
@@ -278,28 +317,26 @@ export default {
 	},
 	methods: {
 		submitHideout () {
-			console.log('called');
 			this.$refs.recaptcha.execute();
 		},
 		async onCaptchaVerified () {
-			console.log('called');
 			if (!this.error) {
 				this.status = 'submitting';
 				this.$refs.recaptcha.reset();
-				const hideoutRef = this.$fireStore.collection('hideouts').doc();
-				const newID = hideoutRef.id;
 				try {
+					const hideoutRef = this.$fireStore.collection('hideouts').doc();
+					const newID = hideoutRef.id;
 					const newHideout = this.$hideoutObject({
 						author: this.author,
 						nameDescription: this.nameDescription,
 						hideoutType: this.hideoutType,
 						hideoutFileLink: this.hideoutFileLink,
-						hideoutDescription: this.hideoutDescription,
+						hideoutDescription: this.renderedDescription,
 						hideoutScreenshot: this.hideoutImage,
 						hideoutVideo: this.hideoutVideo,
 						hideoutDoodads: this.getHideoutDoodads,
 						hideoutMasters: this.masterMaxLevel,
-						hieoutId: newID,
+						hideoutId: newID,
 						poeVersion: this.poeVersion
 					});
 					await hideoutRef.set(newHideout);
@@ -313,16 +350,33 @@ export default {
 				this.errorMessage = 'Cannot submit hideout until errors are resolved';
 			}
 		},
+		clearPastebin () {
+			this.hideoutType = '';
+			this.pastebinData = '';
+			this.hideoutFileLink = '';
+			this.pastebinSubmitted = false;
+		},
 		async resolvePastebin () {
 			const pastebin = this.hideoutFileLink;
 			if (/https:\/\/pastebin.com\//gi.test(pastebin)) {
+				this.pastebinProcessing = true;
 				const rawPastebin = pastebin.replace(/https:\/\/pastebin.com\//gi, '/raw/');
 				try {
+					this.errorMessage = '';
 					const { data } = await this.$axios.get(rawPastebin);
 					const pastebinObject = this.$parseHideoutFile(data);
-					this.hideoutType = parseInt(pastebinObject['Hideout Hash']);
-					this.pastebinData = this.$parseHideoutFile(data);
+					console.log(pastebinObject);
+					if (pastebinObject['Hideout Hash']) {
+						this.hideoutType = parseInt(pastebinObject['Hideout Hash']);
+						this.pastebinData = this.$parseHideoutFile(data);
+						this.pastebinProcessing = false;
+						this.pastebinSubmitted = true;
+					} else {
+						this.errorMessage = 'Not a valid hideout file';
+						this.pastebinProcessing = false;
+					}
 				} catch (e) {
+					this.pastebinProcessing = false;
 					return e;
 				}
 			} else {

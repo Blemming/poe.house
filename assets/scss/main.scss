@@ -12,6 +12,7 @@ $dropdown-link-hover-bg:map-get($theme-colors, dark);
 $dropdown-border-color: map-get($theme-colors, dark);
 $table-dark-border-color: map-get($theme-colors, dark);
 $input-bg:map-get($theme-colors, dark);
+$input-disabled-bg: map-get($theme-colors, secondary);
 $input-color: white;
 @import "~bootstrap/scss/bootstrap";
  body{
