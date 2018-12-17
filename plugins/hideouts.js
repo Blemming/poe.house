@@ -38,11 +38,15 @@ Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = 
 	});
 };
 Vue.prototype.$mastersObject = (doodads) => {
+	const Zana = doodads.filter(doo => doo['MasterName'] === 'Zana').map(doo => doo['MasterLevel']) || [0, 0];
+	const Niko = doodads.filter(doo => doo['MasterName'] === 'Niko').map(doo => doo['MasterLevel']) || [0, 0];
+	const Einhar = doodads.filter(doo => doo['MasterName'] === 'Einhar').map(doo => doo['MasterLevel']) || [0, 0];
+	const Alva = doodads.filter(doo => doo['MasterName'] === 'Alva').map(doo => doo['MasterLevel']) || [0, 0];
 	return {
-		'Zana': Math.max(...doodads.filter(doo => doo['MasterName'] === 'Zana').map(doo => doo['MasterLevel'])),
-		'Niko': Math.max(...doodads.filter(doo => doo['MasterName'] === 'Niko').map(doo => doo['MasterLevel'])),
-		'Einhar': Math.max(...doodads.filter(doo => doo['MasterName'] === 'Einhar').map(doo => doo['MasterLevel'])),
-		'Alva': Math.max(...doodads.filter(doo => doo['MasterName'] === 'Alva').map(doo => doo['MasterLevel']))
+		Zana: Math.max(...Zana, ...[0, 0]),
+		Niko: Math.max(...Niko, ...[0, 0]),
+		Einhar: Math.max(...Einhar, ...[0, 0]),
+		Alva: Math.max(...Alva, ...[0, 0])
 	};
 };
 Vue.prototype.$hideoutObject = ({

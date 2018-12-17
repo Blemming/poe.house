@@ -15,7 +15,7 @@
 								class="form-control">
 								<option
 									value=""
-									selected>Choose...</option>
+									selected>All</option>
 								<option
 									v-for="hideout in $store.state.hideouts"
 									:value="hideout['Hash']"
@@ -30,7 +30,7 @@
 								class="form-control">
 								<option
 									:value="0"
-									selected>Choose...</option>
+									selected>All</option>
 								<option
 									v-for="level in levels"
 									:value="level"
@@ -45,7 +45,7 @@
 								class="form-control">
 								<option
 									:value="0"
-									selected>Choose...</option>
+									selected>All</option>
 								<option
 									v-for="level in levels"
 									:value="level"
@@ -60,7 +60,7 @@
 								class="form-control">
 								<option
 									:value="0"
-									selected>Choose...</option>
+									selected>All</option>
 								<option
 									v-for="level in levels"
 									:value="level"
@@ -75,7 +75,7 @@
 								class="form-control">
 								<option
 									:value="0"
-									selected>Choose...</option>
+									selected>All</option>
 								<option
 									v-for="level in levels"
 									:value="level"
@@ -83,7 +83,62 @@
 							</select>
 						</div>
 					</div>
-					<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
+					<div class="row bg-dark py-3">
+						<div
+							v-for="(hideout,index) in filteredHideouts"
+							:key="index"
+							class="col-6 my-2">
+							<div class="card bg-secondary">
+								<img
+									:src="getImage(hideout)"
+									class="card-img-top"
+									alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title text-white ">{{ hideout.nameDescription }}
+									</h5>
+									<div class="row">
+										<div class="col-12">
+											<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
+												<tbody>
+													<tr>
+														<th scope="row">Hideout</th>
+														<td class="text-white"><strong>{{ getHideout(hideout.hideoutType) }}</strong></td>
+													</tr>
+													<tr>
+														<th scope="row">Doodads</th>
+														<td class="text-white"><strong>{{ hideout.hideoutDoodads.length }}</strong></td>
+													</tr>
+													<tr>
+														<th scope="row">Alva</th>
+														<td class="text-white"><strong>{{ hideout.hideoutMasters['Alva'] }}</strong></td>
+													</tr>
+													<tr>
+														<th scope="row">Einhar </th>
+														<td class="text-white"><strong>{{ hideout.hideoutMasters['Einhar'] }}</strong></td>
+													</tr>
+													<tr>
+														<th scope="row">Niko </th>
+														<td class="text-white"><strong>{{ hideout.hideoutMasters['Niko'] }}</strong></td>
+													</tr>
+													<tr>
+														<th scope="row">Zana </th>
+														<td class="text-white"><strong>{{ hideout.hideoutMasters['Zana'] }}</strong></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row justify-content-end">
+										<nuxt-link
+											:to="`/hideout/${hideout.hideoutId}`"
+											class="btn btn-primary">Details</nuxt-link>
+									</div>
+								</div>
+								<div class="card-footer">
+									<small class="text-muted ">by {{ hideout.author }}</small>
+								</div>
+							</div>
+							<!-- <table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
 						<thead>
 							<tr>
 								<th scope="col">Doodads</th>
@@ -108,17 +163,15 @@
 									Zana level {{ hideout.hideoutMasters['Zana'] }}<br>
 								</td>
 								<td>{{ hideout.author }}</td>
-								<td><nuxt-link
-									:to="`/hideout/${hideout.hideoutId}`"
-									class="btn btn-primary">Details</nuxt-link></td>
+								<td/>
 							</tr>
 						</tbody>
-					</table>
+					</table> -->
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</template>
+</div></div></template>
 <script>
 export default {
 	async asyncData (context) {
@@ -171,6 +224,13 @@ export default {
 				return this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === hash)[0]['Name'];
 			} else {
 				return '';
+			}
+		},
+		getImage (hideout) {
+			if (/.jpg|.png|jpeg/gi.test(hideout.hideoutScreenshot)) {
+				return hideout.hideoutScreenshot;
+			} else {
+				return this.$store.state.hideouts.filter(stateHideout => parseInt(stateHideout['Hash']) === hideout.hideoutType)[0]['Icon'];
 			}
 		}
 	}

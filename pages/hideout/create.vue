@@ -366,7 +366,6 @@ export default {
 					this.errorMessage = '';
 					const { data } = await this.$axios.get(rawPastebin);
 					const pastebinObject = this.$parseHideoutFile(data);
-					console.log(pastebinObject);
 					if (pastebinObject['Hideout Hash']) {
 						this.hideoutType = parseInt(pastebinObject['Hideout Hash']);
 						this.pastebinData = this.$parseHideoutFile(data);
