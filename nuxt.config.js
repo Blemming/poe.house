@@ -64,6 +64,10 @@ module.exports = {
 				useOnly: ['auth', 'firestore']
 			}
 		],
+		['@nuxtjs/google-analytics', {
+			track: 'PageView',
+			id: 'UA-131152589-1'
+		}],
 		['nuxt-validate', {
 			aria: true
 		}]
