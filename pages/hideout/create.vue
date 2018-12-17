@@ -92,7 +92,7 @@
 									placeholder="Link to youtube url">
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputScreenshot">Screenshot link</label>
+								<label for="inputScreenshot">Screenshot link <small>(Can be a imgur gallery)</small></label>
 								<input
 									v-validate="'url:require_protocol'"
 									id="inputScreenshot"
@@ -120,6 +120,7 @@
 									v-if="!imgurGallery"
 									id="inputHideout"
 									:src="hideoutImage"
+									class="img-fluid"
 									alt="">
 							</div>
 							<div
@@ -289,7 +290,7 @@ export default {
 			return this.hideoutDescription;
 		},
 		imgurGallery () {
-			return !!/imgur/g.test(this.hideoutScreenshot);
+			return !!/imgur/g.test(this.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
 		},
 		renderedDescription () {
 			return this.$md.render(this.hideoutDescription);
