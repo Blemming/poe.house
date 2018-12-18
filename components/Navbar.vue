@@ -80,13 +80,13 @@ export default {
 		navbarOptions () {
 			// const categories = this.$store.state.poe.hideouts.map(hideout => ({ description: hideout.Name, url: `/hideout/${hideout.Hash}`, target: false }));
 			return [
-				{
-					title: 'hideouts',
-					dropdownItems: false,
-					description: 'Hideouts',
-					url: '/hideout',
-					target: false
-				}
+				// {
+				// 	title: 'hideouts',
+				// 	dropdownItems: false,
+				// 	description: 'Hideouts',
+				// 	url: '/hideout',
+				// 	target: false
+				// }
 				// {
 				// 	title: 'categories',
 				// 	description: 'Categories',
