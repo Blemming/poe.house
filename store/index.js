@@ -20,6 +20,5 @@ export const actions = {
 		const { hideouts } = require('~/data/hideouts.json');
 		commit('SET_DOODADS', doodads);
 		commit('SET_HIDEOUTS', hideouts);
-		commit('SET_BEX_POST', stripped);
 	}
 };
