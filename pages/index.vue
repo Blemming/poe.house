@@ -105,6 +105,32 @@
 						</div>
 					</div>
 					<div class="row bg-dark py-3">
+						<div class="col-12">
+							<div class="row justify-content-end">
+								<div class="col-xs-6 col-lg-2 form-group">
+									<select
+										id="inputState"
+										v-model="sort"
+										class="form-control custom-select border-secondary text-white">
+										<option
+											value=""
+											selected>Sort</option>
+										<option value="downloads">
+											Downloads
+										</option>
+										<option value="views">
+											Views
+										</option>
+										<option value="date-old">
+											Date newest
+										</option>
+										<option value="date-new">
+											Date oldest
+										</option>
+									</select>
+								</div>
+							</div>
+						</div>
 						<div
 							v-for="(hideout,index) in filteredHideouts"
 							:key="index"
@@ -135,7 +161,7 @@
 													</tr>
 													<tr>
 														<th scope="row">Favour Required</th>
-														<td class="text-white"><strong>{{ totalFavorCost(hideout.hideoutDoodads) }}</strong></td>
+														<td class="text-white"><strong>{{ formatFavour(totalFavorCost(hideout.hideoutDoodads)) }}</strong></td>
 													</tr>
 													<tr>
 														<th scope="row">Decorations</th>
@@ -254,6 +280,7 @@ export default {
 			levels: [1, 2, 3, 4, 5, 6, 7],
 			hideoutType: '',
 			'mtx': '',
+			'sort': '',
 			'Alva': 0,
 			'Einhar': 0,
 			'Niko': 0,
@@ -281,7 +308,17 @@ export default {
 			if (this.Zana) {
 				results = results.filter(hideout => hideout.hideoutMasters['Zana'] <= this.Zana);
 			}
-			return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
+			if (this.sort) {
+				if (this.sort === 'date-old') {
+					return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
+				}
+				if (this.sort === 'date-new') {
+					return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'asc');
+				}
+				return orderBy(results, (ho) => ho[this.sort], 'desc');
+			} else {
+				return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
+			}
 		}
 	},
 	methods: {
@@ -294,6 +331,9 @@ export default {
 			} else {
 				return '';
 			}
+		},
+		formatFavour (favour = 0) {
+			return favour.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 		},
 		getImage (hideout) {
 			if (/.jpg|.png|jpeg/gi.test(hideout.hideoutScreenshot)) {
