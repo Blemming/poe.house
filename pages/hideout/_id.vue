@@ -98,7 +98,7 @@
 						</div>
 						<div
 							v-if="shoppingList.alva.length> 0"
-							class="col-6">
+							class="col-xs-12 col-lg-6">
 							<div class="row">
 								<div
 									id="alva"
@@ -151,7 +151,7 @@
 						</div>
 						<div
 							v-if="shoppingList.einhar.length> 0"
-							class="col-6">
+							class="col-xs-12 col-lg-6">
 							<div class="row">
 								<div
 									id="Einhar"
@@ -199,7 +199,7 @@
 						</div>
 						<div
 							v-if="shoppingList.niko.length> 0"
-							class="col-6">
+							class="col-xs-12 col-lg-6">
 							<div class="row">
 								<div
 									id="Niko"
@@ -247,7 +247,7 @@
 						</div>
 						<div
 							v-if="shoppingList.zana.length> 0"
-							class="col-6">
+							class="col-xs-12 col-lg-6">
 							<div class="row">
 								<div
 									id="Zana"
@@ -295,7 +295,7 @@
 						</div>
 						<div
 							v-if="shoppingList.other.length> 0"
-							class="col-12">
+							class="col-xs-12 col-lg-6">
 							<div class="row">
 								<div
 									id="mtx"

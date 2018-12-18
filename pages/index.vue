@@ -15,12 +15,12 @@
 				</div>
 				<div class="card-body text-primary text-left">
 					<div class="row">
-						<div class="col form-group">
+						<div class="col-xs-6 col-lg-2 form-group">
 							<label for="inputState">Hideout Type</label>
 							<select
 								id="inputState"
 								v-model="hideoutType"
-								class="form-control">
+								class="form-control custom-select border-primary text-primary">
 								<option
 									value=""
 									selected>All</option>
@@ -30,12 +30,12 @@
 									:key="hideout['Hash']">{{ hideout['Name'] }}</option>
 							</select>
 						</div>
-						<div class="col form-group">
+						<div class="col-xs-6 col-lg-2 form-group">
 							<label for="inputState">MTX</label>
 							<select
 								id="inputState"
 								v-model="mtx"
-								class="form-control">
+								class="form-control custom-select border-primary text-primary">
 								<option
 									value=""
 									selected>All</option>
@@ -43,12 +43,12 @@
 								<option :value="false">No</option>
 							</select>
 						</div>
-						<div class="col form-group">
+						<div class="col-xs-6 col-lg-2 form-group">
 							<label for="inputState">Alva Level</label>
 							<select
 								id="inputState"
 								v-model="Alva"
-								class="form-control">
+								class="form-control custom-select border-primary text-primary">
 								<option
 									:value="0"
 									selected>All</option>
@@ -58,12 +58,12 @@
 									:key="level">{{ level }}</option>
 							</select>
 						</div>
-						<div class="col form-group">
+						<div class="col-xs-6 col-lg-2 form-group">
 							<label for="inputState">Einhar Level</label>
 							<select
 								id="inputState"
 								v-model="Einhar"
-								class="form-control">
+								class="form-control custom-select border-primary text-primary">
 								<option
 									:value="0"
 									selected>All</option>
@@ -73,12 +73,12 @@
 									:key="level">{{ level }}</option>
 							</select>
 						</div>
-						<div class="col form-group">
+						<div class="col-xs-6 col-lg-2 form-group">
 							<label for="inputState">Niko Level</label>
 							<select
 								id="inputState"
 								v-model="Niko"
-								class="form-control">
+								class="form-control custom-select border-primary text-primary">
 								<option
 									:value="0"
 									selected>All</option>
@@ -88,12 +88,12 @@
 									:key="level">{{ level }}</option>
 							</select>
 						</div>
-						<div class="col form-group">
+						<div class="col-xs-6 col-lg-2 form-group">
 							<label for="inputState">Zana Level</label>
 							<select
 								id="inputState"
 								v-model="Zana"
-								class="form-control">
+								class="form-control custom-select border-primary text-primary">
 								<option
 									:value="0"
 									selected>All</option>
@@ -108,7 +108,7 @@
 						<div
 							v-for="(hideout,index) in filteredHideouts"
 							:key="index"
-							class="col-6 my-2">
+							class="col-xs-12 col-lg-6 my-2">
 
 							<div class="card bg-secondary">
 								<nuxt-link
