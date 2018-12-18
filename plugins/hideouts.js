@@ -53,6 +53,7 @@ const _getMTX = (doodads) => {
 		'Waypoint',
 		'Crafting Bench',
 		'Blessing Font',
+		'Sharpening Wheel',
 		'Artisan\'s Bench',
 		'Headstones',
 		'Gladiator\'s Workbench',
