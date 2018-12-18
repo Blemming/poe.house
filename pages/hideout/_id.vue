@@ -34,12 +34,38 @@
 								class="img-fluid">
 						</div>
 					</div>
-					<div class="row justify-content-center">
-
+					<div class="row mb-5">
 						<div class="col-12">
 							<p v-html="hideout.hideoutDescription"/>
 
 						</div>
+					</div>
+					<div class="row mt-5">
+						<div class="col-12">
+							<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
+								<tbody>
+									<tr>
+										<th
+											class="text-center w-25"
+											scope="row">
+											Hideout Type:
+										</th>
+										<td>{{ getHideoutType }}</td>
+									</tr>
+									<tr>
+										<th
+											class="text-center w-25"
+											scope="row">
+											Total Favor:
+										</th>
+										<td>{{ totalFavorCost }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="row justify-content-end">
+
 						<div
 							v-if="hideout.hideoutVideo"
 							class="col-6">
@@ -52,8 +78,9 @@
 									alt="Youtube">
 							</a>
 						</div>
-						<div class="col-6">
+						<div class="col-6 text-right">
 							<a
+								:download="`${hideout.nameDescription}.hideout`"
 								:href="downloadLink"
 								class="btn btn-primary"
 								target="_blank">
@@ -69,7 +96,9 @@
 							<h2 class="display-4 border border-primary py-3 bg-dark text-center">Shopping List</h2>
 							<hr>
 						</div>
-						<div class="col-12">
+						<div
+							v-if="shoppingList.alva.length> 0"
+							class="col-6">
 							<div class="row">
 								<div
 									id="alva"
@@ -86,13 +115,13 @@
 												src="https://web.poecdn.com/image/Art/2DItems/Hideout/Alva.png?scale=1"
 												alt=""
 												class="img-fluid"><br>
-											<span >Alva</span>
+											<span class="btn btn-primary mt-3">Alva decorations</span>
 										</a>
 										<hr>
 									</h5>
 									<div
 										id="collapseAlva"
-										class="collapse"
+										class="collapse show"
 										aria-labelledby="headingOne"
 										data-parent="#alva">
 										<div class="card bg-secondary">
@@ -120,7 +149,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12">
+						<div
+							v-if="shoppingList.einhar.length> 0"
+							class="col-6">
 							<div class="row">
 								<div
 									id="Einhar"
@@ -137,13 +168,13 @@
 												src="https://web.poecdn.com/image/Art/2DItems/Hideout/Einhar.png?scale=1"
 												alt=""
 												class="img-fluid"><br>
-											<span>Einhar</span>
+											<span class="btn btn-primary mt-3">Einhar decorations</span>
 										</a>
 										<hr>
 									</h5>
 									<div
 										id="collapseEinhar"
-										class="collapse"
+										class="collapse show"
 										aria-labelledby="headingOne"
 										data-parent="#Einhar">
 										<div class="card bg-secondary">
@@ -166,7 +197,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12">
+						<div
+							v-if="shoppingList.niko.length> 0"
+							class="col-6">
 							<div class="row">
 								<div
 									id="Niko"
@@ -183,13 +216,13 @@
 												src="https://web.poecdn.com/image/Art/2DItems/Hideout/Niko.png?scale=1"
 												alt=""
 												class="img-fluid"><br>
-											<span>Niko</span>
+											<span class="btn btn-primary mt-3">Niko decorations</span>
 										</a>
 										<hr>
 									</h5>
 									<div
 										id="collapseNiko"
-										class="collapse"
+										class="collapse show"
 										aria-labelledby="headingOne"
 										data-parent="#Niko">
 										<div class="card bg-secondary">
@@ -212,7 +245,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12">
+						<div
+							v-if="shoppingList.zana.length> 0"
+							class="col-6">
 							<div class="row">
 								<div
 									id="Zana"
@@ -229,13 +264,13 @@
 												src="https://web.poecdn.com/image/Art/2DItems/Hideout/Zana.png?scale=1"
 												alt=""
 												class="img-fluid"><br>
-											<span>Niko</span>
+											<span class="btn btn-primary mt-3">Zana decorations</span>
 										</a>
 										<hr>
 									</h5>
 									<div
 										id="collapseZana"
-										class="collapse"
+										class="collapse show"
 										aria-labelledby="headingOne"
 										data-parent="#Zana">
 										<div class="card bg-secondary">
@@ -258,16 +293,14 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12">
+						<div
+							v-if="shoppingList.other.length> 0"
+							class="col-12">
 							<div class="row">
 								<div
-									id="Zana"
+									id="mtx"
 									class="col-12">
 									<h5 class="mb-0 text-center">
-										<img
-											class="pb-4"
-											src="https://web.poecdn.com/image/shop/item/ShopItemCoin.png?1538109960000"
-											alt="">
 										<a
 											href="#"
 											class="text-white"
@@ -275,15 +308,19 @@
 											data-target="#collapseOther"
 											aria-expanded="true"
 											aria-controls="collapseOther">
-											<span class="display-4">Microtransactions</span>
+											<span class="display-4">
+												<img
+													class="pb-4"
+													src="https://web.poecdn.com/image/shop/item/ShopItemCoin.png?1538109960000"
+													alt="">Microtransactions</span>
 											<hr>
 										</a>
 									</h5>
 									<div
 										id="collapseOther"
-										class="collapse"
+										class="collapse show"
 										aria-labelledby="headingOne"
-										data-parent="#Zana">
+										data-parent="#mtx">
 										<div class="card bg-secondary">
 											<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
 												<tbody>
@@ -318,8 +355,11 @@ export default {
 			const hideoutsDoc = await hideoutsRef.get();
 			const hideout = hideoutsDoc.data();
 			if (hideout) {
+				const hideoutLink = await hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
+				const hideoutFile = await context.app.$axios.$get(hideoutLink);
 				return {
-					hideout
+					hideout,
+					hideoutFile: hideoutFile.replace(/\n/g, '\n')
 				};
 			} else {
 				context.error({ statusCode: 404, message: 'This hideout does not exist' });
@@ -329,11 +369,11 @@ export default {
 		}
 	},
 	computed: {
+		getHideoutType () {
+			return this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === this.hideout.hideoutType)[0]['Name'];
+		},
 		imgurGallery () {
 			return !!/imgur/g.test(this.hideout.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideout.hideoutScreenshot);
-		},
-		downloadLink () {
-			return this.hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, 'https://pastebin.com/dl/');
 		},
 		shoppingList () {
 			const alva = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Alva');
@@ -348,9 +388,19 @@ export default {
 				zana,
 				other
 			};
+		},
+		totalFavorCost () {
+			return this.$favorCost(this.hideout.hideoutDoodads);
+		},
+		downloadLink () {
+			return `data:text/plain;charset=utf-8,${encodeURIComponent(this.hideoutFile)}`;
 		}
 	},
 	methods: {
+		// async downloadLink () {
+
+		// 	// return this.hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, 'https://pastebin.com/dl/');
+		// }
 	},
 	head () {
 		return {

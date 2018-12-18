@@ -20,6 +20,14 @@ Vue.prototype.$parseHideoutFile = (string) => {
 		return e.message;
 	}
 };
+Vue.prototype.$favorCost = (doodads) => {
+	let costs = 0;
+	doodads.forEach(doodad => {
+		const cost = doodad.Count * parseInt(doodad.Cost);
+		costs += cost;
+	});
+	return costs;
+};
 Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = []) => {
 	const doodads = [];
 	for (const doodad of hideoutObjectDoodads) {

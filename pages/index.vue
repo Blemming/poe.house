@@ -134,6 +134,10 @@
 														<td class="text-white"><strong>{{ getHideout(hideout.hideoutType) }}</strong></td>
 													</tr>
 													<tr>
+														<th scope="row">Favour Required</th>
+														<td class="text-white"><strong>{{ totalFavorCost(hideout.hideoutDoodads) }}</strong></td>
+													</tr>
+													<tr>
 														<th scope="row">Decorations</th>
 														<td class="text-white"><strong>{{ hideout.hideoutDoodads.length }}</strong></td>
 													</tr>
@@ -273,6 +277,9 @@ export default {
 		}
 	},
 	methods: {
+		totalFavorCost (doodads) {
+			return this.$favorCost(doodads);
+		},
 		getHideout (hash) {
 			if (hash) {
 				return this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === hash)[0]['Name'];
