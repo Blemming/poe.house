@@ -295,7 +295,7 @@
 						</div>
 						<div
 							v-if="shoppingList.other.length> 0"
-							class="col-xs-12 col-lg-6">
+							class="col-xs-12 col-lg-12">
 							<div class="row">
 								<div
 									id="mtx"
