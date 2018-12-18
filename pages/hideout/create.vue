@@ -92,19 +92,58 @@
 									placeholder="Link to youtube url">
 							</div>
 							<div class="form-group col-md-6">
-								<label for="inputScreenshot">Screenshot link <small>(Can be a imgur gallery)</small></label>
+								<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
 								<input
-									v-validate="'url:require_protocol'"
+									v-validate="{ required: true, regex: /^https:\/\/(.*)(.jpg$|.png$)/ }"
 									id="inputScreenshot"
 									v-model="hideoutScreenshot"
-									name="Screenshot link"
+									name="Thumbnail link"
 									type="text"
 									placeholder="Link to image url"
 									class="form-control">
 							</div>
+							<div class="form-group col-md-6">
+								<label for="inputAuthor">Author</label>
+								<input
+									id="inputAuthor"
+									v-model="author"
+									type="text"
+									class="form-control"
+									placeholder="Author name">
+							</div>
 							<div class="form-group col-md-12">
-								<label for="inputHideout">Hideout</label><br>
 								<div
+									v-if="error || errorMessage"
+									class="row">
+									<div
+										v-for="error in errors.items"
+										:key="error.id"
+										class="col-12 mt-1">
+										<span
+											class="badge badge-danger">{{ error.msg }}</span>
+									</div>
+									<div class="col-12">
+										<span
+											v-if="errorMessage"
+											class="badge badge-danger">{{ errorMessage }}</span>
+									</div>
+								</div>
+								<vue-recaptcha
+									ref="recaptcha"
+									size="invisible"
+									sitekey="6Lce9oEUAAAAAArGCOuyLXTSjFGarewlLYCN9E_e"
+									@verify="onCaptchaVerified"
+									@expired="onCaptchaExpired"/>
+								<button
+									:disabled="status==='submitting' || !!error || !getHideoutDoodads"
+									type="submit"
+									class="btn btn-primary">Submit</button>
+							</div>
+							<div class="form-group col-md-12">
+								<h4
+									class="text-white"
+									for="inputHideout">Thumbnail</h4><br>
+								<!-- <div
 									v-if="imgurGallery">
 									<blockquote
 										:data-id="`a/${hideoutImage}`"
@@ -115,7 +154,7 @@
 										async
 										src="//s.imgur.com/min/embed.js"
 										charset="utf-8"/>
-								</div>
+								</div> -->
 								<img
 									v-if="!imgurGallery"
 									id="inputHideout"
@@ -123,45 +162,7 @@
 									class="img-fluid"
 									alt="">
 							</div>
-							<div
-								id="doodads"
-								class="col-12">
 
-								<h5 class="mb-0">
-									<a
-										href="#"
-										class="text-white"
-										data-toggle="collapse"
-										data-target="#collapseTwo"
-										aria-expanded="true"
-										aria-controls="collapseTwo">
-										Doodads +
-									</a>
-								</h5>
-								<div
-									id="collapseTwo"
-									class="collapse"
-									aria-labelledby="headingOne"
-									data-parent="#doodads">
-									<div class="card bg-secondary">
-										<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-											<tbody>
-												<tr
-													v-for="doodad in getHideoutDoodads"
-													:key="doodad['Hash']">
-													<th scope="row"><img
-														:src="doodad['Icon']"
-														alt=""></th>
-													<td>{{ doodad['Count'] }}</td>
-													<td>{{ doodad['Name'] }}</td>
-													<td>{{ doodad['MasterName'] }}</td>
-													<td>{{ doodad['MasterLevel'] }}</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
 							<!-- <div class="form-group col-md-2">
 								<label for="inputState">Path of exile version</label>
 								<select
@@ -171,47 +172,6 @@
 									<option selected>3.5.1</option>
 								</select>
 							</div> -->
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="inputAuthor">Author</label>
-								<input
-									id="inputAuthor"
-									v-model="author"
-									type="text"
-									class="form-control"
-									placeholder="Author name">
-							</div>
-						</div>
-						<div
-							v-if="error || errorMessage"
-							class="row">
-							<div
-								v-for="error in errors.items"
-								:key="error.id"
-								class="col-12 mt-1">
-								<span
-									class="badge badge-danger">{{ error.msg }}</span>
-							</div>
-							<div class="col-12">
-								<span
-									v-if="errorMessage"
-									class="badge badge-danger">{{ errorMessage }}</span>
-							</div>
-						</div>
-						<div class="form-row justify-content-between my-3">
-							<div class="col">
-								<vue-recaptcha
-									ref="recaptcha"
-									size="invisible"
-									sitekey="6Lce9oEUAAAAAArGCOuyLXTSjFGarewlLYCN9E_e"
-									@verify="onCaptchaVerified"
-									@expired="onCaptchaExpired"/>
-								<button
-									:disabled="status==='submitting' || !!error"
-									type="submit"
-									class="btn btn-primary">Submit</button>
-							</div>
 						</div>
 						<div class="row">
 							<div
@@ -242,6 +202,46 @@
 										<div
 											class="card-body"
 											v-html="renderedDescription"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div
+								id="doodads"
+								class="col-12">
+								<h5 class="mb-0">
+									<a
+										href="#"
+										class="text-white"
+										data-toggle="collapse"
+										data-target="#collapseTwo"
+										aria-expanded="true"
+										aria-controls="collapseTwo">
+										Click to see doodads list
+									</a>
+								</h5>
+								<div
+									id="collapseTwo"
+									class="collapse"
+									aria-labelledby="headingOne"
+									data-parent="#doodads">
+									<div class="card bg-secondary">
+										<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
+											<tbody>
+												<tr
+													v-for="doodad in getHideoutDoodads"
+													:key="doodad['Hash']">
+													<th scope="row"><img
+														:src="doodad['Icon']"
+														alt=""></th>
+													<td>{{ doodad['Count'] }}</td>
+													<td>{{ doodad['Name'] }}</td>
+													<td>{{ doodad['MasterName'] }}</td>
+													<td>{{ doodad['MasterLevel'] }}</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>
@@ -290,7 +290,9 @@ export default {
 			return this.hideoutDescription;
 		},
 		imgurGallery () {
-			return !!/imgur/g.test(this.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
+			// return false;
+			// return !!/imgur/g.test(this.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
+			return !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
 		},
 		renderedDescription () {
 			return this.$md.render(this.hideoutDescription);

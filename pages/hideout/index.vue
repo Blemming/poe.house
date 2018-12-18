@@ -23,6 +23,19 @@
 							</select>
 						</div>
 						<div class="col form-group">
+							<label for="inputState">MTX</label>
+							<select
+								id="inputState"
+								v-model="mtx"
+								class="form-control">
+								<option
+									value=""
+									selected>All</option>
+								<option :value="true">Yes</option>
+								<option :value="false">No</option>
+							</select>
+						</div>
+						<div class="col form-group">
 							<label for="inputState">Alva Level</label>
 							<select
 								id="inputState"
@@ -128,7 +141,14 @@
 											</table>
 										</div>
 									</div>
-									<div class="row justify-content-end">
+									<div class="row justify-content-between">
+										<div class="col-3">
+											<img
+												v-if="hideout.hideoutMasters['mtx']"
+												src="https://web.poecdn.com/image/shop/item/ShopItemCoin.png?1538109960000"
+												alt="">
+											<small v-if="hideout.hideoutMasters['mtx']">MTX</small>
+										</div>
 										<nuxt-link
 											:to="`/hideout/${hideout.hideoutId}`"
 											class="btn btn-primary">Details</nuxt-link>
@@ -191,6 +211,7 @@ export default {
 		return {
 			levels: [1, 2, 3, 4, 5, 6, 7],
 			hideoutType: '',
+			'mtx': '',
 			'Alva': 0,
 			'Einhar': 0,
 			'Niko': 0,
@@ -202,6 +223,9 @@ export default {
 			let results = this.hideouts;
 			if (this.hideoutType) {
 				results = results.filter(hideout => hideout['hideoutType'] === parseInt(this.hideoutType));
+			}
+			if (this.mtx !== '') {
+				results = results.filter(hideout => hideout.hideoutMasters['mtx'] === this.mtx);
 			}
 			if (this.Alva) {
 				results = results.filter(hideout => hideout.hideoutMasters['Alva'] <= this.Alva);

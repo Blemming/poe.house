@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import uniqBy from 'lodash/uniqBy';
+import includes from 'lodash/includes';
 import firebase from 'firebase/app';
 // Vue.prototype.$parseHideoutFile = (string) => JSON.parse(string.replace(/^\n$/gm, '').replace(/=/gm, ':').replace(/([^ ]*?)\n/g, '$1,\n').replace(/^/g, '{\n').replace(/$/g, '\n}').replace(/(^|{|,)(.*?)\s*:/gm, '$1"$2":').replace(/"\s(.*?)"/g, '"$1"'));
 Vue.prototype.$parseHideoutFile = (string) => {
@@ -37,16 +38,43 @@ Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = 
 		};
 	});
 };
+const _getMTX = (doodads) => {
+	const nonMtxDoodads = [
+		'Stash',
+		'Guild Stash',
+		'Waypoint',
+		'Crafting Bench',
+		'Blessing Font',
+		'Artisan\'s Bench',
+		'Headstones',
+		'Gladiator\'s Workbench',
+		'Armourer\'s Workbench',
+		'Map Device',
+		'Navali',
+		'Einhar',
+		'Alva',
+		'Jun',
+		'Helena',
+		'Niko',
+		'Zana',
+		'Bowmaker\'s Tools'
+	];
+	const noMasters = doodads.filter(doodad => doodad['MasterName'] === null);
+	return noMasters.filter(item => !includes(nonMtxDoodads, item['Name']));
+};
+Vue.prototype.$getMTX = (doodads) => _getMTX(doodads);
 Vue.prototype.$mastersObject = (doodads) => {
-	const Zana = doodads.filter(doo => doo['MasterName'] === 'Zana').map(doo => doo['MasterLevel']) || [0, 0];
-	const Niko = doodads.filter(doo => doo['MasterName'] === 'Niko').map(doo => doo['MasterLevel']) || [0, 0];
-	const Einhar = doodads.filter(doo => doo['MasterName'] === 'Einhar').map(doo => doo['MasterLevel']) || [0, 0];
-	const Alva = doodads.filter(doo => doo['MasterName'] === 'Alva').map(doo => doo['MasterLevel']) || [0, 0];
+	const Zana = doodads.filter(doo => doo['MasterName'] === 'Zana').map(doo => doo['MasterLevel']);
+	const Niko = doodads.filter(doo => doo['MasterName'] === 'Niko').map(doo => doo['MasterLevel']);
+	const Einhar = doodads.filter(doo => doo['MasterName'] === 'Einhar').map(doo => doo['MasterLevel']);
+	const Alva = doodads.filter(doo => doo['MasterName'] === 'Alva').map(doo => doo['MasterLevel']);
+	const mtx = _getMTX(doodads).length > 0;
 	return {
 		Zana: Math.max(...Zana, ...[0, 0]),
 		Niko: Math.max(...Niko, ...[0, 0]),
 		Einhar: Math.max(...Einhar, ...[0, 0]),
-		Alva: Math.max(...Alva, ...[0, 0])
+		Alva: Math.max(...Alva, ...[0, 0]),
+		mtx
 	};
 };
 Vue.prototype.$hideoutObject = ({

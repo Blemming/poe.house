@@ -252,6 +252,47 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-12">
+							<div class="row">
+								<div
+									id="Zana"
+									class="col-12">
+									<h5 class="mb-0 text-center">
+										<a
+											href="#"
+											class="text-white"
+											data-toggle="collapse"
+											data-target="#collapseOther"
+											aria-expanded="true"
+											aria-controls="collapseOther">
+											<span class="display-4">Other</span>
+										</a>
+									</h5>
+									<div
+										id="collapseOther"
+										class="collapse"
+										aria-labelledby="headingOne"
+										data-parent="#Zana">
+										<div class="card bg-secondary">
+											<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
+												<tbody>
+													<tr
+														v-for="doodad in shoppingList.other"
+														:key="doodad['Hash']">
+														<th scope="row"><img
+															:src="doodad['Icon']"
+															alt=""></th>
+														<td>{{ doodad['Count'] }}</td>
+														<td>{{ doodad['Name'] }}</td>
+														<td>{{ doodad['Cost'] }}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -284,11 +325,13 @@ export default {
 			const einhar = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Einhar');
 			const niko = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Niko');
 			const zana = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Zana');
+			const other = this.$getMTX(this.hideout.hideoutDoodads);
 			return {
 				alva,
 				einhar,
 				niko,
-				zana
+				zana,
+				other
 			};
 		}
 	},
