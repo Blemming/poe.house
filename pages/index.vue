@@ -157,6 +157,14 @@
 														<th scope="row">Zana </th>
 														<td class="text-white"><strong>{{ hideout.hideoutMasters['Zana'] }}</strong></td>
 													</tr>
+													<tr v-if="hideout.views">
+														<th scope="row">Views</th>
+														<td class="text-white"><strong>{{ hideout.views }}</strong></td>
+													</tr>
+													<tr v-if="hideout.downloads">
+														<th scope="row">Downloads</th>
+														<td class="text-white"><strong>{{ hideout.downloads }}</strong></td>
+													</tr>
 												</tbody>
 											</table>
 										</div>

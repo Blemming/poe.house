@@ -83,7 +83,8 @@
 								:download="`${hideout.nameDescription}.hideout`"
 								:href="downloadLink"
 								class="btn btn-primary"
-								target="_blank">
+								target="_blank"
+								@click="downloaded()">
 								Download
 							</a>
 							<p>
@@ -354,6 +355,10 @@ export default {
 		try {
 			const hideoutsDoc = await hideoutsRef.get();
 			const hideout = hideoutsDoc.data();
+			const views = hideout.views || 0;
+			await hideoutsRef.set({
+				views: views + 1
+			}, { merge: true });
 			if (hideout) {
 				const hideoutLink = await hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
 				const hideoutFile = await context.app.$axios.$get(hideoutLink);
@@ -401,10 +406,17 @@ export default {
 		}
 	},
 	methods: {
-		// async downloadLink () {
-
-		// 	// return this.hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, 'https://pastebin.com/dl/');
-		// }
+		async downloaded () {
+			const hideoutRef = this.$fireStore.collection('hideouts').doc(this.$route.params.id);
+			try {
+				const downloads = this.hideout.downloads || 0;
+				await hideoutRef.set({
+					downloads: downloads + 1
+				}, { merge: true });
+			} catch (e) {
+				this.error({ statusCode: 404, message: e.message });
+			}
+		}
 	},
 	head () {
 		return {
