@@ -93,14 +93,40 @@
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
-								<input
-									v-validate="{ required: true, regex: /^https:\/\/(.*)(.jpg$|.png$)/ }"
-									id="inputScreenshot"
-									v-model="hideoutScreenshot"
-									name="Thumbnail link"
-									type="text"
-									placeholder="Link to image url"
-									class="form-control">
+
+								<div class="input-group">
+									<div
+										class="input-group-prepend">
+										<a
+											:class="`btn btn-primary  ${(!pastebinSubmitted||error)?'disabled':''}`"
+											href="#"
+											@click.prevent="resolveThumbnail(true)">
+											<span>
+												Use default Image
+											</span>
+										</a>
+									</div>
+									<input
+										v-validate="{ required: true, regex: /^https:\/\/(.*)(.jpg$|.png$)/ }"
+										id="inputScreenshot"
+										:disabled="!pastebinSubmitted"
+										v-model="hideoutScreenshot"
+										:placeholder="(pastebinSubmitted)?'Link to image url':'Submit Pastebin first'"
+										name="Thumbnail link"
+										type="text"
+										class="form-control">
+									<div
+										class="input-group-append">
+										<a
+											:class="`btn btn-primary ${(!pastebinSubmitted||error)?'disabled':''}`"
+											href="#"
+											@click.prevent="resolveThumbnail()">
+											<span>
+												Process
+											</span>
+										</a>
+									</div>
+								</div>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputAuthor">Author</label>
@@ -158,7 +184,7 @@
 								<img
 									v-if="!imgurGallery"
 									id="inputHideout"
-									:src="hideoutImage"
+									:src="displayedImage"
 									class="img-fluid"
 									alt="">
 							</div>
@@ -265,6 +291,7 @@ export default {
 			nameDescription: '',
 			hideoutType: '',
 			hideoutFileLink: '',
+			hideoutImage: '',
 			hideoutDescription: '',
 			status: '',
 			hideoutScreenshot: '',
@@ -292,22 +319,13 @@ export default {
 		imgurGallery () {
 			// return false;
 			// return !!/imgur/g.test(this.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
-			return !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
+			return !/.png|.jpg|.jpeg/g.test(this.hideoutImage);
 		},
 		renderedDescription () {
 			return this.$md.render(this.hideoutDescription);
 		},
-		hideoutImage () {
-			if (this.hideoutScreenshot) {
-				if (/imgur/gi.test(this.hideoutScreenshot)) {
-					return this.hideoutScreenshot.replace(/https:\/\/imgur\.com\/a\//gi, '');
-				} else {
-					return this.hideoutScreenshot;
-				}
-			}
-			if (this.pastebinData) {
-				return this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'] || '';
-			}
+		displayedImage () {
+			return this.hideoutImage;
 		},
 		getHideoutDoodads () {
 			if (this.pastebinData) {
@@ -321,6 +339,25 @@ export default {
 	methods: {
 		submitHideout () {
 			this.$refs.recaptcha.execute();
+		},
+		async resolveThumbnail (defaultImage = false) {
+			if (this.hideoutScreenshot) {
+				try {
+					const resultImage = await this.$axios.get(this.hideoutScreenshot);
+					console.log(resultImage);
+					if (/imgur/gi.test(this.hideoutScreenshot)) {
+						this.hideoutImage = this.hideoutScreenshot.replace(/https:\/\/imgur\.com\/a\//gi, '');
+					} else {
+						this.hideoutImage = this.hideoutScreenshot;
+					}
+				} catch (e) {
+					this.errorMessage = 'The image you submitted is not valid, default hideout image used';
+					this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'] || '';
+				}
+			}
+			if (this.pastebinData && defaultImage) {
+				this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'] || '';
+			}
 		},
 		async onCaptchaVerified () {
 			if (!this.error) {
@@ -345,7 +382,7 @@ export default {
 					await hideoutRef.set(newHideout);
 
 					this.status = '';
-					this.$router.push('/hideout');
+					this.$router.push('/');
 				} catch (e) {
 					alert(e);
 				}

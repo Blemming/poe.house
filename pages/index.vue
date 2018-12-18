@@ -222,6 +222,7 @@
 	</div>
 </template>
 <script>
+import orderBy from 'lodash/orderBy';
 export default {
 	async asyncData (context) {
 		const hideoutsRef = context.app.$fireStore.collection('hideouts');
@@ -268,7 +269,7 @@ export default {
 			if (this.Zana) {
 				results = results.filter(hideout => hideout.hideoutMasters['Zana'] <= this.Zana);
 			}
-			return results;
+			return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
 		}
 	},
 	methods: {
