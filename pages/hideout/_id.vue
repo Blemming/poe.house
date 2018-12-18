@@ -351,6 +351,11 @@ export default {
 		}
 	},
 	methods: {
+	},
+	head () {
+		return {
+			title: this.hideout.nameDescription
+		};
 	}
 };
 </script>
