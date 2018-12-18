@@ -29,7 +29,7 @@
 						class="row">
 						<div class="col-12 mb-5">
 							<img
-								:src="hideout.hideoutScreenshot"
+								:src="hideout.hideoutScreenshot || getScreenshot"
 								alt=""
 								class="img-fluid">
 						</div>
@@ -371,6 +371,10 @@ export default {
 	computed: {
 		getHideoutType () {
 			return this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === this.hideout.hideoutType)[0]['Name'];
+		},
+		getScreenshot () {
+			const image = this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === this.hideout.hideoutType)[0]['Icon'];
+			return image.replace(/\?scale=1/gi, '');
 		},
 		imgurGallery () {
 			return !!/imgur/g.test(this.hideout.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideout.hideoutScreenshot);

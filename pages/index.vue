@@ -183,7 +183,7 @@
 											<small class="text-muted ">{{ $moment.unix(hideout.hideoutDateSubmit.seconds).format(' MMMM Do YYYY') }}</small>
 										</div>
 										<div class="col text-right">
-											<small class="text-muted ">by {{ hideout.author }}</small>
+											<small class="text-muted ">by {{ hideout.author || 'Anonymous' }}</small>
 										</div>
 
 									</div>
