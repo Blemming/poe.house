@@ -1,3 +1,11 @@
+<style lang="scss">
+.card{
+    a:hover{
+        text-decoration: none;
+    }
+}
+</style>
+
 <template>
 	<div class="row py-5">
 		<div class="col-12">
@@ -101,14 +109,22 @@
 							v-for="(hideout,index) in filteredHideouts"
 							:key="index"
 							class="col-6 my-2">
+
 							<div class="card bg-secondary">
-								<img
-									:src="getImage(hideout)"
-									class="card-img-top"
-									alt="Card image cap">
+								<nuxt-link
+									:to="`/hideout/${hideout.hideoutId}`">
+									<img
+										:src="getImage(hideout)"
+										class="card-img-top"
+										alt="Card image cap">
+
+								</nuxt-link>
 								<div class="card-body">
-									<h5 class="card-title text-white ">{{ hideout.nameDescription }}
-									</h5>
+									<nuxt-link
+										:to="`/hideout/${hideout.hideoutId}`">
+										<h5 class="card-title text-white ">{{ hideout.nameDescription }}
+										</h5>
+									</nuxt-link>
 									<div class="row">
 										<div class="col-12">
 											<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
