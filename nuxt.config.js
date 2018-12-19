@@ -47,7 +47,8 @@ module.exports = {
 
 	plugins: [
 		'~/plugins/moment.js',
-		'~/plugins/hideouts.js'
+		'~/plugins/hideouts.js',
+		{ src: '~/plugins/simplemde.js', ssr: false }
 	],
 
 	/*

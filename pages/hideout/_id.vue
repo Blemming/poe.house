@@ -60,15 +60,31 @@
 										</th>
 										<td>{{ totalFavorCost }}</td>
 									</tr>
+									<tr
+										v-if="hideout.gallery">
+										<th
+											class="text-center w-25"
+											scope="row">
+											Gallery
+										</th>
+										<td
+											scope="row">
+											<a
+												:href="hideout.gallery || ''"
+												target="_blank">
+												Images
+												<i class="far fa-images"/>
+											</a>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 					<div class="row justify-content-end">
-
 						<div
 							v-if="hideout.hideoutVideo"
-							class="col-6">
+							class="col-6 text-left">
 							<a
 								:href="hideout.hideoutVideo"
 								target="_blank">

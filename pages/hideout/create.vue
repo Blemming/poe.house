@@ -1,3 +1,6 @@
+<style lang="scss">
+</style>
+
 <template>
 
 	<div class="row py-5">
@@ -66,30 +69,33 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
+						<div
+							class="form-group">
 							<label for="inputDescription">Description</label>
-							<textarea
-								v-validate="'required|max:1550'"
-								id="inputDescription"
-								v-model="hideoutDescription"
-								rows="7"
-								name="description"
-								required
-								type="textarea"
-								class="form-control"
-								placeholder="Description of the hideout, you can use markdown to make it look good."/>
+							<div class="row">
+								<div class="col-12">
+									<markdown-editor
+										v-validate="'required|max:1550'"
+										id="inputDescription"
+										ref="markdownEditor"
+										v-model="hideoutDescription"
+										name="description"
+										required
+										placeholder="Description of the hideout, you can use markdown to make it look good."/>
+								</div>
+							</div>
 						</div>
 						<div class="form-row justify-content-between">
 							<div class="form-group col-md-6">
-								<label for="inputVideo">Video link</label>
+								<label for="inputVideo">Imgur Gallery</label>
 								<input
 									v-validate="'url:require_protocol'"
-									id="inputVideo"
-									v-model="hideoutVideo"
-									name="Video link"
+									id="inputGallery"
+									v-model="gallery"
+									name="Imgur Gallery"
 									type="text"
 									class="form-control"
-									placeholder="Link to youtube url">
+									placeholder="Link to imgur gallery">
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
@@ -128,7 +134,20 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="form-group col-md-6">
+								<label for="inputVideo">Video link</label>
+								<input
+									v-validate="'url:require_protocol'"
+									id="inputVideo"
+									v-model="hideoutVideo"
+									name="Video link"
+									type="text"
+									class="form-control"
+									placeholder="Link to youtube url">
+							</div>
+							<div class="w-100"/>
+							<div class="form-group col-col-md-6">
 								<label for="inputAuthor">Author</label>
 								<input
 									id="inputAuthor"
@@ -294,6 +313,7 @@ export default {
 			hideoutImage: '',
 			hideoutDescription: '',
 			status: '',
+			gallery: '',
 			hideoutScreenshot: '',
 			hideoutVideo: '',
 			hideoutDoodads: [],
@@ -322,7 +342,7 @@ export default {
 			return !/.png|.jpg|.jpeg/g.test(this.hideoutImage);
 		},
 		renderedDescription () {
-			return this.$md.render(this.hideoutDescription);
+			return this.$md.render(this.hideoutDescription).replace(/<img/gi, '<img class="img-fluid"');
 		},
 		displayedImage () {
 			return this.hideoutImage;
@@ -375,6 +395,7 @@ export default {
 						hideoutScreenshot: this.hideoutImage,
 						hideoutVideo: this.hideoutVideo,
 						hideoutDoodads: this.getHideoutDoodads,
+						gallery: this.gallery,
 						hideoutMasters: this.masterMaxLevel,
 						hideoutId: newID,
 						poeVersion: this.poeVersion

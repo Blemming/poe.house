@@ -31,7 +31,8 @@
     "nuxt": "^2.0.0",
     "nuxt-fire": "^1.2.1",
     "nuxt-validate": "^0.1.2",
-    "vue-recaptcha": "^1.1.1"
+    "vue-recaptcha": "^1.1.1",
+    "vue-simplemde": "^0.5.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
