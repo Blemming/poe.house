@@ -100,6 +100,9 @@ module.exports = {
 	/*
   ** Build configuration
   */
+	serverMiddleware: [
+		{ path: '/api/hideouts', handler: '~/api/hideouts' }
+	],
 	build: {
 		/*
     ** You can extend webpack config here
