@@ -109,6 +109,8 @@ Vue.prototype.$hideoutObject = ({
 	hideoutDoodads,
 	hideoutMasters,
 	hideoutId,
+	downloads: 0,
+	views: 0,
 	hideoutDateSubmit: firebase.firestore.FieldValue.serverTimestamp(),
 	poeVersion
 });
