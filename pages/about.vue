@@ -28,7 +28,7 @@
 							<li>Place to submit your current decorations to generate appropriate shopping list</li>
 							<li>Better design ( need you guys for this )</li>
 							<li>https</li>
-							<li>Internal database ( not firebase)</li>
+							<li><strike>Internal database ( not firebase)</strike></li>
 						</ul>
 						If you want to contribute to the future development of the site, feel free to use the the Patreon (for monthly support) or the PayPal Donate button below.
 					</p>
