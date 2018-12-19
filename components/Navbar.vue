@@ -12,6 +12,13 @@
 				src="~/assets/images/poehouse.png"
 				alt="">
 		</nuxt-link>
+		<a
+			class="nav-item text-danger"
+			href="https://www.paypal.me/bluelemming">
+			<i
+				class="fas fa-heart"/>
+			Support
+		</a>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -57,9 +64,8 @@
 							v-for="(dropdownItem,index) in item.dropdownItems"
 							:key="index"
 							:to="dropdownItem.url"
-							class="dropdown-item">
-							{{ dropdownItem.description }}
-						</nuxt-link>
+							class="dropdown-item"
+							v-html="dropdownItem.description"/>
 					</div>
 				</li>
 			</ul>

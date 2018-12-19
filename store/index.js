@@ -1,4 +1,5 @@
 export const state = () => ({
+	firestoreData: null,
 	bexPost: '',
 	doodads: null,
 	hideouts: null
@@ -6,6 +7,9 @@ export const state = () => ({
 export const mutations = {
 	SET_BEX_POST: function (state, post) {
 		state.bexPost = post;
+	},
+	SET_FIRESTOREDATA: function (state, data) {
+		state.firestoreData = data;
 	},
 	SET_DOODADS: function (state, doodads) {
 		state.doodads = doodads;
