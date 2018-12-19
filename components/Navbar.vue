@@ -14,6 +14,7 @@
 		</nuxt-link>
 		<a
 			class="nav-item text-danger"
+			target="_blank"
 			href="https://www.paypal.me/bluelemming">
 			<i
 				class="fas fa-heart"/>
