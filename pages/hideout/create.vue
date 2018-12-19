@@ -384,8 +384,6 @@ export default {
 				this.status = 'submitting';
 				this.$refs.recaptcha.reset();
 				try {
-					// const hideoutRef = this.$fireStore.collection('hideouts').doc();
-					// const newID = hideoutRef.id;
 					const newHideout = this.$hideoutObject({
 						author: this.author,
 						nameDescription: this.nameDescription,
