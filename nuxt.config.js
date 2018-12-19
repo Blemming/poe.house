@@ -1,5 +1,5 @@
 const pkg = require('./package');
-const fireBaseConfig = require('./.firebase.json');
+// const fireBaseConfig = require('./.firebase.json');
 
 module.exports = {
 	mode: 'universal',
@@ -57,15 +57,6 @@ module.exports = {
 	modules: [
 		'@nuxtjs/axios',
 		'@nuxtjs/markdownit',
-		['nuxt-fire',
-			{
-				config: {
-					development: fireBaseConfig,
-					production: fireBaseConfig
-				},
-				useOnly: ['auth', 'firestore']
-			}
-		],
 		['@nuxtjs/google-analytics', {
 			track: 'PageView',
 			id: 'UA-131152589-1'
@@ -81,6 +72,13 @@ module.exports = {
 		proxy: true
 	},
 	proxy: [
+		['/api', {
+			target: 'http://159.203.187.146',
+			changeOrigin: true,
+			pathRewrite: {
+				'^/api': '/'
+			}
+		}],
 		['/raw', {
 			target: 'https://pastebin.com/',
 			changeOrigin: true,
