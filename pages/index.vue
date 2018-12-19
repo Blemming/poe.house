@@ -255,6 +255,17 @@
 						</div>
 					</div>
 				</div>
+				<div class="card-footer">
+
+					<a
+						class="nav-item text-danger"
+						target="_blank"
+						href="https://www.paypal.me/bluelemming">
+						<i
+							class="fas fa-heart"/>
+						Support
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

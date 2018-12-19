@@ -12,14 +12,6 @@
 				src="~/assets/images/poehouse.png"
 				alt="">
 		</nuxt-link>
-		<a
-			class="nav-item text-danger"
-			target="_blank"
-			href="https://www.paypal.me/bluelemming">
-			<i
-				class="fas fa-heart"/>
-			Support
-		</a>
 		<button
 			class="navbar-toggler"
 			type="button"
