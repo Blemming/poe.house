@@ -282,11 +282,12 @@
 import orderBy from 'lodash/orderBy';
 export default {
 	async asyncData (context) {
-		const hideoutsRef = context.app.$fireStore.collection('hideouts');
+		// const hideoutsRef = context.app.$fireStore.collection('hideouts');
 		try {
-			const hideoutsDoc = await hideoutsRef.get();
-			const hideouts = [];
-			hideoutsDoc.docs.forEach(hideout => hideouts.push(hideout.data()));
+			// const hideoutsDoc = await hideoutsRef.get();
+			// const hideouts = [];
+			// hideoutsDoc.docs.forEach(hideout => hideouts.push(hideout.data()));
+			const { data: hideouts } = await context.app.$axios.get('/api/hideouts');
 			return {
 				hideouts
 			};

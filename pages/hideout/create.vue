@@ -384,8 +384,8 @@ export default {
 				this.status = 'submitting';
 				this.$refs.recaptcha.reset();
 				try {
-					const hideoutRef = this.$fireStore.collection('hideouts').doc();
-					const newID = hideoutRef.id;
+					// const hideoutRef = this.$fireStore.collection('hideouts').doc();
+					// const newID = hideoutRef.id;
 					const newHideout = this.$hideoutObject({
 						author: this.author,
 						nameDescription: this.nameDescription,
@@ -397,11 +397,10 @@ export default {
 						hideoutDoodads: this.getHideoutDoodads,
 						gallery: this.gallery,
 						hideoutMasters: this.masterMaxLevel,
-						hideoutId: newID,
 						poeVersion: this.poeVersion
 					});
-					await hideoutRef.set(newHideout);
-
+					// await hideoutRef.set(newHideout);
+					await this.$axios.post(`/api/hideouts/`, newHideout);
 					this.status = '';
 					this.$router.push('/');
 				} catch (e) {

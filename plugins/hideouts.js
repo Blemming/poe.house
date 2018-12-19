@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import uniqBy from 'lodash/uniqBy';
 import includes from 'lodash/includes';
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 // Vue.prototype.$parseHideoutFile = (string) => JSON.parse(string.replace(/^\n$/gm, '').replace(/=/gm, ':').replace(/([^ ]*?)\n/g, '$1,\n').replace(/^/g, '{\n').replace(/$/g, '\n}').replace(/(^|{|,)(.*?)\s*:/gm, '$1"$2":').replace(/"\s(.*?)"/g, '"$1"'));
 Vue.prototype.$parseHideoutFile = (string) => {
 	// TERRIBLE CODE TODO: Make this better
@@ -86,6 +86,19 @@ Vue.prototype.$mastersObject = (doodads) => {
 		mtx
 	};
 };
+function makeid () {
+	var text = '';
+	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	for (var i = 0; i < 8; i++) { text += possible.charAt(Math.floor(Math.random() * possible.length)); }
+	return text;
+}
+function makeTimeStamp () {
+	const nanoseconds = (new Date()).getTime();
+	return {
+		seconds: Math.round(nanoseconds / 1000),
+		nanoseconds
+	};
+}
 Vue.prototype.$hideoutObject = ({
 	author = '',
 	nameDescription = '',
@@ -110,9 +123,9 @@ Vue.prototype.$hideoutObject = ({
 	gallery,
 	hideoutDoodads,
 	hideoutMasters,
-	hideoutId,
+	hideoutId: makeid(),
 	downloads: 0,
 	views: 0,
-	hideoutDateSubmit: firebase.firestore.FieldValue.serverTimestamp(),
+	hideoutDateSubmit: makeTimeStamp(),
 	poeVersion
 });
