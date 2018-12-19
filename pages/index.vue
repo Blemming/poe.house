@@ -255,15 +255,23 @@
 						</div>
 					</div>
 				</div>
-				<div class="card-footer">
-
+				<div class="card-footer d-flex justify-content-between">
+					<a
+						class="nav-item text-danger"
+						target="_blank"
+						href="https://www.patreon.com/join/blemming/checkout?rid=0">
+						<i
+							style="color:#f96854;"
+							class="fab fa-patreon"/>
+						Patreon
+					</a>
 					<a
 						class="nav-item text-danger"
 						target="_blank"
 						href="https://www.paypal.me/bluelemming">
 						<i
 							class="fas fa-heart"/>
-						Support
+						Paypal Support
 					</a>
 				</div>
 			</div>
