@@ -209,7 +209,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-row justify-content-between">
+					<div class="form-row ">
 						<div class="form-group col-md-6">
 							<label for="inputVideo">Imgur Gallery</label>
 							<input
@@ -234,7 +234,7 @@
 								placeholder="Link to youtube url">
 						</div>
 						<div class="w-100"/>
-						<div class="form-group col-col-md-6">
+						<div class="form-group col-6 col-lg-4">
 							<label for="inputAuthor">Author</label>
 							<input
 								id="inputAuthor"
@@ -242,6 +242,19 @@
 								type="text"
 								class="form-control"
 								placeholder="Author name">
+						</div>
+						<div class="form-group col-6 col-lg-4">
+							<label for="inputAuthor">Email</label>
+							<input
+								v-validate="'email'"
+								id="inputAuthor"
+								v-model="authorEmail"
+								type="email"
+								class="form-control"
+								placeholder="Author Email">
+							<small>
+								When accounts and editting goes live, you will be able to claim your hideouts with your email. Not required but you will not be able to reclaim or edit this post. Your email will not show anywhere and will not be shared with anyone.
+							</small>
 						</div>
 						<div class="form-group col-md-12">
 							<div
@@ -291,6 +304,7 @@ export default {
 	data () {
 		return {
 			author: '',
+			authorEmail: '',
 			nameDescription: '',
 			hideoutType: '',
 			hideoutFileLink: '',
@@ -372,6 +386,7 @@ export default {
 				try {
 					const newHideout = this.$hideoutObject({
 						author: this.author,
+						authorEmail: this.authorEmail,
 						nameDescription: this.nameDescription,
 						hideoutType: this.hideoutType,
 						hideoutFileLink: this.hideoutFileLink,
