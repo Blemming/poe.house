@@ -48,7 +48,7 @@ module.exports = {
 	plugins: [
 		'~/plugins/moment.js',
 		'~/plugins/hideouts.js',
-		{ src: '~/plugins/simplemde.js', ssr: false }
+		{ src: '~/plugins/paginate.js', ssr: false }
 	],
 
 	/*
@@ -57,6 +57,7 @@ module.exports = {
 	modules: [
 		'@nuxtjs/axios',
 		'@nuxtjs/markdownit',
+		['@nuxtjs/moment'],
 		['@nuxtjs/google-analytics', {
 			track: 'PageView',
 			id: 'UA-131152589-1'
@@ -99,6 +100,7 @@ module.exports = {
   ** Build configuration
   */
 	build: {
+		// analyze: true,
 		/*
     ** You can extend webpack config here
     */

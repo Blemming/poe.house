@@ -68,35 +68,19 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div
-							class="form-group">
-							<label for="inputDescription">Description</label>
-							<div class="row">
-								<div class="col-12">
-									<markdown-editor
-										v-validate="'required|max:1550'"
-										id="inputDescription"
-										ref="markdownEditor"
-										v-model="hideoutDescription"
-										name="description"
-										required
-										placeholder="Description of the hideout, you can use markdown to make it look good."/>
-								</div>
+
+							<div class="form-group col-md-12">
+								<h4
+									class="text-white"
+									for="inputHideout">Thumbnail</h4><br>
+								<img
+									v-if="!imgurGallery"
+									id="inputHideout"
+									:src="displayedImage"
+									class="img-fluid"
+									alt="">
 							</div>
-						</div>
-						<div class="form-row justify-content-between">
-							<div class="form-group col-md-6">
-								<label for="inputVideo">Imgur Gallery</label>
-								<input
-									v-validate="'url:require_protocol'"
-									id="inputGallery"
-									v-model="gallery"
-									name="Imgur Gallery"
-									type="text"
-									class="form-control"
-									placeholder="Link to imgur gallery">
-							</div>
+
 							<div class="form-group col-md-6">
 								<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
 
@@ -133,6 +117,70 @@
 										</a>
 									</div>
 								</div>
+							</div>
+						</div>
+						<div
+							class="form-group">
+							<label for="inputDescription">Description</label>
+							<div class="row">
+								<div class="col-12">
+									<textarea
+										v-validate="'required|max:1550'"
+										id="inputDescription"
+										ref="markdownEditor"
+										v-model="hideoutDescription"
+										style="min-height:300px"
+										class="w-100 bg-dark text-white"
+										name="description"
+										required
+										placeholder="Description of the hideout, you can use markdown to make it look good."/>
+								</div>
+
+								<div
+									id="preview"
+									class="col-12">
+
+									<div class="card bg-secondary">
+
+										<div
+											id="headingOne"
+											class="card-header">
+											<h5 class="mb-0">
+												<a
+													href="#"
+													class="text-white"
+													data-toggle="collapse"
+													data-target="#collapseOne"
+													aria-expanded="true"
+													aria-controls="collapseOne">
+													Preview
+												</a>
+											</h5>
+										</div>
+										<div
+											id="collapseOne"
+											class="collapse show"
+											aria-labelledby="headingOne"
+											data-parent="#preview">
+											<div
+												class="card-body"
+												v-html="renderedDescription"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-row justify-content-between">
+							<div class="form-group col-md-6">
+								<label for="inputVideo">Imgur Gallery</label>
+								<input
+									v-validate="'url:require_protocol'"
+									id="inputGallery"
+									v-model="gallery"
+									name="Imgur Gallery"
+									type="text"
+									class="form-control"
+									placeholder="Link to imgur gallery">
 							</div>
 
 							<div class="form-group col-md-6">
@@ -184,29 +232,6 @@
 									type="submit"
 									class="btn btn-primary">Submit</button>
 							</div>
-							<div class="form-group col-md-12">
-								<h4
-									class="text-white"
-									for="inputHideout">Thumbnail</h4><br>
-								<!-- <div
-									v-if="imgurGallery">
-									<blockquote
-										:data-id="`a/${hideoutImage}`"
-										class="imgur-embed-pub"
-										lang="en"><a :href="`//imgur.com/${hideoutImage}`"/>
-									</blockquote>
-									<script
-										async
-										src="//s.imgur.com/min/embed.js"
-										charset="utf-8"/>
-								</div> -->
-								<img
-									v-if="!imgurGallery"
-									id="inputHideout"
-									:src="displayedImage"
-									class="img-fluid"
-									alt="">
-							</div>
 
 							<!-- <div class="form-group col-md-2">
 								<label for="inputState">Path of exile version</label>
@@ -218,39 +243,7 @@
 								</select>
 							</div> -->
 						</div>
-						<div class="row">
-							<div
-								id="preview"
-								class="col-12">
-
-								<h5 class="mb-0">
-									<a
-										href="#"
-										class="text-white"
-										data-toggle="collapse"
-										data-target="#collapseOne"
-										aria-expanded="true"
-										aria-controls="collapseOne">
-										Preview
-									</a>
-								</h5>
-
-								<div
-									id="collapseOne"
-									class="collapse show"
-									aria-labelledby="headingOne"
-									data-parent="#preview">
-									<div class="card bg-secondary">
-										<div
-											id="headingOne"
-											class="card-header"/>
-										<div
-											class="card-body"
-											v-html="renderedDescription"/>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div class="row"/>
 						<div class="row">
 							<div
 								id="doodads"

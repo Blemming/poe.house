@@ -1,9 +1,4 @@
-
-$theme-colors: (
-    "primary":#f2c462,
-    "secondary":#222,
-    "dark":#101010
-);
+$theme-colors: ( "primary":#f2c462, "secondary":#222, "dark":#101010);
 $border-radius:0px;
 $dropdown-bg:map-get($theme-colors, secondary);
 $dropdown-link-color: map-get($theme-colors, primary);
@@ -15,34 +10,80 @@ $input-bg:map-get($theme-colors, dark);
 $input-disabled-bg: map-get($theme-colors, secondary);
 $input-color: white;
 @import "~bootstrap/scss/bootstrap";
- body{
-     background-image: url('/images/kn2SC0N.jpg');
-     background-size: cover;
-     background-attachment: fixed;
-     background-color: map-get($theme-colors, dark);
- }
-#inputDescription{
-    .CodeMirror{
-       background-color: lighten(map-get($theme-colors, secondary),30%)!important;
-    }
- .editor-toolbar{
-     border-radius: 0px!important;
-     &.disabled-for-preview a:not(.no-disable){
-        background-color: map-get($theme-colors, dark)!important;
-         color:map-get($theme-colors, secondary)!important;
-     }
-     a{
-         border:0px solid black;
-         color:white!important;
-         &:hover{
-            background-color: map-get($theme-colors, dark)!important;
-             color:map-get($theme-colors, primary)!important;
-         }
-         &.active{
-            background-color: map-get($theme-colors, dark)!important;
-             color:map-get($theme-colors, primary)!important;
-         }
-     }
+body {
+    background-image: url('/images/kn2SC0N.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: map-get($theme-colors, dark);
+}
+
+
+
+.pagination > li > a
+{
+    background-color: map-get($theme-colors, secondary);
+    color: map-get($theme-colors, primary);
+    border: 0px solid map-get($theme-colors, primary);
+    -webkit-user-select: none;
+     -moz-user-select: -moz-none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: map-get($theme-colors, primary);
+    background-color: map-get($theme-colors, dark);
+    border: 0px solid map-get($theme-colors, primary);
+}
+
+.pagination > .disabled > a{
+    color:white!important;
+    background-color: map-get($theme-colors, secondary)!important;
+    border-color: map-get($theme-colors, primary)!important;
+}
+
+.pagination > .active > a
+{
+    color: white;
     background-color: map-get($theme-colors, dark)!important;
+    border: solid 1px map-get($theme-colors, primary) !important;
 }
+
+.pagination > .active > a:hover
+{
+    background-color: map-get($theme-colors, dark)!important;
+    border: solid 1px map-get($theme-colors, primary) !important;
 }
+
+
+
+// #inputDescription {
+//     .CodeMirror {
+//         background-color: lighten(map-get($theme-colors, secondary), 30%) !important;
+//     }
+//     .editor-toolbar {
+//         border-radius: 0px !important;
+//         &.disabled-for-preview a:not(.no-disable) {
+//             background-color: map-get($theme-colors, dark) !important;
+//             color: map-get($theme-colors, secondary) !important;
+//         }
+//         a {
+//             border: 0px solid black;
+//             color: white !important;
+//             &:hover {
+//                 background-color: map-get($theme-colors, dark) !important;
+//                 color: map-get($theme-colors, primary) !important;
+//             }
+//             &.active {
+//                 background-color: map-get($theme-colors, dark) !important;
+//                 color: map-get($theme-colors, primary) !important;
+//             }
+//         }
+//         background-color: map-get($theme-colors,
+//         dark) !important;
+//     }
+// }

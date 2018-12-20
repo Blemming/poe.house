@@ -105,13 +105,13 @@
 						</div>
 					</div>
 					<div class="row bg-dark py-3">
-						<div class="col-12">
-							<div class="row justify-content-end">
-								<div class="col-xs-6 col-lg-2 form-group">
+						<div class="col-12 col-lg-6 mb-3 d-flex">
+							<form class="form-inline">
+								<div class="form-group mr-2">
 									<select
 										id="inputState"
 										v-model="sort"
-										class="form-control custom-select border-secondary text-white">
+										class="form-control custom-select border-secondary text-white ">
 										<option
 											value=""
 											selected>Sort</option>
@@ -129,13 +129,52 @@
 										</option>
 									</select>
 								</div>
-							</div>
+								<div class="form-group">
+									<select
+										id="inputState"
+										v-model="perPage"
+										class="form-control custom-select border-secondary text-white">
+										<option
+											:value="6"
+											selected>
+											Per page
+										</option>
+										<option :value="2">
+											2
+										</option>
+										<option
+											:value="6">
+											6
+										</option>
+										<option :value="12">
+											12
+										</option>
+										<option :value="hideouts.length">
+											All
+										</option>
+									</select>
+								</div>
+							</form>
+						</div>
+						<div class="col-12 col-lg-6 d-flex justify-content-end">
+							<paginate
+								:page-count="paginatePages"
+								:click-handler="clickCallback"
+								:prev-text="'Prev'"
+								:next-text="'Next'"
+								container-class="pagination"
+								page-class="page-item  bg-secondary"
+								page-link-class="page-link"
+								prev-class="page-item bg-secondary"
+								prev-link-class="page-link"
+								next-class="page-item bg-secondary"
+								next-link-class="page-link"
+							/>
 						</div>
 						<div
 							v-for="(hideout,index) in filteredHideouts"
 							:key="index"
 							class="col-xs-12 col-lg-6 my-2">
-
 							<div class="card bg-secondary">
 								<nuxt-link
 									:to="`/hideout/${hideout.hideoutId}`">
@@ -223,35 +262,6 @@
 									</div>
 								</div>
 							</div>
-							<!-- <table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-						<thead>
-							<tr>
-								<th scope="col">Doodads</th>
-								<th scope="col">Title</th>
-								<th scope="col">Type</th>
-								<th scope="col">Required Masters</th>
-								<th scope="col">Author</th>
-								<th scope="col"/>
-							</tr>
-						</thead>
-						<tbody>
-							<tr
-								v-for="(hideout,index) in filteredHideouts"
-								:key="index">
-								<th scope="row">{{ hideout.hideoutDoodads.length }}</th>
-								<td class="text-white"><strong>{{ hideout.nameDescription }}</strong></td>
-								<td>{{ getHideout(hideout.hideoutType) }}</td>
-								<td>
-									Alva level {{ hideout.hideoutMasters['Alva'] }}<br>
-									Einhar level {{ hideout.hideoutMasters['Einhar'] }}<br>
-									Niko level {{ hideout.hideoutMasters['Niko'] }}<br>
-									Zana level {{ hideout.hideoutMasters['Zana'] }}<br>
-								</td>
-								<td>{{ hideout.author }}</td>
-								<td/>
-							</tr>
-						</tbody>
-					</table> -->
 						</div>
 					</div>
 				</div>
@@ -280,6 +290,8 @@
 </template>
 <script>
 import orderBy from 'lodash/orderBy';
+import chunk from 'lodash/chunk';
+
 export default {
 	async asyncData (context) {
 		try {
@@ -291,9 +303,13 @@ export default {
 			console.log(e);
 		}
 	},
+	components: {
+	},
 	data () {
 		return {
 			levels: [1, 2, 3, 4, 5, 6, 7],
+			currentPage: 1,
+			perPage: 6,
 			hideoutType: '',
 			'mtx': '',
 			'sort': '',
@@ -304,6 +320,9 @@ export default {
 		};
 	},
 	computed: {
+		paginatePages () {
+			return Math.ceil(this.hideouts.length / this.perPage);
+		},
 		filteredHideouts () {
 			let results = this.hideouts;
 			if (this.hideoutType) {
@@ -326,20 +345,25 @@ export default {
 			}
 			if (this.sort) {
 				if (this.sort === 'date-old') {
-					return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
+					results = orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
 				}
 				if (this.sort === 'date-new') {
-					return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'asc');
+					results = orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'asc');
 				}
-				return orderBy(results, (ho) => ho[this.sort], 'desc');
+				results = orderBy(results, (ho) => ho[this.sort], 'desc');
 			} else {
-				return orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
+				results = orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
 			}
+			const offset = (this.currentPage - 1);
+			return chunk(results, this.perPage)[offset];
 		}
 	},
 	methods: {
 		totalFavorCost (doodads) {
 			return this.$favorCost(doodads);
+		},
+		clickCallback (pageNum) {
+			this.currentPage = pageNum;
 		},
 		getHideout (hash) {
 			if (hash) {
