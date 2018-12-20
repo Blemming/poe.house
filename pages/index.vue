@@ -1,9 +1,5 @@
 <style lang="scss">
-.card{
-    a:hover{
-        text-decoration: none;
-    }
-}
+
 </style>
 
 <template>
@@ -157,19 +153,21 @@
 							</form>
 						</div>
 						<div class="col-12 col-lg-6 d-flex justify-content-end">
-							<paginate
-								:page-count="paginatePages"
-								:click-handler="clickCallback"
-								:prev-text="'Prev'"
-								:next-text="'Next'"
-								container-class="pagination"
-								page-class="page-item  bg-secondary"
-								page-link-class="page-link"
-								prev-class="page-item bg-secondary"
-								prev-link-class="page-link"
-								next-class="page-item bg-secondary"
-								next-link-class="page-link"
-							/>
+							<no-ssr>
+								<paginate
+									:page-count="paginatePages"
+									:click-handler="clickCallback"
+									:prev-text="'Prev'"
+									:next-text="'Next'"
+									container-class="pagination"
+									page-class="page-item  bg-secondary"
+									page-link-class="page-link"
+									prev-class="page-item bg-secondary"
+									prev-link-class="page-link"
+									next-class="page-item bg-secondary"
+									next-link-class="page-link"
+								/>
+							</no-ssr>
 						</div>
 						<div
 							v-for="(hideout,index) in filteredHideouts"

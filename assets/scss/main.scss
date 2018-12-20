@@ -19,6 +19,12 @@ body {
 
 
 
+.card{
+    a:hover{
+        text-decoration: none;
+    }
+}
+
 .pagination > li > a
 {
     background-color: map-get($theme-colors, secondary);
