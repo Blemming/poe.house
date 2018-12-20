@@ -82,3 +82,4 @@ dist
 
 # Private Stuff
 .firebase.json
+.api.json

@@ -1,5 +1,5 @@
 const pkg = require('./package');
-// const fireBaseConfig = require('./.firebase.json');
+const apiConfig = require('./.api.json');
 
 module.exports = {
 	mode: 'universal',
@@ -74,7 +74,7 @@ module.exports = {
 	},
 	proxy: [
 		['/api', {
-			target: 'http://159.203.187.146',
+			target: apiConfig.server,
 			changeOrigin: true,
 			pathRewrite: {
 				'^/api': '/'

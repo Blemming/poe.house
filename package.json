@@ -29,9 +29,7 @@
     "moment": "^2.23.0",
     "nuxt": "^2.0.0",
     "nuxt-validate": "^0.1.2",
-    "v-markdown-editor": "^1.0.8",
     "vue-recaptcha": "^1.1.1",
-    "vue-simplemde": "^0.5.1",
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {

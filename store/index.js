@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 export const state = () => ({
 	firestoreData: null,
 	bexPost: '',
@@ -21,9 +21,10 @@ export const mutations = {
 };
 export const actions = {
 	async nuxtServerInit ({ state, commit }) {
-		const { data: doodadsData } = await axios.get('http://poedb.tw/us/api.php/HideoutDoodads');
+		// const { data: doodadsData } = await axios.get('http://poedb.tw/us/api.php/HideoutDoodads');
+		const { doodads } = require('~/data/doodads.json');
 		const { hideouts } = require('~/data/hideouts.json');
-		commit('SET_DOODADS', doodadsData.data);
+		commit('SET_DOODADS', doodads);
 		commit('SET_HIDEOUTS', hideouts);
 	}
 };
