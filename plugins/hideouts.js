@@ -20,6 +20,12 @@ Vue.prototype.$parseHideoutFile = (string) => {
 		return e.message;
 	}
 };
+Vue.prototype.$getThumbnail = (imgLink) => {
+	if (/imgut/gi.test(imgLink)) {
+		return imgLink.replace(/.jpg/i, '_d.jpg?maxwidth=520&amp;shape=thumb&amp;fidelity=high');
+	}
+	return imgLink;
+};
 Vue.prototype.$favorCost = (doodads) => {
 	let costs = 0;
 	doodads.forEach(doodad => {

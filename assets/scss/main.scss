@@ -27,9 +27,10 @@ body {
 
 .pagination > li > a
 {
+    margin-left: 2px;
     background-color: map-get($theme-colors, secondary);
     color: map-get($theme-colors, primary);
-    border: 0px solid map-get($theme-colors, primary);
+    border: 1px solid map-get($theme-colors, secondary);
     -webkit-user-select: none;
      -moz-user-select: -moz-none;
       -ms-user-select: none;
@@ -43,13 +44,13 @@ body {
 {
     color: map-get($theme-colors, primary);
     background-color: map-get($theme-colors, dark);
-    border: 0px solid map-get($theme-colors, primary);
+    border: 1px solid map-get($theme-colors, dark);
 }
 
 .pagination > .disabled > a{
     color:white!important;
     background-color: map-get($theme-colors, secondary)!important;
-    border-color: map-get($theme-colors, primary)!important;
+    border-color: map-get($theme-colors, secondary)!important;
 }
 
 .pagination > .active > a

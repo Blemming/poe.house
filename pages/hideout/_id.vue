@@ -142,25 +142,7 @@
 										aria-labelledby="headingOne"
 										data-parent="#alva">
 										<div class="card bg-secondary">
-											<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-												<tbody>
-													<tr
-														v-for="doodad in shoppingList.alva"
-														:key="doodad['Hash']">
-														<th
-															class="text-center w-25"
-															scope="row">
-															<img
-																:src="doodad['Icon']"
-																style="max-height:80px;"
-																alt="">
-														</th>
-														<td>{{ doodad['Count'] }}</td>
-														<td>{{ doodad['Name'] }}</td>
-														<td>{{ doodad['Cost'] }}</td>
-													</tr>
-												</tbody>
-											</table>
+											<shopping-list :list="shoppingList.alva"/>
 										</div>
 									</div>
 								</div>
@@ -195,20 +177,7 @@
 										aria-labelledby="headingOne"
 										data-parent="#Einhar">
 										<div class="card bg-secondary">
-											<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-												<tbody>
-													<tr
-														v-for="doodad in shoppingList.einhar"
-														:key="doodad['Hash']">
-														<th scope="row"><img
-															:src="doodad['Icon']"
-															alt=""></th>
-														<td>{{ doodad['Count'] }}</td>
-														<td>{{ doodad['Name'] }}</td>
-														<td>{{ doodad['Cost'] }}</td>
-													</tr>
-												</tbody>
-											</table>
+											<shopping-list :list="shoppingList.einhar"/>
 										</div>
 									</div>
 								</div>
@@ -243,20 +212,7 @@
 										aria-labelledby="headingOne"
 										data-parent="#Niko">
 										<div class="card bg-secondary">
-											<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-												<tbody>
-													<tr
-														v-for="doodad in shoppingList.niko"
-														:key="doodad['Hash']">
-														<th scope="row"><img
-															:src="doodad['Icon']"
-															alt=""></th>
-														<td>{{ doodad['Count'] }}</td>
-														<td>{{ doodad['Name'] }}</td>
-														<td>{{ doodad['Cost'] }}</td>
-													</tr>
-												</tbody>
-											</table>
+											<shopping-list :list="shoppingList.niko"/>
 										</div>
 									</div>
 								</div>
@@ -291,20 +247,7 @@
 										aria-labelledby="headingOne"
 										data-parent="#Zana">
 										<div class="card bg-secondary">
-											<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-												<tbody>
-													<tr
-														v-for="doodad in shoppingList.zana"
-														:key="doodad['Hash']">
-														<th scope="row"><img
-															:src="doodad['Icon']"
-															alt=""></th>
-														<td>{{ doodad['Count'] }}</td>
-														<td>{{ doodad['Name'] }}</td>
-														<td>{{ doodad['Cost'] }}</td>
-													</tr>
-												</tbody>
-											</table>
+											<shopping-list :list="shoppingList.zana"/>
 										</div>
 									</div>
 								</div>
@@ -339,20 +282,7 @@
 										aria-labelledby="headingOne"
 										data-parent="#mtx">
 										<div class="card bg-secondary">
-											<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-												<tbody>
-													<tr
-														v-for="doodad in shoppingList.other"
-														:key="doodad['Hash']">
-														<th scope="row"><img
-															:src="doodad['Icon']"
-															alt=""></th>
-														<td>{{ doodad['Count'] }}</td>
-														<td>{{ doodad['Name'] }}</td>
-														<td>{{ doodad['Cost'] }}</td>
-													</tr>
-												</tbody>
-											</table>
+											<shopping-list :list="shoppingList.other"/>
 										</div>
 									</div>
 								</div>
@@ -365,6 +295,7 @@
 	</div>
 </template>
 <script>
+import ShoppingList from '~/components/ShoppingList';
 export default {
 	async asyncData (context) {
 		try {
@@ -386,6 +317,9 @@ export default {
 		} catch (e) {
 			context.error({ statusCode: 404, message: e.message });
 		}
+	},
+	components: {
+		ShoppingList
 	},
 	computed: {
 		getHideoutType () {

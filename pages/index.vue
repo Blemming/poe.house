@@ -1,5 +1,10 @@
 <style lang="scss">
-
+    .text-grey{
+        color:rgba(255,255,255,0.8)!important;
+    }
+    .border-grey{
+        border:1px solid rgba(255,255,255,0.3)!important;
+    }
 </style>
 
 <template>
@@ -101,73 +106,60 @@
 						</div>
 					</div>
 					<div class="row bg-dark py-3">
-						<div class="col-12 col-lg-6 mb-3 d-flex">
-							<form class="form-inline">
-								<div class="form-group mr-2">
-									<select
-										id="inputState"
-										v-model="sort"
-										class="form-control custom-select border-secondary text-white ">
-										<option
-											value=""
-											selected>Sort</option>
-										<option value="downloads">
-											Downloads
-										</option>
-										<option value="views">
-											Views
-										</option>
-										<option value="date-old">
-											Date newest
-										</option>
-										<option value="date-new">
-											Date oldest
-										</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<select
-										id="inputState"
-										v-model="perPage"
-										class="form-control custom-select border-secondary text-white">
-										<option
-											:value="6"
-											selected>
-											Per page
-										</option>
-										<option :value="2">
-											2
-										</option>
-										<option
-											:value="6">
-											6
-										</option>
-										<option :value="12">
-											12
-										</option>
-										<option :value="hideouts.length">
-											All
-										</option>
-									</select>
-								</div>
-							</form>
-						</div>
-						<div class="col-12 col-lg-6 d-flex justify-content-end">
-							<no-ssr>
-								<paginate
-									:page-count="paginatePages"
-									:click-handler="clickCallback"
-									:prev-text="'Prev'"
-									:next-text="'Next'"
-									container-class="pagination"
-									page-class="page-item  bg-secondary"
-									page-link-class="page-link"
-									prev-class="page-item bg-secondary"
-									prev-link-class="page-link"
-									next-class="page-item bg-secondary"
-									next-link-class="page-link"
-								/>
-							</no-ssr>
+						<div class="col-12 mb-3 d-flex justify-content-between">
+							<div class="form-group form-inline">
+								<label
+									class="mr-2"
+									for="inputSort">Sort by: </label>
+								<select
+									id="inputSort"
+									v-model="sort"
+									class="form-control custom-select border-grey text-grey  mr-2">
+									<option
+										disabled
+										value="">Sort</option>
+									<option value="downloads">
+										Downloads
+									</option>
+									<option value="views">
+										Views
+									</option>
+									<option value="date-old">
+										Date newest
+									</option>
+									<option value="date-new">
+										Date oldest
+									</option>
+								</select>
+							</div>
+							<div class="form-group form-inline">
+								<label
+									class="mr-2"
+									for="perPage">Results per page: </label>
+								<select
+									id="perPage"
+									v-model="perPage"
+									class="form-control custom-select border-grey text-grey">
+									<option
+										:value="0"
+										disabled>
+										Per page
+									</option>
+									<option :value="2">
+										2
+									</option>
+									<option
+										:value="6">
+										6
+									</option>
+									<option :value="12">
+										12
+									</option>
+									<option :value="hideouts.length">
+										All
+									</option>
+								</select>
+							</div>
 						</div>
 						<div
 							v-for="(hideout,index) in filteredHideouts"
@@ -177,7 +169,7 @@
 								<nuxt-link
 									:to="`/hideout/${hideout.hideoutId}`">
 									<img
-										:src="getImage(hideout)"
+										:src="$getThumbnail(getImage(hideout))"
 										class="card-img-top"
 										alt="Card image cap">
 
@@ -261,6 +253,24 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="col-12 col-lg-12 d-flex justify-content-end mt-3">
+							<no-ssr>
+								<paginate
+									:page-count="paginatePages"
+									:click-handler="clickCallback"
+									:prev-text="'Prev'"
+									:next-text="'Next'"
+									container-class="pagination"
+									page-class="page-item  bg-secondary"
+									page-link-class="page-link"
+									prev-class="page-item bg-secondary"
+									prev-link-class="page-link"
+									next-class="page-item bg-secondary"
+									next-link-class="page-link"
+								/>
+							</no-ssr>
+						</div>
 					</div>
 				</div>
 				<div class="card-footer d-flex justify-content-between">
@@ -310,7 +320,7 @@ export default {
 			perPage: 6,
 			hideoutType: '',
 			'mtx': '',
-			'sort': '',
+			'sort': 'date-old',
 			'Alva': 0,
 			'Einhar': 0,
 			'Niko': 0,
@@ -319,6 +329,9 @@ export default {
 	},
 	computed: {
 		paginatePages () {
+			if (this.hideoutType || this.mtx !== '' || this.Alva || this.Einhar || this.Niko || this.Zana) {
+				return Math.ceil(this.filteredHideouts.length / this.perPage);
+			}
 			return Math.ceil(this.hideouts.length / this.perPage);
 		},
 		filteredHideouts () {
