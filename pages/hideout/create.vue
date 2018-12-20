@@ -1,300 +1,291 @@
 <style lang="scss">
+.modal-dialog, .modal-header{
+    border-radius:0px!important;
+}
 </style>
 
 <template>
-
 	<div class="row py-5">
 		<div class="col-12">
-
-			<div class="card text-primary bg-secondary border border-primary">
-				<div class="card-header border-bottom border-dark text-white text-center">
-					<h2 class="display-4">Add Hideout</h2>
-				</div>
-				<div class="card-body text-primary text-left">
-					<form @submit.prevent="submitHideout()">
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="inputTitle">Title</label>
-								<input
-									v-validate="'required|max:150'"
-									id="inputTitle"
-									v-model="nameDescription"
-									name="title"
-									required
-									type="input"
-									class="form-control"
-									placeholder="Title">
-							</div>
-							<div class="form-group col-md-6">
-								<label for="inputPastebin">Pastebin link</label>
-
-								<div class="input-group">
-									<input
-										v-validate="{ required: true, regex: /https:\/\/pastebin.com\// }"
-										id="inputPastebin"
-										v-model="hideoutFileLink"
-										:disabled="pastebinSubmitted"
-										name="Pastebin Link"
-										required
-										type="text"
-										placeholder="Link to pastebin"
-										class="form-control">
-									<div
-										v-if="pastebinSubmitted"
-										class="input-group-append">
-										<a
-											href="#"
-											class="btn btn-danger"
-											@click.prevent="clearPastebin()">
-											<span>
-												<i class="fas fa-ban"/>
-											</span>
-										</a>
-									</div>
-									<div
-										v-else
-										class="input-group-append">
-										<a
-											:class="`btn btn-primary ${(!hideoutFileLink|| error)?'disabled':''}`"
-											href="#"
-											@click.prevent="resolvePastebin()">
-											<span v-if="!pastebinProcessing">
-												Process
-											</span>
-											<span v-else>
-												<i class="fas fa-spinner-third fa-spin"/>
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group col-md-12">
-								<h4
-									class="text-white"
-									for="inputHideout">Thumbnail</h4><br>
-								<img
-									v-if="!imgurGallery"
-									id="inputHideout"
-									:src="displayedImage"
-									class="img-fluid"
-									alt="">
-							</div>
-
-							<div class="form-group col-md-6">
-								<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
-
-								<div class="input-group">
-									<div
-										class="input-group-prepend">
-										<a
-											:class="`btn btn-primary  ${(!pastebinSubmitted||error)?'disabled':''}`"
-											href="#"
-											@click.prevent="resolveThumbnail(true)">
-											<span>
-												Use default Image
-											</span>
-										</a>
-									</div>
-									<input
-										v-validate="{ required: true, regex: /^https:\/\/(.*)(.jpg$|.png$)/ }"
-										id="inputScreenshot"
-										:disabled="!pastebinSubmitted"
-										v-model="hideoutScreenshot"
-										:placeholder="(pastebinSubmitted)?'Link to image url':'Submit Pastebin first'"
-										name="Thumbnail link"
-										type="text"
-										class="form-control">
-									<div
-										class="input-group-append">
-										<a
-											:class="`btn btn-primary ${(!pastebinSubmitted||error)?'disabled':''}`"
-											href="#"
-											@click.prevent="resolveThumbnail()">
-											<span>
-												Process
-											</span>
-										</a>
-									</div>
-								</div>
-							</div>
+			<card-layout
+				title="Add Hideout">
+				<form @submit.prevent="submitHideout()">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="inputTitle">Title</label>
+							<input
+								v-validate="'required|max:150'"
+								id="inputTitle"
+								v-model="nameDescription"
+								name="title"
+								required
+								type="input"
+								class="form-control"
+								placeholder="Title">
 						</div>
-						<div
-							class="form-group">
-							<label for="inputDescription">Description</label>
-							<div class="row">
-								<div class="col-12">
-									<textarea
-										v-validate="'required|max:1550'"
-										id="inputDescription"
-										ref="markdownEditor"
-										v-model="hideoutDescription"
-										style="min-height:300px"
-										class="w-100 bg-dark text-white"
-										name="description"
-										required
-										placeholder="Description of the hideout, you can use markdown to make it look good."/>
-								</div>
+						<div class="form-group col-md-6">
+							<label for="inputPastebin">Pastebin link</label>
 
+							<div class="input-group">
 								<div
-									id="preview"
-									class="col-12">
-
-									<div class="card bg-secondary">
-
-										<div
-											id="headingOne"
-											class="card-header">
-											<h5 class="mb-0">
-												<a
-													href="#"
-													class="text-white"
-													data-toggle="collapse"
-													data-target="#collapseOne"
-													aria-expanded="true"
-													aria-controls="collapseOne">
-													Preview
-												</a>
-											</h5>
-										</div>
-										<div
-											id="collapseOne"
-											class="collapse show"
-											aria-labelledby="headingOne"
-											data-parent="#preview">
-											<div
-												class="card-body"
-												v-html="renderedDescription"/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-row justify-content-between">
-							<div class="form-group col-md-6">
-								<label for="inputVideo">Imgur Gallery</label>
-								<input
-									v-validate="'url:require_protocol'"
-									id="inputGallery"
-									v-model="gallery"
-									name="Imgur Gallery"
-									type="text"
-									class="form-control"
-									placeholder="Link to imgur gallery">
-							</div>
-
-							<div class="form-group col-md-6">
-								<label for="inputVideo">Video link</label>
-								<input
-									v-validate="'url:require_protocol'"
-									id="inputVideo"
-									v-model="hideoutVideo"
-									name="Video link"
-									type="text"
-									class="form-control"
-									placeholder="Link to youtube url">
-							</div>
-							<div class="w-100"/>
-							<div class="form-group col-col-md-6">
-								<label for="inputAuthor">Author</label>
-								<input
-									id="inputAuthor"
-									v-model="author"
-									type="text"
-									class="form-control"
-									placeholder="Author name">
-							</div>
-							<div class="form-group col-md-12">
-								<div
-									v-if="error || errorMessage"
-									class="row">
-									<div
-										v-for="error in errors.items"
-										:key="error.id"
-										class="col-12 mt-1">
-										<span
-											class="badge badge-danger">{{ error.msg }}</span>
-									</div>
-									<div class="col-12">
-										<span
-											v-if="errorMessage"
-											class="badge badge-danger">{{ errorMessage }}</span>
-									</div>
-								</div>
-								<vue-recaptcha
-									ref="recaptcha"
-									size="invisible"
-									sitekey="6Lce9oEUAAAAAArGCOuyLXTSjFGarewlLYCN9E_e"
-									@verify="onCaptchaVerified"
-									@expired="onCaptchaExpired"/>
-								<button
-									:disabled="status==='submitting' || !!error || !getHideoutDoodads"
-									type="submit"
-									class="btn btn-primary">Submit</button>
-							</div>
-
-							<!-- <div class="form-group col-md-2">
-								<label for="inputState">Path of exile version</label>
-								<select
-									id="inputState"
-									disabled
-									class="form-control">
-									<option selected>3.5.1</option>
-								</select>
-							</div> -->
-						</div>
-						<div class="row"/>
-						<div class="row">
-							<div
-								id="doodads"
-								class="col-12">
-								<h5 class="mb-0">
+									v-if="pastebinSubmitted"
+									class="input-group-prepend">
 									<a
 										href="#"
-										class="text-white"
-										data-toggle="collapse"
-										data-target="#collapseTwo"
-										aria-expanded="true"
-										aria-controls="collapseTwo">
-										Click to see doodads list
+										class="btn btn-success"
+										disabled
+										@click.prevent="">
+										<span>
+											<i class="fas fa-check"/>
+										</span>
 									</a>
-								</h5>
+								</div>
+								<input
+									v-validate="{ required: true, regex: /https:\/\/pastebin.com\// }"
+									id="inputPastebin"
+									v-model="hideoutFileLink"
+									:disabled="pastebinSubmitted"
+									name="Pastebin Link"
+									required
+									type="text"
+									placeholder="Link to pastebin"
+									class="form-control">
+
 								<div
-									id="collapseTwo"
-									class="collapse"
-									aria-labelledby="headingOne"
-									data-parent="#doodads">
-									<div class="card bg-secondary">
-										<table class="table table-bordered table-striped table-dark bg-secondary text-primary ">
-											<tbody>
-												<tr
-													v-for="doodad in getHideoutDoodads"
-													:key="doodad['Hash']">
-													<th scope="row"><img
-														:src="doodad['Icon']"
-														alt=""></th>
-													<td>{{ doodad['Count'] }}</td>
-													<td>{{ doodad['Name'] }}</td>
-													<td>{{ doodad['MasterName'] }}</td>
-													<td>{{ doodad['MasterLevel'] }}</td>
-												</tr>
-											</tbody>
-										</table>
+									v-if="pastebinSubmitted"
+									class="input-group-append">
+									<a
+										href="#"
+										class="btn btn-danger"
+										@click.prevent="clearPastebin()">
+										<span>
+											<i class="far fa-trash-alt"/>
+										</span>
+									</a>
+								</div>
+								<div
+									v-else
+									class="input-group-append">
+									<a
+										:class="`btn btn-primary ${(!hideoutFileLink|| error)?'disabled':''}`"
+										href="#"
+										@click.prevent="resolvePastebin()">
+										<span v-if="!pastebinProcessing">
+											Process
+										</span>
+										<span v-else>
+											<i class="fas fa-cog fa-spin"/>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group col-md-12">
+							<h4
+								class="text-white"
+								for="inputHideout">Thumbnail</h4><br>
+							<img
+								v-if="!imgurGallery"
+								id="inputHideout"
+								:src="displayedImage"
+								class="img-fluid"
+								alt="">
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
+
+							<div class="input-group">
+								<div
+									v-if="!imageSubmitted"
+									class="input-group-prepend">
+									<a
+										:class="`btn btn-primary  ${(!pastebinSubmitted||error)?'disabled':''}`"
+										href="#"
+										@click.prevent="resolveThumbnail(true)">
+										<span>
+											Use default Image
+										</span>
+									</a>
+								</div>
+								<div
+									v-if="imageSubmitted"
+									class="input-group-prepend">
+									<a
+										href="#"
+										class="btn btn-success"
+										disabled
+										@click.prevent="">
+										<span>
+											<i class="fas fa-check"/>
+										</span>
+									</a>
+								</div>
+								<input
+									v-validate="{ required: true, regex: /^https:\/\/(.*)(.jpg$|.png$)/ }"
+									id="inputScreenshot"
+									:disabled="!pastebinSubmitted || imageSubmitted"
+									v-model="hideoutScreenshot"
+									:placeholder="(pastebinSubmitted)?'Link to image url':'Submit Pastebin first'"
+									name="Thumbnail link"
+									type="text"
+									class="form-control">
+								<div
+									v-if="!imageSubmitted"
+									class="input-group-append">
+									<a
+										:class="`btn btn-primary ${(!pastebinSubmitted||error)?'disabled':''}`"
+										href="#"
+										@click.prevent="resolveThumbnail()">
+										<span>
+											Process
+										</span>
+									</a>
+								</div>
+								<div
+									v-if="imageSubmitted"
+									class="input-group-append">
+									<a
+										href="#"
+										class="btn btn-danger"
+										@click.prevent="clearImage()">
+										<span>
+											<i class="far fa-trash-alt"/>
+										</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="form-group">
+						<label for="inputDescription">Description</label>
+						<div class="row">
+							<div class="col-12">
+								<textarea
+									v-validate="'required|max:1550'"
+									id="inputDescription"
+									ref="markdownEditor"
+									v-model="hideoutDescription"
+									style="min-height:300px"
+									class="w-100 bg-dark text-white"
+									name="description"
+									required
+									placeholder="Description of the hideout, you can use markdown to make it look good."/>
+							</div>
+
+							<div
+								id="preview"
+								class="col-12">
+
+								<div class="card bg-secondary">
+
+									<div
+										id="headingOne"
+										class="card-header">
+										<h5 class="mb-0">
+											<a
+												href="#"
+												class="text-white"
+												data-toggle="collapse"
+												data-target="#collapseOne"
+												aria-expanded="true"
+												aria-controls="collapseOne">
+												Preview
+											</a>
+										</h5>
+									</div>
+									<div
+										id="collapseOne"
+										class="collapse show"
+										aria-labelledby="headingOne"
+										data-parent="#preview">
+										<div
+											class="card-body"
+											v-html="renderedDescription"/>
 									</div>
 								</div>
 							</div>
 						</div>
-					</form>
-				</div>
-			</div>
+					</div>
+					<div class="form-row justify-content-between">
+						<div class="form-group col-md-6">
+							<label for="inputVideo">Imgur Gallery</label>
+							<input
+								v-validate="'url:require_protocol'"
+								id="inputGallery"
+								v-model="gallery"
+								name="Imgur Gallery"
+								type="text"
+								class="form-control"
+								placeholder="Link to imgur gallery">
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="inputVideo">Video link</label>
+							<input
+								v-validate="'url:require_protocol'"
+								id="inputVideo"
+								v-model="hideoutVideo"
+								name="Video link"
+								type="text"
+								class="form-control"
+								placeholder="Link to youtube url">
+						</div>
+						<div class="w-100"/>
+						<div class="form-group col-col-md-6">
+							<label for="inputAuthor">Author</label>
+							<input
+								id="inputAuthor"
+								v-model="author"
+								type="text"
+								class="form-control"
+								placeholder="Author name">
+						</div>
+						<div class="form-group col-md-12">
+							<div
+								v-if="error || errorMessage"
+								class="row">
+								<div
+									v-for="error in errors.items"
+									:key="error.id"
+									class="col-12 mt-1">
+									<span
+										class="badge badge-danger">{{ error.msg }}</span>
+								</div>
+								<div class="col-12">
+									<span
+										v-if="errorMessage"
+										class="badge badge-danger">{{ errorMessage }}</span>
+								</div>
+							</div>
+
+							<vue-recaptcha
+								ref="recaptcha"
+								size="invisible"
+								sitekey="6Lce9oEUAAAAAArGCOuyLXTSjFGarewlLYCN9E_e"
+								@verify="onCaptchaVerified"
+								@expired="onCaptchaExpired"/>
+
+							<button
+								:disabled="status==='submitting' || !!error || !getHideoutDoodads"
+								type="submit"
+								class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+			</card-layout>
 		</div>
 	</div>
 </template>
 <script>
+import CardLayout from '~/components/CardLayout.vue';
 
 import VueRecaptcha from 'vue-recaptcha';
 export default {
 	components: {
+		CardLayout,
 		VueRecaptcha
 	},
 	data () {
@@ -314,6 +305,7 @@ export default {
 			pastebinData: '',
 			pastebinProcessing: false,
 			pastebinSubmitted: false,
+			imageSubmitted: false,
 			errorMessage: ''
 		};
 	},
@@ -356,11 +348,12 @@ export default {
 		async resolveThumbnail (defaultImage = false) {
 			if (this.hideoutScreenshot) {
 				try {
-					const resultImage = await this.$axios.get(this.hideoutScreenshot);
-					console.log(resultImage);
+					await this.$axios.get(this.hideoutScreenshot);
 					if (/imgur/gi.test(this.hideoutScreenshot)) {
+						this.imageSubmitted = true;
 						this.hideoutImage = this.hideoutScreenshot.replace(/https:\/\/imgur\.com\/a\//gi, '');
 					} else {
+						this.imageSubmitted = true;
 						this.hideoutImage = this.hideoutScreenshot;
 					}
 				} catch (e) {
@@ -406,6 +399,11 @@ export default {
 			this.pastebinData = '';
 			this.hideoutFileLink = '';
 			this.pastebinSubmitted = false;
+		},
+		clearImage () {
+			this.hideoutScreenshot = '';
+			this.hideoutImage = '';
+			this.imageSubmitted = false;
 		},
 		async resolvePastebin () {
 			const pastebin = this.hideoutFileLink;
