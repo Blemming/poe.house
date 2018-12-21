@@ -40,6 +40,19 @@
 										</span>
 									</a>
 								</div>
+								<div
+									v-if="pastebinError"
+									class="input-group-prepend">
+									<a
+										href="#"
+										class="btn btn-danger"
+										disabled
+										@click.prevent="">
+										<span>
+											<i class="fas fa-times"/>
+										</span>
+									</a>
+								</div>
 								<input
 									v-validate="{ required: true, regex: /https:\/\/pastebin.com\// }"
 									id="inputPastebin"
@@ -50,9 +63,8 @@
 									type="text"
 									placeholder="Link to pastebin"
 									class="form-control">
-
 								<div
-									v-if="pastebinSubmitted"
+									v-if="pastebinSubmitted || pastebinError"
 									class="input-group-append">
 									<a
 										href="#"
@@ -317,6 +329,7 @@ export default {
 			hideoutDoodads: [],
 			poeVersion: '3.5.1',
 			pastebinData: '',
+			pastebinError: false,
 			pastebinProcessing: false,
 			pastebinSubmitted: false,
 			imageSubmitted: false,
@@ -414,6 +427,7 @@ export default {
 			this.pastebinData = '';
 			this.hideoutFileLink = '';
 			this.pastebinSubmitted = false;
+			this.pastebinError = false;
 		},
 		clearImage () {
 			this.hideoutScreenshot = '';
@@ -422,6 +436,7 @@ export default {
 		},
 		async resolvePastebin () {
 			const pastebin = this.hideoutFileLink;
+			this.pastebinError = false;
 			if (/https:\/\/pastebin.com\//gi.test(pastebin)) {
 				this.pastebinProcessing = true;
 				const rawPastebin = pastebin.replace(/https:\/\/pastebin.com\//gi, '/raw/');
@@ -436,14 +451,18 @@ export default {
 						this.pastebinSubmitted = true;
 					} else {
 						this.errorMessage = 'Not a valid hideout file';
+						this.pastebinError = true;
 						this.pastebinProcessing = false;
 					}
 				} catch (e) {
 					this.pastebinProcessing = false;
+					this.pastebinError = true;
 					return e;
 				}
 			} else {
-				this.pastebinData = 'Not a pastebin link';
+				this.pastebinProcessing = false;
+				this.pastebinError = true;
+				this.errorMessage = 'Not a pastebin link';
 			}
 		},
 		onCaptchaExpired () {

@@ -86,6 +86,13 @@ module.exports = {
 			pathRewrite: {
 				'^/raw': '/raw'
 			}
+		}],
+		['/githubraw', {
+			target: 'https://raw.githubusercontent.com',
+			changeOrigin: true,
+			pathRewrite: {
+				'^/githubraw': '/'
+			}
 		}]
 	],
 
