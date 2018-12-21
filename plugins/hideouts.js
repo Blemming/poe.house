@@ -21,8 +21,8 @@ Vue.prototype.$parseHideoutFile = (string) => {
 	}
 };
 Vue.prototype.$getThumbnail = (imgLink) => {
-	if (/imgut/gi.test(imgLink)) {
-		return imgLink.replace(/.jpg/i, '_d.jpg?maxwidth=520&amp;shape=thumb&amp;fidelity=high');
+	if (/imgur/gi.test(imgLink)) {
+		return imgLink.replace(/(.jpg|.png)/i, 'l$1');
 	}
 	return imgLink;
 };
