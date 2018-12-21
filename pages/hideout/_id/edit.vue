@@ -16,7 +16,7 @@
 							<input
 								v-validate="'required|max:150'"
 								id="inputTitle"
-								v-model="nameDescription"
+								v-model="hideout.nameDescription"
 								name="title"
 								required
 								type="input"
@@ -56,7 +56,7 @@
 								<input
 									v-validate="{ required: true, regex: /https:\/\/pastebin.com\// }"
 									id="inputPastebin"
-									v-model="hideoutFileLink"
+									v-model="hideout.hideoutFileLink"
 									:disabled="pastebinSubmitted"
 									name="Pastebin Link"
 									required
@@ -79,7 +79,7 @@
 									v-else
 									class="input-group-append">
 									<a
-										:class="`btn btn-primary ${(!hideoutFileLink|| error)?'disabled':''}`"
+										:class="`btn btn-primary ${(!hideout.hideoutFileLink|| error)?'disabled':''}`"
 										href="#"
 										@click.prevent="resolvePastebin()">
 										<span v-if="!pastebinProcessing">
@@ -98,7 +98,7 @@
 								class="text-white"
 								for="inputHideout">Thumbnail</h4><br>
 							<img
-								v-if="!imgurGallery"
+								v-if="imageSubmitted"
 								id="inputHideout"
 								:src="displayedImage"
 								class="img-fluid"
@@ -113,7 +113,7 @@
 									v-if="!imageSubmitted"
 									class="input-group-prepend">
 									<a
-										:class="`btn btn-primary  ${(!pastebinSubmitted||error)?'disabled':''}`"
+										:class="`btn btn-primary  ${(!pastebinSubmitted)?'disabled':''}`"
 										href="#"
 										@click.prevent="resolveThumbnail(true)">
 										<span>
@@ -138,7 +138,7 @@
 									v-validate="{ required: true, regex: /^https:\/\/(.*)(.jpg$|.png$)/ }"
 									id="inputScreenshot"
 									:disabled="!pastebinSubmitted || imageSubmitted"
-									v-model="hideoutScreenshot"
+									v-model="hideoutImage"
 									:placeholder="(pastebinSubmitted)?'Link to image url':'Submit Pastebin first'"
 									name="Thumbnail link"
 									type="text"
@@ -179,7 +179,7 @@
 									v-validate="'required|max:1550'"
 									id="inputDescription"
 									ref="markdownEditor"
-									v-model="hideoutDescription"
+									v-model="hideout.hideoutDescription"
 									style="min-height:300px"
 									class="w-100 bg-dark text-white"
 									name="description"
@@ -227,7 +227,7 @@
 							<input
 								v-validate="'url:require_protocol'"
 								id="inputGallery"
-								v-model="gallery"
+								v-model="hideout.gallery"
 								name="Imgur Gallery"
 								type="text"
 								class="form-control"
@@ -239,38 +239,11 @@
 							<input
 								v-validate="'url:require_protocol'"
 								id="inputVideo"
-								v-model="hideoutVideo"
+								v-model="hideout.hideoutVideo"
 								name="Video link"
 								type="text"
 								class="form-control"
 								placeholder="Link to youtube url">
-						</div>
-						<div class="w-100"/>
-						<div
-							v-if="!$store.getters['auth/username']"
-							class="form-group col-6 col-lg-4">
-							<label for="inputAuthor">Author</label>
-							<input
-								id="inputAuthor"
-								v-model="author"
-								type="text"
-								class="form-control"
-								placeholder="Author name">
-						</div>
-						<div
-							v-if="!$store.getters['auth/username']"
-							class="form-group col-6 col-lg-4">
-							<label for="inputAuthor">Email</label>
-							<input
-								v-validate="'email'"
-								id="inputAuthor"
-								v-model="authorEmail"
-								type="email"
-								class="form-control"
-								placeholder="Author Email">
-							<small>
-								When accounts and editting goes live, you will be able to claim your hideouts with your email. Not required but you will not be able to reclaim or edit this post. Your email will not show anywhere and will not be shared with anyone.
-							</small>
 						</div>
 						<div class="form-group col-md-12">
 							<div
@@ -300,7 +273,7 @@
 							<button
 								:disabled="status==='submitting' || !!error || !getHideoutDoodads"
 								type="submit"
-								class="btn btn-primary">Submit</button>
+								class="btn btn-primary">Edit</button>
 						</div>
 					</div>
 				</form>
@@ -313,30 +286,37 @@ import CardLayout from '~/components/CardLayout.vue';
 
 import VueRecaptcha from 'vue-recaptcha';
 export default {
+	async asyncData (context) {
+		try {
+			const { data: hideouts } = await context.app.$axios.get(`/api/hideouts?hideoutId=${context.params.id}`);
+			const hideout = hideouts[0];
+			hideout.hideoutDescription = hideout.hideoutDescription.replace(/<\/?[^>]+(>|$)/g, '');
+			if (hideout.user.username === context.store.getters['auth/username']) {
+				return {
+					hideout,
+					hideoutImage: hideout.hideoutScreenshot,
+					pastebinData: hideout.hideoutDoodads
+				};
+			} else {
+				context.error({ statusCode: 403, message: 'You are not the author of this hideout' });
+			}
+		} catch (e) {
+			context.error({ statusCode: 404, message: e.message });
+		}
+	},
 	components: {
 		CardLayout,
 		VueRecaptcha
 	},
 	data () {
 		return {
-			author: '',
-			authorEmail: '',
-			nameDescription: '',
-			hideoutType: '',
-			hideoutFileLink: '',
-			hideoutImage: '',
-			hideoutDescription: '',
 			status: '',
-			gallery: '',
-			hideoutScreenshot: '',
-			hideoutVideo: '',
-			hideoutDoodads: [],
 			poeVersion: '3.5.1',
 			pastebinData: '',
 			pastebinError: false,
 			pastebinProcessing: false,
-			pastebinSubmitted: false,
-			imageSubmitted: false,
+			pastebinSubmitted: true,
+			imageSubmitted: true,
 			errorMessage: ''
 		};
 	},
@@ -358,7 +338,7 @@ export default {
 			return !/.png|.jpg|.jpeg/g.test(this.hideoutImage);
 		},
 		renderedDescription () {
-			return this.$md.render(this.hideoutDescription).replace(/<img/gi, '<img class="img-fluid"');
+			return this.$md.render(this.hideout.hideoutDescription).replace(/<img/gi, '<img class="img-fluid"');
 		},
 		displayedImage () {
 			return this.hideoutImage;
@@ -376,11 +356,12 @@ export default {
 		submitHideout () {
 			this.$refs.recaptcha.execute();
 		},
+
 		async resolveThumbnail (defaultImage = false) {
-			if (this.hideoutScreenshot) {
+			if (this.hideoutImage) {
 				try {
-					await this.$axios.get(this.hideoutScreenshot);
-					if (/imgur/gi.test(this.hideoutScreenshot)) {
+					await this.$axios.get(this.hideoutImage);
+					if (/imgur/gi.test(this.hideoutImage)) {
 						this.imageSubmitted = true;
 						this.hideoutImage = this.hideoutScreenshot.replace(/https:\/\/imgur\.com\/a\//gi, '');
 					} else {
@@ -389,11 +370,12 @@ export default {
 					}
 				} catch (e) {
 					this.errorMessage = 'The image you submitted is not valid, default hideout image used';
-					this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'] || '';
+					this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideout.hideoutType)[0]['Icon'] || '';
 				}
 			}
 			if (this.pastebinData && defaultImage) {
-				this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'] || '';
+				this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideout.hideoutType)[0]['Icon'] || '';
+				this.imageSubmitted = true;
 			}
 		},
 		async onCaptchaVerified () {
@@ -402,11 +384,11 @@ export default {
 				this.$refs.recaptcha.reset();
 				try {
 					const newHideout = this.$hideoutObject({
-						author: this.$store.getters['auth/username'] || this.author,
-						authorEmail: this.authorEmail,
-						nameDescription: this.nameDescription,
-						hideoutType: this.hideoutType,
-						hideoutFileLink: this.hideoutFileLink,
+						author: this.hideout.author,
+						authorEmail: this.hideout.authorEmail,
+						nameDescription: this.hideout.nameDescription,
+						hideoutType: this.hideout.hideoutType,
+						hideoutFileLink: this.hideout.hideoutFileLink,
 						hideoutDescription: this.renderedDescription,
 						hideoutScreenshot: this.hideoutImage,
 						hideoutVideo: this.hideoutVideo,
@@ -416,10 +398,11 @@ export default {
 						user: this.$store.state.auth.user || null,
 						poeVersion: this.poeVersion
 					});
-					// await hideoutRef.set(newHideout);
-					await this.$axios.post(`/api/hideouts/`, newHideout);
+					console.log(newHideout);
+					console.log(this.hideout);
+					// await this.$axios.put(`/api/hideouts/${this.hideout._id}`, newHideout);
 					this.status = '';
-					this.$router.push('/');
+					// this.$router.push('/');
 				} catch (e) {
 					alert(e);
 				}
@@ -428,19 +411,18 @@ export default {
 			}
 		},
 		clearPastebin () {
-			this.hideoutType = '';
+			this.hideout.hideoutType = '';
 			this.pastebinData = '';
-			this.hideoutFileLink = '';
+			this.hideout.hideoutFileLink = '';
 			this.pastebinSubmitted = false;
 			this.pastebinError = false;
 		},
 		clearImage () {
-			this.hideoutScreenshot = '';
 			this.hideoutImage = '';
 			this.imageSubmitted = false;
 		},
 		async resolvePastebin () {
-			const pastebin = this.hideoutFileLink;
+			const pastebin = this.hideout.hideoutFileLink;
 			this.pastebinError = false;
 			if (/https:\/\/pastebin.com\//gi.test(pastebin)) {
 				this.pastebinProcessing = true;
@@ -450,7 +432,7 @@ export default {
 					const { data } = await this.$axios.get(rawPastebin);
 					const pastebinObject = this.$parseHideoutFile(data);
 					if (pastebinObject['Hideout Hash']) {
-						this.hideoutType = parseInt(pastebinObject['Hideout Hash']);
+						this.hideout.hideoutType = parseInt(pastebinObject['Hideout Hash']);
 						this.pastebinData = this.$parseHideoutFile(data);
 						this.pastebinProcessing = false;
 						this.pastebinSubmitted = true;

@@ -187,7 +187,7 @@
 												</tr>
 												<tr>
 													<th scope="row">Favour Required</th>
-													<td class="text-white"><strong>{{ formatFavour(totalFavorCost(hideout.hideoutDoodads)) }}</strong></td>
+													<td class="text-white"><strong>{{ $favorCost(hideout.hideoutDoodads) }}</strong></td>
 												</tr>
 												<tr>
 													<th scope="row">Decorations</th>
@@ -283,8 +283,10 @@ export default {
 	async asyncData (context) {
 		try {
 			const { data: hideouts } = await context.app.$axios.get('/api/hideouts');
+			const confirmed = context.query.confirmed;
 			return {
-				hideouts
+				hideouts,
+				confirmed
 			};
 		} catch (e) {
 			console.log(e);
@@ -296,6 +298,7 @@ export default {
 	data () {
 		return {
 			levels: [1, 2, 3, 4, 5, 6, 7],
+			hideouts: [],
 			currentPage: 1,
 			perPage: 6,
 			hideoutType: '',
@@ -350,27 +353,18 @@ export default {
 		}
 	},
 	methods: {
-		totalFavorCost (doodads) {
-			return this.$favorCost(doodads);
-		},
 		clickCallback (pageNum) {
 			this.currentPage = pageNum;
 		},
 		getHideout (hash) {
-			if (hash) {
-				return this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === hash)[0]['Name'];
-			} else {
-				return '';
-			}
-		},
-		formatFavour (favour = 0) {
-			return favour.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			return this.$store.getters.getHideout(hash)['Name'];
 		},
 		getImage (hideout) {
 			if (/.jpg|.png|jpeg/gi.test(hideout.hideoutScreenshot)) {
 				return hideout.hideoutScreenshot;
 			} else {
-				return this.$store.state.hideouts.filter(stateHideout => parseInt(stateHideout['Hash']) === hideout.hideoutType)[0]['Icon'];
+				const image = this.$store.getters.getHideout(hideout.hideoutType)['Icon'];
+				return image;
 			}
 		}
 	}

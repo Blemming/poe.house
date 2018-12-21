@@ -70,12 +70,12 @@ module.exports = {
   ** Axios module configuration
   */
 	axios: {
-		proxy: true
+		proxy: true,
+		proxyHeaders: false
 	},
 	proxy: [
 		['/api', {
 			target: apiConfig.server,
-			changeOrigin: true,
 			pathRewrite: {
 				'^/api': '/'
 			}
@@ -95,7 +95,6 @@ module.exports = {
 			}
 		}]
 	],
-
 	/*
   ** Markdownit module configuration
   */

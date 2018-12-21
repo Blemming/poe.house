@@ -32,7 +32,7 @@ Vue.prototype.$favorCost = (doodads) => {
 		const cost = doodad.Count * parseInt(doodad.Cost);
 		costs += cost;
 	});
-	return costs;
+	return costs.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = []) => {
 	const doodads = [];
@@ -107,6 +107,7 @@ function makeTimeStamp () {
 }
 Vue.prototype.$hideoutObject = ({
 	author = '',
+	user = '',
 	nameDescription = '',
 	hideoutType = 13485,
 	hideoutFileLink = '',
@@ -120,6 +121,7 @@ Vue.prototype.$hideoutObject = ({
 	poeVersion = '3.5.1'
 } = {}) => ({
 	author,
+	user,
 	nameDescription,
 	hideoutType,
 	hideoutFileLink,
