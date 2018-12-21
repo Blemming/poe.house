@@ -108,7 +108,7 @@ function makeTimeStamp () {
 Vue.prototype.$hideoutObject = ({
 	author = '',
 	nameDescription = '',
-	hideoutType = '',
+	hideoutType = 13485,
 	hideoutFileLink = '',
 	hideoutDescription = '',
 	hideoutScreenshot = '',

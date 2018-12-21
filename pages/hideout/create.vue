@@ -393,7 +393,7 @@ export default {
 			}
 		},
 		async onCaptchaVerified () {
-			if (!this.error) {
+			if (!this.error && !this.pastebinError) {
 				this.status = 'submitting';
 				this.$refs.recaptcha.reset();
 				try {
