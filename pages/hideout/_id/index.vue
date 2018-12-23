@@ -295,7 +295,7 @@ import ShoppingList from '~/components/ShoppingList';
 export default {
 	async asyncData (context) {
 		try {
-			const { data: hideouts } = await context.app.$axios.get(`/api/hideouts?hideoutId=${context.params.id}`);
+			const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
 			const hideout = hideouts[0];
 			const views = hideout.views || 0;
 			hideout.views = views + 1;

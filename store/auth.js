@@ -26,19 +26,42 @@ export const actions = {
 	logoutUser ({ commit }) {
 		commit('logout');
 	},
-	async loginUser ({ commit }, payload) {
+	async updateUserHideouts ({ state, commit }) {
+		let user = state.user;
+		const query = `
+        query{
+            user(id:"${user._id}"){
+              username
+              confirmed
+              hideouts{
+                hideoutId
+                nameDescription
+                hideoutType
+                views
+                downloads
+                hideoutDateSubmit
+                hideoutMasters
+                hideoutScreenshot
+              }
+            }
+          }
+        `;
+		const { data: confirmedUser } = await this.$axios.post(`/api/graphql`, { query });
+		user = { ...user, ...confirmedUser.data.user };
+		commit('setUser', user);
+	},
+	async loginUser ({ commit, dispatch }, payload) {
 		try {
 			const { data: session } = await this.$axios.post('/api/auth/local', {
 				identifier: payload.identifier,
 				password: payload.password
 			});
-			let user = session.user;
-			const { data: confirmedUser } = await this.$axios.get(`/api/users/${user._id}`);
-			user = { ...user, hideouts: confirmedUser.hideouts };
-			commit('setUser', user);
+			const user = session.user;
+			await commit('setUser', user);
+			dispatch('updateUserHideouts');
 			commit('setToken', session.jwt);
 		} catch (e) {
-			throw Error(e);
+			throw Error(e.response.data.message);
 		}
 	},
 	async registerUser ({ commit }, payload) {
@@ -51,7 +74,7 @@ export const actions = {
 			commit('setUser', session.user);
 			commit('setToken', session.jwt);
 		} catch (e) {
-			throw Error(e.message);
+			throw Error(e.response.data.message);
 		}
 	}
 };

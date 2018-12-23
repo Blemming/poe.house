@@ -18,7 +18,7 @@
 						<small
 							v-if="isError"
 							id="passwordHelp"
-							class="form-text text-center text-danger">Email or password incorrect.</small>
+							class="form-text text-center text-danger">{{ error }}</small>
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label>
@@ -34,7 +34,7 @@
 						<small
 							v-if="isError"
 							id="passwordHelp"
-							class="form-text text-center text-danger">Email or password incorrect.</small>
+							class="form-text text-center text-danger">{{ error }}</small>
 					</div>
 					<button
 						:disabled="loading"
@@ -81,10 +81,10 @@ export default {
 				this.loading = true;
 				await this.loginUser({ identifier: this.email, password: this.password });
 				this.loading = false;
+				this.$router.push('/');
 			} catch (err) {
 				this.loading = false;
-				this.error = 'Incorrect email or password';
-				this.$router.push('/');
+				this.error = err.message || 'Incorrect email or password';
 			}
 		},
 		...mapActions({

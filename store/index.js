@@ -38,7 +38,7 @@ export const actions = {
 			token = (parsed.token) || null;
 		}
 		if (user) {
-			const { data: confirmedUser } = await this.$axios.get(`/api/users/${user._id}`);
+			const confirmedUser = await this.$axios.$get(`/api/users/${user._id}`);
 			user = confirmedUser;
 		}
 		commit('auth/setUser', user);

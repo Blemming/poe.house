@@ -288,15 +288,19 @@ import VueRecaptcha from 'vue-recaptcha';
 export default {
 	async asyncData (context) {
 		try {
-			const { data: hideouts } = await context.app.$axios.get(`/api/hideouts?hideoutId=${context.params.id}`);
+			const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
 			const hideout = hideouts[0];
 			hideout.hideoutDescription = hideout.hideoutDescription.replace(/<\/?[^>]+(>|$)/g, '');
-			if (hideout.user.username === context.store.getters['auth/username']) {
-				return {
-					hideout,
-					hideoutImage: hideout.hideoutScreenshot,
-					pastebinData: hideout.hideoutDoodads
-				};
+			if (hideout.user) {
+				if (hideout.user.username === context.store.getters['auth/username']) {
+					return {
+						hideout,
+						hideoutImage: hideout.hideoutScreenshot || context.store.getters.getHideout(hideout.hideoutType)['Icon'],
+						pastebinData: hideout.hideoutDoodads
+					};
+				} else {
+					context.error({ statusCode: 403, message: 'You are not the author of this hideout' });
+				}
 			} else {
 				context.error({ statusCode: 403, message: 'You are not the author of this hideout' });
 			}
@@ -304,6 +308,7 @@ export default {
 			context.error({ statusCode: 404, message: e.message });
 		}
 	},
+	middleware: 'auth',
 	components: {
 		CardLayout,
 		VueRecaptcha
@@ -344,8 +349,12 @@ export default {
 			return this.hideoutImage;
 		},
 		getHideoutDoodads () {
-			if (this.pastebinData) {
+			if (this.pastebinData['Doodads']) {
 				return this.$getDoodadsFromHideout(this.$store.state.doodads, this.pastebinData['Doodads']);
+			}
+			if (this.pastebinData) {
+				// return 'noooo';
+				return this.$getDoodadsFromHideout(this.$store.state.doodads, this.pastebinData);
 			}
 		},
 		hideoutOptions () {
@@ -385,6 +394,7 @@ export default {
 				try {
 					const newHideout = this.$hideoutObject({
 						author: this.hideout.author,
+						hideoutId: this.hideout.hideoutId,
 						authorEmail: this.hideout.authorEmail,
 						nameDescription: this.hideout.nameDescription,
 						hideoutType: this.hideout.hideoutType,
@@ -398,11 +408,9 @@ export default {
 						user: this.$store.state.auth.user || null,
 						poeVersion: this.poeVersion
 					});
-					console.log(newHideout);
-					console.log(this.hideout);
-					// await this.$axios.put(`/api/hideouts/${this.hideout._id}`, newHideout);
+					await this.$axios.put(`/api/hideouts/${this.hideout._id}`, newHideout);
 					this.status = '';
-					// this.$router.push('/');
+					this.$router.push('/');
 				} catch (e) {
 					alert(e);
 				}

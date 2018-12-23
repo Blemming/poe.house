@@ -1,21 +1,27 @@
 <template>
 	<div class="row py-5">
 		<div class="col-12">
-			<div class="card text-primary bg-secondary border border-primary">
-				<div class="card-header border-bottom border-dark text-white text-center">
-					<h2 class="display-4">{{ error.statusCode }}</h2>
-				</div>
-				<div class="card-body text-primary text-left">
-					<p>
-						{{ error.message }}
-					</p>
-				</div>
-			</div>
+			<card-layout
+				title="Ooops">
+				<h4 class="text-center">
+					{{ error.message }}
+				</h4>
+				<h4 class="text-center">
+					Please contact
+					<a
+						class="text-white"
+						href="mailto:support@poe.house">support@poe.house</a> if the problem persists.
+				</h4>
+			</card-layout>
 		</div>
 	</div>
 </template>
 <script>
+import CardLayout from '~/components/CardLayout.vue';
 export default {
+	components: {
+		CardLayout
+	},
 	props: {
 		error: {
 			type: Object,

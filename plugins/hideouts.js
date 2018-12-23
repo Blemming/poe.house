@@ -26,8 +26,9 @@ Vue.prototype.$getThumbnail = (imgLink) => {
 	}
 	return imgLink;
 };
-Vue.prototype.$favorCost = (doodads) => {
+Vue.prototype.$favorCost = (doodads = []) => {
 	let costs = 0;
+	doodads = doodads || [];
 	doodads.forEach(doodad => {
 		const cost = doodad.Count * parseInt(doodad.Cost);
 		costs += cost;
@@ -37,7 +38,7 @@ Vue.prototype.$favorCost = (doodads) => {
 Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = []) => {
 	const doodads = [];
 	for (const doodad of hideoutObjectDoodads) {
-		const found = allDoodads.filter(doo => parseInt(doo['Hash']) === doodad['Hash'])[0];
+		const found = allDoodads.filter(doo => parseInt(doo['Hash']) === parseInt(doodad['Hash']))[0];
 		if (found) {
 			doodads.push(found);
 		}
@@ -115,7 +116,9 @@ Vue.prototype.$hideoutObject = ({
 	hideoutScreenshot = '',
 	hideoutVideo = '',
 	gallery = '',
+	hideoutId = '',
 	authorEmail = '',
+	hideoutDateSubmit = '',
 	hideoutDoodads = [],
 	hideoutMasters = [],
 	poeVersion = '3.5.1'
@@ -132,9 +135,9 @@ Vue.prototype.$hideoutObject = ({
 	hideoutDoodads,
 	hideoutMasters,
 	authorEmail,
-	hideoutId: makeid(),
+	hideoutId: hideoutId || makeid(),
 	downloads: 0,
 	views: 0,
-	hideoutDateSubmit: makeTimeStamp(),
+	hideoutDateSubmit: hideoutDateSubmit || makeTimeStamp(),
 	poeVersion
 });

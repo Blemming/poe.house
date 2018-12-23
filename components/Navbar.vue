@@ -62,6 +62,46 @@
 								v-html="dropdownItem.description"/>
 						</div>
 					</li>
+					<li class="nav-item dropdown">
+						<a
+							:id="`navbar-support`"
+							class="nav-link dropdown-toggle text-danger"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false">
+							<i class="fas fa-heart"/> Support
+						</a>
+						<div
+							class="dropdown-menu bg-secondary dropdown-primary"
+							aria-labelledby="navbarDropdown">
+							<a
+								class="dropdown-item text-danger"
+								target="_blank"
+								href="https://www.patreon.com/join/blemming/checkout?rid=0">
+								<i
+									style="color:#f96854;"
+									class="fab fa-patreon"/>
+								<small
+									style="color:#f96854;">
+									Support with Patreon
+								</small>
+							</a>
+							<a
+								class="dropdown-item text-danger"
+								target="_blank"
+								href="https://www.paypal.me/bluelemming">
+								<i
+									style="color:#3b7bbf;"
+									class="fab fa-paypal"/>
+								<small
+									style="color:#3b7bbf;">
+									Support with Paypal
+								</small>
+							</a>
+						</div>
+					</li>
 				</ul>
 				<ul class="navbar-nav ml-auto ">
 					<li
@@ -98,6 +138,39 @@
 								v-html="dropdownItem.description"/>
 						</div>
 					</li>
+					<li
+						v-if="$store.getters['auth/username']"
+						class="nav-item dropdown">
+						<a
+							:id="`navbar-support`"
+							class="nav-link dropdown-toggle"
+							href="#"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false">
+							{{ $store.getters['auth/username'] }}
+						</a>
+						<div
+							class="dropdown-menu bg-secondary dropdown-primary"
+							aria-labelledby="navbarDropdown">
+							<nuxt-link
+								class="dropdown-item text-white"
+								to="/user">
+								Hideouts
+							</nuxt-link>
+							<div
+								v-if="$store.state.auth.user.confirmed"
+								class="dropdown-divider border-top border-dark"/>
+							<a
+								v-if="$store.state.auth.user.confirmed"
+								class="dropdown-item"
+								href="/"
+								@click.prevent="logout()">
+								Logout <i class="fas fa-sign-out-alt"/>
+							</a>
+						</div>
+					</li>
 				</ul>
 				<div
 					class="form-inline ml-5 my-2 my-lg-0">
@@ -116,34 +189,34 @@ export default {
 	computed: {
 		navbarOptions () {
 			return [
-				{
-					title: 'about',
-					dropdownItems: false,
-					description: 'About',
-					url: '/about',
-					target: false
-				}];
+				// {
+				// 	title: 'about',
+				// 	dropdownItems: false,
+				// 	description: 'About',
+				// 	url: '/about',
+				// 	target: false
+				// }
+			];
 		},
 		rightNavbarOptions () {
 			if (this.$store.getters['auth/username']) {
 				return [
-					{
-						title: 'account',
-						dropdownItems: false,
-						description: 'Account',
-						url: '/user',
-						target: false
-					},
-					{
-						title: 'logout',
-						dropdownItems: false,
-						description: 'Log out',
-						url: '/logout',
-						target: false
-					}
+					// {
+					// 	title: 'account',
+					// 	dropdownItems: false,
+					// 	description: 'Account',
+					// 	url: '/user',
+					// 	target: false
+					// },
+					// {
+					// 	title: 'logout',
+					// 	dropdownItems: false,
+					// 	description: 'Log out',
+					// 	url: '/logout',
+					// 	target: false
+					// }
 				];
 			}
-			// const categories = this.$store.state.poe.hideouts.map(hideout => ({ description: hideout.Name, url: `/hideout/${hideout.Hash}`, target: false }));
 			return [
 				{
 					title: 'login',
@@ -169,7 +242,8 @@ export default {
 	},
 	methods: {
 		logout () {
-			this.$store.dispatch('userLogout');
+			this.$router.push('/');
+			this.$store.dispatch('auth/logoutUser');
 		}
 	}
 };

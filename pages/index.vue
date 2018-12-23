@@ -122,10 +122,10 @@
 									Views
 								</option>
 								<option value="date-old">
-									Date newest
+									Newest
 								</option>
 								<option value="date-new">
-									Date oldest
+									Oldest
 								</option>
 							</select>
 						</div>
@@ -282,7 +282,7 @@ import chunk from 'lodash/chunk';
 export default {
 	async asyncData (context) {
 		try {
-			const { data: hideouts } = await context.app.$axios.get('/api/hideouts');
+			const hideouts = await context.app.$axios.$get('/api/hideouts');
 			const confirmed = context.query.confirmed;
 			return {
 				hideouts,

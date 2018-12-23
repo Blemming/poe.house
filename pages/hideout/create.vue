@@ -312,6 +312,7 @@
 import CardLayout from '~/components/CardLayout.vue';
 
 import VueRecaptcha from 'vue-recaptcha';
+import { mapActions } from 'vuex';
 export default {
 	components: {
 		CardLayout,
@@ -419,6 +420,9 @@ export default {
 					// await hideoutRef.set(newHideout);
 					await this.$axios.post(`/api/hideouts/`, newHideout);
 					this.status = '';
+					if (this.$store.getters['auth/username']) {
+						this.updateUserHideouts();
+					}
 					this.$router.push('/');
 				} catch (e) {
 					alert(e);
@@ -447,7 +451,7 @@ export default {
 				const rawPastebin = pastebin.replace(/https:\/\/pastebin.com\//gi, '/raw/');
 				try {
 					this.errorMessage = '';
-					const { data } = await this.$axios.get(rawPastebin);
+					const data = await this.$axios.$get(rawPastebin);
 					const pastebinObject = this.$parseHideoutFile(data);
 					if (pastebinObject['Hideout Hash']) {
 						this.hideoutType = parseInt(pastebinObject['Hideout Hash']);
@@ -472,7 +476,10 @@ export default {
 		},
 		onCaptchaExpired () {
 			this.$refs.recaptcha.reset();
-		}
+		},
+		...mapActions({
+			updateUserHideouts: 'auth/updateUserHideouts'
+		})
 	},
 	head () {
 		return {

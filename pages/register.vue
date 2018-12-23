@@ -3,6 +3,7 @@
 		<div class="col-md-6 offset-md-3 mt-3">
 			<card-layout title="Register">
 				<form
+					v-if="!registered"
 					autocomplete="off"
 					@submit.stop.prevent="handleSubmit">
 					<div class="form-group">
@@ -15,6 +16,10 @@
 							autofocus="true"
 							placeholder="Enter your username"
 							required>
+						<small
+							v-if="isError"
+							id="passwordHelp"
+							class="form-text text-center text-danger">{{ error }}</small>
 					</div>
 					<div class="form-group">
 						<label for="email">Email</label>
@@ -29,6 +34,10 @@
 						<small
 							id="emailHelp"
 							class="form-text text-muted">We'll never share your email with anyone else.</small>
+						<small
+							v-if="isError"
+							id="passwordHelp"
+							class="form-text text-center text-danger">{{ error }}</small>
 					</div>
 					<div class="form-group">
 						<label for="password">Password</label>
@@ -41,6 +50,10 @@
 							autofocus="true"
 							placeholder="Enter your password"
 							required>
+						<small
+							v-if="isError"
+							id="passwordHelp"
+							class="form-text text-center text-danger">{{ error }}</small>
 					</div>
 					<div class="form-group">
 						<label for="password">Confirm Password</label>
@@ -69,12 +82,20 @@
 					<p class="text-center mt-3">
 						Already have an account?
 						<router-link
-							to="/user/login"
+							to="/login"
 							tag="a">
 							Login
 						</router-link>
 					</p>
 				</form>
+				<div v-else>
+					<h4>Account not confirmed, check your email to confirm account. </h4>
+					<p>If it does not show up check the spam folder. If after 24 hours you still have not received the confirmation email contact
+						<a
+							class="text-white"
+							href="mailto:support@poe.house">support@poe.house</a> with your registered email.
+					</p>
+				</div>
 			</card-layout>
 		</div>
 	</section>
@@ -93,6 +114,7 @@ export default {
 			email: '',
 			password: '',
 			username: '',
+			registered: false || !!this.$store.getters['auth/username'],
 			rePassword: '',
 			error: '',
 			loading: false
@@ -120,10 +142,11 @@ export default {
 					this.loading = true;
 					await this.registerUser({ username: this.username, email: this.email, password: this.password });
 					this.loading = false;
+					this.registered = true;
 				}
 			} catch (err) {
 				this.loading = false;
-				alert(err.message || 'An error occurred.');
+				this.error = err.message;
 			}
 		},
 		...mapActions({
