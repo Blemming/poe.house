@@ -292,14 +292,21 @@
 <script>
 import CardLayout from '~/components/CardLayout.vue';
 import ShoppingList from '~/components/ShoppingList';
+import Cookies from 'js-cookie';
+
 export default {
 	async asyncData (context) {
 		try {
 			const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
 			const hideout = hideouts[0];
-			const views = hideout.views || 0;
-			hideout.views = views + 1;
-			await context.app.$axios.put(`/api/hideouts/${hideout.id}`, hideout);
+			const viewed = JSON.parse(Cookies.get('viewed') || '[]');
+			if (viewed.indexOf(context.params.id) === -1) {
+				viewed.push(context.params.id);
+				const views = hideout.views || 0;
+				hideout.views = views + 1;
+				await context.app.$axios.put(`/api/hideouts/${hideout.id}`, hideout);
+				Cookies.set('viewed', viewed);
+			}
 			if (hideout) {
 				const hideoutLink = await hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
 				const hideoutFile = await context.app.$axios.$get(hideoutLink);
@@ -352,10 +359,15 @@ export default {
 	},
 	methods: {
 		async downloaded () {
+			const downloaded = JSON.parse(Cookies.get('downloaded') || '[]');
 			try {
-				const downloads = this.hideout.downloads || 0;
-				this.hideout.downloads = downloads + 1;
-				await this.$axios.put(`/api/hideouts/${this.hideout.id}`, this.hideout);
+				if (downloaded.indexOf(this.hideout.hideoutId) === -1) {
+					downloaded.push(this.hideout.hideoutId);
+					const downloads = this.hideout.downloads || 0;
+					this.hideout.downloads = downloads + 1;
+					await this.$axios.put(`/api/hideouts/${this.hideout.id}`, this.hideout);
+					Cookies.set('downloaded', downloaded);
+				}
 			} catch (e) {
 				this.error({ statusCode: 404, message: e.message });
 			}
