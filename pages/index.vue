@@ -102,7 +102,9 @@
 						</select>
 					</div>
 				</div>
-				<div class="row bg-dark py-3">
+				<div
+					ref="topPage"
+					class="row bg-dark py-3">
 					<div class="col-12 mb-3 d-flex justify-content-between">
 						<div class="form-group form-inline">
 							<label
@@ -243,7 +245,17 @@
 										<small class="text-muted ">{{ $moment.unix(hideout.hideoutDateSubmit.seconds).format(' MMMM Do YYYY') }}</small>
 									</div>
 									<div class="col text-right">
-										<small class="text-muted ">by {{ hideout.author || 'Anonymous' }}</small>
+										<small class="text-muted ">
+											by
+										</small>
+										<nuxt-link
+											v-if="hideout.user && hideout.user.id"
+											:to="`/user/${hideout.user.id}`"><i class="fas fa-user"/> {{ hideout.user.username }}
+										</nuxt-link>
+										<span
+											v-else
+											class="text-muted "
+										>{{ hideout.author || 'Anonymous' }}</span>
 									</div>
 
 								</div>
@@ -254,6 +266,7 @@
 					<div class="col-12 col-lg-12 d-flex justify-content-end mt-3">
 						<no-ssr>
 							<paginate
+								v-model="currentPage"
 								:page-count="paginatePages"
 								:click-handler="clickCallback"
 								:prev-text="'Prev'"
@@ -280,6 +293,7 @@ import orderBy from 'lodash/orderBy';
 import chunk from 'lodash/chunk';
 
 export default {
+	scrollTop: false,
 	async asyncData (context) {
 		try {
 			const hideouts = await context.app.$axios.$get('/api/hideouts');
@@ -299,15 +313,15 @@ export default {
 		return {
 			levels: [1, 2, 3, 4, 5, 6, 7],
 			hideouts: [],
-			currentPage: 1,
-			perPage: 6,
-			hideoutType: '',
-			'mtx': '',
-			'sort': 'date-old',
-			'Alva': 0,
-			'Einhar': 0,
-			'Niko': 0,
-			'Zana': 0
+			currentPage: this.$store.state.pageControls.currentPage,
+			perPage: this.$store.state.pageControls.perPage,
+			hideoutType: this.$store.state.filters.type || '',
+			'sort': this.$store.state.filters.sortBy,
+			mtx: this.$store.state.filters.mtx,
+			'Alva': this.$store.state.filters['Alva'] || 0,
+			'Einhar': this.$store.state.filters['Einhar'] || 0,
+			'Niko': this.$store.state.filters['Niko'] || 0,
+			'Zana': this.$store.state.filters['Zana'] || 0
 		};
 	},
 	computed: {
@@ -352,9 +366,46 @@ export default {
 			return chunk(results, this.perPage)[offset];
 		}
 	},
+	watch: {
+		currentPage (val) {
+			this.$store.commit('SET_PAGE_OBJECT', { prop: 'currentPage', choice: val });
+		},
+		perPage (val) {
+			this.$store.commit('SET_PAGE_OBJECT', { prop: 'perPage', choice: val });
+		},
+		hideoutType (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'type', choice: val });
+		},
+		mtx (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'mtx', choice: val });
+		},
+		'sort' (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'sortBy', choice: val });
+		},
+		'Alva' (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'Alva', choice: val });
+		},
+		'Einhar' (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'Einhar', choice: val });
+		},
+		'Niko' (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'Niko', choice: val });
+		},
+		'Zana' (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'mtx', choice: val });
+		}
+	},
 	methods: {
 		clickCallback (pageNum) {
 			this.currentPage = pageNum;
+			this.$nextTick(() => {
+				this.setScrollPosition(0);
+			});
+		},
+		setScrollPosition (pos) {
+			window.pageYOffset = pos;
+			document.documentElement.scrollTop = pos;
+			document.body.scrollTop = pos;
 		},
 		getHideout (hash) {
 			return this.$store.getters.getHideout(hash)['Name'];

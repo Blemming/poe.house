@@ -73,6 +73,20 @@
 										</a>
 									</td>
 								</tr>
+								<tr>
+									<th
+										class="text-center w-25"
+										scope="row">
+										Author:
+									</th>
+									<td>
+										<nuxt-link
+											v-if="hideout.user && hideout.user.username"
+											:to="`/user/${hideout.user.id}`"
+											class="text-white"><i class="fas fa-user"/>  {{ hideout.user.username }}</nuxt-link>
+										<span v-else>{{ hideout.author || 'Anonymous' }}</span>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

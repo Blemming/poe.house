@@ -2,6 +2,19 @@ import cookieparser from 'cookieparser';
 
 export const state = () => ({
 	firestoreData: null,
+	filters: {
+		type: '',
+		mtx: '',
+		'Alva': 0,
+		'Einhar': 0,
+		'Niko': 0,
+		sortBy: 'date-old',
+		'Zana': 0
+	},
+	pageControls: {
+		currentPage: 1,
+		perPage: 6
+	},
 	doodads: null,
 	hideouts: null
 });
@@ -15,6 +28,12 @@ export const getters = {
 	}
 };
 export const mutations = {
+	SET_FILTER_OBJECT: function (state, { filter, choice }) {
+		state.filters[filter] = choice;
+	},
+	SET_PAGE_OBJECT: function (state, { prop, choice }) {
+		state.pageControls[prop] = choice;
+	},
 	SET_BEX_POST: function (state, post) {
 		state.bexPost = post;
 	},

@@ -25,6 +25,19 @@ body {
     }
 }
 
+.media{
+    &.on-hover{
+        border-top: 1px solid map-get($theme-colors, secondary)!important;
+        border-left: 1px solid map-get($theme-colors, secondary)!important;
+        border-right: 1px solid map-get($theme-colors, secondary)!important;
+        &:hover{
+            background-color: map-get($theme-colors, dark);
+            border:1px solid map-get($theme-colors, primary)!important;
+        }
+    }
+
+}
+
 .pagination > li > a
 {
     margin-left: 2px;
