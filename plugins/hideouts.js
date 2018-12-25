@@ -116,6 +116,8 @@ Vue.prototype.$hideoutObject = ({
 	hideoutScreenshot = '',
 	hideoutVideo = '',
 	gallery = '',
+	views = 0,
+	downloads = 0,
 	hideoutId = '',
 	authorEmail = '',
 	hideoutDateSubmit = '',
@@ -136,8 +138,8 @@ Vue.prototype.$hideoutObject = ({
 	hideoutMasters,
 	authorEmail,
 	hideoutId: hideoutId || makeid(),
-	downloads: 0,
-	views: 0,
+	downloads,
+	views,
 	hideoutDateSubmit: hideoutDateSubmit || makeTimeStamp(),
 	poeVersion
 });

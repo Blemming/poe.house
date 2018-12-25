@@ -394,6 +394,8 @@ export default {
 				try {
 					const newHideout = this.$hideoutObject({
 						author: this.hideout.author,
+						downloads: this.hideout.downloads,
+						views: this.hideout.views,
 						hideoutId: this.hideout.hideoutId,
 						hideoutDateSubmit: this.hideout.hideoutDateSubmit,
 						authorEmail: this.hideout.authorEmail,
