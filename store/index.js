@@ -56,9 +56,32 @@ export const actions = {
 			user = (parsed.user && JSON.parse(parsed.user)) || null;
 			token = (parsed.token) || null;
 		}
+		const query = `
+        query{
+            user(id:"${user._id}"){
+              username
+              email
+              _id
+              provider
+              confirmed
+              hideouts(where:{
+                isDeleted_ne:true
+              }){
+                hideoutId
+                nameDescription
+                hideoutType
+                views
+                downloads
+                hideoutDateSubmit
+                hideoutMasters
+                hideoutScreenshot
+              }
+            }
+          }
+        `;
 		if (user) {
-			const confirmedUser = await this.$axios.$get(`/api/users/${user._id}`);
-			user = confirmedUser;
+			const { data: confirmedUser } = await this.$axios.post(`/api/graphql`, { query });
+			user = confirmedUser.data.user;
 		}
 		commit('auth/setUser', user);
 		commit('auth/setToken', token);

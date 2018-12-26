@@ -296,7 +296,7 @@ export default {
 	scrollTop: false,
 	async asyncData (context) {
 		try {
-			const hideouts = await context.app.$axios.$get('/api/hideouts?_limit=1000');
+			const hideouts = await context.app.$axios.$get('/api/hideouts?_limit=1000&isDeleted_ne=true');
 			const confirmed = context.query.confirmed;
 			return {
 				hideouts,
