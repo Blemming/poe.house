@@ -103,6 +103,7 @@
 					</div>
 				</div>
 				<div
+					v-if="filteredHideouts"
 					ref="topPage"
 					class="row bg-dark py-3">
 					<div class="col-12 mb-3 d-flex justify-content-between">
@@ -160,6 +161,7 @@
 							</select>
 						</div>
 					</div>
+
 					<div
 						v-for="(hideout,index) in filteredHideouts"
 						:key="index"
@@ -280,6 +282,13 @@
 								next-link-class="page-link"
 							/>
 						</no-ssr>
+					</div>
+				</div>
+				<div
+					v-else
+					class="row bg-dark py-3">
+					<div class="col-12">
+						<h4 class="text-center">No results</h4>
 					</div>
 				</div>
 			</card-layout>
