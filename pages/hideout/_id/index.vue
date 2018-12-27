@@ -309,20 +309,21 @@ import ShoppingList from '~/components/ShoppingList';
 import Cookies from 'js-cookie';
 
 export default {
+	middleware: 'views',
 	async asyncData (context) {
 		try {
 			const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
 			const hideout = hideouts[0];
-			if (!process.server) {
-				const viewed = JSON.parse(Cookies.get('viewed') || '[]');
-				if (viewed.indexOf(context.params.id) === -1) {
-					viewed.push(context.params.id);
-					const views = hideout.views || 0;
-					hideout.views = views + 1;
-					await context.app.$axios.put(`/api/hideouts/${hideout.id}`, hideout);
-					Cookies.set('viewed', viewed);
-				}
-			}
+			// if (!process.server) {
+			// 	const viewed = JSON.parse(Cookies.get('viewed') || '[]');
+			// 	if (viewed.indexOf(context.params.id) === -1) {
+			// 		viewed.push(context.params.id);
+			// 		const views = hideout.views || 0;
+			// 		hideout.views = views + 1;
+			// 		await context.app.$axios.put(`/api/hideouts/${hideout.id}`, hideout);
+			// 		Cookies.set('viewed', viewed);
+			// 	}
+			// }
 			if (hideout) {
 				const hideoutLink = await hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
 				const hideoutFile = await context.app.$axios.$get(hideoutLink);

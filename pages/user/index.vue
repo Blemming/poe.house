@@ -176,7 +176,6 @@ export default {
 			try {
 				const hideout = await this.$axios.$get(`/api/hideouts?hideoutId=${id}`);
 				hideout[0].isDeleted = true;
-				console.log(hideout[0]);
 				await this.$axios.put(`/api/hideouts/${hideout[0].id}`, hideout[0]);
 				await this.$store.dispatch('auth/updateUserHideouts');
 			} catch (e) {
