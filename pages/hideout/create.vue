@@ -79,7 +79,7 @@
 									v-else
 									class="input-group-append">
 									<a
-										:class="`btn btn-primary ${(!hideoutFileLink|| error)?'disabled':''}`"
+										:class="`btn btn-primary ${(!hideoutFileLink)?'disabled':''}`"
 										href="#"
 										@click.prevent="resolvePastebin()">
 										<span v-if="!pastebinProcessing">
@@ -113,7 +113,7 @@
 									v-if="!imageSubmitted"
 									class="input-group-prepend">
 									<a
-										:class="`btn btn-primary  ${(!pastebinSubmitted||error)?'disabled':''}`"
+										:class="`btn btn-primary  ${(!pastebinSubmitted)?'disabled':''}`"
 										href="#"
 										@click.prevent="resolveThumbnail(true)">
 										<span>
@@ -381,13 +381,8 @@ export default {
 			if (this.hideoutScreenshot) {
 				try {
 					await this.$axios.get(this.hideoutScreenshot);
-					if (/imgur/gi.test(this.hideoutScreenshot)) {
-						this.imageSubmitted = true;
-						this.hideoutImage = this.hideoutScreenshot.replace(/https:\/\/imgur\.com\/a\//gi, '');
-					} else {
-						this.imageSubmitted = true;
-						this.hideoutImage = this.hideoutScreenshot;
-					}
+					this.imageSubmitted = true;
+					this.hideoutImage = this.hideoutScreenshot;
 				} catch (e) {
 					this.errorMessage = 'The image you submitted is not valid, default hideout image used';
 					this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideoutType)[0]['Icon'] || '';

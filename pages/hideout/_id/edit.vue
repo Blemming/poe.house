@@ -79,7 +79,7 @@
 									v-else
 									class="input-group-append">
 									<a
-										:class="`btn btn-primary ${(!hideout.hideoutFileLink|| error)?'disabled':''}`"
+										:class="`btn btn-primary ${(!hideout.hideoutFileLink)?'disabled':''}`"
 										href="#"
 										@click.prevent="resolvePastebin()">
 										<span v-if="!pastebinProcessing">

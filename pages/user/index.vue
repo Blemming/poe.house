@@ -190,7 +190,8 @@ export default {
 				const getHideoutsQuery = `
                         query{
                             hideouts(where:{
-                                authorEmail:"${this.$store.state.auth.user.email}"
+                                authorEmail:"${this.$store.state.auth.user.email}",
+                                isDeleted_ne:true
                             }){
                                 _id
                             }
