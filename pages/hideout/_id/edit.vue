@@ -369,14 +369,9 @@ export default {
 		async resolveThumbnail (defaultImage = false) {
 			if (this.hideoutImage) {
 				try {
-					await this.$axios.get(this.hideoutImage);
-					if (/imgur/gi.test(this.hideoutImage)) {
-						this.imageSubmitted = true;
-						this.hideoutImage = this.hideoutScreenshot.replace(/https:\/\/imgur\.com\/a\//gi, '');
-					} else {
-						this.imageSubmitted = true;
-						this.hideoutImage = this.hideoutScreenshot;
-					}
+					await this.$axios.get(this.hideoutScreenshot.replace('https://i.imgur.com', '/imgur'));
+					this.imageSubmitted = true;
+					this.hideoutImage = this.hideoutScreenshot;
 				} catch (e) {
 					this.errorMessage = 'The image you submitted is not valid, default hideout image used';
 					this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideout.hideoutType)[0]['Icon'] || '';

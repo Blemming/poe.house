@@ -380,7 +380,7 @@ export default {
 		async resolveThumbnail (defaultImage = false) {
 			if (this.hideoutScreenshot) {
 				try {
-					await this.$axios.get(this.hideoutScreenshot);
+					await this.$axios.get(this.hideoutScreenshot.replace('https://i.imgur.com', '/imgur'));
 					this.imageSubmitted = true;
 					this.hideoutImage = this.hideoutScreenshot;
 				} catch (e) {

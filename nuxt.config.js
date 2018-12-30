@@ -80,6 +80,13 @@ module.exports = {
 				'^/api': '/'
 			}
 		}],
+		['/imgur', {
+			target: 'https://i.imgur.com',
+			changeOrigin: true,
+			pathRewrite: {
+				'^/imgur': '/'
+			}
+		}],
 		['/raw', {
 			target: 'https://pastebin.com/',
 			changeOrigin: true,
