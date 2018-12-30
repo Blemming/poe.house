@@ -14,6 +14,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
+    "install": "pm2 stop poehouse && git pull origin master && npm run build && pm2 restart poehouse",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
