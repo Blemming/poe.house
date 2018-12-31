@@ -480,6 +480,7 @@ export default {
       username
     },
     votes{
+        _id,
       score,
       user{
         _id
