@@ -175,8 +175,11 @@
 						aria-labelledby="description-tab">
 						<div class="row m-4">
 							<div class="col-12">
-								<p v-html="hideout.hideoutDescription"/>
-
+								<div class="ql-editor">
+									<div
+										v-html="hideout.hideoutDescription"
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -457,6 +460,10 @@ export default {
 		}
 	},
 	methods: {
+		strip (html) {
+			var doc = new DOMParser().parseFromString(html, 'text/html');
+			return doc.body.textContent || '';
+		},
 		async downloaded () {
 			const downloaded = JSON.parse(Cookies.get('downloaded') || '[]');
 			try {

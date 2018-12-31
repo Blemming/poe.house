@@ -175,16 +175,18 @@
 						<label for="inputDescription">Description</label>
 						<div class="row">
 							<div class="col-12">
-								<textarea
-									v-validate="'required|max:1550'"
-									id="inputDescription"
-									ref="markdownEditor"
-									v-model="hideoutDescription"
-									style="min-height:300px"
-									class="w-100 bg-dark text-white"
-									name="description"
-									required
-									placeholder="Description of the hideout, you can use markdown to make it look good."/>
+								<no-ssr>
+									<vue-editor
+										v-validate="'required'"
+										id="inputDescription"
+										ref="markdownEditor"
+										:editor-options="editorSettings"
+										v-model="hideoutDescription"
+										class="w-100 bg-dark text-white"
+										name="description"
+										required/>
+
+								</no-ssr>
 							</div>
 
 							<div
@@ -213,9 +215,12 @@
 										class="collapse show"
 										aria-labelledby="headingOne"
 										data-parent="#preview">
-										<div
-											class="card-body"
-											v-html="renderedDescription"/>
+										<div class="ql-editor">
+											<div
+												class="card-body"
+												style="max-width:1066px;"
+												v-html="hideoutDescription"/>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -338,6 +343,13 @@ export default {
 			pastebinProcessing: false,
 			pastebinSubmitted: false,
 			imageSubmitted: false,
+			editorSettings: {
+
+				placeholder: 'Description of the hideout',
+				modules: {
+					imageResize: {}
+				}
+			},
 			errorMessage: ''
 		};
 	},
@@ -374,6 +386,10 @@ export default {
 		}
 	},
 	methods: {
+		strip (html) {
+			var doc = new DOMParser().parseFromString(html, 'text/html');
+			return doc.body.textContent || '';
+		},
 		submitHideout () {
 			this.$refs.recaptcha.execute();
 		},
@@ -397,7 +413,7 @@ export default {
 						nameDescription: this.nameDescription,
 						hideoutType: this.hideoutType,
 						hideoutFileLink: this.hideoutFileLink,
-						hideoutDescription: this.renderedDescription,
+						hideoutDescription: this.hideoutDescription,
 						hideoutScreenshot: this.hideoutImage,
 						hideoutVideo: this.hideoutVideo,
 						hideoutDoodads: this.getHideoutDoodads,
@@ -414,7 +430,7 @@ export default {
 					}
 					this.$router.push('/');
 				} catch (e) {
-					alert(e);
+					console.log(e);
 				}
 			} else {
 				this.errorMessage = 'Cannot submit hideout until errors are resolved';

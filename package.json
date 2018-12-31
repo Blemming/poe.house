@@ -33,8 +33,10 @@
     "moment": "^2.23.0",
     "nuxt": "^2.0.0",
     "nuxt-validate": "^0.1.2",
+    "quill-image-resize-module": "^3.0.0",
     "vue-rate-it": "^2.1.0",
     "vue-recaptcha": "^1.1.1",
+    "vue2-editor": "^2.6.6",
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {

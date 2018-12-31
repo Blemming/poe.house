@@ -17,111 +17,95 @@ body {
     background-color: map-get($theme-colors, dark);
 }
 
-.nav-tabs{
-    border-bottom: 0px solid map-get($theme-colors, dark)!important;
-    .nav-link{
-        color:white;
-        font-size:1.6rem;
-        background-color: map-get($theme-colors, secondary)!important;
-        border-bottom: 1px solid rgba(0,0,0,0)!important;
-        padding-bottom:2px;
-        &:hover,&.active{
-            border: 1px solid rgba(0,0,0,0)!important;
+.nav-tabs {
+    border-bottom: 0px solid map-get($theme-colors, dark) !important;
+    .nav-link {
+        color: white;
+        font-size: 1.6rem;
+        background-color: map-get($theme-colors, secondary) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0) !important;
+        padding-bottom: 2px;
+        &:hover,
+        &.active {
+            border: 1px solid rgba(0, 0, 0, 0) !important;
         }
-        &.active{
-            background-color: map-get($theme-colors, secondary)!important;
-            color:white;
-            border-bottom: 5px solid map-get($theme-colors, primary)!important;
+        &.active {
+            background-color: map-get($theme-colors, secondary) !important;
+            color: white;
+            border-bottom: 5px solid map-get($theme-colors, primary) !important;
         }
     }
-
 }
 
-.card{
-    a:hover{
+.card {
+    a:hover {
         text-decoration: none;
     }
 }
 
-.media{
-    &.on-hover{
-        border-top: 1px solid map-get($theme-colors, secondary)!important;
-        border-left: 1px solid map-get($theme-colors, secondary)!important;
-        border-right: 1px solid map-get($theme-colors, secondary)!important;
-        &:hover{
+.media {
+    &.on-hover {
+        border-top: 1px solid map-get($theme-colors, secondary) !important;
+        border-left: 1px solid map-get($theme-colors, secondary) !important;
+        border-right: 1px solid map-get($theme-colors, secondary) !important;
+        &:hover {
             background-color: map-get($theme-colors, dark);
-            border:1px solid map-get($theme-colors, primary)!important;
+            border: 1px solid map-get($theme-colors, primary) !important;
         }
     }
-
 }
 
-.pagination > li > a
-{
+.pagination>li>a {
     margin-left: 2px;
     background-color: map-get($theme-colors, secondary);
     color: map-get($theme-colors, primary);
     border: 1px solid map-get($theme-colors, secondary);
     -webkit-user-select: none;
-     -moz-user-select: -moz-none;
-      -ms-user-select: none;
-          user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.pagination > li > a:focus,
-.pagination > li > a:hover,
-.pagination > li > span:focus,
-.pagination > li > span:hover
-{
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
     color: map-get($theme-colors, primary);
     background-color: map-get($theme-colors, dark);
     border: 1px solid map-get($theme-colors, dark);
 }
 
-.pagination > .disabled > a{
-    color:white!important;
-    background-color: map-get($theme-colors, secondary)!important;
-    border-color: map-get($theme-colors, secondary)!important;
+.pagination>.disabled>a {
+    color: white !important;
+    background-color: map-get($theme-colors, secondary) !important;
+    border-color: map-get($theme-colors, secondary) !important;
 }
 
-.pagination > .active > a
-{
+.pagination>.active>a {
     color: white;
-    background-color: map-get($theme-colors, dark)!important;
+    background-color: map-get($theme-colors, dark) !important;
     border: solid 1px map-get($theme-colors, primary) !important;
 }
 
-.pagination > .active > a:hover
-{
-    background-color: map-get($theme-colors, dark)!important;
+.pagination>.active>a:hover {
+    background-color: map-get($theme-colors, dark) !important;
     border: solid 1px map-get($theme-colors, primary) !important;
 }
-
-
-
-// #inputDescription {
-//     .CodeMirror {
-//         background-color: lighten(map-get($theme-colors, secondary), 30%) !important;
-//     }
-//     .editor-toolbar {
-//         border-radius: 0px !important;
-//         &.disabled-for-preview a:not(.no-disable) {
-//             background-color: map-get($theme-colors, dark) !important;
-//             color: map-get($theme-colors, secondary) !important;
-//         }
-//         a {
-//             border: 0px solid black;
-//             color: white !important;
-//             &:hover {
-//                 background-color: map-get($theme-colors, dark) !important;
-//                 color: map-get($theme-colors, primary) !important;
-//             }
-//             &.active {
-//                 background-color: map-get($theme-colors, dark) !important;
-//                 color: map-get($theme-colors, primary) !important;
-//             }
-//         }
-//         background-color: map-get($theme-colors,
-//         dark) !important;
-//     }
-// }
+.quillWrapper{
+    .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
+    .ql-snow .ql-toolbar .ql-picker-item.ql-selected,
+    .ql-snow.ql-toolbar .ql-picker-item:hover,
+    .ql-snow .ql-toolbar .ql-picker-item:hover,
+    .ql-snow.ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow .ql-toolbar .ql-picker-label.ql-active,
+    .ql-snow.ql-toolbar .ql-picker-label:hover,
+    .ql-snow .ql-toolbar .ql-picker-label:hover,
+    .ql-snow.ql-toolbar button.ql-active,
+    .ql-snow .ql-toolbar button.ql-active,
+    .ql-snow.ql-toolbar button:focus,
+    .ql-snow .ql-toolbar button:focus,
+    .ql-snow.ql-toolbar button:hover,
+    .ql-snow .ql-toolbar button:hover {
+        color: map-get($theme-colors, primary) !important;
+    }
+}

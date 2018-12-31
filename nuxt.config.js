@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 const pkg = require('./package');
 const apiConfig = require('./.api.json');
 
@@ -49,7 +50,8 @@ module.exports = {
 		'~/plugins/moment.js',
 		'~/plugins/hideouts.js',
 		{ src: '~/plugins/paginate.js', ssr: false },
-		{ src: '~/plugins/vue-rate-it.js', ssr: false }
+		{ src: '~/plugins/vue-rate-it.js', ssr: false },
+		{ src: '~/plugins/vue2-editor.js', ssr: false }
 	],
 
 	/*
@@ -57,7 +59,6 @@ module.exports = {
   */
 	modules: [
 		'@nuxtjs/axios',
-		'@nuxtjs/markdownit',
 		['@nuxtjs/moment'],
 		['@nuxtjs/google-analytics', {
 			track: 'PageView',
@@ -106,15 +107,17 @@ module.exports = {
 	/*
   ** Markdownit module configuration
   */
-	markdownit: {
-		injected: true,
-		breaks: true
-	},
 	/*
   ** Build configuration
   */
 	build: {
-		// analyze: true,
+		plugins: [
+			new webpack.ProvidePlugin({
+				'window.Quill': 'quill/dist/quill.js',
+				'Quill': 'quill/dist/quill.js'
+			})
+		],
+		analyze: true,
 		/*
     ** You can extend webpack config here
     */

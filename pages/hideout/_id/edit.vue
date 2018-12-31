@@ -175,16 +175,19 @@
 						<label for="inputDescription">Description</label>
 						<div class="row">
 							<div class="col-12">
-								<textarea
-									v-validate="'required|max:1550'"
-									id="inputDescription"
-									ref="markdownEditor"
-									v-model="hideout.hideoutDescription"
-									style="min-height:300px"
-									class="w-100 bg-dark text-white"
-									name="description"
-									required
-									placeholder="Description of the hideout, you can use markdown to make it look good."/>
+
+								<no-ssr>
+									<vue-editor
+										v-validate="'required'"
+										id="inputDescription"
+										ref="markdownEditor"
+										:editor-options="editorSettings"
+										v-model="textDescription"
+										class="w-100 bg-dark text-white"
+										name="description"
+										required/>
+
+								</no-ssr>
 							</div>
 
 							<div
@@ -215,7 +218,14 @@
 										data-parent="#preview">
 										<div
 											class="card-body"
-											v-html="renderedDescription"/>
+											style="max-width:1066px;">
+
+											<div class="ql-editor">
+												<div
+													v-html="textDescription"
+												/>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -290,7 +300,6 @@ export default {
 		try {
 			const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
 			const hideout = hideouts[0];
-			hideout.hideoutDescription = hideout.hideoutDescription.replace(/<\/?[^>]+(>|$)/g, '');
 			if (hideout.user) {
 				if (hideout.user.username === context.store.getters['auth/username']) {
 					return {
@@ -321,7 +330,14 @@ export default {
 			pastebinError: false,
 			pastebinProcessing: false,
 			pastebinSubmitted: true,
+			textDescription: '',
 			imageSubmitted: true,
+			editorSettings: {
+				placeholder: 'Description of the hideout',
+				modules: {
+					imageResize: {}
+				}
+			},
 			errorMessage: ''
 		};
 	},
@@ -342,9 +358,6 @@ export default {
 			// return !!/imgur/g.test(this.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
 			return !/.png|.jpg|.jpeg/g.test(this.hideoutImage);
 		},
-		renderedDescription () {
-			return this.$md.render(this.hideout.hideoutDescription).replace(/<img/gi, '<img class="img-fluid"');
-		},
 		displayedImage () {
 			return this.hideoutImage;
 		},
@@ -361,7 +374,14 @@ export default {
 			return this.$store.state.hideouts;
 		}
 	},
+	mounted () {
+		this.textDescription = this.hideout.hideoutDescription;
+	},
 	methods: {
+		strip (html) {
+			var doc = new DOMParser().parseFromString(html, 'text/html');
+			return doc.body.textContent || '';
+		},
 		submitHideout () {
 			this.$refs.recaptcha.execute();
 		},
@@ -391,7 +411,7 @@ export default {
 						nameDescription: this.hideout.nameDescription,
 						hideoutType: this.hideout.hideoutType,
 						hideoutFileLink: this.hideout.hideoutFileLink,
-						hideoutDescription: this.renderedDescription,
+						hideoutDescription: this.textDescription,
 						hideoutScreenshot: this.hideoutImage,
 						hideoutVideo: this.hideoutVideo,
 						hideoutDoodads: this.getHideoutDoodads,
