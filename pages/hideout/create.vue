@@ -317,6 +317,7 @@
 import CardLayout from '~/components/CardLayout.vue';
 
 import VueRecaptcha from 'vue-recaptcha';
+
 import { mapActions } from 'vuex';
 export default {
 	components: {
@@ -345,10 +346,7 @@ export default {
 			imageSubmitted: false,
 			editorSettings: {
 
-				placeholder: 'Description of the hideout',
-				modules: {
-					imageResize: {}
-				}
+				placeholder: 'Description of the hideout'
 			},
 			errorMessage: ''
 		};
