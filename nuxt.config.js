@@ -117,7 +117,7 @@ module.exports = {
 				'Quill': 'quill/dist/quill.js'
 			})
 		],
-		analyze: true,
+		// analyze: true,
 		/*
     ** You can extend webpack config here
     */
