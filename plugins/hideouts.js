@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import uniqBy from 'lodash/uniqBy';
+import meanBy from 'lodash/meanBy';
 import includes from 'lodash/includes';
 // import firebase from 'firebase/app';
 // Vue.prototype.$parseHideoutFile = (string) => JSON.parse(string.replace(/^\n$/gm, '').replace(/=/gm, ':').replace(/([^ ]*?)\n/g, '$1,\n').replace(/^/g, '{\n').replace(/$/g, '\n}').replace(/(^|{|,)(.*?)\s*:/gm, '$1"$2":').replace(/"\s(.*?)"/g, '"$1"'));
@@ -25,6 +26,9 @@ Vue.prototype.$getThumbnail = (imgLink) => {
 		return imgLink.replace(/(.jpg|.png)/i, 'l$1');
 	}
 	return imgLink;
+};
+Vue.prototype.$calculateVotes = (votes = []) => {
+	return meanBy(votes, (v) => v.score);
 };
 Vue.prototype.$favorCost = (doodads = []) => {
 	let costs = 0;

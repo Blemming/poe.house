@@ -213,6 +213,18 @@
 													<th scope="row">Zana </th>
 													<td class="text-white"><strong>{{ hideout.hideoutMasters['Zana'] }}</strong></td>
 												</tr>
+												<tr v-if="hideout.votes.length > 0">
+													<th scope="row">Rating</th>
+													<td class="text-white">
+														<image-rating
+															:rating="$calculateVotes(hideout.votes)"
+															:read-only="true"
+															:src="require('~/assets/images/Exalted_Orb.png')"
+															:increment="0.25"
+															:show-rating="false"
+															:item-size="30"/>
+													</td>
+												</tr>
 												<tr v-if="hideout.views">
 													<th scope="row">Views</th>
 													<td class="text-white"><strong>{{ hideout.views }}</strong></td>
@@ -305,10 +317,35 @@ export default {
 	scrollTop: false,
 	async asyncData (context) {
 		try {
-			const hideouts = await context.app.$axios.$get('/api/hideouts?_limit=1000&isDeleted_ne=true');
+			const query = `
+            query{
+  hideouts(limit:9000, where:{isDelete_ne:true}){
+    author,
+    downloads,
+    hideoutFileLink,
+    hideoutId,
+    hideoutMasters,
+    hideoutScreenshot,
+    hideoutType,
+    nameDescription,
+    views,
+    hideoutDateSubmit,
+    hideoutDescription,
+    hideoutDoodads,
+    user{
+      username,
+      _id
+    },
+    votes{
+      score
+    }
+  }
+}
+            `;
+			const { data } = await context.app.$axios.$post('/api/graphql', { query });
 			const confirmed = context.query.confirmed;
 			return {
-				hideouts,
+				hideouts: data.hideouts,
 				confirmed
 			};
 		} catch (e) {

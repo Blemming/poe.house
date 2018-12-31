@@ -33,6 +33,9 @@ export const actions = {
             user(id:"${user._id}"){
               username
               confirmed
+              votes{
+                  _id
+              }
               hideouts(where:{
                 isDeleted_ne:true
               }){

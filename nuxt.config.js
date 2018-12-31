@@ -48,7 +48,8 @@ module.exports = {
 	plugins: [
 		'~/plugins/moment.js',
 		'~/plugins/hideouts.js',
-		{ src: '~/plugins/paginate.js', ssr: false }
+		{ src: '~/plugins/paginate.js', ssr: false },
+		{ src: '~/plugins/vue-rate-it.js', ssr: false }
 	],
 
 	/*
