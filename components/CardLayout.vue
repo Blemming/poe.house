@@ -10,7 +10,7 @@
 			<a
 				class="nav-item text-danger"
 				target="_blank"
-				href="https://www.patreon.com/join/blemming/checkout?rid=0">
+				href="https://www.patreon.com/blemming">
 				<i
 					style="color:#f96854;"
 					class="fab fa-patreon"/>

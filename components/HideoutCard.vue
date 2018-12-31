@@ -30,22 +30,6 @@
 								<th scope="row">Decorations</th>
 								<td class="text-white"><strong>{{ hideout.hideoutDoodads.length }}</strong></td>
 							</tr>
-							<tr>
-								<th scope="row">Alva</th>
-								<td class="text-white"><strong>{{ hideout.hideoutMasters['Alva'] }}</strong></td>
-							</tr>
-							<tr>
-								<th scope="row">Einhar </th>
-								<td class="text-white"><strong>{{ hideout.hideoutMasters['Einhar'] }}</strong></td>
-							</tr>
-							<tr>
-								<th scope="row">Niko </th>
-								<td class="text-white"><strong>{{ hideout.hideoutMasters['Niko'] }}</strong></td>
-							</tr>
-							<tr>
-								<th scope="row">Zana </th>
-								<td class="text-white"><strong>{{ hideout.hideoutMasters['Zana'] }}</strong></td>
-							</tr>
 							<tr v-if="hideout.votes.length > 0">
 								<th scope="row">Rating</th>
 								<td class="text-white">
@@ -66,8 +50,20 @@
 								<th scope="row">Downloads</th>
 								<td class="text-white"><strong>{{ hideout.downloads }}</strong></td>
 							</tr>
+							<tr>
+								<th scope="row">Masters:</th>
+								<td>
+									<div class="row">
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Alva'] }}</strong><br>Alva</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Einhar'] }}</strong><br>Einhar</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Niko'] }}</strong><br>Niko</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Zana'] }}</strong><br>Zana</div>
+									</div>
+								</td>
+							</tr>
 						</tbody>
 					</table>
+
 				</div>
 			</div>
 			<div class="row justify-content-between">
