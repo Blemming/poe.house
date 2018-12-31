@@ -12,94 +12,200 @@
 		<div class="col-12">
 			<card-layout
 				title="Hideouts">
-				<div class="row">
-					<div class="col-xs-6 col-lg-2 form-group">
-						<label for="inputState">Hideout Type</label>
-						<select
-							id="inputState"
-							v-model="hideoutType"
-							class="form-control custom-select border-primary text-primary">
-							<option
-								value=""
-								selected>All</option>
-							<option
-								v-for="hideout in $store.state.hideouts"
-								:value="hideout['Hash']"
-								:key="hideout['Hash']">{{ hideout['Name'] }}</option>
-						</select>
+				<!-- <div class="row mb-5">
+					<div class="col-12">
+						<h2 class="text-center">Hideouts of {{ $moment().format('MMMM') }}</h2>
+						<div
+							id="carouselExampleControls"
+							class="carousel slide"
+							data-ride="carousel">
+							<div
+								class="carousel-inner bg-dark">
+								<div
+									v-for="(hideout,index) in topHideouts"
+									:key="hideout.hideoutId"
+									:class="(index===0)?'carousel-item active':'carousel-item'"
+								>
+									<div
+										class="card bg-secondary">
+										<img
+											:src="hideout.hideoutScreenshot"
+											class="card-img-bottom p-relative"
+											alt="Card image cap">
+										<div class="card-body p-absolute">
+											<h5 class="card-title">{{ hideout.nameDescription }}</h5>
+											<p class="card-text">by {{ hideout.author }}</p>
+											<a
+												href="#"
+												class="btn btn-primary">Go somewhere</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<a
+								class="carousel-control-prev"
+								href="#carouselExampleControls"
+								role="button"
+								data-slide="prev">
+								<span
+									class="carousel-control-prev-icon"
+									aria-hidden="true"/>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a
+								class="carousel-control-next"
+								href="#carouselExampleControls"
+								role="button"
+								data-slide="next">
+								<span
+									class="carousel-control-next-icon"
+									aria-hidden="true"/>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
 					</div>
-					<div class="col-xs-6 col-lg-2 form-group">
-						<label for="inputState">MTX</label>
-						<select
-							id="inputState"
-							v-model="mtx"
-							class="form-control custom-select border-primary text-primary">
-							<option
-								value=""
-								selected>All</option>
-							<option :value="true">Yes</option>
-							<option :value="false">No</option>
-						</select>
+				</div> -->
+				<div class="row border-bottom border-dark">
+					<div class="col-12 mb-3 d-flex">
+						<a
+							class="text-primary"
+							href="#"
+							data-toggle="collapse"
+							data-target="#collapseFilters"
+							aria-expanded="false"
+							aria-controls="collapseFilters"
+							@click="toggleFilters()">
+							<span
+								v-if="!filtersOpened">Show </span>
+							<span
+								v-else>Hide </span>
+							Filters <i
+								v-if="!filtersOpened"
+								class="fas fa-plus-square"/>
+							<i
+								v-else
+								class="fas fa-minus-square"/>
+						</a>
 					</div>
-					<div class="col-xs-6 col-lg-2 form-group">
-						<label for="inputState">Alva Level</label>
-						<select
-							id="inputState"
-							v-model="Alva"
-							class="form-control custom-select border-primary text-primary">
-							<option
-								:value="0"
-								selected>All</option>
-							<option
-								v-for="level in levels"
-								:value="level"
-								:key="level">{{ level }}</option>
-						</select>
-					</div>
-					<div class="col-xs-6 col-lg-2 form-group">
-						<label for="inputState">Einhar Level</label>
-						<select
-							id="inputState"
-							v-model="Einhar"
-							class="form-control custom-select border-primary text-primary">
-							<option
-								:value="0"
-								selected>All</option>
-							<option
-								v-for="level in levels"
-								:value="level"
-								:key="level">{{ level }}</option>
-						</select>
-					</div>
-					<div class="col-xs-6 col-lg-2 form-group">
-						<label for="inputState">Niko Level</label>
-						<select
-							id="inputState"
-							v-model="Niko"
-							class="form-control custom-select border-primary text-primary">
-							<option
-								:value="0"
-								selected>All</option>
-							<option
-								v-for="level in levels"
-								:value="level"
-								:key="level">{{ level }}</option>
-						</select>
-					</div>
-					<div class="col-xs-6 col-lg-2 form-group">
-						<label for="inputState">Zana Level</label>
-						<select
-							id="inputState"
-							v-model="Zana"
-							class="form-control custom-select border-primary text-primary">
-							<option
-								:value="0"
-								selected>All</option>
-							<option
-								v-for="level in levels"
-								:value="level"
-								:key="level">{{ level }}</option>
-						</select>
+				</div>
+				<div
+					id="collapseFilters"
+					ref="filtersCollapse"
+					class="collapse show">
+					<div class="row mt-3">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label for="inputState">Hideout Type</label>
+									<select
+										id="inputState"
+										v-model="hideoutType"
+										class="form-control custom-select border-primary text-primary">
+										<option
+											value=""
+											selected>All</option>
+										<option
+											v-for="hideout in $store.state.hideouts"
+											:value="hideout['Hash']"
+											:key="hideout['Hash']">{{ hideout['Name'] }}</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label for="inputState">MTX</label>
+									<select
+										id="inputState"
+										v-model="mtx"
+										class="form-control custom-select border-primary text-primary">
+										<option
+											value=""
+											selected>All</option>
+										<option :value="true">Yes</option>
+										<option :value="false">No</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label for="inputState">Minimum Rating</label>
+									<select
+										id="inputState"
+										v-model="atleastRating"
+										class="form-control custom-select border-primary text-primary">
+										<option
+											value=""
+											selected>All</option>
+										<option :value="1">1</option>
+										<option :value="2">2</option>
+										<option :value="3">3</option>
+										<option :value="4">4</option>
+										<option :value="5">5</option>
+									</select>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="row">
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label for="inputState">Alva Level</label>
+									<select
+										id="inputState"
+										v-model="Alva"
+										class="form-control custom-select border-primary text-primary">
+										<option
+											:value="0"
+											selected>All</option>
+										<option
+											v-for="level in levels"
+											:value="level"
+											:key="level">{{ level }}</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label for="inputState">Einhar Level</label>
+									<select
+										id="inputState"
+										v-model="Einhar"
+										class="form-control custom-select border-primary text-primary">
+										<option
+											:value="0"
+											selected>All</option>
+										<option
+											v-for="level in levels"
+											:value="level"
+											:key="level">{{ level }}</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label for="inputState">Niko Level</label>
+									<select
+										id="inputState"
+										v-model="Niko"
+										class="form-control custom-select border-primary text-primary">
+										<option
+											:value="0"
+											selected>All</option>
+										<option
+											v-for="level in levels"
+											:value="level"
+											:key="level">{{ level }}</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label for="inputState">Zana Level</label>
+									<select
+										id="inputState"
+										v-model="Zana"
+										class="form-control custom-select border-primary text-primary">
+										<option
+											:value="0"
+											selected>All</option>
+										<option
+											v-for="level in levels"
+											:value="level"
+											:key="level">{{ level }}</option>
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div
@@ -118,6 +224,9 @@
 								<option
 									disabled
 									value="">Sort</option>
+								<option value="ratings">
+									Ratings
+								</option>
 								<option value="downloads">
 									Downloads
 								</option>
@@ -166,115 +275,7 @@
 						v-for="(hideout,index) in filteredHideouts"
 						:key="index"
 						class="col-xs-12 col-lg-6 my-2">
-						<div class="card bg-secondary">
-							<nuxt-link
-								:to="`/hideout/${hideout.hideoutId}`">
-								<img
-									:src="$getThumbnail(getImage(hideout))"
-									class="card-img-top"
-									alt="Card image cap">
-
-							</nuxt-link>
-							<div class="card-body">
-								<nuxt-link
-									:to="`/hideout/${hideout.hideoutId}`">
-									<h5 class="card-title text-white ">{{ hideout.nameDescription }}
-									</h5>
-								</nuxt-link>
-								<div class="row">
-									<div class="col-12">
-										<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
-											<tbody>
-												<tr>
-													<th scope="row">Hideout</th>
-													<td class="text-white"><strong>{{ getHideout(hideout.hideoutType) }}</strong></td>
-												</tr>
-												<tr>
-													<th scope="row">Favour Required</th>
-													<td class="text-white"><strong>{{ $favorCost(hideout.hideoutDoodads) }}</strong></td>
-												</tr>
-												<tr>
-													<th scope="row">Decorations</th>
-													<td class="text-white"><strong>{{ hideout.hideoutDoodads.length }}</strong></td>
-												</tr>
-												<tr>
-													<th scope="row">Alva</th>
-													<td class="text-white"><strong>{{ hideout.hideoutMasters['Alva'] }}</strong></td>
-												</tr>
-												<tr>
-													<th scope="row">Einhar </th>
-													<td class="text-white"><strong>{{ hideout.hideoutMasters['Einhar'] }}</strong></td>
-												</tr>
-												<tr>
-													<th scope="row">Niko </th>
-													<td class="text-white"><strong>{{ hideout.hideoutMasters['Niko'] }}</strong></td>
-												</tr>
-												<tr>
-													<th scope="row">Zana </th>
-													<td class="text-white"><strong>{{ hideout.hideoutMasters['Zana'] }}</strong></td>
-												</tr>
-												<tr v-if="hideout.votes.length > 0">
-													<th scope="row">Rating</th>
-													<td class="text-white">
-														<image-rating
-															:rating="$calculateVotes(hideout.votes)"
-															:read-only="true"
-															:src="require('~/assets/images/Exalted_Orb.png')"
-															:increment="0.25"
-															:show-rating="false"
-															:item-size="30"/>
-													</td>
-												</tr>
-												<tr v-if="hideout.views">
-													<th scope="row">Views</th>
-													<td class="text-white"><strong>{{ hideout.views }}</strong></td>
-												</tr>
-												<tr v-if="hideout.downloads">
-													<th scope="row">Downloads</th>
-													<td class="text-white"><strong>{{ hideout.downloads }}</strong></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div class="row justify-content-between">
-									<div class="col-3">
-										<img
-											v-if="hideout.hideoutMasters['mtx']"
-											src="https://web.poecdn.com/image/shop/item/ShopItemCoin.png?1538109960000"
-											alt="">
-										<small v-if="hideout.hideoutMasters['mtx']">MTX</small>
-									</div>
-									<div class="col-3 text-right">
-										<nuxt-link
-											:to="`/hideout/${hideout.hideoutId}`"
-											class="btn btn-primary">Details</nuxt-link>
-
-									</div>
-								</div>
-							</div>
-							<div class="card-footer">
-								<div class="row justify-content-between">
-									<div class="col">
-										<small class="text-muted ">{{ $moment.unix(hideout.hideoutDateSubmit.seconds).format(' MMMM Do YYYY') }}</small>
-									</div>
-									<div class="col text-right">
-										<small class="text-muted ">
-											by
-										</small>
-										<nuxt-link
-											v-if="hideout.user && hideout.user.id"
-											:to="`/user/${hideout.user.id}`"><i class="fas fa-user"/> {{ hideout.user.username }}
-										</nuxt-link>
-										<span
-											v-else
-											class="text-muted "
-										>{{ hideout.author || 'Anonymous' }}</span>
-									</div>
-
-								</div>
-							</div>
-						</div>
+						<hideout-card :hideout="hideout"/>
 					</div>
 
 					<div class="col-12 col-lg-12 d-flex justify-content-end mt-3">
@@ -309,9 +310,11 @@
 </template>
 <script>
 import CardLayout from '~/components/CardLayout.vue';
+import HideoutCard from '~/components/HideoutCard.vue';
 
 import orderBy from 'lodash/orderBy';
 import chunk from 'lodash/chunk';
+import take from 'lodash/take';
 
 export default {
 	scrollTop: false,
@@ -319,7 +322,9 @@ export default {
 		try {
 			const query = `
             query{
-  hideouts(limit:9000, where:{isDelete_ne:true}){
+  hideouts(limit:9000, where:{
+                isDeleted_ne:true
+     }){
     author,
     downloads,
     hideoutFileLink,
@@ -346,6 +351,7 @@ export default {
 			const confirmed = context.query.confirmed;
 			return {
 				hideouts: data.hideouts,
+				filtersOpened: true,
 				confirmed
 			};
 		} catch (e) {
@@ -353,13 +359,15 @@ export default {
 		}
 	},
 	components: {
-		CardLayout
+		CardLayout,
+		HideoutCard
 	},
 	data () {
 		return {
 			levels: [1, 2, 3, 4, 5, 6, 7],
 			hideouts: [],
 			currentPage: this.$store.state.pageControls.currentPage,
+			atleastRating: '',
 			perPage: this.$store.state.pageControls.perPage,
 			hideoutType: this.$store.state.filters.type || '',
 			'sort': this.$store.state.filters.sortBy,
@@ -371,8 +379,17 @@ export default {
 		};
 	},
 	computed: {
+		topHideouts () {
+			const startofweek = this.$moment().startOf('month').subtract(1, 'day').unix();
+			let results = this.hideouts;
+			results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek);
+			results = results.map(ho => ({ ...ho, total: ho.views + ho.downloads }));
+			results = orderBy(results, (ho) => ho.total, 'desc');
+			results = take(results, 5);
+			return results;
+		},
 		paginatePages () {
-			if (this.hideoutType || this.mtx !== '' || this.Alva || this.Einhar || this.Niko || this.Zana) {
+			if (this.hideoutType || this.mtx !== '' || this.atleastRating !== '' || this.Alva || this.Einhar || this.Niko || this.Zana) {
 				return Math.ceil(this.filteredHideouts.length / this.perPage);
 			}
 			return Math.ceil(this.hideouts.length / this.perPage);
@@ -384,6 +401,9 @@ export default {
 			}
 			if (this.mtx !== '') {
 				results = results.filter(hideout => hideout.hideoutMasters['mtx'] === this.mtx);
+			}
+			if (this.atleastRating !== '') {
+				results = results.filter(hideout => this.$calculateVotes(hideout.votes) >= this.atleastRating);
 			}
 			if (this.Alva) {
 				results = results.filter(hideout => hideout.hideoutMasters['Alva'] <= this.Alva);
@@ -403,6 +423,9 @@ export default {
 				}
 				if (this.sort === 'date-new') {
 					results = orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'asc');
+				}
+				if (this.sort === 'ratings') {
+					results = orderBy(results, (ho) => this.$calculateVotes(ho.votes), 'desc');
 				}
 				results = orderBy(results, (ho) => ho[this.sort], 'desc');
 			} else {
@@ -442,6 +465,9 @@ export default {
 		}
 	},
 	methods: {
+		toggleFilters () {
+			this.filtersOpened = !this.filtersOpened;
+		},
 		clickCallback (pageNum) {
 			this.currentPage = pageNum;
 			this.$nextTick(() => {
@@ -452,18 +478,8 @@ export default {
 			window.pageYOffset = pos;
 			document.documentElement.scrollTop = pos;
 			document.body.scrollTop = pos;
-		},
-		getHideout (hash) {
-			return this.$store.getters.getHideout(hash)['Name'];
-		},
-		getImage (hideout) {
-			if (/.jpg|.png|jpeg/gi.test(hideout.hideoutScreenshot)) {
-				return hideout.hideoutScreenshot;
-			} else {
-				const image = this.$store.getters.getHideout(hideout.hideoutType)['Icon'];
-				return image;
-			}
 		}
+
 	}
 };
 </script>

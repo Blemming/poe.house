@@ -28,7 +28,7 @@ Vue.prototype.$getThumbnail = (imgLink) => {
 	return imgLink;
 };
 Vue.prototype.$calculateVotes = (votes = []) => {
-	return meanBy(votes, (v) => v.score);
+	return meanBy(votes, (v) => v.score) || 0;
 };
 Vue.prototype.$favorCost = (doodads = []) => {
 	let costs = 0;

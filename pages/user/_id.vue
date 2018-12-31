@@ -33,6 +33,18 @@
 																<th scope="row">Hideout</th>
 																<td class="text-white"><strong>{{ getHideout(hideout.hideoutType) }}</strong></td>
 															</tr>
+															<tr v-if="hideout.votes.length > 0">
+																<th scope="row">Rating</th>
+																<td class="text-white">
+																	<image-rating
+																		:rating="$calculateVotes(hideout.votes)"
+																		:read-only="true"
+																		:src="require('~/assets/images/Exalted_Orb.png')"
+																		:increment="0.25"
+																		:show-rating="false"
+																		:item-size="30"/>
+																</td>
+															</tr>
 															<tr v-if="hideout.views">
 																<th scope="row">Views</th>
 																<td class="text-white"><strong>{{ hideout.views }}</strong></td>
@@ -96,6 +108,9 @@ query{
                 hideoutDateSubmit
                 hideoutMasters
                 hideoutScreenshot
+                votes{
+                    score
+                }
               }
             }
           }

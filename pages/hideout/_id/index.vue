@@ -389,16 +389,16 @@ import Cookies from 'js-cookie';
 
 export default {
 	middleware: 'views',
-	async asyncData (context) {
+	async asyncData ({ app, store, params, error }) {
 		try {
-			const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
+			const hideouts = await app.$axios.$get(`/api/hideouts?hideoutId=${params.id}`);
 			const hideout = hideouts[0];
 			if (hideout) {
 				const hideoutLink = await hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
-				const hideoutFile = await context.app.$axios.$get(hideoutLink);
+				const hideoutFile = await app.$axios.$get(hideoutLink);
 				let votes = [];
-				if (context.store.getters['auth/username']) {
-					votes = hideout.votes.filter(v => v.user === context.store.state.auth.user._id);
+				if (store.getters['auth/username']) {
+					votes = hideout.votes.filter(v => v.user === store.state.auth.user._id);
 				}
 				return {
 					hideout,
@@ -406,10 +406,10 @@ export default {
 					rating: (votes.length > 0) ? votes[0].score : undefined
 				};
 			} else {
-				context.error({ statusCode: 404, message: 'This hideout does not exist' });
+				error({ statusCode: 404, message: 'This hideout does not exist' });
 			}
 		} catch (e) {
-			context.error({ statusCode: 404, message: e.message });
+			error({ statusCode: 404, message: e.message });
 		}
 	},
 	components: {
