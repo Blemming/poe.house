@@ -337,6 +337,9 @@ export default {
     hideoutDateSubmit,
     hideoutDescription,
     hideoutDoodads,
+    comments{
+        _id
+    }
     user{
       username,
       _id

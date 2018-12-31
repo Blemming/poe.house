@@ -333,10 +333,7 @@ export default {
 			textDescription: '',
 			imageSubmitted: true,
 			editorSettings: {
-				placeholder: 'Description of the hideout',
-				modules: {
-					imageResize: {}
-				}
+				placeholder: 'Description of the hideout'
 			},
 			errorMessage: ''
 		};

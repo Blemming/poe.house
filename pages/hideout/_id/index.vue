@@ -82,7 +82,7 @@
 									<td>
 										<nuxt-link
 											v-if="hideout.user && hideout.user.username"
-											:to="`/user/${hideout.user.id}`"
+											:to="`/user/${hideout.user._id}`"
 											class="text-white"><i class="fas fa-user"/>  {{ hideout.user.username }}</nuxt-link>
 										<span v-else>{{ hideout.author || 'Anonymous' }}</span>
 									</td>
@@ -376,8 +376,65 @@
 						class="tab-pane"
 						role="tabpanel"
 						aria-labelledby="comment-tab">
-						<div class="m-3">
-							Comments coming soon ...
+						<div
+							v-if="hideout.comments.length > 0"
+							class="m-3">
+							<div
+								v-for="comment in hideout.comments"
+								:key="comment._id"
+								class="card border border-dark mt-3">
+								<div class="card-body bg-dark">
+									<div
+										class="ql-editor"
+										style="min-height:0px;">
+										<div
+											v-html="comment.comment"/>
+									</div>
+
+								</div>
+								<div class="card-footer text-white bg-secondary text-right">
+									By
+									<nuxt-link
+										v-if="comment.user && comment.user.username"
+										:to="`/user/${comment.user._id}`"
+										class="text-primary"><i class="fas fa-user"/>  {{ comment.user.username }}</nuxt-link>
+
+									on {{ $moment(comment.createdAt).format(' MMMM Do YYYY') }}
+								</div>
+							</div>
+						</div>
+						<div
+							v-else
+							class="m-3">
+							<div class="bg-dark mt-3 p-2 border border-primary">
+								<p>No comments yet</p>
+							</div>
+						</div>
+						<div class="border-bottom border-dark"/>
+
+						<div
+							v-if="$store.getters['auth/username']"
+							class="m-3">
+							<no-ssr>
+								<vue-editor
+									v-validate="'required'"
+									id="inputDescription"
+									ref="markdownEditor"
+									:editor-options="editorSettings"
+									v-model="currentComment"
+									class="w-100 bg-dark text-white"
+									name="description"
+									required/>
+								<div class="row justify-content-end">
+									<div class="col mt-3">
+										<a
+											href="#"
+											class="btn btn-primary"
+											@click.prevent="submitComment()">Post</a>
+									</div>
+
+								</div>
+							</no-ssr>
 						</div>
 					</div>
 				</div>
@@ -393,15 +450,53 @@ import Cookies from 'js-cookie';
 export default {
 	middleware: 'views',
 	async asyncData ({ app, store, params, error }) {
+		const query = `
+        query{
+  hideouts(limit:9000, where:{isDelete_ne:true,hideoutId:"${params.id}"}){
+      _id,
+    author,
+    downloads,
+    hideoutFileLink,
+    hideoutId,
+    hideoutMasters,
+    hideoutScreenshot,
+    hideoutVideo
+    gallery,
+    hideoutType,
+    nameDescription,
+    views,
+    hideoutDateSubmit,
+    hideoutDescription,
+    hideoutDoodads,
+    comments{
+      user{
+        username,
+        _id
+      },
+      comment
+    },
+    user{
+        _id,
+      username
+    },
+    votes{
+      score,
+      user{
+        _id
+      }
+    }
+  }
+}
+        `;
 		try {
-			const hideouts = await app.$axios.$get(`/api/hideouts?hideoutId=${params.id}`);
-			const hideout = hideouts[0];
+			const { data } = await app.$axios.$post(`/api/graphql`, { query });
+			const hideout = data.hideouts[0];
 			if (hideout) {
 				const hideoutLink = await hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
 				const hideoutFile = await app.$axios.$get(hideoutLink);
 				let votes = [];
 				if (store.getters['auth/username']) {
-					votes = hideout.votes.filter(v => v.user === store.state.auth.user._id);
+					votes = hideout.votes.filter(v => v.user._id === store.state.auth.user._id);
 				}
 				return {
 					hideout,
@@ -418,6 +513,14 @@ export default {
 	components: {
 		CardLayout,
 		ShoppingList
+	},
+	data () {
+		return {
+			currentComment: '',
+			editorSettings: {
+				placeholder: 'Post a comment'
+			}
+		};
 	},
 	computed: {
 		getHideoutType () {
@@ -445,7 +548,7 @@ export default {
 			};
 		},
 		checkUserHasVoted () {
-			const votes = this.hideout.votes.filter(v => v.user === this.$store.state.auth.user._id) || [];
+			const votes = this.hideout.votes.filter(v => v.user._id === this.$store.state.auth.user._id) || [];
 			return {
 				hasVoted: (votes.length > 0),
 				id: (votes.length > 0) ? votes[0]._id : undefined,
@@ -464,6 +567,15 @@ export default {
 			var doc = new DOMParser().parseFromString(html, 'text/html');
 			return doc.body.textContent || '';
 		},
+		async submitComment () {
+			try {
+				await this.$axios.post(`/api/comments`, { user: this.$store.state.auth.user, comment: this.currentComment, hideout: this.hideout });
+				await this.$store.dispatch('auth/updateUserHideouts');
+				location.reload();
+			} catch (e) {
+				console.log(e);
+			}
+		},
 		async downloaded () {
 			const downloaded = JSON.parse(Cookies.get('downloaded') || '[]');
 			try {
@@ -475,7 +587,7 @@ export default {
 					Cookies.set('downloaded', downloaded);
 				}
 			} catch (e) {
-				this.error({ statusCode: 404, message: e.message });
+				console.log(e);
 			}
 		},
 		async rateHideout () {
@@ -490,7 +602,7 @@ export default {
 					location.reload();
 				}
 			} catch (e) {
-
+				console.log(e);
 			}
 		}
 	},

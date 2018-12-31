@@ -1,8 +1,13 @@
 <template>
 	<div>
 		<navbar/>
-		<div class="container py-3">
-			<nuxt/>
+		<div class="container-fluid py-3">
+			<div class="row justify-content-center">
+				<div class="col-xs-12 col-lg-10">
+					<nuxt/>
+				</div>
+
+			</div>
 		</div>
 	</div>
 </template>

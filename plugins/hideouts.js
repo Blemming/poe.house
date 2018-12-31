@@ -23,7 +23,7 @@ Vue.prototype.$parseHideoutFile = (string) => {
 };
 Vue.prototype.$getThumbnail = (imgLink) => {
 	if (/imgur/gi.test(imgLink)) {
-		return imgLink.replace(/(.jpg|.png)/i, 'l$1');
+		return imgLink.replace(/(.jpg|.png)/i, 'h$1');
 	}
 	return imgLink;
 };

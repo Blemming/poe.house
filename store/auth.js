@@ -43,6 +43,13 @@ export const actions = {
                 nameDescription
                 hideoutType
                 views
+                comments{
+                    user{
+                    username,
+                    _id
+                    },
+                    comment
+                },
                 downloads
                 hideoutDateSubmit
                 hideoutMasters

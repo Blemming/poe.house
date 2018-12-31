@@ -50,6 +50,10 @@
 								<th scope="row">Downloads</th>
 								<td class="text-white"><strong>{{ hideout.downloads }}</strong></td>
 							</tr>
+							<tr v-if="hideout.comments">
+								<th scope="row">Comments</th>
+								<td class="text-white"><strong>{{ hideout.comments.length }}</strong></td>
+							</tr>
 							<tr>
 								<th scope="row">Masters:</th>
 								<td>
