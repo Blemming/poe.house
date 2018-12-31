@@ -91,21 +91,21 @@ body {
     background-color: map-get($theme-colors, dark) !important;
     border: solid 1px map-get($theme-colors, primary) !important;
 }
-.quillWrapper{
-    .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
-    .ql-snow .ql-toolbar .ql-picker-item.ql-selected,
-    .ql-snow.ql-toolbar .ql-picker-item:hover,
-    .ql-snow .ql-toolbar .ql-picker-item:hover,
-    .ql-snow.ql-toolbar .ql-picker-label.ql-active,
-    .ql-snow .ql-toolbar .ql-picker-label.ql-active,
-    .ql-snow.ql-toolbar .ql-picker-label:hover,
-    .ql-snow .ql-toolbar .ql-picker-label:hover,
-    .ql-snow.ql-toolbar button.ql-active,
-    .ql-snow .ql-toolbar button.ql-active,
-    .ql-snow.ql-toolbar button:focus,
-    .ql-snow .ql-toolbar button:focus,
-    .ql-snow.ql-toolbar button:hover,
-    .ql-snow .ql-toolbar button:hover {
+#inputDescription{
+    .ql-toolbar .ql-picker-item.ql-selected,
+    .ql-toolbar .ql-picker-item.ql-selected,
+    .ql-toolbar .ql-picker-item:hover,
+    .ql-toolbar .ql-picker-item:hover,
+    .ql-toolbar .ql-picker-label.ql-active,
+    .ql-toolbar .ql-picker-label.ql-active,
+    .ql-toolbar .ql-picker-label:hover,
+    .ql-toolbar .ql-picker-label:hover,
+    .ql-toolbar button.ql-active,
+    .ql-toolbar button.ql-active,
+    .ql-toolbar button:focus,
+    .ql-toolbar button:focus,
+    .ql-toolbar button:hover,
+    .ql-toolbar button:hover {
         color: map-get($theme-colors, primary) !important;
     }
 }

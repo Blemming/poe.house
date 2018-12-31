@@ -1,19 +1,58 @@
+<style lang="scss">
+.hideout-card {
+  position: relative;
+  .card-header {
+    z-index: 3;
+    top: 0px;
+    left: 0px;
+    height: 80px;
+    width: 100%;
+    position: absolute;
+    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    border-bottom: 0px;
+  }
+  .image-container {
+    z-index: 1;
+    position: relative;
+    .card-subheader {
+      bottom: 0px;
+      text-align: center;
+      height: 80px;
+      width: 100%;
+      background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+      position: absolute;
+      h3{
+          padding-top:40px;
+  text-shadow:
+   -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+      }
+    }
+  }
+}
+</style>
+
 <template>
-	<div class="card bg-secondary">
+	<div class="card hideout-card bg-secondary">
+		<div class="card-header text-right text-white">
+			{{ hideout.views }} <i class="fas fa-eye"/> {{ hideout.downloads }} <i class="fas fa-file-download"/> {{ hideout.comments.length }} <i class="fas fa-comments"/>
+		</div>
 		<nuxt-link
 			:to="`/hideout/${hideout.hideoutId}`">
-			<img
-				:src="$getThumbnail(getImage(hideout))"
-				class="card-img-top"
-				alt="Card image cap">
+			<div class="image-container">
+				<img
+					:src="$getThumbnail(getImage(hideout))"
+					class="card-img-top"
+					alt="Card image cap">
+				<div class="card-subheader">
+					<h3 class="text-white">{{ hideout.nameDescription }}</h3>
+				</div>
+			</div>
 
 		</nuxt-link>
 		<div class="card-body">
-			<nuxt-link
-				:to="`/hideout/${hideout.hideoutId}`">
-				<h5 class="card-title text-white ">{{ hideout.nameDescription }}
-				</h5>
-			</nuxt-link>
 			<div class="row">
 				<div class="col-12">
 					<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
@@ -42,26 +81,14 @@
 										:item-size="30"/>
 								</td>
 							</tr>
-							<tr v-if="hideout.views">
-								<th scope="row">Views</th>
-								<td class="text-white"><strong>{{ hideout.views }}</strong></td>
-							</tr>
-							<tr v-if="hideout.downloads">
-								<th scope="row">Downloads</th>
-								<td class="text-white"><strong>{{ hideout.downloads }}</strong></td>
-							</tr>
-							<tr v-if="hideout.comments">
-								<th scope="row">Comments</th>
-								<td class="text-white"><strong>{{ hideout.comments.length }}</strong></td>
-							</tr>
 							<tr>
 								<th scope="row">Masters:</th>
 								<td>
 									<div class="row">
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Alva'] }}</strong><br>Alva</div>
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Einhar'] }}</strong><br>Einhar</div>
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Niko'] }}</strong><br>Niko</div>
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Zana'] }}</strong><br>Zana</div>
+										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Alva'] }}</strong><br>Alva</div>
+										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Einhar'] }}</strong><br>Einhar</div>
+										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Niko'] }}</strong><br>Niko</div>
+										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Zana'] }}</strong><br>Zana</div>
 									</div>
 								</td>
 							</tr>
@@ -81,7 +108,7 @@
 				<div class="col-3 text-right">
 					<nuxt-link
 						:to="`/hideout/${hideout.hideoutId}`"
-						class="btn btn-primary">Details</nuxt-link>
+						class="btn btn-primary border border-dark text-dark">Details</nuxt-link>
 
 				</div>
 			</div>
