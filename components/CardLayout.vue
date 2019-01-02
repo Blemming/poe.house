@@ -1,7 +1,12 @@
 <template>
 	<div class="card text-primary bg-secondary border border-primary">
 		<div class="card-header border-bottom border-dark text-white text-center">
-			<h2 class="title display-3 font-cinzel">{{ title }}</h2>
+			<h2
+				v-if="title === 'PoE.house'"
+				class="main-title display-3 font-cinzel">{{ title }}</h2>
+			<h2
+				v-else
+				class="title display-4 ">{{ title }}</h2>
 		</div>
 		<div class="card-body">
 			<slot/>

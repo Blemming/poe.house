@@ -27,6 +27,16 @@ body {
 .font-cinzel{
     font-family: 'Copperplate Gothic', serif;
 }
+.main-title{
+    font-family: 'Copperplate Gothic', serif;
+    color:map-get($theme-colors, primary)!important;
+    
+  text-shadow:
+  -2px -2px 0 map-get($theme-colors, dark),
+   2px -2px 0 map-get($theme-colors, dark),
+   -2px 2px 0 map-get($theme-colors, dark),
+    2px 2px 0 map-get($theme-colors, dark);
+}
 .nav-tabs {
     border-bottom: 0px solid map-get($theme-colors, dark) !important;
     .nav-link {
