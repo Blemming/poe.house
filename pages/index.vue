@@ -66,7 +66,7 @@
 					</div>
 				</div> -->
 				<div class="row border-bottom border-dark">
-					<div class="col-12 mb-3 d-flex">
+					<div class="col-12 mb-3 d-flex justify-content-between">
 						<a
 							class="text-primary"
 							href="#"
@@ -86,6 +86,25 @@
 								v-else
 								class="fas fa-minus-square"/>
 						</a>
+						<div class="col-xs-6 col-lg-2">
+							<div class="input-group">
+								<input
+									v-model="searchQuery"
+									type="input"
+									placeholder="Search"
+									class="form-control border-primary bg-secondary">
+								<div
+									v-if="!!searchQuery"
+									class="input-group-append">
+									<button
+										class="btn btn-danger"
+										@click.prevent="clearSearch()"><i
+											class="fa fa-times"
+											aria-hidden="true"/></button>
+								</div>
+							</div>
+
+						</div>
 					</div>
 				</div>
 				<div
@@ -370,6 +389,7 @@ export default {
 			levels: [1, 2, 3, 4, 5, 6, 7],
 			hideouts: [],
 			currentPage: this.$store.state.pageControls.currentPage,
+			searchQuery: '',
 			atleastRating: '',
 			perPage: this.$store.state.pageControls.perPage,
 			hideoutType: this.$store.state.filters.type || '',
@@ -392,7 +412,7 @@ export default {
 			return results;
 		},
 		paginatePages () {
-			if (this.hideoutType || this.mtx !== '' || this.atleastRating !== '' || this.Alva || this.Einhar || this.Niko || this.Zana) {
+			if (this.hideoutType || this.searchQuery !== '' || this.mtx !== '' || this.atleastRating !== '' || this.Alva || this.Einhar || this.Niko || this.Zana) {
 				return Math.ceil(this.filteredHideouts.length / this.perPage);
 			}
 			return Math.ceil(this.hideouts.length / this.perPage);
@@ -434,6 +454,9 @@ export default {
 			} else {
 				results = orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
 			}
+			if (this.searchQuery) {
+				results = results.filter(hideout => hideout.nameDescription.toLowerCase().includes(this.searchQuery.toLowerCase()) || hideout.author.toLowerCase().includes(this.searchQuery.toLowerCase()));
+			}
 			const offset = (this.currentPage - 1);
 			return chunk(results, this.perPage)[offset];
 		}
@@ -470,6 +493,9 @@ export default {
 	methods: {
 		toggleFilters () {
 			this.filtersOpened = !this.filtersOpened;
+		},
+		clearSearch () {
+			this.searchQuery = '';
 		},
 		clickCallback (pageNum) {
 			this.currentPage = pageNum;
