@@ -173,25 +173,28 @@
 					<div
 						class="form-group">
 						<label for="inputDescription">Description</label>
-						<div class="row">
+						<div
+							id="inputDescription"
+							class="row">
 							<div class="col-12">
 								<no-ssr>
-									<vue-editor
+									<div
 										v-validate="'required'"
-										id="inputDescription"
+										v-quill:myQuillEditor="editorSettings"
 										ref="markdownEditor"
-										:editor-options="editorSettings"
-										v-model="hideoutDescription"
+										:content="hideoutDescription"
 										class="w-100 bg-dark text-white"
+										style="height:200px;"
 										name="description"
-										required/>
+										required
+										@change="onEditorChange($event)"/>
 
 								</no-ssr>
 							</div>
 
 							<div
 								id="preview"
-								class="col-12">
+								class="col-12 mt-3">
 
 								<div class="card bg-secondary">
 
@@ -345,8 +348,24 @@ export default {
 			pastebinSubmitted: false,
 			imageSubmitted: false,
 			editorSettings: {
+				placeholder: 'Description of the hideout',
+				modules: {
+					toolbar: [
+						[{ 'header': 1 }, { 'header': 2 }], // custom button values
+						['bold', 'italic', 'underline', 'strike'], // toggled buttons
+						['blockquote', 'code-block'],
 
-				placeholder: 'Description of the hideout'
+						[{ 'list': 'ordered' }, { 'list': 'bullet' }],
+
+						[{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+
+						[{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
+						[{ 'align': [] }],
+
+						['link', 'image'],
+						['clean'] // remove formatting button
+					]
+				}
 			},
 			errorMessage: ''
 		};
@@ -387,6 +406,9 @@ export default {
 		strip (html) {
 			var doc = new DOMParser().parseFromString(html, 'text/html');
 			return doc.body.textContent || '';
+		},
+		onEditorChange ({ editor, html, text }) {
+			this.hideoutDescription = html;
 		},
 		submitHideout () {
 			this.$refs.recaptcha.execute();

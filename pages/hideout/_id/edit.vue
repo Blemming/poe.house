@@ -177,15 +177,16 @@
 							<div class="col-12">
 
 								<no-ssr>
-									<vue-editor
+									<div
 										v-validate="'required'"
-										id="inputDescription"
+										v-quill:myQuillEditor="editorSettings"
 										ref="markdownEditor"
-										:editor-options="editorSettings"
-										v-model="textDescription"
+										:content="textDescription"
 										class="w-100 bg-dark text-white"
+										style="height:200px;"
 										name="description"
-										required/>
+										required
+										@change="onEditorChange($event)"/>
 
 								</no-ssr>
 							</div>
@@ -333,7 +334,23 @@ export default {
 			textDescription: '',
 			imageSubmitted: true,
 			editorSettings: {
-				placeholder: 'Description of the hideout'
+				placeholder: 'Description of the hideout',
+				modules: {
+					toolbar: [
+						[{ 'header': 1 }, { 'header': 2 }], // custom button values
+						['bold', 'italic', 'underline', 'strike'], // toggled buttons
+						['blockquote', 'code-block'],
+
+						[{ 'list': 'ordered' }, { 'list': 'bullet' }],
+
+						[{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+
+						[{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
+						[{ 'align': [] }],
+						['link', 'image'],
+						['clean'] // remove formatting button
+					]
+				}
 			},
 			errorMessage: ''
 		};
@@ -382,7 +399,9 @@ export default {
 		submitHideout () {
 			this.$refs.recaptcha.execute();
 		},
-
+		onEditorChange ({ editor, html, text }) {
+			this.textDescription = html;
+		},
 		async resolveThumbnail (defaultImage = false) {
 			if (this.hideoutImage) {
 				this.imageSubmitted = true;

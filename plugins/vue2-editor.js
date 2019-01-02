@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import { VueEditor } from 'vue2-editor';
+import VueQuillEditor from 'vue-quill-editor/dist/ssr';
 // import ImageResize from 'quill-image-resize-module';
 
 // Quill.register('modules/imageResize', ImageResize);
 
-Vue.component('vueEditor', VueEditor);
+Vue.use(VueQuillEditor);

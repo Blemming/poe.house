@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+// import webpack from 'webpack';
 const pkg = require('./package');
 const apiConfig = require('./.api.json');
 
@@ -39,6 +39,8 @@ module.exports = {
   ** Global CSS
   */
 	css: [
+		'quill/dist/quill.core.css',
+		'~assets/quill.custom.css',
 		'~assets/scss/main.scss'
 	],
 
@@ -111,12 +113,12 @@ module.exports = {
   ** Build configuration
   */
 	build: {
-		plugins: [
-			new webpack.ProvidePlugin({
-				'window.Quill': 'quill/dist/quill.js',
-				'Quill': 'quill/dist/quill.js'
-			})
-		],
+		// plugins: [
+		// 	new webpack.ProvidePlugin({
+		// 		'window.Quill': 'quill/dist/quill.js',
+		// 		'Quill': 'quill/dist/quill.js'
+		// 	})
+		// ],
 		// analyze: true,
 		/*
     ** You can extend webpack config here

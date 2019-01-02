@@ -415,16 +415,18 @@
 						<div
 							v-if="$store.getters['auth/username']"
 							class="m-3">
+
 							<no-ssr>
-								<vue-editor
+								<div
 									v-validate="'required'"
-									id="inputDescription"
+									v-quill:myQuillEditor="editorSettings"
 									ref="markdownEditor"
-									:editor-options="editorSettings"
-									v-model="currentComment"
+									:content="currentComment"
 									class="w-100 bg-dark text-white"
+									style="height:100px;"
 									name="description"
-									required/>
+									required
+									@change="onEditorChange($event)"/>
 								<div class="row justify-content-end">
 									<div class="col mt-3">
 										<a
@@ -434,6 +436,7 @@
 									</div>
 
 								</div>
+
 							</no-ssr>
 						</div>
 					</div>
@@ -519,7 +522,23 @@ export default {
 		return {
 			currentComment: '',
 			editorSettings: {
-				placeholder: 'Post a comment'
+				placeholder: 'Post a comment',
+				modules: {
+					toolbar: [
+						[{ 'header': 1 }, { 'header': 2 }], // custom button values
+						['bold', 'italic', 'underline', 'strike'], // toggled buttons
+						['blockquote', 'code-block'],
+
+						[{ 'list': 'ordered' }, { 'list': 'bullet' }],
+
+						[{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+
+						[{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
+						[{ 'align': [] }],
+
+						['clean'] // remove formatting button
+					]
+				}
 			}
 		};
 	},
@@ -567,6 +586,9 @@ export default {
 		strip (html) {
 			var doc = new DOMParser().parseFromString(html, 'text/html');
 			return doc.body.textContent || '';
+		},
+		onEditorChange ({ editor, html, text }) {
+			this.currentComment = html;
 		},
 		async submitComment () {
 			try {
