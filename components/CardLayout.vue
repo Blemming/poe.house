@@ -1,7 +1,7 @@
 <template>
 	<div class="card text-primary bg-secondary border border-primary">
 		<div class="card-header border-bottom border-dark text-white text-center">
-			<h2 class="display-4">{{ title }}</h2>
+			<h2 class="title display-3 font-cinzel">{{ title }}</h2>
 		</div>
 		<div class="card-body">
 			<slot/>

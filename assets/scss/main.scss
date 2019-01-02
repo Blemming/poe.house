@@ -9,6 +9,14 @@ $table-dark-border-color: map-get($theme-colors, dark);
 $input-bg:map-get($theme-colors, dark);
 $input-disabled-bg: map-get($theme-colors, secondary);
 $input-color: white;
+@font-face {
+    font-family: 'Copperplate Gothic';
+    src: local('Copperplate Gothic Bold'), local('CopperplateGothic-Bold'),
+        url('../fonts/CopperplateGothic-Bold.woff2') format('woff2'),
+        url('../fonts/CopperplateGothic-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
 @import "~bootstrap/scss/bootstrap";
 body {
     background-image: url('/images/kn2SC0N.jpg');
@@ -16,7 +24,9 @@ body {
     background-attachment: fixed;
     background-color: map-get($theme-colors, dark);
 }
-
+.font-cinzel{
+    font-family: 'Copperplate Gothic', serif;
+}
 .nav-tabs {
     border-bottom: 0px solid map-get($theme-colors, dark) !important;
     .nav-link {

@@ -1,23 +1,39 @@
 <style lang="scss">
-    .text-grey{
-        color:rgba(255,255,255,0.8)!important;
-    }
-    .border-grey{
-        border:1px solid rgba(255,255,255,0.3)!important;
-    }
+.text-grey {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.border-grey {
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+.top-gradient {
+  height: 80px;
+  z-index: 99;
+  width:101%;
+  position: absolute;
+  top:-1px;
+  left:-1px;
+  background: linear-gradient(rgba(16, 16, 16,1), rgba(16, 16, 16, 0));
+}
+.carousel-caption {
+  h2,
+  p {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000;
+  }
+}
 </style>
 
 <template>
-	<div class="row py-5">
-		<div class="col-12">
+	<div class="row">
+		<div class="col-12 my-5">
 			<card-layout
-				title="Hideouts">
-				<!-- <div class="row mb-5">
+				title="PoE.house">
+				<div class="row mb-5">
 					<div class="col-12">
-						<h2 class="text-center">Hideouts of {{ $moment().format('MMMM') }}</h2>
+						<h4 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts of {{ $moment().format('MMMM') }}</h4>
 						<div
 							id="carouselExampleControls"
-							class="carousel slide"
+							class="carousel border border-dark slide"
 							data-ride="carousel">
 							<div
 								class="carousel-inner bg-dark">
@@ -28,16 +44,19 @@
 								>
 									<div
 										class="card bg-secondary">
+										<div
+											class="top-gradient"/>
 										<img
+
 											:src="hideout.hideoutScreenshot"
-											class="card-img-bottom p-relative"
+											style="max-height:300px; object-fit:cover; filter: blur(4px);"
 											alt="Card image cap">
-										<div class="card-body p-absolute">
-											<h5 class="card-title">{{ hideout.nameDescription }}</h5>
-											<p class="card-text">by {{ hideout.author }}</p>
-											<a
-												href="#"
-												class="btn btn-primary">Go somewhere</a>
+										<div class="carousel-caption d-none d-md-block">
+											<nuxt-link :to="`/hideout/${hideout.hideoutId}`">
+												<h2 class="display-4 mb-0">{{ hideout.nameDescription }}</h2>
+												<p class="text-white mt-0">{{ hideout.views }} <i class="fas fa-eye pr-3"/>   {{ hideout.downloads }} <i class="fas fa-file-download pr-3"/> {{ hideout.comments.length }} <i class="fas fa-comments"/></p>
+												<p>by {{ hideout.author || 'anonymous' }}</p>
+											</nuxt-link>
 										</div>
 									</div>
 								</div>
@@ -64,7 +83,7 @@
 							</a>
 						</div>
 					</div>
-				</div> -->
+				</div>
 				<div class="row border-bottom border-dark">
 					<div class="col-12 mb-3 d-flex justify-content-between">
 						<a
@@ -110,7 +129,7 @@
 				<div
 					id="collapseFilters"
 					ref="filtersCollapse"
-					class="collapse show">
+					class="collapse">
 					<div class="row mt-3">
 						<div class="col-12">
 							<div class="row">
@@ -273,15 +292,22 @@
 									disabled>
 									Per page
 								</option>
-								<option :value="2">
-									2
+								<option :value="3">
+									3
 								</option>
 								<option
 									:value="6">
 									6
 								</option>
+								<option
+									:value="9">
+									9
+								</option>
 								<option :value="12">
 									12
+								</option>
+								<option :value="48">
+									48
 								</option>
 								<option :value="hideouts.length">
 									All
@@ -293,7 +319,7 @@
 					<div
 						v-for="(hideout,index) in filteredHideouts"
 						:key="index"
-						class="col-xs-12 col-lg-6 my-2">
+						class="col-xs-12 col-lg-4 my-2">
 						<hideout-card :hideout="hideout"/>
 					</div>
 
@@ -373,7 +399,7 @@ export default {
 			const confirmed = context.query.confirmed;
 			return {
 				hideouts: data.hideouts,
-				filtersOpened: true,
+				filtersOpened: false,
 				confirmed
 			};
 		} catch (e) {
@@ -405,7 +431,7 @@ export default {
 		topHideouts () {
 			const startofweek = this.$moment().startOf('month').subtract(1, 'day').unix();
 			let results = this.hideouts;
-			results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek);
+			results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek && !!ho.hideoutScreenshot);
 			results = results.map(ho => ({ ...ho, total: ho.views + ho.downloads }));
 			results = orderBy(results, (ho) => ho.total, 'desc');
 			results = take(results, 5);

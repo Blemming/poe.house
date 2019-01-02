@@ -17,7 +17,6 @@
     .card-subheader {
       bottom: 0px;
       text-align: center;
-      height: 80px;
       width: 100%;
       background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
       position: absolute;
@@ -37,7 +36,7 @@
 <template>
 	<div class="card hideout-card bg-secondary">
 		<div class="card-header text-right text-white">
-			{{ hideout.views }} <i class="fas fa-eye"/> {{ hideout.downloads }} <i class="fas fa-file-download"/> {{ hideout.comments.length }} <i class="fas fa-comments"/>
+			{{ hideout.views }} <i class="fas fa-eye pr-2"/> {{ hideout.downloads }} <i class="fas fa-file-download pr-2"/> {{ hideout.comments.length }} <i class="fas fa-comments"/>
 		</div>
 		<nuxt-link
 			:to="`/hideout/${hideout.hideoutId}`">
@@ -47,7 +46,7 @@
 					class="card-img-top"
 					alt="Card image cap">
 				<div class="card-subheader">
-					<h3 class="text-white">{{ hideout.nameDescription }}</h3>
+					<h4 class="text-white">{{ hideout.nameDescription }}</h4>
 				</div>
 			</div>
 
@@ -98,14 +97,14 @@
 				</div>
 			</div>
 			<div class="row justify-content-between">
-				<div class="col-3">
+				<div class="col-6 col-md-4 col-lg3">
 					<img
 						v-if="hideout.hideoutMasters['mtx']"
 						src="https://web.poecdn.com/image/shop/item/ShopItemCoin.png?1538109960000"
 						alt="">
 					<small v-if="hideout.hideoutMasters['mtx']">MTX</small>
 				</div>
-				<div class="col-3 text-right">
+				<div class="col-6 col-md-4 col-lg3 text-right">
 					<nuxt-link
 						:to="`/hideout/${hideout.hideoutId}`"
 						class="btn btn-primary border border-dark text-dark">Details</nuxt-link>

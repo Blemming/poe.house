@@ -13,7 +13,7 @@ export const state = () => ({
 	},
 	pageControls: {
 		currentPage: 1,
-		perPage: 6
+		perPage: 9
 	},
 	doodads: null,
 	hideouts: null
