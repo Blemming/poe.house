@@ -402,10 +402,9 @@ export default {
 		onEditorChange ({ editor, html, text }) {
 			this.textDescription = html;
 		},
-		async resolveThumbnail (defaultImage = false) {
+		resolveThumbnail (defaultImage = false) {
 			if (this.hideoutImage) {
 				this.imageSubmitted = true;
-				this.hideoutImage = this.hideoutScreenshot;
 			}
 			if (this.pastebinData && defaultImage) {
 				this.hideoutImage = this.hideoutOptions.filter(hide => parseInt(hide['Hash']) === this.hideout.hideoutType)[0]['Icon'] || '';
@@ -429,9 +428,9 @@ export default {
 						hideoutFileLink: this.hideout.hideoutFileLink,
 						hideoutDescription: this.textDescription,
 						hideoutScreenshot: this.hideoutImage,
-						hideoutVideo: this.hideoutVideo,
+						hideoutVideo: this.hideout.hideoutVideo,
 						hideoutDoodads: this.getHideoutDoodads,
-						gallery: this.gallery,
+						gallery: this.hideout.gallery,
 						hideoutMasters: this.masterMaxLevel,
 						user: this.$store.state.auth.user || null,
 						poeVersion: this.poeVersion
