@@ -30,7 +30,8 @@
 				title="PoE.house">
 				<div class="row mb-5">
 					<div class="col-12">
-						<h4 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts of {{ $moment().format('MMMM') }}</h4>
+						<h4 class="text-center text-white bg-dark border border-dark m-0 pt-2 lead">Hideouts of {{ $moment().format('MMMM') }}</h4>
+						<p class="text-center text-white bg-dark border border-dark m-0 py-0 lead"><small>Encourage people to vote to get your hideout here</small>   </p>
 						<div
 							id="carouselExampleControls"
 							class="carousel border border-dark slide"
@@ -432,8 +433,8 @@ export default {
 			const startofweek = this.$moment().startOf('month').subtract(1, 'day').unix();
 			let results = this.hideouts;
 			results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek && !!ho.hideoutScreenshot);
-			results = results.map(ho => ({ ...ho, total: ho.views + ho.downloads }));
-			results = orderBy(results, (ho) => ho.total, 'desc');
+			results = results.map(ho => ({ ...ho, scale: this.$getRatingScale(ho, this.$calculateVotes(ho.votes)) }));
+			results = orderBy(results, (ho) => ho.downloads, 'desc');
 			results = take(results, 5);
 			return results;
 		},

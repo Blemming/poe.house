@@ -21,6 +21,9 @@ Vue.prototype.$parseHideoutFile = (string) => {
 		return e.message;
 	}
 };
+Vue.prototype.$getRatingScale = (hideout = {}, rating) => {
+	return (5 * rating / 10) + 5 * (1 - Math.pow(Math.E, -hideout.votes.length / 10));
+};
 Vue.prototype.$getThumbnail = (imgLink) => {
 	if (/imgur/gi.test(imgLink)) {
 		return imgLink.replace(/(.jpg|.png)/i, 'h$1');
