@@ -45,7 +45,7 @@
 				role="alert">
 				I've started getting support on patreon. To show my appreciation, patrons get their usernames displayed differently. Ex:  <span
 					class=" bg-dark"
-					style="color: rgb(249, 104, 84);"> <i class="fab fa-patreon" /> blemming</span> instead of <span class="text-white bg-dark"><i class="fas fa-user"/> blemming</span>
+					style="color: rgb(249, 104, 84);"> <i class="fab fa-patreon" /> blemming</span> instead of <span class="text-white bg-dark"><i class="fas fa-user"/> blemming</span> might changed it to something cooler like a chaos orb or a Mirror of Kalandra.
 				<button
 					type="button"
 					class="close"
