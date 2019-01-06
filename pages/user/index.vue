@@ -44,8 +44,11 @@
 										class="align-self-center mr-3 xs-12 lg-2">
 
 									<div class="media-body py-3  xs-12 lg-10">
-										<h4 class="card-title text-white ">{{ hideout.nameDescription }}
-										</h4>
+
+										<div class="card-title text-white ">
+											<h4>{{ hideout.nameDescription }}</h4>
+											<small class="text-primary">{{ hideout.views }} <i class="fas fa-eye pr-2"/> {{ hideout.downloads }} <i class="fas fa-file-download pr-2"/> {{ hideout.comments.length }} <i class="fas fa-comments"/></small>
+										</div>
 
 										<div class="row">
 											<div class="col-12">

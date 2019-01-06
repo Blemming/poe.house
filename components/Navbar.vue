@@ -154,10 +154,12 @@
 								style="color: rgb(255, 108, 0);"><img
 									style="max-height:1rem;"
 									src="/images/Chaos_Orb.png"
-									alt=""> {{ $store.getters['auth/username'] }}</span>
+									alt=""> {{ $store.getters['auth/username'] }} </span>
 							<span v-else>
 								{{ $store.getters['auth/username'] }}
 							</span>
+
+							<!-- <span class="badge badge-dark border border-primary ml-1">{{ $store.getters['auth/unreadComments'].length }}</span> -->
 						</a>
 						<div
 							class="dropdown-menu bg-secondary dropdown-primary"

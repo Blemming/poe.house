@@ -1,4 +1,13 @@
 <style lang="scss">
+.image-container{
+    position: relative;
+    .image-overlay{
+        position:absolute;
+        left:1.2rem;
+        top:1.4rem;
+        z-index:9;
+    }
+}
 </style>
 
 <template>
@@ -17,14 +26,18 @@
 								:to="`/hideout/${hideout.hideoutId}`">
 								<div class="media border-bottom border-dark on-hover p-3">
 									<div class="row w-100">
-										<img
-											:src="$getThumbnail(getImage(hideout))"
-											style="max-width:400px;"
-											class="align-self-center mr-3 xs-12 lg-2">
+										<div class="image-container d-flex">
+											<img
+												:src="$getThumbnail(getImage(hideout))"
+												style="max-width:400px;"
+												class="align-self-center mr-3 xs-12 lg-2">
+										</div>
 
 										<div class="media-body py-3  xs-12 lg-10">
-											<h4 class="card-title text-white ">{{ hideout.nameDescription }}
-											</h4>
+											<div class="card-title text-white ">
+												<h4>{{ hideout.nameDescription }}</h4>
+												<small class="text-primary">{{ hideout.views }} <i class="fas fa-eye pr-2"/> {{ hideout.downloads }} <i class="fas fa-file-download pr-2"/> {{ hideout.comments.length }} <i class="fas fa-comments"/></small>
+											</div>
 											<div class="row justify-content-center">
 												<div class="col-12">
 													<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
@@ -105,6 +118,9 @@ query{
                 hideoutType
                 views
                 downloads
+                comments{
+                    _id
+                }
                 hideoutDateSubmit
                 hideoutMasters
                 hideoutScreenshot
