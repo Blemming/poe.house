@@ -36,6 +36,11 @@
 							id="passwordHelp"
 							class="form-text text-center text-danger">{{ error }}</small>
 					</div>
+					<div
+						class="alert alert-success"
+						role="alert">
+						<small>If you are still encountering confirmation issues. Send an email to <a href="mailto:support@poe.house">support@poe.house</a> with the email you have registered with and I will gladly confirm your email.</small>
+					</div>
 					<button
 						:disabled="loading"
 						type="submit"

@@ -27,7 +27,7 @@ export const actions = {
 		commit('logout');
 	},
 	async updateUserHideouts ({ state, commit }) {
-		let user = state.user;
+		const user = state.user;
 		const query = `
         query{
             user(id:"${user._id}"){
@@ -60,8 +60,8 @@ export const actions = {
           }
         `;
 		const { data: confirmedUser } = await this.$axios.post(`/api/graphql`, { query });
-		user = { ...user, ...confirmedUser.data.user };
-		commit('setUser', user);
+		const newuser = { ...user, ...confirmedUser.data.user };
+		commit('setUser', newuser);
 	},
 	async loginUser ({ commit, dispatch }, payload) {
 		try {

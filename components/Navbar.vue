@@ -139,7 +139,7 @@
 						</div>
 					</li>
 					<li
-						v-if="$store.getters['auth/username']"
+						v-if="$store.getters['auth/username'] "
 						class="nav-item dropdown">
 						<a
 							:id="`navbar-support`"
@@ -151,7 +151,10 @@
 							aria-expanded="false">
 							<span
 								v-if="$store.state.auth.user.Donator"
-								style="color: rgb(249, 104, 84);"><i class="fab fa-patreon" /> {{ $store.getters['auth/username'] }}</span>
+								style="color: rgb(255, 108, 0);"><img
+									style="max-height:1rem;"
+									src="/images/Chaos_Orb.png"
+									alt=""> {{ $store.getters['auth/username'] }}</span>
 							<span v-else>
 								{{ $store.getters['auth/username'] }}
 							</span>
@@ -187,6 +190,22 @@
 				</div>
 			</div>
 		</nav>
+		<div
+			:class="`alert alert-warning alert-dismissible text-center fade ${($store.state.showAnnouncement)?'show':''} d-none d-lg-block`"
+			style="position:absolute;z-index:99;width:100%;"
+			role="alert">
+			<no-ssr>
+				<div v-html="$store.state.announcement.message"/>
+			</no-ssr>
+			<button
+				type="button"
+				class="close"
+				aria-label="Close"
+				@click="toggleAnnouncement()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
 	</div>
 </template>
 <script>
@@ -246,6 +265,9 @@ export default {
 		}
 	},
 	methods: {
+		toggleAnnouncement () {
+			this.$store.commit('TOGGLE_ANNOUNCEMENT', false);
+		},
 		logout () {
 			this.$router.push('/');
 			this.$store.dispatch('auth/logoutUser');

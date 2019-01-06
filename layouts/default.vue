@@ -3,7 +3,7 @@
 		<navbar/>
 		<div class="container-fluid py-3">
 			<div class="row justify-content-center">
-				<div class="col-xs-12 col-lg-10">
+				<div class="col-xs-12 col-lg-10 py-5">
 					<nuxt/>
 				</div>
 

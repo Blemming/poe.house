@@ -397,7 +397,10 @@
 									<nuxt-link
 										v-if="comment.user && comment.user.username && comment.user.Donator"
 										:to="`/user/${comment.user._id}`"
-										style="color: rgb(249, 104, 84);"><i class="fab fa-patreon" /> {{ comment.user.username }}
+										style="color: rgb(255, 108, 0);"><img
+											style="max-height:1rem;"
+											src="/images/Chaos_Orb.png"
+											alt="">  {{ comment.user.username }}
 									</nuxt-link>
 									<nuxt-link
 										v-if="comment.user && comment.user.username&& !comment.user.Donator"
@@ -421,8 +424,15 @@
 						<div
 							v-if="$store.getters['auth/username']"
 							class="m-3">
-
-							<no-ssr>
+							<div v-if="!$store.state.auth.user.confirmed">
+								<h4>Account not confirmed, check your email to confirm account. </h4>
+								<p>If it does not show up check the spam folder. If after 24 hours you still have not received the confirmation email contact
+									<a
+										class="text-white"
+										href="mailto:support@poe.house">support@poe.house</a> with your registered email.
+								</p>
+							</div>
+							<no-ssr v-else>
 								<div
 									v-validate="'required'"
 									v-quill:myQuillEditor="editorSettings"
@@ -543,6 +553,7 @@ export default {
 						[{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
 						[{ 'align': [] }],
 
+						['link'],
 						['clean'] // remove formatting button
 					]
 				}
@@ -625,7 +636,7 @@ export default {
 				if (this.checkUserHasVoted.hasVoted) {
 					await this.$axios.put(`/api/votes/${this.checkUserHasVoted.id}`, { user: this.$store.state.auth.user, score: this.rating, hideout: this.hideout });
 					await this.$store.dispatch('auth/updateUserHideouts');
-					location.reload();
+					// location.reload();
 				} else {
 					await this.$axios.post(`/api/votes`, { user: this.$store.state.auth.user, score: this.rating, hideout: this.hideout });
 					await this.$store.dispatch('auth/updateUserHideouts');

@@ -1,7 +1,10 @@
 import cookieparser from 'cookieparser';
+import Cookies from 'js-cookie';
 
 export const state = () => ({
 	firestoreData: null,
+	announcement: null,
+	showAnnouncement: true,
 	filters: {
 		type: '',
 		mtx: '',
@@ -45,46 +48,59 @@ export const mutations = {
 	},
 	SET_HIDEOUTS: function (state, hideouts) {
 		state.hideouts = hideouts;
+	},
+	TOGGLE_ANNOUNCEMENT: function (state, result) {
+		state.showAnnouncement = result;
+		Cookies.set('showAnnouncement', state.showAnnouncement);
+	},
+	SET_ANNOUNCEMENT: function (state, announcement) {
+		state.announcement = announcement;
 	}
 };
 export const actions = {
 	async nuxtServerInit ({ state, commit }, { req }) {
 		let user = null;
 		let token = null;
+		let showAnnouncement = state.showAnnouncement;
 		if (req && req.headers && req.headers.cookie) {
 			const parsed = cookieparser.parse(req.headers.cookie);
 			user = (parsed.user && JSON.parse(parsed.user)) || null;
 			token = (parsed.token) || null;
+			showAnnouncement = JSON.parse(parsed.showAnnouncement);
 		}
-		if (user) {
+		if (user && !user.confirmed) {
 			const query = `
-            query{
-                user(id:"${user._id}"){
-                  username
-                  email
-                  _id
-                  provider
-                  confirmed
-                  hideouts(where:{
-                    isDeleted_ne:true
-                  }){
-                    hideoutId
-                    nameDescription
-                    hideoutType
-                    views
-                    downloads
-                    hideoutDateSubmit
-                    hideoutMasters
-                    hideoutScreenshot
-                  }
-                }
-              }
-            `;
+		    query{
+		        user(id:"${user._id}"){
+		          username
+		          email
+		          _id
+		          provider
+		          confirmed
+		          hideouts(where:{
+		            isDeleted_ne:true
+		          }){
+		            hideoutId
+		            nameDescription
+		            hideoutType
+		            views
+		            downloads
+		            hideoutDateSubmit
+		            hideoutMasters
+		            hideoutScreenshot
+		          }
+		        }
+		      }
+		    `;
 			const { data: confirmedUser } = await this.$axios.post(`/api/graphql`, { query });
 			user = confirmedUser.data.user;
 		}
 		commit('auth/setUser', user);
 		commit('auth/setToken', token);
+
+		const announcements = await this.$axios.$get(`/api/announcements`);
+		commit('SET_ANNOUNCEMENT', announcements[0]);
+		commit('TOGGLE_ANNOUNCEMENT', showAnnouncement);
 
 		const { doodads } = require('~/data/doodads.json');
 		const { hideouts } = require('~/data/hideouts.json');

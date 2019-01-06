@@ -16,6 +16,7 @@
 }
 .carousel-caption {
   h2,
+  h5,
   p {
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
       1px 1px 0 #000;
@@ -25,36 +26,6 @@
 
 <template>
 	<div class="row">
-		<div class="col-12">
-			<div
-				class="alert alert-success alert-dismissible fade show"
-				role="alert">
-				<strong>Attention ***</strong> Registration has been restored, if you are still having issues, send an email to <a href="mailto:support@poe.house">support@poe.house</a> using the email your registered with and I will gladly confirm your account.<strong>*** Attention</strong>
-				<button
-					type="button"
-					class="close"
-					data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		</div>
-		<div class="col-12">
-			<div
-				class="alert alert-warning alert-dismissible fade show"
-				role="alert">
-				I've started getting support on patreon. To show my appreciation, patrons get their usernames displayed differently. Ex:  <span
-					class=" bg-dark"
-					style="color: rgb(249, 104, 84);"> <i class="fab fa-patreon" /> blemming</span> instead of <span class="text-white bg-dark"><i class="fas fa-user"/> blemming</span> might changed it to something cooler like a chaos orb or a Mirror of Kalandra.
-				<button
-					type="button"
-					class="close"
-					data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		</div>
 		<div class="col-12 my-5">
 			<card-layout
 				title="PoE.house">
@@ -80,13 +51,21 @@
 										<img
 
 											:src="hideout.hideoutScreenshot"
-											style="max-height:300px; object-fit:cover; filter: blur(4px);"
+											style="max-height:300px; object-fit:cover; filter: blur(2px);"
 											alt="Card image cap">
 										<div class="carousel-caption d-none d-md-block">
 											<nuxt-link :to="`/hideout/${hideout.hideoutId}`">
 												<h2 class="display-4 mb-0">{{ hideout.nameDescription }}</h2>
 												<p class="text-white mt-0">{{ hideout.views }} <i class="fas fa-eye pr-3"/>   {{ hideout.downloads }} <i class="fas fa-file-download pr-3"/> {{ hideout.comments.length }} <i class="fas fa-comments"/></p>
 												<p>by {{ hideout.author || 'anonymous' }}</p>
+											</nuxt-link>
+										</div>
+										<div class="carousel-caption d-block d-md-none">
+											<nuxt-link :to="`/hideout/${hideout.hideoutId}`">
+												<h5
+													style="font-size:2rem;"
+													class="display-4 mb-0">{{ hideout.nameDescription }}</h5>
+												<p class="text-white mt-0">{{ hideout.views }} <i class="fas fa-eye pr-3"/>   {{ hideout.downloads }} <i class="fas fa-file-download pr-3"/> {{ hideout.comments.length }} <i class="fas fa-comments"/></p>
 											</nuxt-link>
 										</div>
 									</div>
@@ -465,7 +444,7 @@ export default {
 			let results = this.hideouts;
 			results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek && !!ho.hideoutScreenshot);
 			results = results.map(ho => ({ ...ho, scale: this.$getRatingScale(ho, this.$calculateVotes(ho.votes)) }));
-			results = orderBy(results, (ho) => ho.downloads, 'desc');
+			results = orderBy(results, (ho) => ho.scale, 'desc');
 			results = take(results, 5);
 			return results;
 		},
