@@ -66,7 +66,9 @@ export const actions = {
 			const parsed = cookieparser.parse(req.headers.cookie);
 			user = (parsed.user && JSON.parse(parsed.user)) || null;
 			token = (parsed.token) || null;
-			showAnnouncement = JSON.parse(parsed.showAnnouncement);
+			if (parsed.showAnnouncement) {
+				showAnnouncement = JSON.parse(parsed.showAnnouncement);
+			}
 		}
 		if (user && !user.confirmed) {
 			const query = `
