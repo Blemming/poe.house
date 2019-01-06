@@ -25,6 +25,20 @@
 
 <template>
 	<div class="row">
+		<div class="col-12">
+			<div
+				class="alert alert-danger alert-dismissible fade show"
+				role="alert">
+				<strong>Attention ***</strong> There is an issue with account registration right now. I am working hard to find the issue. Until then account registration will not work.<strong>*** Attention</strong>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>
 		<div class="col-12 my-5">
 			<card-layout
 				title="PoE.house">
