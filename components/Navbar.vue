@@ -149,7 +149,12 @@
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false">
-							{{ $store.getters['auth/username'] }}
+							<span
+								v-if="$store.state.auth.user.Donator"
+								style="color: rgb(249, 104, 84);"><i class="fab fa-patreon" /> {{ $store.getters['auth/username'] }}</span>
+							<span v-else>
+								{{ $store.getters['auth/username'] }}
+							</span>
 						</a>
 						<div
 							class="dropdown-menu bg-secondary dropdown-primary"

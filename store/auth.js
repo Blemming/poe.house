@@ -33,6 +33,7 @@ export const actions = {
             user(id:"${user._id}"){
               username
               confirmed
+              Donator
               votes{
                   _id
               }

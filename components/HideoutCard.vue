@@ -122,7 +122,12 @@
 						by
 					</small>
 					<nuxt-link
-						v-if="hideout.user && hideout.user._id"
+						v-if="hideout.user && hideout.user._id && hideout.user.Donator"
+						:to="`/user/${hideout.user._id}`"
+						style="color: rgb(249, 104, 84);"><i class="fab fa-patreon" /> {{ hideout.user.username }}
+					</nuxt-link>
+					<nuxt-link
+						v-if="hideout.user && hideout.user._id && !hideout.user.Donator"
 						:to="`/user/${hideout.user._id}`"><i class="fas fa-user"/> {{ hideout.user.username }}
 					</nuxt-link>
 					<span

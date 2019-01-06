@@ -27,9 +27,25 @@
 	<div class="row">
 		<div class="col-12">
 			<div
-				class="alert alert-danger alert-dismissible fade show"
+				class="alert alert-success alert-dismissible fade show"
 				role="alert">
-				<strong>Attention ***</strong> There is an issue with account registration right now. I am working hard to find the issue. Until then account registration will not work.<strong>*** Attention</strong>
+				<strong>Attention ***</strong> Registration has been restored, if you are still having issues, send an email to <a href="mailto:support@poe.house">support@poe.house</a> using the email your registered with and I will gladly confirm your account.<strong>*** Attention</strong>
+				<button
+					type="button"
+					class="close"
+					data-dismiss="alert"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>
+		<div class="col-12">
+			<div
+				class="alert alert-warning alert-dismissible fade show"
+				role="alert">
+				I've started getting support on patreon. To show my appreciation, patrons get their usernames displayed differently. Ex:  <span
+					class=" bg-dark"
+					style="color: rgb(249, 104, 84);"> <i class="fab fa-patreon" /> blemming</span> instead of <span class="text-white bg-dark"><i class="fas fa-user"/> blemming</span>
 				<button
 					type="button"
 					class="close"
@@ -401,6 +417,7 @@ export default {
         _id
     }
     user{
+        Donator,
       username,
       _id
     },

@@ -162,7 +162,7 @@
 							href="#comment"
 							role="tab"
 							aria-controls="comment"
-							aria-selected="false">Comments</a>
+							aria-selected="false">Comments ({{ hideout.comments.length }})</a>
 					</li>
 				</ul>
 				<div
@@ -395,9 +395,15 @@
 								<div class="card-footer text-white bg-secondary text-right">
 									By
 									<nuxt-link
-										v-if="comment.user && comment.user.username"
+										v-if="comment.user && comment.user.username && comment.user.Donator"
 										:to="`/user/${comment.user._id}`"
-										class="text-primary"><i class="fas fa-user"/>  {{ comment.user.username }}</nuxt-link>
+										style="color: rgb(249, 104, 84);"><i class="fab fa-patreon" /> {{ comment.user.username }}
+									</nuxt-link>
+									<nuxt-link
+										v-if="comment.user && comment.user.username&& !comment.user.Donator"
+										:to="`/user/${comment.user._id}`"
+										class="text-primary"><i class="fas fa-user"/>  {{ comment.user.username }}
+									</nuxt-link>
 
 									on {{ $moment(comment.createdAt).format(' MMMM Do YYYY') }}
 								</div>
@@ -473,6 +479,7 @@ export default {
     hideoutDoodads,
     comments{
       user{
+          Donator,
         username,
         _id
       },
