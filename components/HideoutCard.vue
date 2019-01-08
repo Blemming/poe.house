@@ -134,7 +134,7 @@
 						:to="`/user/${hideout.user._id}`"><i class="fas fa-user"/> {{ hideout.user.username }}
 					</nuxt-link>
 					<span
-						v-else
+						v-if="!hideout.user"
 						class="text-muted "
 					>{{ hideout.author || 'Anonymous' }}</span>
 				</div>
