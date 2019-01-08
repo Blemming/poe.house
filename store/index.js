@@ -100,7 +100,8 @@ export const actions = {
 		commit('auth/setUser', user);
 		commit('auth/setToken', token);
 
-		const announcements = await this.$axios.$get(`/api/announcements`);
+		let announcements = await this.$axios.$get(`/api/announcements`);
+		announcements = (announcements.length) ? announcements : [null, null];
 		commit('SET_ANNOUNCEMENT', announcements[0]);
 		commit('TOGGLE_ANNOUNCEMENT', showAnnouncement);
 
