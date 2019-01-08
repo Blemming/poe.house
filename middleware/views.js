@@ -11,7 +11,7 @@ export default async function (context) {
 				viewed.push(context.params.id);
 				const views = hideout.views || 0;
 				hideout.views = views + 1;
-				await context.app.$axios.put(`/api/hideouts/${hideout.id}`, hideout);
+				await context.app.$axios.put(`/api/hideouts/${hideout._id}`, hideout);
 				Cookies.set('viewed', viewed);
 			}
 		} else {
@@ -24,7 +24,7 @@ export default async function (context) {
 				viewed.push(context.params.id);
 				const views = hideout.views || 0;
 				hideout.views = views + 1;
-				await context.app.$axios.put(`/api/hideouts/${hideout.id}`, hideout);
+				await context.app.$axios.put(`/api/hideouts/${hideout._id}`, hideout);
 				Cookies.set('viewed', viewed);
 			}
 		}
