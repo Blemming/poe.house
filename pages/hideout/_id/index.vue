@@ -98,7 +98,6 @@
 											:download="`${hideout.nameDescription}.hideout`"
 											:href="downloadLink"
 											class="btn btn-primary"
-											target="_blank"
 											@click="downloaded()">
 											Download
 										</a>
@@ -624,7 +623,7 @@ export default {
 					downloaded.push(this.hideout.hideoutId);
 					const downloads = this.hideout.downloads || 0;
 					this.hideout.downloads = downloads + 1;
-					await this.$axios.put(`/api/hideouts/${this.hideout.id}`, this.hideout);
+					await this.$axios.put(`/api/hideouts/${this.hideout._id}`, this.hideout);
 					Cookies.set('downloaded', downloaded);
 				}
 			} catch (e) {
