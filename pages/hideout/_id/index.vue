@@ -97,9 +97,10 @@
 										<a
 											:download="`${hideout.nameDescription}.hideout`"
 											:href="downloadLink"
+											:class="{'btn-danger':!hideoutFile, 'disabled':!hideoutFile}"
 											class="btn btn-primary"
 											@click="downloaded()">
-											Download
+											<span v-if="hideoutFile">Download</span><span v-else>PASTEBIN NOT VALID</span>
 										</a>
 										<p>
 											<small>Note: You might have to change the file extension to .hideout</small>
@@ -512,15 +513,12 @@ export default {
 			const { data } = await app.$axios.$post(`/api/graphql`, { query });
 			const hideout = data.hideouts[0];
 			if (hideout) {
-				const hideoutLink = await hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
-				const hideoutFile = await app.$axios.$get(hideoutLink);
 				let votes = [];
 				if (store.getters['auth/username']) {
 					votes = hideout.votes.filter(v => v.user._id === store.state.auth.user._id);
 				}
 				return {
 					hideout,
-					hideoutFile: hideoutFile.replace(/\n/g, '\n'),
 					rating: (votes.length > 0) ? votes[0].score : undefined
 				};
 			} else {
@@ -536,6 +534,7 @@ export default {
 	},
 	data () {
 		return {
+			hideoutFile: '',
 			currentComment: '',
 			editorSettings: {
 				placeholder: 'Post a comment',
@@ -598,6 +597,11 @@ export default {
 		downloadLink () {
 			return `data:text/plain;charset=utf-8,${encodeURIComponent(this.hideoutFile)}`;
 		}
+	},
+	async mounted () {
+		const hideoutLink = await this.hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
+		const hideoutFile = await this.$axios.$get(hideoutLink);
+		this.hideoutFile = hideoutFile.replace(/\n/g, '\n');
 	},
 	methods: {
 		strip (html) {
