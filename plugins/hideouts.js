@@ -143,7 +143,7 @@ Vue.prototype.$hideoutObject = ({
 	gallery,
 	hideoutDoodads,
 	hideoutMasters,
-	authorEmail,
+	authorEmail: authorEmail.toLowerCase(),
 	hideoutId: hideoutId || makeid(),
 	downloads,
 	views,

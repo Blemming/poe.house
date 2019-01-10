@@ -14,6 +14,16 @@
 <script>
 import Navbar from '~/components/Navbar';
 export default {
+	head () {
+		return {
+			script: [
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' }
+			],
+			link: [
+				{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Serif' }
+			]
+		};
+	},
 	components: {
 		Navbar
 	}
@@ -21,4 +31,7 @@ export default {
 </script>
 
 <style>
+body{
+    font-family: 'Noto Serif', serif;
+}
 </style>

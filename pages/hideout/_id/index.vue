@@ -3,6 +3,51 @@
 		<div class="col-12">
 			<card-layout :title="hideout.nameDescription">
 				<div
+					v-if="isImgurGallery"
+					class="row">
+					<div class="col-12">
+						<div
+							id="carouselExampleControls"
+							class="carousel border border-dark slide"
+							data-ride="carousel">
+							<div
+								class="carousel-inner bg-dark">
+								<div
+									v-for="(image,index) in imgurGalleryPhotos.data"
+									:key="image.id"
+									:class="(index===0)?'carousel-item active text-center':'carousel-item text-center'"
+								>
+									<img
+
+										:src="image.link"
+										class="img-fluid"
+										alt="Card image cap">
+								</div>
+							</div>
+						</div>
+						<a
+							class="carousel-control-prev text-white"
+							href="#carouselExampleControls"
+							style="background: linear-gradient(to right,rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));"
+							role="button"
+							data-slide="prev">
+							<i class="fas fa-caret-left fa-7x"/>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a
+							class="carousel-control-next"
+							href="#carouselExampleControls"
+							style="background: linear-gradient(to right,rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));"
+							role="button"
+							data-slide="next">
+							<i class="fas fa-caret-right fa-7x"/>
+							<span class="sr-only">Next</span>
+						</a>
+
+					</div>
+				</div>
+				<div
+					v-else
 					class="row">
 					<div class="col-12 mb-5">
 						<img
@@ -55,23 +100,6 @@
 										Total Favor:
 									</th>
 									<td>{{ totalFavorCost }}</td>
-								</tr>
-								<tr
-									v-if="hideout.gallery">
-									<th
-										class="text-center w-25"
-										scope="row">
-										Gallery
-									</th>
-									<td
-										scope="row">
-										<a
-											:href="hideout.gallery || ''"
-											target="_blank">
-											Images
-											<i class="far fa-images"/>
-										</a>
-									</td>
 								</tr>
 								<tr>
 									<th
@@ -512,12 +540,21 @@ export default {
 		try {
 			const { data } = await app.$axios.$post(`/api/graphql`, { query });
 			const hideout = data.hideouts[0];
+			let isImgurGallery = false;
+			let imgurGalleryPhotos = '';
+			if (hideout.gallery && /imgur.com\/a/.test(hideout.gallery)) {
+				isImgurGallery = true;
+				const hideoutGallery = hideout.gallery.replace(/https:\/\/imgur.com\/a\/([a-zA-Z0-9]*)/gi, '$1');
+				imgurGalleryPhotos = await app.$axios.$get(`/imgur/3/album/${hideoutGallery}/images`);
+			}
 			if (hideout) {
 				let votes = [];
 				if (store.getters['auth/username']) {
 					votes = hideout.votes.filter(v => v.user._id === store.state.auth.user._id);
 				}
 				return {
+					isImgurGallery,
+					imgurGalleryPhotos,
 					hideout,
 					rating: (votes.length > 0) ? votes[0].score : undefined
 				};
@@ -599,9 +636,13 @@ export default {
 		}
 	},
 	async mounted () {
-		const hideoutLink = await this.hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
-		const hideoutFile = await this.$axios.$get(hideoutLink);
-		this.hideoutFile = hideoutFile.replace(/\n/g, '\n');
+		try {
+			const hideoutLink = this.hideout.hideoutFileLink.replace(/https:\/\/pastebin.com\//gi, '/raw/');
+			const hideoutFile = await this.$axios.$get(hideoutLink);
+			this.hideoutFile = hideoutFile.replace(/\n/g, '\n');
+		} catch (e) {
+			console.log(e);
+		}
 	},
 	methods: {
 		strip (html) {

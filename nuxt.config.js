@@ -75,7 +75,7 @@ module.exports = {
   */
 	axios: {
 		proxy: true,
-		proxyHeaders: false
+		proxyHeaders: true
 	},
 	proxy: [
 		['/api', {
@@ -85,8 +85,9 @@ module.exports = {
 			}
 		}],
 		['/imgur', {
-			target: 'https://i.imgur.com',
-			changeOrigin: true,
+			target: 'https://api.imgur.com',
+			preserveHeaderKeyCase: true,
+			headers: { 'Authorization': `Client-ID ${apiConfig.imgurKey}` },
 			pathRewrite: {
 				'^/imgur': '/'
 			}

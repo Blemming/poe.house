@@ -56,8 +56,18 @@
 										<div class="carousel-caption d-none d-md-block">
 											<nuxt-link :to="`/hideout/${hideout.hideoutId}`">
 												<h2 class="display-4 mb-0">{{ hideout.nameDescription }}</h2>
-												<p class="text-white mt-0">{{ hideout.views }} <i class="fas fa-eye pr-3"/>   {{ hideout.downloads }} <i class="fas fa-file-download pr-3"/> {{ hideout.comments.length }} <i class="fas fa-comments"/></p>
-												<p>by {{ hideout.author || 'anonymous' }}</p>
+												<p class="text-white my-0">
+													{{ hideout.views }} <i class="fas fa-eye pr-3"/>   {{ hideout.downloads }} <i class="fas fa-file-download pr-3"/> {{ hideout.comments.length }} <i class="fas fa-comments pr-5"/></p>
+
+												<p class="mt-0">
+													<i
+														v-if="hideout.gallery"
+														class="fas fa-images text-primary pr-2"/>
+													<i
+														v-if="hideout.hideoutVideo"
+														class="fas fa-video text-primary"/>
+												</p>
+												<p class="mt-0">by {{ hideout.author || 'anonymous' }}</p>
 											</nuxt-link>
 										</div>
 										<div class="carousel-caption d-block d-md-none">
@@ -389,6 +399,8 @@ export default {
     hideoutType,
     nameDescription,
     views,
+    gallery,
+    hideoutVideo,
     hideoutDateSubmit,
     hideoutDescription,
     hideoutDoodads,
