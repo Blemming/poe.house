@@ -35,23 +35,23 @@
 
 <template>
 	<div class="card hideout-card bg-secondary">
-		<div class="card-header text-white">
-			<div class="row">
-				<div class="col-6">
-					<i
-						v-if="hideout.gallery"
-						class="fas fa-images text-primary pr-2"/>
-					<i
-						v-if="hideout.hideoutVideo"
-						class="fas fa-video text-primary"/>
-				</div>
-				<div class="col-6 text-right">
-					{{ hideout.views }} <i class="fas fa-eye pr-2"/> {{ hideout.downloads }} <i class="fas fa-file-download pr-2"/> {{ hideout.comments.length }} <i class="fas fa-comments"/>
-				</div>
-			</div>
-		</div>
 		<nuxt-link
 			:to="`/hideout/${hideout.hideoutId}`">
+			<div class="card-header text-white">
+				<div class="row">
+					<div class="col-6">
+						<i
+							v-if="hideout.gallery"
+							class="fas fa-images text-primary pr-2"/>
+						<i
+							v-if="hideout.hideoutVideo"
+							class="fas fa-video text-primary"/>
+					</div>
+					<div class="col-6 text-right">
+						{{ hideout.views }} <i class="fas fa-eye pr-2"/> {{ hideout.downloads }} <i class="fas fa-file-download pr-2"/> {{ hideout.comments.length }} <i class="fas fa-comments"/>
+					</div>
+				</div>
+			</div>
 			<div
 				class="image-container">
 				<img
@@ -60,38 +60,20 @@
 					class="card-img-top"
 					alt="Card image cap">
 				<div class="card-subheader">
-					<h4 class="text-white">{{ hideout.nameDescription }}</h4>
+					<h4 class="text-white text-capitalize">{{ hideout.nameDescription }}</h4>
 				</div>
 			</div>
 
 		</nuxt-link>
 		<div class="card-body">
 			<div class="row">
-				<div class="col-12">
+				<div
+					class="col-12">
 					<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
 						<tbody>
 							<tr>
 								<th scope="row">Type</th>
 								<td class="text-white"><strong>{{ getHideout(hideout.hideoutType) }}</strong></td>
-							</tr>
-							<tr>
-								<th scope="row">Favour Required</th>
-								<td class="text-white"><strong>{{ $favorCost(hideout.hideoutDoodads) }}</strong></td>
-							</tr>
-							<tr>
-								<th scope="row">Decorations</th>
-								<td class="text-white"><strong>{{ hideout.hideoutDoodads.length }}</strong></td>
-							</tr>
-
-							<tr>
-								<th
-									scope="row">
-									Gallery
-								</th>
-								<td class="text-white">
-									<span v-if="hideout.gallery">Yes</span>
-									<span v-else>No</span>
-								</td>
 							</tr>
 							<tr>
 								<th scope="row">Rating</th>
@@ -115,13 +97,32 @@
 								</td>
 							</tr>
 							<tr>
+								<th scope="row">Favour required</th>
+								<td class="text-white"><strong>{{ $favorCost(hideout.hideoutDoodads) }}</strong></td>
+							</tr>
+							<tr>
+								<th scope="row">Unique decorations</th>
+								<td class="text-white"><strong>{{ hideout.hideoutDoodads.length }}</strong></td>
+							</tr>
+
+							<tr>
+								<th
+									scope="row">
+									Gallery
+								</th>
+								<td class="text-white">
+									<span v-if="hideout.gallery">Yes</span>
+									<span v-else>No</span>
+								</td>
+							</tr>
+							<tr>
 								<th scope="row">Masters:</th>
 								<td>
 									<div class="row">
-										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Alva'] }}</strong><br>Alva</div>
-										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Einhar'] }}</strong><br>Einhar</div>
-										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Niko'] }}</strong><br>Niko</div>
-										<div class="col"><strong class="text-white">{{ hideout.hideoutMasters['Zana'] }}</strong><br>Zana</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Alva'] }}</strong><br>Alva</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Einhar'] }}</strong><br>Einhar</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Niko'] }}</strong><br>Niko</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Zana'] }}</strong><br>Zana</div>
 									</div>
 								</td>
 							</tr>

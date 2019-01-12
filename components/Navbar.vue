@@ -100,6 +100,16 @@
 									Support with Paypal
 								</small>
 							</a>
+							<a
+								class="dropdown-item text-white"
+								target="_blank"
+								href="https://m.do.co/c/015a65653606">
+								<i
+									class="fab fa-digital-ocean"/>
+								<small>
+									Use my Digital Ocean Referral
+								</small>
+							</a>
 						</div>
 					</li>
 				</ul>

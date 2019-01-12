@@ -339,7 +339,7 @@
 					<div
 						v-for="(hideout,index) in filteredHideouts"
 						:key="index"
-						class="col-xs-12 col-lg-4 my-2">
+						class="col-xs-12 col-lg-6 col-xl-4 my-2">
 						<hideout-card :hideout="hideout"/>
 					</div>
 
