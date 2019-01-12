@@ -413,7 +413,11 @@ export default {
       _id
     },
     votes{
-      score
+        _id,
+      score,
+      user{
+          _id
+      }
     }
   }
 }
@@ -455,7 +459,7 @@ export default {
 			const startofweek = this.$moment().startOf('week').subtract(1, 'day').unix();
 			let results = this.hideouts;
 			results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek && !!ho.hideoutScreenshot);
-			results = results.map(ho => ({ ...ho, scale: this.$getRatingScale(ho, this.$calculateVotes(ho.votes)) }));
+			results = results.map(ho => ({ ...ho, scale: this.$getRatingScale(ho, this.$calculateVotes(ho.votes, ho.user)) }));
 			results = orderBy(results, (ho) => ho.scale, 'desc');
 			results = take(results, 5);
 			return results;
@@ -475,7 +479,7 @@ export default {
 				results = results.filter(hideout => hideout.hideoutMasters['mtx'] === this.mtx);
 			}
 			if (this.atleastRating !== '') {
-				results = results.filter(hideout => this.$calculateVotes(hideout.votes) >= this.atleastRating);
+				results = results.filter(hideout => this.$calculateVotes(hideout.votes, hideout.user) >= this.atleastRating);
 			}
 			if (this.Alva) {
 				results = results.filter(hideout => hideout.hideoutMasters['Alva'] <= this.Alva);
@@ -497,7 +501,7 @@ export default {
 					results = orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'asc');
 				}
 				if (this.sort === 'ratings') {
-					results = orderBy(results, (ho) => this.$calculateVotes(ho.votes), 'desc');
+					results = orderBy(results, (ho) => this.$calculateVotes(ho.votes, ho.user), 'desc');
 				}
 				results = orderBy(results, (ho) => ho[this.sort], 'desc');
 			} else {

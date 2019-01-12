@@ -56,7 +56,7 @@
 				class="image-container">
 				<img
 					:src="$getThumbnail(getImage(hideout))"
-					style="min-height:272px;object-fit:cover;"
+					style="height:272px;object-fit:cover;"
 					class="card-img-top"
 					alt="Card image cap">
 				<div class="card-subheader">
@@ -71,7 +71,7 @@
 					<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
 						<tbody>
 							<tr>
-								<th scope="row">Hideout</th>
+								<th scope="row">Type</th>
 								<td class="text-white"><strong>{{ getHideout(hideout.hideoutType) }}</strong></td>
 							</tr>
 							<tr>
@@ -98,7 +98,7 @@
 								<td class="text-white">
 									<image-rating
 										v-if="hideout.votes.length > 0"
-										:rating="$calculateVotes(hideout.votes)"
+										:rating="$calculateVotes(hideout.votes,hideout.user)"
 										:read-only="true"
 										:src="require('~/assets/images/Exalted_Orb.png')"
 										:increment="0.25"

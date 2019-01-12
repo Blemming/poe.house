@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import remove from 'lodash/remove';
 import uniqBy from 'lodash/uniqBy';
 import meanBy from 'lodash/meanBy';
 import includes from 'lodash/includes';
@@ -30,8 +31,17 @@ Vue.prototype.$getThumbnail = (imgLink) => {
 	}
 	return imgLink;
 };
-Vue.prototype.$calculateVotes = (votes = []) => {
-	return meanBy(votes, (v) => v.score) || 0;
+Vue.prototype.$calculateVotes = (votes = [], user = {}) => {
+	user = (user === null) ? {} : user;
+	const tempVotes = [...votes];
+	if (user._id) {
+		remove(tempVotes, {
+			user: {
+				_id: user._id
+			}
+		});
+	}
+	return meanBy(tempVotes, (v) => v.score) || 0;
 };
 Vue.prototype.$favorCost = (doodads = []) => {
 	let costs = 0;
