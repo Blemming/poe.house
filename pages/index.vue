@@ -340,7 +340,10 @@
 						v-for="(hideout,index) in filteredHideouts"
 						:key="index"
 						class="col-xs-12 col-lg-6 col-xl-4 my-2">
-						<hideout-card :hideout="hideout"/>
+						<no-ssr>
+							<hideout-card-placeholder slot="placeholder"/>
+							<hideout-card :hideout="hideout"/>
+						</no-ssr>
 					</div>
 
 					<div class="col-12 col-lg-12 d-flex justify-content-end mt-3">
@@ -376,6 +379,7 @@
 <script>
 import CardLayout from '~/components/CardLayout.vue';
 import HideoutCard from '~/components/HideoutCard.vue';
+import HideoutCardPlaceholder from '~/components/HideoutCardPlaceholder.vue';
 
 import orderBy from 'lodash/orderBy';
 import chunk from 'lodash/chunk';
@@ -435,6 +439,7 @@ export default {
 	},
 	components: {
 		CardLayout,
+		HideoutCardPlaceholder,
 		HideoutCard
 	},
 	data () {
