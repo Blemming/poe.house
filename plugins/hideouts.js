@@ -43,14 +43,23 @@ Vue.prototype.$calculateVotes = (votes = [], user = {}) => {
 	}
 	return meanBy(tempVotes, (v) => v.score) || 0;
 };
-Vue.prototype.$favorCost = (doodads = []) => {
+Vue.prototype.$favorCost = (costs) => {
+	// let costs = 0;
+	// doodads = doodads || [];
+	// doodads.forEach(doodad => {
+	// 	const cost = doodad.Count * parseInt(doodad.Cost);
+	// 	costs += cost;
+	// });
+	return costs.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+Vue.prototype.$favorCostNotString = (doodads = []) => {
 	let costs = 0;
 	doodads = doodads || [];
 	doodads.forEach(doodad => {
 		const cost = doodad.Count * parseInt(doodad.Cost);
 		costs += cost;
 	});
-	return costs.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return costs;
 };
 Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = []) => {
 	const doodads = [];
@@ -138,8 +147,11 @@ Vue.prototype.$hideoutObject = ({
 	hideoutId = '',
 	authorEmail = '',
 	hideoutDateSubmit = '',
+	uniqueDecorations = 0,
+	decorationsCost = 0,
 	hideoutDoodads = [],
 	hideoutMasters = [],
+	dateSubmitted = 0,
 	poeVersion = '3.5.1'
 } = {}) => ({
 	author,
@@ -150,6 +162,9 @@ Vue.prototype.$hideoutObject = ({
 	hideoutDescription,
 	hideoutScreenshot,
 	hideoutVideo,
+	dateSubmitted,
+	uniqueDecorations,
+	decorationsCost,
 	gallery,
 	hideoutDoodads,
 	hideoutMasters,

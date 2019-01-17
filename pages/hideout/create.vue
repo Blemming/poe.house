@@ -438,6 +438,9 @@ export default {
 						hideoutVideo: this.hideoutVideo,
 						hideoutDoodads: this.getHideoutDoodads,
 						gallery: this.gallery,
+						decorationsCost: this.$favorCostNotString(this.getHideoutDoodads),
+						uniqueDecorations: this.getHideoutDoodads.length,
+						dateSubmitted: this.$moment().toDate(),
 						hideoutMasters: this.masterMaxLevel,
 						user: this.$store.state.auth.user || null,
 						poeVersion: this.poeVersion

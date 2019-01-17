@@ -401,13 +401,15 @@ export default {
     hideoutMasters,
     hideoutScreenshot,
     hideoutType,
+    decorationsCost,
+    uniqueDecorations,
     nameDescription,
     views,
     gallery,
     hideoutVideo,
     hideoutDateSubmit,
     hideoutDescription,
-    hideoutDoodads,
+    dateSubmitted,
     comments{
         _id
     }

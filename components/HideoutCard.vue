@@ -98,11 +98,11 @@
 							</tr>
 							<tr>
 								<th scope="row">Favour required</th>
-								<td class="text-white"><strong>{{ $favorCost(hideout.hideoutDoodads) }}</strong></td>
+								<td class="text-white"><strong>{{ $favorCost(hideout.decorationsCost) }}</strong></td>
 							</tr>
 							<tr>
 								<th scope="row">Unique decorations</th>
-								<td class="text-white"><strong>{{ hideout.hideoutDoodads.length }}</strong></td>
+								<td class="text-white"><strong>{{ hideout.uniqueDecorations }}</strong></td>
 							</tr>
 
 							<tr>
@@ -150,7 +150,7 @@
 		<div class="card-footer">
 			<div class="row justify-content-between">
 				<div class="col">
-					<small class="text-muted ">{{ $moment.unix(hideout.hideoutDateSubmit.seconds).format(' MMMM Do YYYY') }}</small>
+					<small class="text-muted ">{{ $moment(hideout.dateSubmitted).format(' MMMM Do YYYY') }}</small>
 				</div>
 				<div class="col text-right">
 					<small class="text-muted ">
