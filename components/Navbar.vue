@@ -79,7 +79,8 @@
 							<a
 								class="dropdown-item text-danger"
 								target="_blank"
-								href="https://www.patreon.com/blemming">
+								href="https://www.patreon.com/blemming"
+								@click="logClick('patreon')">
 								<i
 									style="color:#f96854;"
 									class="fab fa-patreon"/>
@@ -91,7 +92,8 @@
 							<a
 								class="dropdown-item text-danger"
 								target="_blank"
-								href="https://www.paypal.me/bluelemming">
+								href="https://www.paypal.me/bluelemming"
+								@click="logClick('paypal')">
 								<i
 									style="color:#3b7bbf;"
 									class="fab fa-paypal"/>
@@ -103,7 +105,8 @@
 							<a
 								class="dropdown-item text-white"
 								target="_blank"
-								href="https://m.do.co/c/015a65653606">
+								href="https://m.do.co/c/015a65653606"
+								@click="logClick('digitalocean')">
 								<i
 									class="fab fa-digital-ocean"/>
 								<small>
@@ -284,6 +287,12 @@ export default {
 		logout () {
 			this.$router.push('/');
 			this.$store.dispatch('auth/logoutUser');
+		},
+		logClick (type) {
+			this.$ga.event({
+				eventCategory: 'click',
+				eventAction: `${type}`
+			});
 		}
 	}
 };
