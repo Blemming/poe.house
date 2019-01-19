@@ -116,85 +116,88 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="navbar-nav ml-auto ">
-					<li
-						v-for="item in rightNavbarOptions"
-						:key="item.title"
-						:class="(item.dropdownItems)?'nav-item dropdown':'nav-item'">
-						<nuxt-link
-							v-if="!item.dropdownItems"
-							:to="item.url"
-							class="nav-link" >
-							{{ item.description }}
-						</nuxt-link>
+				<no-ssr>
 
-						<a
-							v-if="item.dropdownItems"
-							:id="`navbar${item.title}`"
-							class="nav-link dropdown-toggle"
-							href="#"
-							role="button"
-							data-toggle="dropdown"
-							aria-haspopup="true"
-							aria-expanded="false">
-							{{ item.description }}
-						</a>
-						<div
-							v-if="item.dropdownItems"
-							class="dropdown-menu bg-secondary dropdown-primary"
-							aria-labelledby="navbarDropdown">
+					<ul class="navbar-nav ml-auto ">
+						<li
+							v-for="item in rightNavbarOptions"
+							:key="item.title"
+							:class="(item.dropdownItems)?'nav-item dropdown':'nav-item'">
 							<nuxt-link
-								v-for="(dropdownItem,index) in item.dropdownItems"
-								:key="index"
-								:to="dropdownItem.url"
-								class="dropdown-item"
-								v-html="dropdownItem.description"/>
-						</div>
-					</li>
-					<li
-						v-if="$store.getters['auth/username'] "
-						class="nav-item dropdown">
-						<a
-							:id="`navbar-support`"
-							class="nav-link dropdown-toggle"
-							href="#"
-							role="button"
-							data-toggle="dropdown"
-							aria-haspopup="true"
-							aria-expanded="false">
-							<span
-								v-if="$store.state.auth.user.Donator"
-								style="color: rgb(255, 108, 0);"><img
-									style="max-height:1rem;"
-									src="/images/Chaos_Orb.png"
-									alt=""> {{ $store.getters['auth/username'] }} </span>
-							<span v-else>
-								{{ $store.getters['auth/username'] }}
-							</span>
+								v-if="!item.dropdownItems"
+								:to="item.url"
+								class="nav-link" >
+								{{ item.description }}
+							</nuxt-link>
+
+							<a
+								v-if="item.dropdownItems"
+								:id="`navbar${item.title}`"
+								class="nav-link dropdown-toggle"
+								href="#"
+								role="button"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">
+								{{ item.description }}
+							</a>
+							<div
+								v-if="item.dropdownItems"
+								class="dropdown-menu bg-secondary dropdown-primary"
+								aria-labelledby="navbarDropdown">
+								<nuxt-link
+									v-for="(dropdownItem,index) in item.dropdownItems"
+									:key="index"
+									:to="dropdownItem.url"
+									class="dropdown-item"
+									v-html="dropdownItem.description"/>
+							</div>
+						</li>
+						<li
+							v-if="$store.getters['auth/username'] "
+							class="nav-item dropdown">
+							<a
+								:id="`navbar-support`"
+								class="nav-link dropdown-toggle"
+								href="#"
+								role="button"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false">
+								<span
+									v-if="$store.state.auth.user.Donator"
+									style="color: rgb(255, 108, 0);"><img
+										style="max-height:1rem;"
+										src="/images/Chaos_Orb.png"
+										alt=""> {{ $store.getters['auth/username'] }} </span>
+								<span v-else>
+									{{ $store.getters['auth/username'] }}
+								</span>
 
 							<!-- <span class="badge badge-dark border border-primary ml-1">{{ $store.getters['auth/unreadComments'].length }}</span> -->
-						</a>
-						<div
-							class="dropdown-menu bg-secondary dropdown-primary"
-							aria-labelledby="navbarDropdown">
-							<nuxt-link
-								class="dropdown-item text-white"
-								to="/user">
-								Hideouts
-							</nuxt-link>
-							<div
-								v-if="$store.state.auth.user.confirmed"
-								class="dropdown-divider border-top border-dark"/>
-							<a
-								v-if="$store.state.auth.user.confirmed"
-								class="dropdown-item"
-								href="/"
-								@click.prevent="logout()">
-								Logout <i class="fas fa-sign-out-alt"/>
 							</a>
-						</div>
-					</li>
-				</ul>
+							<div
+								class="dropdown-menu bg-secondary dropdown-primary"
+								aria-labelledby="navbarDropdown">
+								<nuxt-link
+									class="dropdown-item text-white"
+									to="/user">
+									Hideouts
+								</nuxt-link>
+								<div
+									v-if="$store.state.auth.user.confirmed"
+									class="dropdown-divider border-top border-dark"/>
+								<a
+									v-if="$store.state.auth.user.confirmed"
+									class="dropdown-item"
+									href="/"
+									@click.prevent="logout()">
+									Logout <i class="fas fa-sign-out-alt"/>
+								</a>
+							</div>
+						</li>
+					</ul>
+				</no-ssr>
 				<div
 					class="form-inline ml-5 my-2 my-lg-0">
 					<nuxt-link
