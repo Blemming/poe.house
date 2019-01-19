@@ -513,6 +513,7 @@ export default {
     nameDescription,
     views,
     hideoutDateSubmit,
+    decorationsCost,
     hideoutDescription,
     hideoutDoodads,
     comments{
