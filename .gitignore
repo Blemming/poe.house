@@ -83,3 +83,7 @@ dist
 # Private Stuff
 .firebase.json
 .api.json
+
+# data processing
+
+data-processing.vue

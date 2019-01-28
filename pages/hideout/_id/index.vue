@@ -99,7 +99,7 @@
 										scope="row">
 										Total Favor:
 									</th>
-									<td>{{ hideout.decorationsCost }}</td>
+									<td>{{ $favorCost(hideout.decorationsCost) }}</td>
 								</tr>
 								<tr>
 									<th
