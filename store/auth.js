@@ -169,7 +169,7 @@ export const mutations = {
 		Cookies.set('token', token);
 	},
 	logout (state) {
-		state.user = null;
+		state.user = {};
 		state.token = '';
 		Cookies.remove('user');
 		Cookies.remove('token');
@@ -248,6 +248,12 @@ export const actions = {
 export const getters = {
 	username: state => {
 		return state.user && state.user.username;
+	},
+	role: state => {
+		if (state.user && state.user.role) {
+			return state.user.role.name;
+		}
+		return null;
 	}
 	// unreadComments: state => {
 	// 	const userHideouts = testData.hideouts;

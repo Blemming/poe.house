@@ -143,6 +143,13 @@
 					<nuxt-link
 						:to="`/hideout/${hideout.hideoutId}`"
 						class="btn btn-primary border border-dark text-dark">Details</nuxt-link>
+					<div v-if="$store.getters['auth/role']">
+						<nuxt-link
+							v-if="$store.getters['auth/role'] === 'Administrator'"
+							:to="`/hideout/${hideout.hideoutId}/edit`"
+							class="btn btn-danger border border-dark text-dark">Edit</nuxt-link>
+
+					</div>
 
 				</div>
 			</div>

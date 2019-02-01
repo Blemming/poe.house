@@ -302,7 +302,7 @@ export default {
 			const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
 			const hideout = hideouts[0];
 			if (hideout.user) {
-				if (hideout.user.username === context.store.getters['auth/username']) {
+				if (hideout.user.username === context.store.getters['auth/username'] || context.store.getters['auth/role'] === 'Administrator') {
 					return {
 						hideout,
 						hideoutImage: hideout.hideoutScreenshot || context.store.getters.getHideout(hideout.hideoutType)['Icon'],
@@ -415,6 +415,10 @@ export default {
 			if (!this.error && !this.pastebinError) {
 				this.status = 'submitting';
 				this.$refs.recaptcha.reset();
+				let user = this.$store.state.auth.user;
+				if (this.$store.state.auth.user.role.name === 'Administrator') {
+					user = this.hideout.user;
+				}
 				try {
 					const newHideout = this.$hideoutObject({
 						author: this.hideout.author,
@@ -435,7 +439,7 @@ export default {
 						hideoutDoodads: this.getHideoutDoodads,
 						gallery: this.hideout.gallery,
 						hideoutMasters: this.masterMaxLevel,
-						user: this.$store.state.auth.user || null,
+						user: user || null,
 						poeVersion: this.poeVersion
 					});
 					await this.$axios.put(`/api/hideouts/${this.hideout._id}`, newHideout);

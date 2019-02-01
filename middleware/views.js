@@ -6,7 +6,8 @@ export default async function (context) {
 		const hideouts = await context.app.$axios.$get(`/api/hideouts?hideoutId=${context.params.id}`);
 		const hideout = hideouts[0];
 		if (!process.server) {
-			const viewed = JSON.parse(Cookies.get('viewed') || '[]');
+			let viewed = [];
+			viewed = JSON.parse(Cookies.get('viewed')) || viewed;
 			if (viewed.indexOf(context.params.id) === -1) {
 				viewed.push(context.params.id);
 				const views = hideout.views || 0;
