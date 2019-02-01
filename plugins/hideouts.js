@@ -62,22 +62,27 @@ Vue.prototype.$favorCostNotString = (doodads = []) => {
 	return costs;
 };
 Vue.prototype.$getDoodadsFromHideout = (allDoodads = [], hideoutObjectDoodads = []) => {
-	const doodads = [];
-	for (const doodad of hideoutObjectDoodads) {
-		const found = allDoodads.filter(doo => parseInt(doo['Hash']) === parseInt(doodad['Hash']))[0];
-		if (found) {
-			doodads.push(found);
+	if (hideoutObjectDoodads[0].Count) {
+		return hideoutObjectDoodads;
+	} else {
+		const doodads = [];
+		for (const doodad of hideoutObjectDoodads) {
+			const found = allDoodads.filter(doo => parseInt(doo['Hash']) === parseInt(doodad['Hash']))[0];
+			if (found) {
+				doodads.push(found);
+			}
 		}
-	}
-	const uniqDoodads = uniqBy(doodads, 'Hash');
+		const uniqDoodads = uniqBy(doodads, 'Hash');
 
-	return uniqDoodads.map((doo) => {
-		const numberOfCopies = doodads.filter(doodad => doodad['Hash'] === doo['Hash']).length;
-		return {
-			...doo,
-			'Count': numberOfCopies
-		};
-	});
+		return uniqDoodads.map((doo) => {
+			const numberOfCopies = doodads.filter(doodad => doodad['Hash'] === doo['Hash']).length;
+
+			return {
+				...doo,
+				'Count': doo.Count || numberOfCopies
+			};
+		});
+	}
 };
 const _getMTX = (doodads) => {
 	const nonMtxDoodads = [
