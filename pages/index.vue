@@ -301,6 +301,12 @@
 								<option value="date-new">
 									Oldest
 								</option>
+								<option value="favour-desc">
+									Favour cost highest
+								</option>
+								<option value="favour-asc">
+									Favour cost lowest
+								</option>
 							</select>
 						</div>
 						<div class="form-group form-inline">
@@ -514,6 +520,12 @@ export default {
 				results = results.filter(hideout => hideout.hideoutMasters['Zana'] <= this.Zana);
 			}
 			if (this.sort) {
+				if (this.sort === 'favour-desc') {
+					results = orderBy(results, (ho) => ho.decorationsCost, 'desc');
+				}
+				if (this.sort === 'favour-asc') {
+					results = orderBy(results, (ho) => ho.decorationsCost, 'asc');
+				}
 				if (this.sort === 'date-old') {
 					results = orderBy(results, (ho) => ho.hideoutDateSubmit.seconds, 'desc');
 				}
