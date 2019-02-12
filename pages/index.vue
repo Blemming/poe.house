@@ -29,8 +29,12 @@
 		<div class="col-12 my-5">
 			<card-layout
 				title="PoE.house">
-				<div class="row mb-5">
-					<div class="col-12">
+				<div
+					v-if="!loading"
+					class="row mb-5">
+					<div
+						style="min-height:350px;"
+						class="col-12">
 						<h4 class="text-center text-white bg-dark border border-dark m-0 pt-2 lead">Hideouts of the week</h4>
 						<p class="text-center text-white bg-dark border border-dark m-0 py-0 lead"><small>Encourage people to vote to get your hideout here</small>   </p>
 						<div
@@ -51,7 +55,7 @@
 										<img
 
 											:src="hideout.hideoutScreenshot"
-											style="max-height:300px; object-fit:cover; filter: blur(2px);"
+											style="min-height:300px;max-height:300px; object-fit:cover; filter: blur(2px);"
 											alt="Card image cap">
 										<div class="carousel-caption d-none d-md-block">
 											<nuxt-link :to="`/hideout/${hideout.hideoutId}`">
@@ -366,6 +370,14 @@
 					</div>
 				</div>
 				<div
+					v-else-if="loading"
+					class="row bg-dark py-3">
+					<div class="col-12 text-center py-4">
+						<i class="fas fa-cog fa-spin fa-10x"/>
+						<h2 class="mt-3">... Loading hideouts ...</h2>
+					</div>
+				</div>
+				<div
 					v-else
 					class="row bg-dark py-3">
 					<div class="col-12">
@@ -389,49 +401,49 @@ export default {
 	scrollTop: false,
 	async asyncData (context) {
 		try {
-			const query = `
-            query{
-  hideouts(limit:9000, where:{
-                isDeleted_ne:true
-     }){
-    author,
-    downloads,
-    hideoutFileLink,
-    hideoutId,
-    hideoutMasters,
-    hideoutScreenshot,
-    hideoutType,
-    decorationsCost,
-    uniqueDecorations,
-    nameDescription,
-    views,
-    gallery,
-    hideoutVideo,
-    hideoutDateSubmit,
-    hideoutDescription,
-    dateSubmitted,
-    comments{
-        _id
-    }
-    user{
-        Donator,
-      username,
-      _id
-    },
-    votes{
-        _id,
-      score,
-      user{
-          _id
-      }
-    }
-  }
-}
-            `;
-			const { data } = await context.app.$axios.$post('/api/graphql', { query });
+			// 			const query = `
+			//             query{
+			//   hideouts(limit:9000, where:{
+			//                 isDeleted_ne:true
+			//      }){
+			//     author,
+			//     downloads,
+			//     hideoutFileLink,
+			//     hideoutId,
+			//     hideoutMasters,
+			//     hideoutScreenshot,
+			//     hideoutType,
+			//     decorationsCost,
+			//     uniqueDecorations,
+			//     nameDescription,
+			//     views,
+			//     gallery,
+			//     hideoutVideo,
+			//     hideoutDateSubmit,
+			//     hideoutDescription,
+			//     dateSubmitted,
+			//     comments{
+			//         _id
+			//     }
+			//     user{
+			//         Donator,
+			//       username,
+			//       _id
+			//     },
+			//     votes{
+			//         _id,
+			//       score,
+			//       user{
+			//           _id
+			//       }
+			//     }
+			//   }
+			// }
+			//             `;
+			// const { data } = await context.app.$axios.$post('/api/graphql', { query });
 			const confirmed = context.query.confirmed;
 			return {
-				hideouts: data.hideouts,
+				// hideouts: data.hideouts,
 				filtersOpened: false,
 				confirmed
 			};
@@ -447,6 +459,7 @@ export default {
 	data () {
 		return {
 			levels: [1, 2, 3, 4, 5, 6, 7],
+			loading: false,
 			hideouts: [],
 			currentPage: this.$store.state.pageControls.currentPage,
 			searchQuery: '',
@@ -548,6 +561,56 @@ export default {
 		},
 		'Zana' (val) {
 			this.$store.commit('SET_FILTER_OBJECT', { filter: 'mtx', choice: val });
+		}
+	},
+	async created () {
+		try {
+			const query = `
+            query{
+  hideouts(limit:9000, where:{
+                isDeleted_ne:true
+     }){
+    author,
+    downloads,
+    hideoutFileLink,
+    hideoutId,
+    hideoutMasters,
+    hideoutScreenshot,
+    hideoutType,
+    decorationsCost,
+    uniqueDecorations,
+    nameDescription,
+    views,
+    gallery,
+    hideoutVideo,
+    hideoutDateSubmit,
+    hideoutDescription,
+    dateSubmitted,
+    comments{
+        _id
+    }
+    user{
+        Donator,
+      username,
+      _id
+    },
+    votes{
+        _id,
+      score,
+      user{
+          _id
+      }
+    }
+  }
+}
+            `;
+			this.loading = true;
+			const { data } = await this.$axios.$post('/api/graphql', { query });
+			this.hideouts = data.hideouts;
+
+			this.loading = false;
+		} catch (e) {
+			console.log(e);
 		}
 	},
 	methods: {
