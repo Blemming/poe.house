@@ -2,13 +2,13 @@
 	<div class="card text-primary bg-secondary border border-primary">
 		<div class="card-header border-bottom border-dark text-white text-center">
 			<h2
-				v-if="title === 'PoE.house'"
+				v-if="title === 'PoE.house' ||title === 'Community Hideout Contest' "
 				class="main-title display-3 font-cinzel">{{ title }}</h2>
 			<h2
 				v-else
 				class="title display-4 ">{{ title }}</h2>
 		</div>
-		<div class="card-body">
+		<div class="card-body  p-relative">
 			<slot/>
 		</div>
 		<div class="card-footer d-flex justify-content-between">

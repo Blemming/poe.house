@@ -35,7 +35,7 @@
 						<nuxt-link
 							v-if="!item.dropdownItems"
 							:to="item.url"
-							class="nav-link" >
+							class="nav-link border border-primary" >
 							{{ item.description }}
 						</nuxt-link>
 
@@ -232,13 +232,13 @@ export default {
 	computed: {
 		navbarOptions () {
 			return [
-				// {
-				// 	title: 'about',
-				// 	dropdownItems: false,
-				// 	description: 'About',
-				// 	url: '/about',
-				// 	target: false
-				// }
+				{
+					title: 'contest',
+					dropdownItems: false,
+					description: 'Community Hideout Contest',
+					url: '/contest',
+					target: false
+				}
 			];
 		},
 		rightNavbarOptions () {

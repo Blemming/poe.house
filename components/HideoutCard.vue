@@ -8,7 +8,7 @@
     height: 80px;
     width: 100%;
     position: absolute;
-    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    background: linear-gradient(rgb(49, 47, 47), rgba(0, 0, 0, 0));
     border-bottom: 0px;
   }
   .image-container {

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 export default (ctx, inject) => {
 	moment.locale('en-us');

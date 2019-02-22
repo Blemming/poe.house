@@ -2,6 +2,35 @@
 .modal-dialog, .modal-header{
     border-radius:0px!important;
 }
+// .card-header {
+//     z-index: 3;
+//     top: 0px;
+//     left: 0px;
+//     height: 80px;
+//     width: 100%;
+//     position: absolute;
+//     background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+//     border-bottom: 0px;
+//   }
+//   .image-container {
+//     z-index: 1;
+//     position: relative;
+//     .card-subheader {
+//       bottom: 0px;
+//       text-align: center;
+//       width: 100%;
+//       background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+//       position: absolute;
+//       h3{
+//           padding-top:40px;
+//   text-shadow:
+//    -1px -1px 0 #000,
+//     1px -1px 0 #000,
+//     -1px 1px 0 #000,
+//      1px 1px 0 #000;
+//       }
+//     }
+//   }
 </style>
 
 <template>
@@ -11,7 +40,7 @@
 				title="Add Hideout">
 				<form @submit.prevent="submitHideout()">
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-6 ">
 							<label for="inputTitle">Title</label>
 							<input
 								v-validate="'required|max:150'"
@@ -93,18 +122,36 @@
 							</div>
 						</div>
 
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-12 p-relative">
 							<h4
 								class="text-white"
 								for="inputHideout">Thumbnail</h4><br>
-							<img
-								v-if="!imgurGallery"
-								id="inputHideout"
-								:src="displayedImage"
-								class="img-fluid"
-								alt="">
+							<div
+								class="image-container">
+								<img
+									v-if="!imgurGallery"
+									id="inputHideout"
+									:src="$getThumbnail(displayedImage)"
+									style="height: 272px; object-fit: cover;"
+									class="img-fluid"
+									alt="">
+								<div class="card-subheader">
+									<!-- <h4 class="text-white text-capitalize">{{ nameDescription }}</h4> -->
+								</div>
+							</div>
 						</div>
 
+						<div class="form-group col-md-6">
+							<label for="inputVideo">Imgur Gallery</label>
+							<input
+								v-validate="{ regex: /https:\/\/imgur.com\// }"
+								id="inputGallery"
+								v-model="gallery"
+								name="Imgur Gallery"
+								type="text"
+								class="form-control"
+								placeholder="Link to imgur gallery">
+						</div>
 						<div class="form-group col-md-6">
 							<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
 
@@ -113,11 +160,23 @@
 									v-if="!imageSubmitted"
 									class="input-group-prepend">
 									<a
-										:class="`btn btn-primary  ${(!pastebinSubmitted)?'disabled':''}`"
+										:class="`btn btn-primary  ${(!pastebinSubmitted )?'disabled':''}`"
 										href="#"
 										@click.prevent="resolveThumbnail(true)">
 										<span>
 											Use default Image
+										</span>
+									</a>
+								</div>
+								<div
+									v-if="!imageSubmitted"
+									class="input-group-prepend">
+									<a
+										:class="`btn btn-primary  ${(!pastebinSubmitted || !gallery|| imgueGalleryError)?'disabled':''}`"
+										href="#"
+										@click.prevent="getThumbnailFromGallery()">
+										<span>
+											Gallery image
 										</span>
 									</a>
 								</div>
@@ -176,7 +235,7 @@
 						<div
 							id="inputDescription"
 							class="row">
-							<div class="col-12">
+							<div class="col-6">
 								<no-ssr>
 									<div
 										v-validate="'required'"
@@ -194,7 +253,7 @@
 
 							<div
 								id="preview"
-								class="col-12 mt-3">
+								class="col-6 mt-3">
 
 								<div class="card bg-secondary">
 
@@ -215,7 +274,7 @@
 									</div>
 									<div
 										id="collapseOne"
-										class="collapse show"
+										class="collapse show  border border-primary bg-dark"
 										aria-labelledby="headingOne"
 										data-parent="#preview">
 										<div class="ql-editor">
@@ -230,17 +289,6 @@
 						</div>
 					</div>
 					<div class="form-row ">
-						<div class="form-group col-md-6">
-							<label for="inputVideo">Imgur Gallery</label>
-							<input
-								v-validate="'url:require_protocol'"
-								id="inputGallery"
-								v-model="gallery"
-								name="Imgur Gallery"
-								type="text"
-								class="form-control"
-								placeholder="Link to imgur gallery">
-						</div>
 
 						<div class="form-group col-md-6">
 							<label for="inputVideo">Video link</label>
@@ -280,6 +328,64 @@
 								When accounts and editting goes live, you will be able to claim your hideouts with your email. Not required but you will not be able to reclaim or edit this post. Your email will not show anywhere and will not be shared with anyone.
 							</small>
 						</div>
+						<div
+							v-if="pastebinSubmitted || pastebinError"
+							class="col-6">
+							<h3>Overview</h3>
+							<table
+								class="table table-sm table-striped table-dark bg-secondary text-primary ">
+
+								<tbody>
+									<tr>
+										<th scope="row">Type</th>
+										<td class="text-white"><strong>{{ getHideout(hideoutType) }}</strong></td>
+									</tr>
+									<tr>
+										<th scope="row">Favour required</th>
+										<td class="text-white"><strong>{{ hideoutCost.string }}</strong></td>
+									</tr>
+									<tr>
+										<th scope="row">Unique decorations</th>
+										<td class="text-white"><strong>{{ getHideoutDoodads.length }}</strong></td>
+									</tr>
+									<tr>
+										<th scope="row">MTX</th>
+										<td class="text-white"><strong>{{ isMtx?'Yes':'No' }}</strong></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div
+							v-if="$store.getters['auth/username']"
+							class="form-group col-6 col-lg-6">
+							<div class="custom-control custom-checkbox">
+								<input
+									id="contestParticipation"
+									:disabled="!pastebinSubmitted"
+									v-model="isCommunityContest"
+									type="checkbox"
+									class="custom-control-input">
+								<label
+									class="custom-control-label"
+									for="contestParticipation">Participate in community hideout contest {{ !pastebinSubmitted?'( Submit pastebin first )':'' }}</label>
+							</div>
+							<div
+								v-if="isCommunityContest && pastebinSubmitted"
+								class="mt-3 alert alert-warning"
+								role="alert">
+								<h4>Rules:</h4>
+								<ul>
+									<li>Contest starts on February 22nd.</li>
+									<li>Must be built around map device.</li>
+									<li :class="{'text-danger':isImageDefault}">Must provide thumbnail.</li>
+									<li :class="{'text-danger':hideoutCost.number>5000000}">5M favor limit.</li>
+									<li :class="{'text-danger':isMtx}">No mtx/trophies/old crafting benches/supporter pack hideouts</li>
+									<li>No supporter pack decorations </li>
+									<li>Deadline is March 22, 23:59 UTC</li>
+									<li>Voting will be from March 23, 0:00 to March 29, 23:59 UTC</li>
+								</ul>
+							</div>
+						</div>
 						<div class="form-group col-md-12">
 							<div
 								v-if="error || errorMessage"
@@ -306,7 +412,7 @@
 								@expired="onCaptchaExpired"/>
 
 							<button
-								:disabled="status==='submitting' || !!error || !getHideoutDoodads"
+								:disabled="status==='submitting' || !!error || !getHideoutDoodads || contestRulesBroken"
 								type="submit"
 								class="btn btn-primary">Submit</button>
 						</div>
@@ -336,6 +442,7 @@ export default {
 			hideoutFileLink: '',
 			hideoutImage: '',
 			hideoutDescription: '',
+			isCommunityContest: false,
 			status: '',
 			gallery: '',
 			hideoutScreenshot: '',
@@ -343,6 +450,7 @@ export default {
 			hideoutDoodads: [],
 			poeVersion: '3.5.1',
 			pastebinData: '',
+			isImageDefault: false,
 			pastebinError: false,
 			pastebinProcessing: false,
 			pastebinSubmitted: false,
@@ -379,8 +487,48 @@ export default {
 				return this.$mastersObject(this.getHideoutDoodads);
 			}
 		},
+		isMtx () {
+			return !!this.masterMaxLevel['mtx'];
+		},
+		imgueGalleryError () {
+			return !!this.errors.items.filter(err => err.field === 'Imgur Gallery').length;
+		},
+		hideoutCost () {
+			return {
+				string: this.$favorCost(this.$favorCostNotString(this.getHideoutDoodads)),
+				number: this.$favorCostNotString(this.getHideoutDoodads)
+			};
+		},
 		hideoutDescriptionMD () {
 			return this.hideoutDescription;
+		},
+		contestTime () {
+			const now = this.$moment.tz(this.$moment(), 'GMT').format();
+			const start = this.$moment.tz('2019-02-22', 'GMT').format();
+			const end = this.$moment.tz('2019-03-22', 'GMT').format();
+			return {
+				started: this.$moment(now).isAfter(start),
+				ended: this.$moment(now).isAfter(end)
+			};
+		},
+		contestRulesBroken () {
+			if (this.isCommunityContest) {
+				if (!this.contestTime.started) {
+					return true;
+				}
+				if (this.contestTime.ended) {
+					return true;
+				}
+				if (this.isImageDefault) {
+					return true;
+				}
+				if (this.hideoutCost.number > 5000000 || this.isMtx) {
+					return true;
+				}
+				return false;
+			} else {
+				return false;
+			}
 		},
 		imgurGallery () {
 			// return false;
@@ -403,6 +551,9 @@ export default {
 		}
 	},
 	methods: {
+		getHideout (hash) {
+			return this.$store.getters.getHideout(hash)['Name'];
+		},
 		strip (html) {
 			var doc = new DOMParser().parseFromString(html, 'text/html');
 			return doc.body.textContent || '';
@@ -413,7 +564,16 @@ export default {
 		submitHideout () {
 			this.$refs.recaptcha.execute();
 		},
+		async getThumbnailFromGallery () {
+			if (this.gallery && /imgur.com\/a/.test(this.gallery)) {
+				const hideoutGallery = this.gallery.replace(/https:\/\/imgur.com\/a\/([a-zA-Z0-9]*)/gi, '$1');
+				const imgurGalleryPhotos = await this.$axios.$get(`/imgur/3/album/${hideoutGallery}/images`);
+				this.hideoutScreenshot = imgurGalleryPhotos.data[0].link;
+				this.resolveThumbnail();
+			}
+		},
 		async resolveThumbnail (defaultImage = false) {
+			this.isImageDefault = defaultImage;
 			if (this.hideoutScreenshot) {
 				this.imageSubmitted = true;
 				this.hideoutImage = this.hideoutScreenshot;
@@ -423,7 +583,7 @@ export default {
 			}
 		},
 		async onCaptchaVerified () {
-			if (!this.error && !this.pastebinError) {
+			if (!this.error && !this.pastebinError && !this.contestRulesBroken) {
 				this.status = 'submitting';
 				this.$refs.recaptcha.reset();
 				try {
@@ -432,6 +592,7 @@ export default {
 						authorEmail: this.authorEmail,
 						nameDescription: this.nameDescription,
 						hideoutType: this.hideoutType,
+						isCommunityContest: this.isCommunityContest,
 						hideoutFileLink: this.hideoutFileLink,
 						hideoutDescription: this.hideoutDescription,
 						hideoutScreenshot: this.hideoutImage,
@@ -451,7 +612,11 @@ export default {
 					if (this.$store.getters['auth/username']) {
 						this.updateUserHideouts();
 					}
-					this.$router.push('/');
+					if (this.isCommunityContest) {
+						this.$router.push('/contest');
+					} else {
+						this.$router.push('/');
+					}
 				} catch (e) {
 					console.log(e);
 				}
