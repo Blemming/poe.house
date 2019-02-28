@@ -174,6 +174,7 @@ Vue.prototype.$hideoutObject = ({
 	gallery,
 	hideoutDoodads,
 	hideoutMasters,
+	hasThumbnail: !((/web.poe/gi.test(hideoutScreenshot) || hideoutScreenshot.length < 1)),
 	authorEmail: authorEmail.toLowerCase(),
 	isCommunityContest,
 	hideoutId: hideoutId || makeid(),

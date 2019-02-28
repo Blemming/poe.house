@@ -27,6 +27,15 @@ body {
 .font-cinzel{
     font-family: 'Copperplate Gothic', serif;
 }
+.btn-grey{
+    color:rgba(255,255,255,0.6);
+    &:hover{
+        color:rgba(255,255,255,0.9);
+    }
+    &.border-grey{
+        border-color: rgba(0,0,0,0.5);
+    }
+}
 .main-title{
     font-family: 'Copperplate Gothic', serif;
     color:map-get($theme-colors, primary)!important;

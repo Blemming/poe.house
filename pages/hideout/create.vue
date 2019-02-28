@@ -109,7 +109,7 @@
 								class="badge badge-danger">{{ errors.first('authorEmail') }}</span>
 							<p>
 
-								<small>
+								<small class="text-white">
 									If you decide to create an account, you will be able to link the hideout to your account.
 								</small>
 							</p>
@@ -311,6 +311,9 @@
 										</span>
 									</a>
 								</div>
+								<small class="text-white">
+									Setting the thumbnail to <strong>default</strong> or <strong>not</strong> setting one will prevent your hideout from showing up on the default homepage.
+								</small>
 							</div>
 							<span
 								v-if="errors.first('thumbnail')"

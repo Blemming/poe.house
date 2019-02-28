@@ -274,7 +274,7 @@
 					v-if="filteredHideouts"
 					ref="topPage"
 					class="row bg-dark py-3">
-					<div class="col-12 mb-3 d-flex justify-content-between">
+					<div class="col-12 mb-3 d-flex">
 						<div class="form-group form-inline">
 							<label
 								class="mr-2"
@@ -309,7 +309,14 @@
 								</option>
 							</select>
 						</div>
-						<div class="form-group form-inline">
+						<div class="form-group  form-inline">
+							<div
+								class="btn btn-grey border border-grey"
+								@click="switchThumbnails">
+								{{ (noThumbnails)?'Hide':'Show' }} <i class="fas fa-ban"/> thumbnails
+							</div>
+						</div>
+						<div class="form-group form-inline ml-auto">
 							<label
 								class="mr-2"
 								for="perPage">Results per page: </label>
@@ -467,6 +474,7 @@ export default {
 	data () {
 		return {
 			levels: [1, 2, 3, 4, 5, 6, 7],
+			noThumbnails: false,
 			loading: false,
 			hideouts: [],
 			currentPage: this.$store.state.pageControls.currentPage,
@@ -578,11 +586,19 @@ export default {
 		}
 	},
 	async created () {
-		try {
-			const query = `
+		this.getHideouts();
+	},
+	methods: {
+		toggleFilters () {
+			this.filtersOpened = !this.filtersOpened;
+		},
+		async getHideouts (all = false) {
+			try {
+				const query = `
             query{
   hideouts(limit:9000, where:{
-                isDeleted_ne:true
+                isDeleted_ne:true,
+                ${(all) ? '' : 'hasThumbnail:true'}
      }){
     author,
     downloads,
@@ -618,21 +634,22 @@ export default {
   }
 }
             `;
-			this.loading = true;
-			const { data } = await this.$axios.$post('/api/graphql', { query });
-			this.hideouts = data.hideouts;
+				this.loading = true;
+				const { data } = await this.$axios.$post('/api/graphql', { query });
+				this.hideouts = data.hideouts;
 
-			this.loading = false;
-		} catch (e) {
-			console.log(e);
-		}
-	},
-	methods: {
-		toggleFilters () {
-			this.filtersOpened = !this.filtersOpened;
+				this.loading = false;
+			} catch (e) {
+				console.log(e);
+			}
 		},
 		clearSearch () {
 			this.searchQuery = '';
+		},
+		switchThumbnails () {
+			this.noThumbnails = !this.noThumbnails;
+			this.hideouts = [];
+			this.getHideouts(this.noThumbnails);
 		},
 		clickCallback (pageNum) {
 			this.currentPage = pageNum;
