@@ -46,7 +46,7 @@
 						<div class="form-group col-md-10 ml-auto">
 							<label for="Title">Title</label>
 							<input
-								v-validate="'required|max:150'"
+								v-validate="{required:true,max:150}"
 								id="nameDescription"
 								v-model="nameDescription"
 								name="Title"

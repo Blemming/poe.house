@@ -352,7 +352,9 @@
 						class="col-xs-12 col-lg-6 col-xl-4 my-2">
 						<no-ssr>
 							<hideout-card-placeholder slot="placeholder"/>
-							<hideout-card :hideout="hideout"/>
+							<hideout-card
+								v-if="$store.getters.getHideout(hideout.hideoutType)['Name']"
+								:hideout="hideout"/>
 						</no-ssr>
 					</div>
 

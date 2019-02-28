@@ -24,7 +24,7 @@ export const state = () => ({
 export const getters = {
 	getHideout: (state) => (hash) => {
 		if (hash) {
-			return state.hideouts.filter(hideout => parseInt(hideout['Hash']) === hash)[0];
+			return state.hideouts.filter(hideout => parseInt(hideout['Hash']) === hash)[0] || { 'Icon': '', 'Name': '' };
 		} else {
 			return { 'Icon': '', 'Name': '' };
 		}

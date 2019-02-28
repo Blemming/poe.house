@@ -232,13 +232,13 @@ export default {
 	computed: {
 		navbarOptions () {
 			return [
-				{
-					title: 'contest',
-					dropdownItems: false,
-					description: 'Community Hideout Contest',
-					url: '/contest',
-					target: false
-				}
+				// {
+				// 	title: 'contest',
+				// 	dropdownItems: false,
+				// 	description: 'Community Hideout Contest',
+				// 	url: '/contest',
+				// 	target: false
+				// }
 			];
 		},
 		rightNavbarOptions () {
