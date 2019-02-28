@@ -41,7 +41,7 @@
 				<form @submit.prevent="submitHideout()">
 					<div class="form-row">
 						<div class="form-group col-md-12 ">
-							<h3 class="text-white">About</h3>
+							<h3 class="text-white bg-dark pl-3 pb-1  border-left border-primary">About</h3>
 						</div>
 						<div class="form-group col-md-10 ml-auto">
 							<label for="Title">Title</label>
@@ -109,7 +109,7 @@
 								class="badge badge-danger">{{ errors.first('authorEmail') }}</span>
 							<p>
 
-								<small class="text-white">
+								<small class="text-muted">
 									If you decide to create an account, you will be able to link the hideout to your account.
 								</small>
 							</p>
@@ -118,7 +118,7 @@
 					</div>
 					<div class="form-row justify-content-end">
 						<div class="form-group col-12">
-							<h3 class="text-white">Details</h3>
+							<h3 class="text-white bg-dark pl-3 pb-1  border-left border-primary">Details</h3>
 						</div>
 
 						<div class="form-group col-md-5">
@@ -311,7 +311,7 @@
 										</span>
 									</a>
 								</div>
-								<small class="text-white">
+								<small class="text-muted">
 									Setting the thumbnail to <strong>default</strong> or <strong>not</strong> setting one will prevent your hideout from showing up on the default homepage.
 								</small>
 							</div>
@@ -393,7 +393,7 @@
 						v-if="pastebinSubmitted"
 						class="form-row justify-content-center">
 						<div class="col-12">
-							<h3 class="text-white">Preview</h3>
+							<h3 class="text-white bg-dark pl-3 pb-1  border-left border-primary">Preview</h3>
 						</div>
 						<div
 							v-if="pastebinSubmitted || pastebinError"
@@ -480,9 +480,9 @@
 					</div>
 					<div
 						v-if="!error && getHideoutDoodads && !contestRulesBroken"
-						class="form-row justify-content-center">
+						class="form-row justify-content-center mt-5">
 						<div class="col-12">
-							<h3 class="text-white">
+							<h3 class="text-white bg-dark pl-3 pb-1  border-left border-primary">
 								Submit
 							</h3>
 						</div>
