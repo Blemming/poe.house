@@ -147,7 +147,7 @@
 							class="btn btn-danger border border-dark text-dark">Edit</nuxt-link>
 
 					</div>
-					<div v-if="hideout.user">
+					<div v-if="hideout.user && $store.state.auth.user">
 						<nuxt-link
 							v-if="$store.state.auth.user._id === hideout.user._id"
 							:to="`/hideout/${hideout.hideoutId}/edit`"
