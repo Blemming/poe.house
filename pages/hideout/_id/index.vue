@@ -146,12 +146,25 @@
 									<td>
 										<a
 											:href="hideout.hideoutVideo"
+											class="text-danger"
 											target="_blank">
-											<img
-												class="w-25 bg-white p-2"
-												src="~/assets/images/yt_logo_rgb_light.png"
-												alt="Youtube">
+											<i class="bg-white fab fa-youtube fa-4x"/>
 										</a>
+									</td>
+								</tr>
+								<tr>
+									<th
+										class="text-center w-25 "
+										scope="row">
+										<small>
+											Last Updated:
+										</small>
+									</th>
+									<td class="text-white">
+										<small>
+
+											{{ $moment(hideout.updatedAt).format('HH:mm, MMMM Do YYYY') }}
+										</small>
 									</td>
 								</tr>
 							</tbody>
@@ -198,7 +211,7 @@
 					class="tab-content">
 					<div
 						id="description"
-						class="tab-pane show active bg-secondary mt-3 p-2 border border-primary"
+						class="tab-pane show active bg-dark mt-3 p-2 border border-primary"
 						role="tabpanel"
 						aria-labelledby="description-tab">
 						<div class="row m-4">
@@ -411,7 +424,7 @@
 								v-for="comment in hideout.comments"
 								:key="comment._id"
 								class="card border border-secondary mt-3">
-								<div class="card-body bg-secondary">
+								<div class="card-body bg-dark">
 									<div
 										class="ql-editor"
 										style="min-height:0px;">
@@ -443,7 +456,7 @@
 						<div
 							v-else
 							class="m-3">
-							<div class="bg-secondary mt-3 p-2 border border-primary">
+							<div class="bg-dark mt-3 p-2 border border-primary">
 								<p>No comments yet</p>
 							</div>
 						</div>
@@ -516,6 +529,7 @@ export default {
     decorationsCost,
     hideoutDescription,
     hideoutDoodads,
+    updatedAt,
     comments{
       user{
           Donator,
