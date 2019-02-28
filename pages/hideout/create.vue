@@ -40,19 +40,88 @@
 				title="Add Hideout">
 				<form @submit.prevent="submitHideout()">
 					<div class="form-row">
-						<div class="form-group col-md-6 ">
-							<label for="inputTitle">Title</label>
+						<div class="form-group col-md-12 ">
+							<h3 class="text-white">About</h3>
+						</div>
+						<div class="form-group col-md-10 ml-auto">
+							<label for="Title">Title</label>
 							<input
 								v-validate="'required|max:150'"
-								id="inputTitle"
+								id="nameDescription"
 								v-model="nameDescription"
-								name="title"
+								name="Title"
 								required
 								type="input"
 								class="form-control"
 								placeholder="Title">
+							<span
+								v-if="errors.first('Title')"
+								class="badge badge-danger">{{ errors.first('Title') }}</span>
 						</div>
-						<div class="form-group col-md-6">
+						<div
+							class="form-group col-md-10 ml-auto">
+							<label for="inputDescription">Description</label>
+							<div
+								id="inputDescription"
+								class="row">
+								<div class="col-12">
+									<no-ssr>
+										<div
+											v-quill:myQuillEditor="editorSettings"
+											ref="markdownEditor"
+											:content="hideoutDescription"
+											class="w-100 bg-dark text-white"
+											style="height:200px;"
+											name="description"
+											required
+											@change="onEditorChange($event)"/>
+
+									</no-ssr>
+								</div>
+
+							</div>
+						</div>
+						<div
+							v-if="!$store.getters['auth/username']"
+							class="form-group col-6 col-lg-4 ml-auto">
+							<label for="inputAuthor">Author</label>
+							<input
+								id="inputAuthor"
+								v-model="author"
+								type="text"
+								class="form-control"
+								placeholder="Author name">
+						</div>
+						<div
+							v-if="!$store.getters['auth/username']"
+							class="form-group col-6 col-lg-4 ml-auto">
+							<label for="inputAuthor">Email</label>
+							<input
+								v-validate="'email'"
+								id="inputAuthor"
+								v-model="authorEmail"
+								name="authorEmail"
+								type="email"
+								class="form-control"
+								placeholder="Author Email">
+							<span
+								v-if="errors.first('authorEmail')"
+								class="badge badge-danger">{{ errors.first('authorEmail') }}</span>
+							<p>
+
+								<small>
+									If you decide to create an account, you will be able to link the hideout to your account.
+								</small>
+							</p>
+						</div>
+
+					</div>
+					<div class="form-row justify-content-end">
+						<div class="form-group col-12">
+							<h3 class="text-white">Details</h3>
+						</div>
+
+						<div class="form-group col-md-5">
 							<label for="inputPastebin">Pastebin link</label>
 
 							<div class="input-group">
@@ -87,7 +156,7 @@
 									id="inputPastebin"
 									v-model="hideoutFileLink"
 									:disabled="pastebinSubmitted"
-									name="Pastebin Link"
+									name="pastebinLink"
 									required
 									type="text"
 									placeholder="Link to pastebin"
@@ -120,47 +189,63 @@
 									</a>
 								</div>
 							</div>
-						</div>
 
-						<div class="form-group col-md-12 p-relative">
-							<h4
-								class="text-white"
-								for="inputHideout">Thumbnail</h4><br>
-							<div
-								class="image-container">
-								<img
-									v-if="!imgurGallery"
-									id="inputHideout"
-									:src="$getThumbnail(displayedImage)"
-									style="height: 272px; object-fit: cover;"
-									class="img-fluid"
-									alt="">
-								<div class="card-subheader">
-									<!-- <h4 class="text-white text-capitalize">{{ nameDescription }}</h4> -->
+							<span
+								v-if="errors.first('pastebinLink')"
+								class="badge badge-danger">{{ errors.first('pastebinLink') }}</span>
+						</div>
+						<div class="form-group col-md-5">
+							<label for="Imgur Gallery">Imgur Gallery</label>
+							<div class="input-group">
+								<div
+									v-if="gallery && !errors.first('Imgur Gallery')"
+									class="input-group-prepend">
+									<a
+										href="#"
+										class="btn btn-success"
+										disabled
+										@click.prevent="">
+										<span>
+											<i class="fas fa-check"/>
+										</span>
+									</a>
+								</div>
+								<input
+									v-validate="{ regex: /https:\/\/imgur.com\// }"
+									id="inputGallery"
+									v-model="gallery"
+									name="Imgur Gallery"
+									type="text"
+									class="form-control"
+									placeholder="Link to imgur gallery">
+
+								<div
+									v-if="gallery && !errors.first('Imgur Gallery')"
+									class="input-group-append">
+									<a
+										href="#"
+										class="btn btn-danger"
+										@click.prevent="gallery=''">
+										<span>
+											<i class="far fa-trash-alt"/>
+										</span>
+									</a>
 								</div>
 							</div>
+							<span
+								v-if="errors.first('Imgur Gallery')"
+								class="badge badge-danger">{{ errors.first('Imgur Gallery') }}</span>
 						</div>
-
-						<div class="form-group col-md-6">
-							<label for="inputVideo">Imgur Gallery</label>
-							<input
-								v-validate="{ regex: /https:\/\/imgur.com\// }"
-								id="inputGallery"
-								v-model="gallery"
-								name="Imgur Gallery"
-								type="text"
-								class="form-control"
-								placeholder="Link to imgur gallery">
-						</div>
-						<div class="form-group col-md-6">
-							<label for="inputScreenshot">Thumbnail link <small>(Direct link to image)</small></label>
+						<div class="w-100"/>
+						<div class="form-group col-md-5">
+							<label for="thumbnail">Thumbnail link <small>(Direct link to image)</small></label>
 
 							<div class="input-group">
 								<div
 									v-if="!imageSubmitted"
 									class="input-group-prepend">
 									<a
-										:class="`btn btn-primary  ${(!pastebinSubmitted )?'disabled':''}`"
+										:class="`btn btn-primary border-left  ${(!pastebinSubmitted )?'disabled':''}`"
 										href="#"
 										@click.prevent="resolveThumbnail(true)">
 										<span>
@@ -199,7 +284,7 @@
 									:disabled="!pastebinSubmitted || imageSubmitted"
 									v-model="hideoutScreenshot"
 									:placeholder="(pastebinSubmitted)?'Link to image url':'Submit Pastebin first'"
-									name="Thumbnail link"
+									name="thumbnail"
 									type="text"
 									class="form-control">
 								<div
@@ -227,30 +312,132 @@
 									</a>
 								</div>
 							</div>
+							<span
+								v-if="errors.first('thumbnail')"
+								class="badge badge-danger">{{ errors.first('thumbnail') }}</span>
+						</div>
+
+						<div class="form-group col-md-5">
+							<label for="inputVideo">Video link</label>
+							<input
+								v-validate="'url:require_protocol'"
+								id="inputVideo"
+								v-model="hideoutVideo"
+								name="videoLink"
+								type="text"
+								class="form-control"
+								placeholder="Link to youtube url">
+							<span
+								v-if="errors.first('videoLink')"
+								class="badge badge-danger">{{ errors.first('videoLink') }}</span>
 						</div>
 					</div>
 					<div
-						class="form-group">
-						<label for="inputDescription">Description</label>
-						<div
-							id="inputDescription"
-							class="row">
-							<div class="col-6">
-								<no-ssr>
-									<div
-										v-validate="'required'"
-										v-quill:myQuillEditor="editorSettings"
-										ref="markdownEditor"
-										:content="hideoutDescription"
-										class="w-100 bg-dark text-white"
-										style="height:200px;"
-										name="description"
-										required
-										@change="onEditorChange($event)"/>
+						class="form-row ">
 
-								</no-ssr>
+						<!-- <div
+							v-if="$store.getters['auth/username']"
+							class="form-group col-6 col-lg-6">
+							<div class="custom-control custom-checkbox">
+								<input
+									id="contestParticipation"
+									:disabled="!pastebinSubmitted"
+									v-model="isCommunityContest"
+									type="checkbox"
+									class="custom-control-input">
+								<label
+									class="custom-control-label"
+									for="contestParticipation">Participate in community hideout contest {{ !pastebinSubmitted?'( Submit pastebin first )':'' }}</label>
+							</div>
+							<div
+								v-if="isCommunityContest && pastebinSubmitted"
+								class="mt-3 alert alert-warning"
+								role="alert">
+								<h4>Rules:</h4>
+								<ul>
+									<li>Contest starts on February 22nd.</li>
+									<li>Must be built around map device.</li>
+									<li :class="{'text-danger':isImageDefault}">Must provide thumbnail.</li>
+									<li :class="{'text-danger':hideoutCost.number>5000000}">5M favor limit.</li>
+									<li :class="{'text-danger':isMtx}">No mtx/trophies/old crafting benches/supporter pack hideouts</li>
+									<li>No supporter pack decorations </li>
+									<li>Deadline is March 22, 23:59 UTC</li>
+									<li>Voting will be from March 23, 0:00 to March 29, 23:59 UTC</li>
+								</ul>
+							</div>
+						</div> -->
+						<!-- <div class="form-group col-md-12">
+							<div
+								v-if="error || errorMessage"
+								class="row">
+								<div
+									v-for="error in errors.items"
+									:key="error.id"
+									class="col-12 mt-1">
+									<span
+										class="badge badge-danger">{{ error.msg }}</span>
+								</div>
+								<div class="col-12">
+									<span
+										v-if="errorMessage"
+										class="badge badge-danger">{{ errorMessage }}</span>
+								</div>
 							</div>
 
+						</div> -->
+					</div>
+					<div
+						v-if="pastebinSubmitted"
+						class="form-row justify-content-center">
+						<div class="col-12">
+							<h3 class="text-white">Preview</h3>
+						</div>
+						<div
+							v-if="pastebinSubmitted || pastebinError"
+							class="col-6">
+							<div class="form-group col-md-12 p-relative">
+								<h4
+									class="text-white"
+									for="inputHideout">Thumbnail</h4><br>
+								<div
+									class="image-container">
+									<img
+										v-if="!imgurGallery"
+										id="inputHideout"
+										:src="$getThumbnail(displayedImage)"
+										style="height: 272px; object-fit: cover;"
+										class="img-fluid"
+										alt="">
+									<div class="card-subheader">
+										<!-- <h4 class="text-white text-capitalize">{{ nameDescription }}</h4> -->
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<h4 class="text-white text-capitalize">{{ nameDescription }}</h4>
+							</div>
+							<table
+								class="table table-sm table-striped table-dark bg-secondary text-primary ">
+
+								<tbody>
+									<tr>
+										<th scope="row">Type</th>
+										<td class="text-white"><strong>{{ getHideout(hideoutType) }}</strong></td>
+									</tr>
+									<tr>
+										<th scope="row">Favour required</th>
+										<td class="text-white"><strong>{{ hideoutCost.string }}</strong></td>
+									</tr>
+									<tr>
+										<th scope="row">Unique decorations</th>
+										<td class="text-white"><strong>{{ getHideoutDoodads.length }}</strong></td>
+									</tr>
+									<tr>
+										<th scope="row">MTX</th>
+										<td class="text-white"><strong>{{ isMtx?'Yes':'No' }}</strong></td>
+									</tr>
+								</tbody>
+							</table>
 							<div
 								id="preview"
 								class="col-6 mt-3">
@@ -288,122 +475,15 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-row ">
-
-						<div class="form-group col-md-6">
-							<label for="inputVideo">Video link</label>
-							<input
-								v-validate="'url:require_protocol'"
-								id="inputVideo"
-								v-model="hideoutVideo"
-								name="Video link"
-								type="text"
-								class="form-control"
-								placeholder="Link to youtube url">
+					<div
+						v-if="!error && getHideoutDoodads && !contestRulesBroken"
+						class="form-row justify-content-center">
+						<div class="col-12">
+							<h3 class="text-white">
+								Submit
+							</h3>
 						</div>
-						<div class="w-100"/>
-						<div
-							v-if="!$store.getters['auth/username']"
-							class="form-group col-6 col-lg-4">
-							<label for="inputAuthor">Author</label>
-							<input
-								id="inputAuthor"
-								v-model="author"
-								type="text"
-								class="form-control"
-								placeholder="Author name">
-						</div>
-						<div
-							v-if="!$store.getters['auth/username']"
-							class="form-group col-6 col-lg-4">
-							<label for="inputAuthor">Email</label>
-							<input
-								v-validate="'email'"
-								id="inputAuthor"
-								v-model="authorEmail"
-								type="email"
-								class="form-control"
-								placeholder="Author Email">
-							<small>
-								When accounts and editting goes live, you will be able to claim your hideouts with your email. Not required but you will not be able to reclaim or edit this post. Your email will not show anywhere and will not be shared with anyone.
-							</small>
-						</div>
-						<div
-							v-if="pastebinSubmitted || pastebinError"
-							class="col-6">
-							<h3>Overview</h3>
-							<table
-								class="table table-sm table-striped table-dark bg-secondary text-primary ">
-
-								<tbody>
-									<tr>
-										<th scope="row">Type</th>
-										<td class="text-white"><strong>{{ getHideout(hideoutType) }}</strong></td>
-									</tr>
-									<tr>
-										<th scope="row">Favour required</th>
-										<td class="text-white"><strong>{{ hideoutCost.string }}</strong></td>
-									</tr>
-									<tr>
-										<th scope="row">Unique decorations</th>
-										<td class="text-white"><strong>{{ getHideoutDoodads.length }}</strong></td>
-									</tr>
-									<tr>
-										<th scope="row">MTX</th>
-										<td class="text-white"><strong>{{ isMtx?'Yes':'No' }}</strong></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div
-							v-if="$store.getters['auth/username']"
-							class="form-group col-6 col-lg-6">
-							<div class="custom-control custom-checkbox">
-								<input
-									id="contestParticipation"
-									:disabled="!pastebinSubmitted"
-									v-model="isCommunityContest"
-									type="checkbox"
-									class="custom-control-input">
-								<label
-									class="custom-control-label"
-									for="contestParticipation">Participate in community hideout contest {{ !pastebinSubmitted?'( Submit pastebin first )':'' }}</label>
-							</div>
-							<div
-								v-if="isCommunityContest && pastebinSubmitted"
-								class="mt-3 alert alert-warning"
-								role="alert">
-								<h4>Rules:</h4>
-								<ul>
-									<li>Contest starts on February 22nd.</li>
-									<li>Must be built around map device.</li>
-									<li :class="{'text-danger':isImageDefault}">Must provide thumbnail.</li>
-									<li :class="{'text-danger':hideoutCost.number>5000000}">5M favor limit.</li>
-									<li :class="{'text-danger':isMtx}">No mtx/trophies/old crafting benches/supporter pack hideouts</li>
-									<li>No supporter pack decorations </li>
-									<li>Deadline is March 22, 23:59 UTC</li>
-									<li>Voting will be from March 23, 0:00 to March 29, 23:59 UTC</li>
-								</ul>
-							</div>
-						</div>
-						<div class="form-group col-md-12">
-							<div
-								v-if="error || errorMessage"
-								class="row">
-								<div
-									v-for="error in errors.items"
-									:key="error.id"
-									class="col-12 mt-1">
-									<span
-										class="badge badge-danger">{{ error.msg }}</span>
-								</div>
-								<div class="col-12">
-									<span
-										v-if="errorMessage"
-										class="badge badge-danger">{{ errorMessage }}</span>
-								</div>
-							</div>
-
+						<div class="col-6 ml-auto">
 							<vue-recaptcha
 								ref="recaptcha"
 								size="invisible"
@@ -480,7 +560,7 @@ export default {
 	},
 	computed: {
 		error () {
-			return !!this.errors.items.length > 0;
+			return this.errors.any();
 		},
 		masterMaxLevel () {
 			if (this.getHideoutDoodads) {
