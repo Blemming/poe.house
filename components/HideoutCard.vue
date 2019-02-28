@@ -139,10 +139,7 @@
 						alt="">
 					<small v-if="hideout.hideoutMasters['mtx']">MTX</small>
 				</div>
-				<div class="col-6 col-md-4 col-lg3 text-right">
-					<nuxt-link
-						:to="`/hideout/${hideout.hideoutId}`"
-						class="btn btn-primary border border-dark text-dark">Details</nuxt-link>
+				<div class="col-6 col-md-4 col-lg3 d-flex justify-content-end text-right">
 					<div v-if="$store.getters['auth/role']">
 						<nuxt-link
 							v-if="$store.getters['auth/role'] === 'Administrator'"
@@ -150,7 +147,17 @@
 							class="btn btn-danger border border-dark text-dark">Edit</nuxt-link>
 
 					</div>
+					<div v-if="hideout.user">
+						<nuxt-link
+							v-if="$store.state.auth.user._id === hideout.user._id"
+							:to="`/hideout/${hideout.hideoutId}/edit`"
+							class="btn btn-danger border border-dark text-dark">Edit</nuxt-link>
 
+					</div>
+
+					<nuxt-link
+						:to="`/hideout/${hideout.hideoutId}`"
+						class="btn btn-primary border border-dark text-dark">Details</nuxt-link>
 				</div>
 			</div>
 		</div>
