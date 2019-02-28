@@ -35,8 +35,8 @@
 					<div
 						style="min-height:350px;"
 						class="col-12">
-						<h4 class="text-center text-white bg-dark border border-dark m-0 pt-2 lead">Hideouts of the week</h4>
-						<p class="text-center text-white bg-dark border border-dark m-0 py-0 lead"><small>Encourage people to vote to get your hideout here</small>   </p>
+						<h3 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts of the week</h3>
+						<!-- <p class="text-center text-white bg-dark border border-dark m-0 py-0 lead"><small>Encourage people to vote to get your hideout here</small>   </p> -->
 						<div
 							id="carouselExampleControls"
 							class="carousel border border-dark slide"
@@ -135,7 +135,7 @@
 									v-model="searchQuery"
 									type="input"
 									placeholder="Search"
-									class="form-control border-primary bg-secondary">
+									class="form-control border-secondary bg-dark">
 								<div
 									v-if="!!searchQuery"
 									class="input-group-append">
@@ -153,16 +153,22 @@
 				<div
 					id="collapseFilters"
 					ref="filtersCollapse"
-					class="collapse">
+					class="collapse  ">
 					<div class="row mt-3">
 						<div class="col-12">
 							<div class="row">
 								<div class="col-xs-6 col-lg-2 form-group">
-									<label for="inputState">Hideout Type</label>
+									<label
+										class="text-white"
+										for="inputState">
+										<small>
+											Hideout Type
+										</small>
+									</label>
 									<select
 										id="inputState"
 										v-model="hideoutType"
-										class="form-control custom-select border-primary text-primary">
+										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
 											value=""
 											selected>All</option>
@@ -173,11 +179,16 @@
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
-									<label for="inputState">MTX</label>
+									<label
+										class="text-white"
+										for="inputState">
+										<small>MTX
+										</small>
+									</label>
 									<select
 										id="inputState"
 										v-model="mtx"
-										class="form-control custom-select border-primary text-primary">
+										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
 											value=""
 											selected>All</option>
@@ -186,11 +197,16 @@
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
-									<label for="inputState">Minimum Rating</label>
+									<label
+										class="text-white"
+										for="inputState">
+										<small>Minimum Rating
+										</small>
+									</label>
 									<select
 										id="inputState"
 										v-model="atleastRating"
-										class="form-control custom-select border-primary text-primary">
+										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
 											value=""
 											selected>All</option>
@@ -207,11 +223,16 @@
 						<div class="col-12">
 							<div class="row">
 								<div class="col-xs-6 col-lg-2 form-group">
-									<label for="inputState">Alva Level</label>
+									<label
+										class="text-white"
+										for="inputState">
+										<small>Alva Level
+										</small>
+									</label>
 									<select
 										id="inputState"
 										v-model="Alva"
-										class="form-control custom-select border-primary text-primary">
+										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
 											:value="0"
 											selected>All</option>
@@ -222,11 +243,16 @@
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
-									<label for="inputState">Einhar Level</label>
+									<label
+										class="text-white"
+										for="inputState">
+										<small>Einhar Level
+										</small>
+									</label>
 									<select
 										id="inputState"
 										v-model="Einhar"
-										class="form-control custom-select border-primary text-primary">
+										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
 											:value="0"
 											selected>All</option>
@@ -237,11 +263,16 @@
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
-									<label for="inputState">Niko Level</label>
+									<label
+										class="text-white"
+										for="inputState">
+										<small>Niko Level
+										</small>
+									</label>
 									<select
 										id="inputState"
 										v-model="Niko"
-										class="form-control custom-select border-primary text-primary">
+										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
 											:value="0"
 											selected>All</option>
@@ -252,11 +283,16 @@
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
-									<label for="inputState">Zana Level</label>
+									<label
+										class="text-white"
+										for="inputState">
+										<small>Zana Level
+										</small>
+									</label>
 									<select
 										id="inputState"
 										v-model="Zana"
-										class="form-control custom-select border-primary text-primary">
+										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
 											:value="0"
 											selected>All</option>
@@ -273,7 +309,7 @@
 				<div
 					v-if="filteredHideouts"
 					ref="topPage"
-					class="row bg-dark py-3">
+					class="row py-3 bg-dark">
 					<div class="col-12 mb-3 d-flex">
 						<div class="form-group form-inline">
 							<label
@@ -386,7 +422,7 @@
 				</div>
 				<div
 					v-else-if="loading"
-					class="row bg-dark py-3">
+					class="row py-3">
 					<div class="col-12 text-center py-4">
 						<i class="fas fa-cog fa-spin fa-10x"/>
 						<h2 class="mt-3">... Loading hideouts ...</h2>

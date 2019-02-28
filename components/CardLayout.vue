@@ -1,5 +1,5 @@
 <template>
-	<div class="card text-primary bg-secondary border border-primary">
+	<div class="card text-primary bg-secondary border border-dark">
 		<div class="card-header border-bottom border-dark text-white text-center">
 			<h2
 				v-if="title === 'PoE.house' ||title === 'Community Hideout Contest' "
@@ -8,7 +8,7 @@
 				v-else
 				class="title display-4 ">{{ title }}</h2>
 		</div>
-		<div class="card-body  p-relative">
+		<div class="card-body p-relative">
 			<slot/>
 		</div>
 		<div class="card-footer d-flex flex-wrap justify-content-between">

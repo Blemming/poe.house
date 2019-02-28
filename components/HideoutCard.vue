@@ -34,7 +34,7 @@
 </style>
 
 <template>
-	<div class="card hideout-card bg-secondary">
+	<div class="card hideout-card bg-secondary border border-dark">
 		<nuxt-link
 			:to="`/hideout/${hideout.hideoutId}`">
 			<div class="card-header text-white">
@@ -69,7 +69,7 @@
 			<div class="row">
 				<div
 					class="col-12">
-					<table class="table table-sm table-striped table-dark bg-secondary text-primary ">
+					<table class="table table-sm table-striped table-dark bg-dark text-primary ">
 						<tbody>
 							<tr>
 								<th scope="row">Type</th>
@@ -144,24 +144,24 @@
 						<nuxt-link
 							v-if="$store.getters['auth/role'] === 'Administrator'"
 							:to="`/hideout/${hideout.hideoutId}/edit`"
-							class="btn btn-danger border border-dark text-dark">Edit</nuxt-link>
+							class="btn btn-danger mr-2">Edit</nuxt-link>
 
 					</div>
 					<div v-if="hideout.user && $store.state.auth.user">
 						<nuxt-link
 							v-if="$store.state.auth.user._id === hideout.user._id"
 							:to="`/hideout/${hideout.hideoutId}/edit`"
-							class="btn btn-danger border border-dark text-dark">Edit</nuxt-link>
+							class="btn btn-danger mr-2">Edit</nuxt-link>
 
 					</div>
 
 					<nuxt-link
 						:to="`/hideout/${hideout.hideoutId}`"
-						class="btn btn-primary border border-dark text-dark">Details</nuxt-link>
+						class="btn btn-primary border border-dark text-secondary">Details</nuxt-link>
 				</div>
 			</div>
 		</div>
-		<div class="card-footer">
+		<div class="card-footer border-top border-dark">
 			<div class="row justify-content-between">
 				<div class="col">
 					<small class="text-muted ">{{ $moment(hideout.dateSubmitted).format(' MMMM Do YYYY') }}</small>

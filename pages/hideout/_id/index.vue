@@ -162,7 +162,7 @@
 					id="myTab"
 					class="nav nav-tabs"
 					role="tablist">
-					<li class="nav-item">
+					<li class="nav-item ">
 						<a
 							id="home-tab"
 							class="nav-link active"
@@ -198,7 +198,7 @@
 					class="tab-content">
 					<div
 						id="description"
-						class="tab-pane show active bg-dark mt-3 p-2 border border-primary"
+						class="tab-pane show active bg-secondary mt-3 p-2 border border-primary"
 						role="tabpanel"
 						aria-labelledby="description-tab">
 						<div class="row m-4">
@@ -410,8 +410,8 @@
 							<div
 								v-for="comment in hideout.comments"
 								:key="comment._id"
-								class="card border border-dark mt-3">
-								<div class="card-body bg-dark">
+								class="card border border-secondary mt-3">
+								<div class="card-body bg-secondary">
 									<div
 										class="ql-editor"
 										style="min-height:0px;">
@@ -443,7 +443,7 @@
 						<div
 							v-else
 							class="m-3">
-							<div class="bg-dark mt-3 p-2 border border-primary">
+							<div class="bg-secondary mt-3 p-2 border border-primary">
 								<p>No comments yet</p>
 							</div>
 						</div>
