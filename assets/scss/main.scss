@@ -19,7 +19,7 @@ $input-color: white;
 }
 @import "~bootstrap/scss/bootstrap";
 body {
-    background-image: url('/images/kn2SC0N.jpg');
+    background-image: url('/images/backgroundimage.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-color: map-get($theme-colors, dark);

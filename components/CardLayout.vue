@@ -11,7 +11,7 @@
 		<div class="card-body  p-relative">
 			<slot/>
 		</div>
-		<div class="card-footer d-flex justify-content-between">
+		<div class="card-footer d-flex flex-wrap justify-content-between">
 			<a
 				class="nav-item text-danger"
 				target="_blank"
@@ -36,6 +36,18 @@
 					Support with Paypal
 				</small>
 			</a>
+
+			<div class="w-100 d-flex justify-content-end pt-4">
+				<small class="text-muted">background image by
+					<strong>
+
+						<a
+							class="text-muted"
+							target="_BLANK"
+							href="https://www.artstation.com/refiend">Max Suleimanov</a>
+					</strong>
+				</small>
+			</div>
 		</div>
 	</div>
 </template>
