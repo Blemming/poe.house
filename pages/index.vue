@@ -33,6 +33,7 @@
 					v-if="!loading"
 					class="row mb-5">
 					<div
+						v-if="topHideouts.length"
 						style="min-height:350px;"
 						class="col-12">
 						<h3 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts of the week</h3>
