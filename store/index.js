@@ -12,6 +12,7 @@ export const state = () => ({
 		'Alva': 0,
 		'Einhar': 0,
 		'Niko': 0,
+		'Jun': 0,
 		sortBy: 'date-old',
 		'Zana': 0
 	},

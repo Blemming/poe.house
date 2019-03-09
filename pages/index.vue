@@ -235,12 +235,12 @@
 										v-model="Alva"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="0"
+											:value="-1"
 											selected>All</option>
 										<option
 											v-for="level in levels"
 											:value="level"
-											:key="level">{{ level }}</option>
+											:key="level">{{ level || 'None' }}</option>
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
@@ -255,12 +255,12 @@
 										v-model="Einhar"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="0"
+											:value="-1"
 											selected>All</option>
 										<option
 											v-for="level in levels"
 											:value="level"
-											:key="level">{{ level }}</option>
+											:key="level">{{ level || 'None' }}</option>
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
@@ -275,12 +275,12 @@
 										v-model="Niko"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="0"
+											:value="-1"
 											selected>All</option>
 										<option
 											v-for="level in levels"
 											:value="level"
-											:key="level">{{ level }}</option>
+											:key="level">{{ level || 'None' }}</option>
 									</select>
 								</div>
 								<div class="col-xs-6 col-lg-2 form-group">
@@ -295,12 +295,32 @@
 										v-model="Zana"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="0"
+											:value="-1"
 											selected>All</option>
 										<option
 											v-for="level in levels"
 											:value="level"
-											:key="level">{{ level }}</option>
+											:key="level">{{ level || 'None' }}</option>
+									</select>
+								</div>
+								<div class="col-xs-6 col-lg-2 form-group">
+									<label
+										class="text-white"
+										for="inputState">
+										<small>Jun Level
+										</small>
+									</label>
+									<select
+										id="inputState"
+										v-model="Jun"
+										class="form-control custom-select border-primary text-primary bg-secondary">
+										<option
+											:value="-1"
+											selected>All</option>
+										<option
+											v-for="level in levels"
+											:value="level"
+											:key="level">{{ level || 'None' }}</option>
 									</select>
 								</div>
 							</div>
@@ -510,7 +530,7 @@ export default {
 	},
 	data () {
 		return {
-			levels: [1, 2, 3, 4, 5, 6, 7],
+			levels: [0, 1, 2, 3, 4, 5, 6, 7],
 			noThumbnails: false,
 			loading: false,
 			hideouts: [],
@@ -521,10 +541,11 @@ export default {
 			hideoutType: this.$store.state.filters.type || '',
 			'sort': this.$store.state.filters.sortBy,
 			mtx: this.$store.state.filters.mtx,
-			'Alva': this.$store.state.filters['Alva'] || 0,
-			'Einhar': this.$store.state.filters['Einhar'] || 0,
-			'Niko': this.$store.state.filters['Niko'] || 0,
-			'Zana': this.$store.state.filters['Zana'] || 0
+			'Alva': this.$store.state.filters['Alva'] || -1,
+			'Einhar': this.$store.state.filters['Einhar'] || -1,
+			'Niko': this.$store.state.filters['Niko'] || -1,
+			'Zana': this.$store.state.filters['Zana'] || -1,
+			'Jun': this.$store.state.filters['Jun'] || -1
 		};
 	},
 	computed: {
@@ -554,17 +575,20 @@ export default {
 			if (this.atleastRating !== '') {
 				results = results.filter(hideout => this.$calculateVotes(hideout.votes, hideout.user) >= this.atleastRating);
 			}
-			if (this.Alva) {
+			if (this.Alva >= 0) {
 				results = results.filter(hideout => hideout.hideoutMasters['Alva'] <= this.Alva);
 			}
-			if (this.Einhar) {
+			if (this.Einhar >= 0) {
 				results = results.filter(hideout => hideout.hideoutMasters['Einhar'] <= this.Einhar);
 			}
-			if (this.Niko) {
+			if (this.Niko >= 0) {
 				results = results.filter(hideout => hideout.hideoutMasters['Niko'] <= this.Niko);
 			}
-			if (this.Zana) {
+			if (this.Zana >= 0) {
 				results = results.filter(hideout => hideout.hideoutMasters['Zana'] <= this.Zana);
+			}
+			if (this.Jun >= 0) {
+				results = results.filter(hideout => hideout.hideoutMasters['Jun'] <= this.Jun);
 			}
 			if (this.sort) {
 				if (this.sort === 'favour-desc') {
@@ -617,6 +641,9 @@ export default {
 		},
 		'Niko' (val) {
 			this.$store.commit('SET_FILTER_OBJECT', { filter: 'Niko', choice: val });
+		},
+		'Jun' (val) {
+			this.$store.commit('SET_FILTER_OBJECT', { filter: 'Jun', choice: val });
 		},
 		'Zana' (val) {
 			this.$store.commit('SET_FILTER_OBJECT', { filter: 'mtx', choice: val });

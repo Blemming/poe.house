@@ -376,6 +376,41 @@
 								</div>
 							</div>
 							<div
+								v-if="shoppingList.jun.length> 0"
+								class="col-xs-12 col-lg-6">
+								<div class="row">
+									<div
+										id="Jun"
+										class="col-12">
+										<h5 class="mb-0 text-center">
+											<a
+												href="#"
+												class="text-white"
+												data-toggle="collapse"
+												data-target="#collapseJun"
+												aria-expanded="true"
+												aria-controls="collapseJun">
+												<img
+													src="https://web.poecdn.com/image/Art/2DItems/Hideout/Jun.png?scale=1"
+													alt=""
+													class="img-fluid"><br>
+												<span class="btn btn-primary mt-3">Jun decorations</span>
+											</a>
+											<hr>
+										</h5>
+										<div
+											id="collapseJun"
+											class="collapse show"
+											aria-labelledby="headingOne"
+											data-parent="#Jun">
+											<div class="card bg-secondary">
+												<shopping-list :list="shoppingList.jun"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div
 								v-if="shoppingList.other.length> 0"
 								class="col-xs-12 col-lg-12">
 								<div class="row">
@@ -626,12 +661,14 @@ export default {
 			const einhar = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Einhar');
 			const niko = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Niko');
 			const zana = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Zana');
+			const jun = this.hideout.hideoutDoodads.filter(doodad => doodad['MasterName'] === 'Jun');
 			const other = this.$getMTX(this.hideout.hideoutDoodads);
 			return {
 				alva,
 				einhar,
 				niko,
 				zana,
+				jun,
 				other
 			};
 		},

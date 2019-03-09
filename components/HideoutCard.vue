@@ -119,10 +119,11 @@
 								<th scope="row">Masters:</th>
 								<td>
 									<div class="row">
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Alva'] }}</strong><br>Alva</div>
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Einhar'] }}</strong><br>Einhar</div>
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Niko'] }}</strong><br>Niko</div>
-										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Zana'] }}</strong><br>Zana</div>
+										<div class="col-4 text-center"><strong class="text-white">{{ hideout.hideoutMasters['Alva'] || 'None' }}</strong><br>Alva</div>
+										<div class="col-4 text-center"><strong class="text-white">{{ hideout.hideoutMasters['Einhar']|| 'None' }}</strong><br>Einhar</div>
+										<div class="col-4 text-center"><strong class="text-white">{{ hideout.hideoutMasters['Niko']|| 'None' }}</strong><br>Niko</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Zana']|| 'None' }}</strong><br>Zana</div>
+										<div class="col text-center"><strong class="text-white">{{ hideout.hideoutMasters['Jun']|| 'None' }}</strong><br>Jun</div>
 									</div>
 								</td>
 							</tr>

@@ -115,12 +115,14 @@ Vue.prototype.$mastersObject = (doodads) => {
 	const Niko = doodads.filter(doo => doo['MasterName'] === 'Niko').map(doo => doo['MasterLevel']);
 	const Einhar = doodads.filter(doo => doo['MasterName'] === 'Einhar').map(doo => doo['MasterLevel']);
 	const Alva = doodads.filter(doo => doo['MasterName'] === 'Alva').map(doo => doo['MasterLevel']);
+	const Jun = doodads.filter(doo => doo['MasterName'] === 'Jun').map(doo => doo['MasterLevel']);
 	const mtx = _getMTX(doodads).length > 0;
 	return {
 		Zana: Math.max(...Zana, ...[0, 0]),
 		Niko: Math.max(...Niko, ...[0, 0]),
 		Einhar: Math.max(...Einhar, ...[0, 0]),
 		Alva: Math.max(...Alva, ...[0, 0]),
+		Jun: Math.max(...Jun, ...[0, 0]),
 		mtx
 	};
 };
