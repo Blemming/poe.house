@@ -1,5 +1,6 @@
 import cookieparser from 'cookieparser';
 import Cookies from 'js-cookie';
+import orderBy from 'lodash/orderBy';
 
 export const state = () => ({
 	firestoreData: null,
@@ -106,7 +107,8 @@ export const actions = {
 		commit('TOGGLE_ANNOUNCEMENT', showAnnouncement);
 
 		const { doodads } = require('~/data/doodads.json');
-		const { hideouts } = require('~/data/hideouts.json');
+		let { hideouts } = require('~/data/hideouts.json');
+		hideouts = orderBy(hideouts, 'Name');
 		commit('SET_DOODADS', doodads);
 		commit('SET_HIDEOUTS', hideouts);
 	}
