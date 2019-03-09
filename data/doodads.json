@@ -1,4 +1,5 @@
 {
+    "size": 1019,
     "doodads": [
         {
             "Hash": "3692930755",
@@ -124,8 +125,8 @@
             "Hash": "3967691837",
             "Name": "Blue Light Beam",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/CaveLightbeam.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Cost": "1380",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
@@ -1210,7 +1211,7 @@
         },
         {
             "Hash": "2546782973",
-            "Name": "Scepter Of God Debris",
+            "Name": "Sceptre Of God Debris",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SceptreOfGodRubble.png?scale=1",
             "Cost": "720",
             "MasterLevel": "2",
@@ -3513,6 +3514,22 @@
             "MasterName": null
         },
         {
+            "Hash": "4056588325",
+            "Name": "Synthesis Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1804020988",
+            "Name": "Synthesis Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
             "Hash": "521932457",
             "Name": "Lucky Dog",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/DogStatue.png?scale=1",
@@ -3668,9 +3685,9 @@
             "Hash": "3242814242",
             "Name": "Malachai's Dedication",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MalachaisDedication.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "25300",
+            "MasterLevel": "4",
+            "MasterName": "Einhar"
         },
         {
             "Hash": "2461939450",
@@ -4412,25 +4429,25 @@
             "Hash": "3532343307",
             "Name": "Rapture Device",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/RaptureDevice.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "60000",
+            "MasterLevel": "5",
+            "MasterName": "Alva"
         },
         {
             "Hash": "4242157986",
             "Name": "Kaom's Throne",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Kaom'sThrone.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "60000",
+            "MasterLevel": "5",
+            "MasterName": "Einhar"
         },
         {
             "Hash": "2929688420",
             "Name": "Goddess Statue",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/GoddessStatue.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "60000",
+            "MasterLevel": "5",
+            "MasterName": "Niko"
         },
         {
             "Hash": "2121825091",
@@ -5652,17 +5669,17 @@
             "Hash": "1111177699",
             "Name": "Statue of the Sisters",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutSkyShrineStatue.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "102000",
+            "MasterLevel": "6",
+            "MasterName": "Niko"
         },
         {
             "Hash": "2758367692",
             "Name": "Mosaic Wall",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutMosaicWall.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "13800",
+            "MasterLevel": "3",
+            "MasterName": "Alva"
         },
         {
             "Hash": "3137700392",
@@ -5748,9 +5765,9 @@
             "Hash": "445530247",
             "Name": "Summoning Circle",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutKitavaSummoningCircle.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "25300",
+            "MasterLevel": "4",
+            "MasterName": "Zana"
         },
         {
             "Hash": "3550948613",
@@ -5788,25 +5805,25 @@
             "Hash": "2947351691",
             "Name": "Kitava Head",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutKitavaHead.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "102000",
+            "MasterLevel": "6",
+            "MasterName": "Einhar"
         },
         {
             "Hash": "3516443350",
             "Name": "Kitava Heart",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutKitavaHeart.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "60000",
+            "MasterLevel": "5",
+            "MasterName": "Einhar"
         },
         {
             "Hash": "4162940298",
             "Name": "Kitava Horns",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutKitavaHorns.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "25300",
+            "MasterLevel": "4",
+            "MasterName": "Einhar"
         },
         {
             "Hash": "3961862829",
@@ -6580,9 +6597,9 @@
             "Hash": "692626992",
             "Name": "Seed of Corruption",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutSeedofCorruption.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "60000",
+            "MasterLevel": "5",
+            "MasterName": "Alva"
         },
         {
             "Hash": "1242507902",
@@ -7028,9 +7045,9 @@
             "Hash": "285987893",
             "Name": "Kitava Skull",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutKitavaSkull.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
+            "Cost": "244000",
+            "MasterLevel": "6",
+            "MasterName": "Zana"
         },
         {
             "Hash": "2462833616",
@@ -7042,723 +7059,899 @@
         },
         {
             "Hash": "3463978739",
-            "Name": "Seraph Hideout Effect",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutSlavePensRug.png?scale=1",
+            "Name": "Sunspire Hideout Effect",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SunspireHideout.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
             "MasterName": null
-        },
-        {
-            "Hash": "3741414142",
-            "Name": "Altar Burner",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/AltarBurner.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": "Jun"
         },
         {
             "Hash": "100922835",
             "Name": "Doomcrow Hideout Effect",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HideoutSlavePensRug.png?scale=1",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/DoomcrowHideout.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
             "MasterName": null
-        },
-        {
-            "Hash": "818177711",
-            "Name": "Charred Skeleton",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/CharredSkeleton.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": "Jun"
         },
         {
             "Hash": "3409453926",
             "Name": "Snowy Rock",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowyRock_L.png?scale=1",
-            "Cost": "280",
-            "MasterLevel": "0",
+            "Cost": "3220",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
             "Hash": "2465370764",
             "Name": "Large Snowy Rock",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowyRockLarge.png?scale=1",
-            "Cost": "22500",
-            "MasterLevel": "0",
+            "Cost": "7500",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
             "Hash": "35527300",
             "Name": "Bare Tree",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "9530",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BareTree.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
             "Hash": "833002552",
             "Name": "Bare Branches",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "3220",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BareBranches.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
             "MasterName": "Jun"
+        },
+        {
+            "Hash": "527758838",
+            "Name": "Arena Petals",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ArenaBluePetals.png?scale=1",
+            "Cost": "3220",
+            "MasterLevel": "4",
+            "MasterName": "Zana"
         },
         {
             "Hash": "3611985432",
             "Name": "Charred Wood Pile",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/CharredWoodPile.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Cost": "280",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
             "Hash": "2464254655",
             "Name": "Prisoners' Monument",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrisonersMonument.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
             "Hash": "1807687175",
             "Name": "Oriath Square Fountain",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OriathSquareFountain.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Cost": "360000",
+            "MasterLevel": "7",
             "MasterName": "Jun"
         },
         {
-            "Hash": "845793249",
+            "Hash": "3262927384",
             "Name": "Oriath Curb",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OriathCurb.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
             "Hash": "1717862010",
             "Name": "Triumph Fountain",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/TriumphFountain.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "44041913",
+            "Hash": "3123067737",
             "Name": "Oriath Ground",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OriathGround.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1446357715",
+            "Hash": "4232074822",
             "Name": "Oriath Doorway",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OriathDoorway.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2023686576",
+            "Hash": "2808502392",
             "Name": "Oriathan Child",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OriathanChild.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2394217383",
+            "Hash": "1059934463",
             "Name": "Sand Pile",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SandPile.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "830217292",
+            "Hash": "75715244",
             "Name": "Beast Trophy",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BeastTrophy.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "691766029",
+            "Hash": "2224781460",
             "Name": "Syndicate Flag",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateFlag.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1271081477",
+            "Hash": "509059416",
             "Name": "Syndicate Cage",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateCage.png?scale=1",
+            "Cost": "5670",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3711810732",
+            "Hash": "3468261675",
             "Name": "Syndicate Cart",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateCart.png?scale=1",
+            "Cost": "5670",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "898417102",
+            "Hash": "2212620880",
             "Name": "Corpse Sculpture",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/CorpseSculpture.png?scale=1",
+            "Cost": "102000",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1187306917",
+            "Hash": "3461381845",
             "Name": "Artifact Cage",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ArtifactCage.png?scale=1",
+            "Cost": "19000",
+            "MasterLevel": "7",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3034787951",
+            "Hash": "2346659486",
             "Name": "Syndicate Drawers",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateDrawers.png?scale=1",
+            "Cost": "5670",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "4189464092",
+            "Hash": "1911647909",
             "Name": "Syndicate Shelf",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateShelf.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1745982604",
+            "Hash": "1389316742",
             "Name": "Syndicate Ladder",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateLadder.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2513746406",
+            "Hash": "473392835",
             "Name": "Syndicate Cabinet",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateCabinet.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3035971202",
+            "Hash": "2474743338",
             "Name": "Syndicate Table",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateTable.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1579061859",
+            "Hash": "615235553",
             "Name": "Syndicate Desk",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateDesk.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1624789350",
+            "Hash": "1015901747",
             "Name": "Warped Skull",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WarpedSkull.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1108074630",
+            "Hash": "1107649594",
             "Name": "Manifesto Altar",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ManifestoAltar.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2597249353",
+            "Hash": "4148567378",
             "Name": "Sandy Grave",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SandyGrave.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "502252364",
+            "Hash": "3558902227",
             "Name": "Manifesto Stand",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ManifestoStand.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "759457585",
+            "Hash": "2762781012",
             "Name": "Syndicate Fortification",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateFortification.png?scale=1",
+            "Cost": "102000",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3392552831",
+            "Hash": "1544056770",
             "Name": "Syndicate Statue",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateStatue.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1481593124",
+            "Hash": "2414000332",
             "Name": "Syndicate Display",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateDisplay.png?scale=1",
+            "Cost": "3220",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2269221317",
+            "Hash": "1670319567",
             "Name": "Weapon Display Table",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WeaponDisplayTable.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2522655724",
+            "Hash": "4073431283",
             "Name": "Syndicate Armour Rack",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateArmourRack.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2948863796",
+            "Hash": "482091164",
             "Name": "Blacksmith's Rack",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BlacksmithsRack.png?scale=1",
+            "Cost": "7500",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3140838405",
+            "Hash": "1053366102",
             "Name": "Assassin's Daggers",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/AssassinsDaggers.png?scale=1",
+            "Cost": "150000",
+            "MasterLevel": "7",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3075217497",
+            "Hash": "2168688457",
             "Name": "Sword Display Case",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SwordDisplayCase.png?scale=1",
+            "Cost": "5760",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "21735955",
+            "Hash": "1378667475",
             "Name": "Geomancer's Bench",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/GeomancersBench.png?scale=1",
+            "Cost": "102000",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2325292005",
+            "Hash": "682588595",
             "Name": "Syndicate Helm Stand",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateHelmStand.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "98974043",
+            "Hash": "1419200203",
             "Name": "Blacksmith's Barrel",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BlacksmithsBarrel.png?scale=1",
+            "Cost": "3200",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2062625652",
+            "Hash": "678208008",
             "Name": "Syndicate Mannequin",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateMannequin.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
             "Hash": "2110017409",
             "Name": "Syndicate Shield Stand",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SyndicateShieldStand.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Cost": "60000",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2908767076",
+            "Hash": "3818021994",
             "Name": "Karui Weapon Holder",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/KaruiWeaponHolder.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3273665864",
+            "Hash": "3296154643",
             "Name": "Karui Weapon Rack",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/KaruiWeaponRack.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3015302253",
+            "Hash": "70178651",
             "Name": "Karui Weapon Display",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/KaruiWeaponDisplay.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1509305441",
+            "Hash": "604672196",
             "Name": "Primeval Support",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalSupport.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1741459319",
+            "Hash": "354459161",
             "Name": "Primeval Tablet",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalTablet.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2394615904",
+            "Hash": "3707200772",
             "Name": "Primeval Carving",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalCarving.png?scale=1",
+            "Cost": "19000",
+            "MasterLevel": "7",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3826121217",
+            "Hash": "3198365223",
             "Name": "Primeval Pillar",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalPillar.png?scale=1",
+            "Cost": "102000",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1240331414",
+            "Hash": "1298519825",
             "Name": "Primeval Container",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalContainer.png?scale=1",
+            "Cost": "3220",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3355355476",
+            "Hash": "1910694571",
             "Name": "Primeval Bench",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalBench.png?scale=1",
+            "Cost": "12700",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2963527675",
+            "Hash": "1829856135",
             "Name": "Primeval Column Arc",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalColumnArc.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3348316299",
+            "Hash": "2495378203",
             "Name": "Primeval Way Marker",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalWayMarker.png?scale=1",
+            "Cost": "7500",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "810480337",
+            "Hash": "2828537049",
             "Name": "Primeval Column",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalColumn.png?scale=1",
+            "Cost": "12700",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1586865164",
+            "Hash": "2706854561",
             "Name": "Primeval Debris",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalDebris.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2772450075",
+            "Hash": "2997925131",
             "Name": "Primeval Rubble",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalRubble.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "4157625650",
+            "Hash": "2955281824",
             "Name": "Petrified Primevals",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PetrifiedPrimevals.png?scale=1",
+            "Cost": "5760",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "575262580",
+            "Hash": "2918254087",
             "Name": "Primeval Planter",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalPlanter.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3518299054",
+            "Hash": "1342635205",
             "Name": "Primeval Vase",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalVase.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3953384559",
+            "Hash": "2105410465",
             "Name": "Primeval Marker",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalMarker.png?scale=1",
+            "Cost": "3220",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "135776098",
+            "Hash": "327731705",
             "Name": "Primeval Stand",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalStand.png?scale=1",
+            "Cost": "3220",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2610100691",
+            "Hash": "461919698",
             "Name": "Primeval Floor Crystal",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalFloorCrystal.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "73647522",
+            "Hash": "651409704",
             "Name": "Primeval Shrine",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalShrine.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3805695298",
+            "Hash": "1298893948",
             "Name": "Primeval Trough",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalTrough.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2838153093",
+            "Hash": "1771570793",
             "Name": "Primeval Throne",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalThrone.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "805886261",
+            "Hash": "1665146691",
             "Name": "Primeval Tree Planter",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalTreePlanter.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "26815263",
+            "Hash": "580184656",
             "Name": "Primeval Chair",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalChair.png?scale=1",
+            "Cost": "7500",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1267150066",
+            "Hash": "2648293046",
             "Name": "Primeval Table",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PrimevalTable.png?scale=1",
+            "Cost": "5760",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "503524412",
+            "Hash": "3424331653",
             "Name": "Sanctum Pillar",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SanctumPillar.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3111556206",
+            "Hash": "1135071839",
             "Name": "Overgrown Boulder",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OvergrownBoulder.png?scale=1",
+            "Cost": "7500",
+            "MasterLevel": "5",
             "MasterName": "Jun"
         },
         {
-            "Hash": "180168363",
+            "Hash": "3101244306",
             "Name": "Petrified Stump",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PetrifiedStump.png?scale=1",
+            "Cost": "12700",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2888247388",
+            "Hash": "3026109508",
             "Name": "Petrified Tree",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PetrifiedTree.png?scale=1",
+            "Cost": "19000",
+            "MasterLevel": "7",
             "MasterName": "Jun"
         },
         {
-            "Hash": "873440927",
+            "Hash": "269832689",
             "Name": "Theurgic Precipitate Machine",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/TheurgicPrecipitateMachine.png?scale=1",
+            "Cost": "244000",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1190146120",
+            "Hash": "3790335952",
             "Name": "Tree Roots",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/TreeRoots.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2393503752",
+            "Hash": "3954500708",
             "Name": "Classical Painting",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ClassicalPainting.png?scale=1",
+            "Cost": "12700",
+            "MasterLevel": "6",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2326959375",
+            "Hash": "2193535486",
             "Name": "Spore Pods",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SporePods.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "567727915",
+            "Hash": "1231683130",
             "Name": "Oriath Barrier",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OriathBarrier.png?scale=1",
+            "Cost": "3220",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2447882103",
+            "Hash": "3040464046",
             "Name": "Toxic Pods",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ToxicPods.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1062600610",
+            "Hash": "1984176758",
             "Name": "Toxic Pustules",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ToxicPustules.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1453579962",
+            "Hash": "431591933",
             "Name": "Toxic Fungus",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ToxicFungus.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "2461699018",
+            "Hash": "620174647",
             "Name": "Toxic Growths",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ToxicGrowths.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "908733575",
+            "Hash": "3979146041",
             "Name": "Pirate Remains",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PirateRemains.png?scale=1",
+            "Cost": "5760",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "1345830064",
+            "Hash": "504538008",
             "Name": "Scattered Coins",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ScatteredCoins.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
             "MasterName": "Jun"
         },
         {
-            "Hash": "335916880",
+            "Hash": "2163893108",
             "Name": "Rising Smoke",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/RisingSmoke.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3942953144",
+            "Hash": "2013670573",
             "Name": "Thick Smoke",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ThickSmoke.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
             "MasterName": "Jun"
         },
         {
-            "Hash": "3758508314",
+            "Hash": "1184604406",
             "Name": "Raging Fire",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/SnowmanHideoutDecoration.png?scale=1",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/RagingFire.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "3741414142",
+            "Name": "Altar Burner",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/AltarBurner.png?scale=1",
+            "Cost": "5760",
+            "MasterLevel": "2",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "818177711",
+            "Name": "Charred Skeleton",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/CharredSkeleton.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "373284126",
+            "Name": "Bamboo Pile",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BambooPile.png?scale=1",
+            "Cost": "280",
+            "MasterLevel": "1",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2757158175",
+            "Name": "Bamboo Fence",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BambooFence.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "707405592",
+            "Name": "Bamboo Divider",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BambooDivider.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2288215444",
+            "Name": "Bamboo Floor",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BambooFloor.png?scale=1",
+            "Cost": "1740",
+            "MasterLevel": "3",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2244942394",
+            "Name": "Maraketh Rug",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MarakethRug.png?scale=1",
+            "Cost": "5760",
+            "MasterLevel": "2",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2627738752",
+            "Name": "Maraketh Banner",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MarakethBanner.png?scale=1",
+            "Cost": "5760",
+            "MasterLevel": "2",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2148610644",
+            "Name": "Maraketh Brazier",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MarakethBrazier.png?scale=1",
+            "Cost": "3220",
+            "MasterLevel": "4",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "3558410938",
+            "Name": "Rhex Statue",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/RhexStatue.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2472354135",
+            "Name": "Planter Box",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/PlanterBox.png?scale=1",
+            "Cost": "720",
+            "MasterLevel": "2",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "3532809407",
+            "Name": "Maple Tree",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MapleTree.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "3938067780",
+            "Name": "Tasuni's Shrine",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/TasunisShrine.png?scale=1",
+            "Cost": "13800",
+            "MasterLevel": "3",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2926725769",
+            "Name": "Shrine Table",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ShrineTable.png?scale=1",
+            "Cost": "2300",
+            "MasterLevel": "1",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "3423772725",
+            "Name": "Oyun's Throne",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/OyunsThrone.png?scale=1",
+            "Cost": "60000",
+            "MasterLevel": "5",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "4129422096",
+            "Name": "Maraketh Gong",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MarakethGong.png?scale=1",
+            "Cost": "25300",
+            "MasterLevel": "4",
+            "MasterName": "Jun"
+        },
+        {
+            "Hash": "2879918256",
+            "Name": "Madcap Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MadcapBuildingSupplies.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
-            "MasterName": "Jun"
+            "MasterName": null
+        },
+        {
+            "Hash": "748355309",
+            "Name": "Madcap Tree",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MadcapTreeHideout.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1017201144",
+            "Name": "Madcap Spores",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MadcapEnvironmentalEffect.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "3967303776",
+            "Name": "Huntsman Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HuntsmanBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "921306463",
+            "Name": "Huntsman Tree",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HuntsmanHideoutTree.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1738873928",
+            "Name": "Huntsman Spores",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HuntsmanEnvironmentalEffect.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2051505877",
+            "Name": "Celestial Tree",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/TempleCarpet.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
         },
         {
             "Hash": "2284421335",
@@ -7951,7 +8144,15 @@
             "Cost": "0",
             "MasterLevel": "0",
             "MasterName": null
+        },
+        {
+            "Hash": "2037475950",
+            "Name": "Cavas",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Casvas.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
         }
-    
     ]
+
 }
