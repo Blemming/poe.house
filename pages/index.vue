@@ -36,7 +36,7 @@
 						v-if="topHideouts.length"
 						style="min-height:350px;"
 						class="col-12">
-						<h3 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts of the week</h3>
+						<h3 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts Updated for Synthesis</h3>
 						<!-- <p class="text-center text-white bg-dark border border-dark m-0 py-0 lead"><small>Encourage people to vote to get your hideout here</small>   </p> -->
 						<div
 							id="carouselExampleControls"
@@ -72,7 +72,7 @@
 														v-if="hideout.hideoutVideo"
 														class="fas fa-video text-primary"/>
 												</p>
-												<p class="mt-0">by {{ hideout.author || 'anonymous' }}</p>
+												<p class="mt-0">Updated {{ $moment(hideout.updatedAt).format(' MMMM Do YYYY') }} by {{ hideout.author || 'anonymous' }}</p>
 											</nuxt-link>
 										</div>
 										<div class="carousel-caption d-block d-md-none">
@@ -235,7 +235,7 @@
 										v-model="Alva"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="-1"
+											:value="''"
 											selected>All</option>
 										<option
 											v-for="level in levels"
@@ -255,7 +255,7 @@
 										v-model="Einhar"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="-1"
+											:value="''"
 											selected>All</option>
 										<option
 											v-for="level in levels"
@@ -275,7 +275,7 @@
 										v-model="Niko"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="-1"
+											:value="''"
 											selected>All</option>
 										<option
 											v-for="level in levels"
@@ -295,7 +295,7 @@
 										v-model="Zana"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="-1"
+											:value="''"
 											selected>All</option>
 										<option
 											v-for="level in levels"
@@ -315,7 +315,7 @@
 										v-model="Jun"
 										class="form-control custom-select border-primary text-primary bg-secondary">
 										<option
-											:value="-1"
+											:value="''"
 											selected>All</option>
 										<option
 											v-for="level in levels"
@@ -541,22 +541,30 @@ export default {
 			hideoutType: this.$store.state.filters.type || '',
 			'sort': this.$store.state.filters.sortBy,
 			mtx: this.$store.state.filters.mtx,
-			'Alva': this.$store.state.filters['Alva'] || -1,
-			'Einhar': this.$store.state.filters['Einhar'] || -1,
-			'Niko': this.$store.state.filters['Niko'] || -1,
-			'Zana': this.$store.state.filters['Zana'] || -1,
-			'Jun': this.$store.state.filters['Jun'] || -1
+			'Alva': this.$store.state.filters['Alva'] || '',
+			'Einhar': this.$store.state.filters['Einhar'] || '',
+			'Niko': this.$store.state.filters['Niko'] || '',
+			'Zana': this.$store.state.filters['Zana'] || '',
+			'Jun': this.$store.state.filters['Jun'] || ''
 		};
 	},
 	computed: {
 		topHideouts () {
-			const startofweek = this.$moment().startOf('week').subtract(1, 'day').unix();
-			let results = this.hideouts;
-			results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek && !!ho.hideoutScreenshot);
-			results = results.map(ho => ({ ...ho, scale: this.$getRatingScale(ho, this.$calculateVotes(ho.votes, ho.user)) }));
-			results = orderBy(results, (ho) => ho.scale, 'desc');
-			results = take(results, 5);
-			return results;
+			// const startofweek = this.$moment().startOf('week').subtract(1, 'day').unix();
+			// let results = this.hideouts;
+			// results = results.filter(ho => ho.hideoutDateSubmit.seconds >= startofweek && !!ho.hideoutScreenshot);
+			// results = results.map(ho => ({ ...ho, scale: this.$getRatingScale(ho, this.$calculateVotes(ho.votes, ho.user)) }));
+			// results = orderBy(results, (ho) => ho.scale, 'desc');
+			// results = take(results, 5);
+			// if (results.length < 1) {
+			const results = this.hideouts;
+			results.sort(function compare (a, b) {
+				const dateA = new Date(a.updatedAt);
+				const dateB = new Date(b.updatedAt);
+				return dateB - dateA;
+			});
+			// }
+			return take(results, 15);
 		},
 		paginatePages () {
 			if (this.hideoutType || this.searchQuery !== '' || this.mtx !== '' || this.atleastRating !== '' || this.Alva || this.Einhar || this.Niko || this.Zana) {
@@ -575,19 +583,19 @@ export default {
 			if (this.atleastRating !== '') {
 				results = results.filter(hideout => this.$calculateVotes(hideout.votes, hideout.user) >= this.atleastRating);
 			}
-			if (this.Alva >= 0) {
+			if (this.Alva) {
 				results = results.filter(hideout => hideout.hideoutMasters['Alva'] <= this.Alva);
 			}
-			if (this.Einhar >= 0) {
+			if (this.Einhar) {
 				results = results.filter(hideout => hideout.hideoutMasters['Einhar'] <= this.Einhar);
 			}
-			if (this.Niko >= 0) {
+			if (this.Niko) {
 				results = results.filter(hideout => hideout.hideoutMasters['Niko'] <= this.Niko);
 			}
-			if (this.Zana >= 0) {
+			if (this.Zana) {
 				results = results.filter(hideout => hideout.hideoutMasters['Zana'] <= this.Zana);
 			}
-			if (this.Jun >= 0) {
+			if (this.Jun) {
 				results = results.filter(hideout => hideout.hideoutMasters['Jun'] <= this.Jun);
 			}
 			if (this.sort) {
@@ -678,6 +686,7 @@ export default {
     gallery,
     hideoutVideo,
     hideoutDateSubmit,
+    updatedAt,
     hideoutDescription,
     dateSubmitted,
     comments{
