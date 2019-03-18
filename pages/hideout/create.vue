@@ -32,7 +32,6 @@
 //     }
 //   }
 </style>
-
 <template>
 	<div class="row py-5">
 		<div class="col-12">

@@ -160,7 +160,7 @@ Vue.prototype.$hideoutObject = ({
 	hideoutDoodads = [],
 	hideoutMasters = [],
 	dateSubmitted = 0,
-	poeVersion = '3.5.1'
+	poeVersion = '3.6'
 } = {}) => ({
 	author,
 	user,

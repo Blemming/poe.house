@@ -156,16 +156,20 @@ export default {
 	},
 	data () {
 		return {
+			user: {},
 			claimable: true
 		};
 	},
 	computed: {
-		user () {
-			return this.$store.state.auth.user;
-		},
+		// user () {
+		// 	return this.$store.state.auth.user;
+		// },
 		userHideouts () {
-			return this.$store.state.auth.user.hideouts;
+			return (this.user.hideouts) ? this.user.hideouts : [];
 		}
+	},
+	async created () {
+		await this.getUserHideouts();
 	},
 	methods: {
 		getImage (hideout) {
@@ -181,12 +185,50 @@ export default {
 				hideout[0].isDeleted = true;
 				await this.$axios.put(`/api/hideouts/${hideout[0].id}`, hideout[0]);
 				await this.$store.dispatch('auth/updateUserHideouts');
+				await this.getUserHideouts();
 			} catch (e) {
 				console.log(e);
 			}
 		},
 		getHideout (hash) {
 			return this.$store.getters.getHideout(hash)['Name'];
+		},
+		async getUserHideouts () {
+			let query = '';
+			if (this.$store.state.auth.user) {
+				query = `
+                query{
+                    user(id:"${this.$store.state.auth.user._id}"){
+                            username
+                            confirmed
+                            hideouts(where:{
+                                isDeleted_ne:true
+                            }){
+                                hideoutId
+                                nameDescription
+                                hideoutType
+                                views
+                                downloads
+                                comments{
+                                    _id
+                                }
+                                hideoutDateSubmit
+                                hideoutMasters
+                                hideoutScreenshot
+                                votes{
+                                    score
+                                }
+                            }
+                            }
+                        }
+                `;
+			}
+			try {
+				const { data } = await this.$axios.$post(`/api/graphql`, { query });
+				this.user = data.user;
+			} catch (e) {
+				console.log(e);
+			}
 		},
 		async claimEmailHideouts () {
 			try {
