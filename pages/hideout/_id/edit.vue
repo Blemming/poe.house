@@ -148,7 +148,7 @@
 									v-else
 									class="input-group-append">
 									<a
-										:class="`btn btn-primary ${(!hideoutFileLink)?'disabled':''}`"
+										:class="`btn btn-primary ${(!hideout.hideoutFileLink)?'disabled':''}`"
 										href="#"
 										@click.prevent="resolvePastebin()">
 										<span v-if="!pastebinProcessing">
@@ -784,13 +784,16 @@ export default {
 		hideoutDescriptionMD () {
 			return this.hideoutDescription;
 		},
+		imgueGalleryError () {
+			return !!this.errors.items.filter(err => err.field === 'Imgur Gallery').length;
+		},
 		imgurGallery () {
 			// return false;
 			// return !!/imgur/g.test(this.hideoutScreenshot) && !/.png|.jpg|.jpeg/g.test(this.hideoutScreenshot);
 			return !/.png|.jpg|.jpeg/g.test(this.hideoutImage);
 		},
 		displayedImage () {
-			return this.hideoutImage;
+			return this.hideout.hideoutScreenshot;
 		},
 		getHideoutDoodads () {
 			if (this.pastebinData['Doodads']) {
@@ -812,6 +815,15 @@ export default {
 
 		getHideout (hash) {
 			return this.$store.getters.getHideout(hash)['Name'];
+		},
+		async getThumbnailFromGallery () {
+			if (this.hideout.gallery && /imgur.com\/a/.test(this.hideout.gallery)) {
+				const hideoutGallery = this.hideout.gallery.replace(/https:\/\/imgur.com\/a\/([a-zA-Z0-9]*)/gi, '$1');
+				const imgurGalleryPhotos = await this.$axios.$get(`/imgur/3/album/${hideoutGallery}/images`);
+				this.hideout.hideoutScreenshot = imgurGalleryPhotos.data[0].link;
+				this.hideoutImage = imgurGalleryPhotos.data[0].link;
+				this.resolveThumbnail();
+			}
 		},
 		strip (html) {
 			var doc = new DOMParser().parseFromString(html, 'text/html');
