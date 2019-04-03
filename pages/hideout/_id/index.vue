@@ -547,7 +547,7 @@ export default {
 	async asyncData ({ app, store, params, error }) {
 		const query = `
         query{
-  hideouts(limit:9000, where:{isDelete_ne:true,hideoutId:"${params.id}"}){
+  hideouts(limit:9000, where:{isDeleted_ne:true,hideoutId:"${params.id}"}){
       _id,
     author,
     downloads,
@@ -592,22 +592,26 @@ export default {
 			const hideout = data.hideouts[0];
 			let isImgurGallery = false;
 			let imgurGalleryPhotos = '';
-			if (hideout.gallery && /imgur.com\/a/.test(hideout.gallery)) {
-				isImgurGallery = true;
-				const hideoutGallery = hideout.gallery.replace(/https:\/\/imgur.com\/a\/([a-zA-Z0-9]*)/gi, '$1');
-				imgurGalleryPhotos = await app.$axios.$get(`/imgur/3/album/${hideoutGallery}/images`);
-			}
-			if (hideout) {
-				let votes = [];
-				if (store.getters['auth/username']) {
-					votes = hideout.votes.filter(v => v.user._id === store.state.auth.user._id);
+			if (data.hideouts.length) {
+				if (hideout.gallery && /imgur.com\/a/.test(hideout.gallery)) {
+					isImgurGallery = true;
+					const hideoutGallery = hideout.gallery.replace(/https:\/\/imgur.com\/a\/([a-zA-Z0-9]*)/gi, '$1');
+					imgurGalleryPhotos = await app.$axios.$get(`/imgur/3/album/${hideoutGallery}/images`);
 				}
-				return {
-					isImgurGallery,
-					imgurGalleryPhotos,
-					hideout,
-					rating: (votes.length > 0) ? votes[0].score : undefined
-				};
+				if (hideout) {
+					let votes = [];
+					if (store.getters['auth/username']) {
+						votes = hideout.votes.filter(v => v.user._id === store.state.auth.user._id);
+					}
+					return {
+						isImgurGallery,
+						imgurGalleryPhotos,
+						hideout,
+						rating: (votes.length > 0) ? votes[0].score : undefined
+					};
+				} else {
+					error({ statusCode: 404, message: 'This hideout does not exist' });
+				}
 			} else {
 				error({ statusCode: 404, message: 'This hideout does not exist' });
 			}

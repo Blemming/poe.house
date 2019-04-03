@@ -88,14 +88,14 @@
 													class="btn btn-primary mt-3">Edit</nuxt-link>
 
 												<a
+													:data-target="`#exampleModal-${hideout.hideoutId}`"
 													hrf="#"
 													data-toggle="modal"
-													data-target="#exampleModal"
 													class="btn btn-danger text-white mt-3">Delete</a>
 
 												<!-- Modal -->
 												<div
-													id="exampleModal"
+													:id="`exampleModal-${hideout.hideoutId}`"
 													class="modal fade"
 													tabindex="-1"
 													role="dialog"
@@ -125,7 +125,7 @@
 																	type="button"
 																	class="btn btn-success"
 																	data-dismiss="modal"
-																	@click.prevent="deleteHideout(hideout.hideoutId)">Confirm</button>
+																	@click.prevent="deleteHideout(userHideouts[index].hideoutId)">Confirm</button>
 																<button
 																	type="button"
 																	class="btn btn-danger">Cancel</button>
