@@ -36,7 +36,7 @@
 						v-if="topHideouts.length"
 						style="min-height:350px;"
 						class="col-12">
-						<h3 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts Updated for Synthesis</h3>
+						<h3 class="text-center text-white bg-dark border border-dark m-0 py-2 lead">Hideouts currently being viewed</h3>
 						<!-- <p class="text-center text-white bg-dark border border-dark m-0 py-0 lead"><small>Encourage people to vote to get your hideout here</small>   </p> -->
 						<div
 							id="carouselExampleControls"

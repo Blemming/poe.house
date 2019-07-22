@@ -1,5 +1,6 @@
+
 {
-    "size": 1019,
+    "size": 1027,
     "doodads": [
         {
             "Hash": "3692930755",
@@ -3524,6 +3525,22 @@
         {
             "Hash": "1804020988",
             "Name": "Synthesis Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "465311039",
+            "Name": "Legion Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "3281554699",
+            "Name": "Legion Challenger Trophy",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
@@ -7948,7 +7965,63 @@
         {
             "Hash": "2051505877",
             "Name": "Celestial Tree",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/TempleCarpet.png?scale=1",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/CelestialTreeHideout.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "695556534",
+            "Name": "Wild Tree",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WildBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1351107381",
+            "Name": "Wild Shrine",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WildMediumHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2799796012",
+            "Name": "Wild Wind Effect",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WildEnvironmentalHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "771127434",
+            "Name": "Wrangler Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WranglerBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2583168844",
+            "Name": "Wrangler Pylon",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WranglerMediumHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "861340376",
+            "Name": "Wrangler Gold Rain",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WranglerEnvironmentHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1992516459",
+            "Name": "Water Elemental Hideout Decoration",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WaterElementalHideout.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
             "MasterName": null
@@ -8141,14 +8214,6 @@
             "Hash": "3992724805",
             "Name": "Jun",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Jun.png?scale=1",
-            "Cost": "0",
-            "MasterLevel": "0",
-            "MasterName": null
-        },
-        {
-            "Hash": "2037475950",
-            "Name": "Cavas",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Casvas.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
             "MasterName": null
