@@ -1,4 +1,4 @@
-$theme-colors: ( "primary":#f2c462, "secondary":rgba(34, 34, 34,1), "dark":rgba(0, 0, 0, 0.7));
+$theme-colors: ( "primary":#f2c462, "secondary":rgba(34, 34, 34,0.9), "dark":rgba(0, 0, 0, 0.7));
 $border-radius:0px;
 $dropdown-bg:map-get($theme-colors, secondary);
 $dropdown-link-color: map-get($theme-colors, primary);
