@@ -1,5 +1,5 @@
 {
-    "size": 1019,
+    "size": 1050,
     "doodads": [
         {
             "Hash": "3692930755",
@@ -3524,6 +3524,54 @@
         {
             "Hash": "1804020988",
             "Name": "Synthesis Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "465311039",
+            "Name": "Legion Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "3281554699",
+            "Name": "Legion Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "419534232",
+            "Name": "Blight Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "3288708355",
+            "Name": "Blight Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "3573557400",
+            "Name": "Metamorph Challenger Trophy",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "663544515",
+            "Name": "Metamorph Challenger Trophy",
             "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/ChallengeTotem.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
@@ -7948,7 +7996,191 @@
         {
             "Hash": "2051505877",
             "Name": "Celestial Tree",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/TempleCarpet.png?scale=1",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/CelestialTreeHideout.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "695556534",
+            "Name": "Wild Tree",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WildBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1351107381",
+            "Name": "Wild Shrine",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WildMediumHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2799796012",
+            "Name": "Wild Wind Effect",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WildEnvironmentalHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "771127434",
+            "Name": "Wrangler Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WranglerBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2583168844",
+            "Name": "Wrangler Pylon",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WranglerMediumHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "861340376",
+            "Name": "Wrangler Gold Rain",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WranglerEnvironmentHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1992516459",
+            "Name": "Water Elemental Hideout Decoration",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WaterElementalHideout.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1344480857",
+            "Name": "Ringmaster Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/RingmasterBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1348449590",
+            "Name": "Ringmaster Spectators",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/RingmasterSpectators.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1719705969",
+            "Name": "Ringmaster Fireworks Environment Decoration",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/RingmasterFireworksEnvironmentDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "3347296747",
+            "Name": "Harlequin Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HarlequinBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2345766441",
+            "Name": "Harlequin Spectators",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HarlequinSpectators.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "3633445042",
+            "Name": "Harlequin Apparition Environment Decoration",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/HarlequinApparitionHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "59484419",
+            "Name": "Miracle Map Device",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MiracleMapDevice.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "443042643",
+            "Name": "Miracle Map Device I",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MiracleMapDevice.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "4247927196",
+            "Name": "Miracle Map Device II",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MiracleMapDevice2.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "337391691",
+            "Name": "Miracle Map Device III",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/MiracleMapDevice3.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "698914185",
+            "Name": "Black Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BlackBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1906766547",
+            "Name": "Black Statue",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BlackHideoutStatue.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2270844387",
+            "Name": "Black Environment Hideout Decoration",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/BlackEnvironmentHideoutDecoration.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2040684681",
+            "Name": "White Building Supplies",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WhiteBuildingSupplies.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "1454660602",
+            "Name": "White Statue",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WhiteHideoutStatue.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "938327890",
+            "Name": "White Environment Hideout Decoration",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/WhiteEnvironmentHideoutDecoration.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
             "MasterName": null
@@ -8146,9 +8378,25 @@
             "MasterName": null
         },
         {
-            "Hash": "2037475950",
-            "Name": "Cavas",
-            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Casvas.png?scale=1",
+            "Hash": "10623884",
+            "Name": "Sister Cassia",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Cassia.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "4285419720",
+            "Name": "Tane Octavius",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Tane.png?scale=1",
+            "Cost": "0",
+            "MasterLevel": "0",
+            "MasterName": null
+        },
+        {
+            "Hash": "2913423765",
+            "Name": "Kirac",
+            "Icon": "https://web.poecdn.com/image/Art/2DItems/Hideout/Kirac.png?scale=1",
             "Cost": "0",
             "MasterLevel": "0",
             "MasterName": null
