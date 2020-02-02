@@ -7,7 +7,8 @@ export default async function (context) {
 		const hideout = hideouts[0];
 		if (!process.server) {
 			let viewed = [];
-			viewed = JSON.parse(Cookies.get('viewed')) || viewed;
+			const viewedCookie = Cookies.get('viewed');
+			viewed = (typeof viewedCookie === 'string') ? JSON.parse(Cookies.get('viewed')) : viewed;
 			if (viewed.indexOf(context.params.id) === -1) {
 				viewed.push(context.params.id);
 				const views = hideout.views || 0;

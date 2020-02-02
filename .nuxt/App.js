@@ -66,6 +66,8 @@ export default {
 
   methods: {
     setLayout(layout) {
+      if(layout && typeof layout !== 'string') throw new Error('[nuxt] Avoid using non-string value as layout property.')
+
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }

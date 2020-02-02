@@ -13,8 +13,8 @@
 							<div
 								class="carousel-inner bg-dark">
 								<div
-									v-for="(image,index) in imgurGalleryPhotos.data"
-									:key="image.id"
+									v-for="(image,index) in imgurGalleryPhotos"
+									:key="image.id || index"
 									:class="(index===0)?'carousel-item active text-center':'carousel-item text-center'"
 								>
 									<img
@@ -77,7 +77,7 @@
 									<td>
 										<image-rating
 											v-if="!!$store.getters['auth/username']"
-											v-model="rating"
+											v-model="hideout.rating"
 											:read-only="false"
 											:src="require('~/assets/images/Exalted_Orb.png')"
 											:show-rating="false"
@@ -598,14 +598,20 @@ export default {
 					const hideoutGallery = hideout.gallery.replace(/https:\/\/imgur.com\/a\/([a-zA-Z0-9]*)/gi, '$1');
 					imgurGalleryPhotos = await app.$axios.$get(`/imgur/3/album/${hideoutGallery}/images`);
 				}
+				if (hideout.gallery && /imgur.com\/gallery/.test(hideout.gallery)) {
+					isImgurGallery = true;
+					const hideoutGallery = hideout.gallery.replace(/https:\/\/imgur.com\/gallery\/([a-zA-Z0-9]*)/gi, '$1');
+					imgurGalleryPhotos = await app.$axios.$get(`/imgur/3/gallery/${hideoutGallery}/images`);
+				}
 				if (hideout) {
 					let votes = [];
 					if (store.getters['auth/username']) {
 						votes = hideout.votes.filter(v => v.user._id === store.state.auth.user._id);
 					}
+					imgurGalleryPhotos = (imgurGalleryPhotos.data && imgurGalleryPhotos.data.images) || imgurGalleryPhotos.data;
 					return {
 						isImgurGallery,
-						imgurGalleryPhotos,
+						imgurGalleryPhotos: imgurGalleryPhotos,
 						hideout,
 						rating: (votes.length > 0) ? votes[0].score : undefined
 					};
@@ -654,6 +660,7 @@ export default {
 			return this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === this.hideout.hideoutType)[0]['Name'];
 		},
 		getScreenshot () {
+			console.log('getting screenshot');
 			const image = this.$store.state.hideouts.filter(hideout => parseInt(hideout['Hash']) === this.hideout.hideoutType)[0]['Icon'];
 			return image.replace(/\?scale=1/gi, '');
 		},
