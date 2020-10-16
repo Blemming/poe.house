@@ -3,66 +3,77 @@
     "name": "contest",
     "path": "/contest",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\contest.vue",
-    "chunkName": "pages/contest"
+    "chunkName": "pages/contest",
+    "_name": "_5ba32adc"
   },
   {
     "name": "data-processing",
     "path": "/data-processing",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\data-processing.vue",
-    "chunkName": "pages/data-processing"
+    "chunkName": "pages/data-processing",
+    "_name": "_d991dc44"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_3bcc3eb1"
   },
   {
     "name": "logout",
     "path": "/logout",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\logout.vue",
-    "chunkName": "pages/logout"
+    "chunkName": "pages/logout",
+    "_name": "_ea66c01c"
   },
   {
     "name": "register",
     "path": "/register",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\register.vue",
-    "chunkName": "pages/register"
+    "chunkName": "pages/register",
+    "_name": "_7b84908b"
   },
   {
     "name": "user",
     "path": "/user",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\user\\\\index.vue",
-    "chunkName": "pages/user/index"
+    "chunkName": "pages/user/index",
+    "_name": "_2d5c336f"
   },
   {
     "name": "hideout-create",
     "path": "/hideout/create",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\hideout\\\\create.vue",
-    "chunkName": "pages/hideout/create"
+    "chunkName": "pages/hideout/create",
+    "_name": "_6e5cbf10"
   },
   {
     "name": "hideout-id",
     "path": "/hideout/:id",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\hideout\\\\_id\\\\index.vue",
-    "chunkName": "pages/hideout/_id/index"
+    "chunkName": "pages/hideout/_id/index",
+    "_name": "_1aaa486c"
   },
   {
     "name": "user-id",
     "path": "/user/:id",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\user\\\\_id.vue",
-    "chunkName": "pages/user/_id"
+    "chunkName": "pages/user/_id",
+    "_name": "_3fee4597"
   },
   {
     "name": "hideout-id-edit",
     "path": "/hideout/:id?/edit",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\hideout\\\\_id\\\\edit.vue",
-    "chunkName": "pages/hideout/_id/edit"
+    "chunkName": "pages/hideout/_id/edit",
+    "_name": "_659dc540"
   },
   {
     "name": "index",
     "path": "/",
     "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_72249b9a"
   }
 ]

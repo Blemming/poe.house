@@ -210,7 +210,7 @@
 		</nav>
 		<div
 			v-if="$store.state.announcement"
-			:class="`alert alert-warning alert-dismissible text-center fade ${($store.state.showAnnouncement)?'show':''} d-none d-lg-block`"
+			:class="`alert alert-${($store.state.announcement)?$store.state.announcement.alertcolor:'warning'} alert-dismissible text-center fade ${($store.state.showAnnouncement)?'show':''} d-none d-lg-block`"
 			style="position:absolute;z-index:99;width:100%;"
 			role="alert">
 			<no-ssr>
