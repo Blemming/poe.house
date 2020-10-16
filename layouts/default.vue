@@ -32,6 +32,6 @@ export default {
 
 <style>
 body{
-    font-family: 'Noto Serif', serif;
+    font-family: 'Fontin-SmallCaps', serif;
 }
 </style>

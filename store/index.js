@@ -108,7 +108,8 @@ export const actions = {
 		commit('TOGGLE_ANNOUNCEMENT', showAnnouncement);
 
 		const { doodads } = require('~/data/doodads.json');
-		let { hideouts } = require('~/data/hideouts.json');
+		// let { hideouts } = require('~/data/hideouts.json');
+		let hideouts = await this.$axios.$get(`/api/hideouttypes`).catch(e => console.log(e));
 		hideouts = orderBy(hideouts, 'Name');
 		commit('SET_DOODADS', doodads);
 		commit('SET_HIDEOUTS', hideouts);

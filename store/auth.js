@@ -241,7 +241,8 @@ export const actions = {
 			commit('setUser', session.user);
 			commit('setToken', session.jwt);
 		} catch (e) {
-			throw Error(e.response.data.message);
+			console.log(e.response);
+			throw Error(e.response.data.message.message);
 		}
 	}
 };

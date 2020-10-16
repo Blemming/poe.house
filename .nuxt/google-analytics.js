@@ -1,7 +1,17 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 
-export default async function ({ app: { router } }) {
-  const moduleOptions = {"track":"PageView","id":"UA-131152589-1"}
-  Vue.use(VueAnalytics, Object.assign({ router }, moduleOptions))
+export default async (ctx, inject) => {
+  const runtimeConfig = ctx.$config && ctx.$config.googleAnalytics || {}
+  const moduleOptions = {"dev":true,"debug":{"sendHitTask":true},"track":"PageView","id":"UA-131152589-1"}
+  const options = {...moduleOptions, ...runtimeConfig}
+
+  if (typeof options.asyncID === 'function') {
+    options.id = await options.asyncID(ctx)
+  }
+
+  Vue.use(VueAnalytics, {...{ router: ctx.app.router }, ...options})
+
+  ctx.$ga = Vue.$ga
+  inject('ga', Vue.$ga)
 }

@@ -658,58 +658,59 @@ export default {
 		}
 	},
 	async created () {
-		this.getHideouts();
+		this.getHideouts(false);
 	},
 	methods: {
 		toggleFilters () {
 			this.filtersOpened = !this.filtersOpened;
 		},
-		async getHideouts (all = false) {
+		async getHideouts (all) {
 			try {
-				const query = `
-            query{
-  hideouts(limit:9000, where:{
-                isDeleted_ne:true,
-                ${(all) ? '' : 'hasThumbnail:true'}
-     }){
-    author,
-    downloads,
-    hideoutFileLink,
-    hideoutId,
-    hideoutMasters,
-    hideoutScreenshot,
-    hideoutType,
-    decorationsCost,
-    uniqueDecorations,
-    nameDescription,
-    views,
-    gallery,
-    hideoutVideo,
-    hideoutDateSubmit,
-    updatedAt,
-    hideoutDescription,
-    dateSubmitted,
-    comments{
-        _id
-    }
-    user{
-        Donator,
-      username,
-      _id
-    },
-    votes{
-        _id,
-      score,
-      user{
-          _id
-      }
-    }
-  }
-}
-            `;
+				// 				const query = `
+				//             query{
+				//   hideouts(limit:9000, where:{
+				//                 isDeleted_ne:true,
+				//                 ${(all) ? '' : 'hasThumbnail:true'}
+				//      }){
+				//     author,
+				//     downloads,
+				//     hideoutFileLink,
+				//     hideoutId,
+				//     hideoutMasters,
+				//     hideoutScreenshot,
+				//     hideoutType,
+				//     decorationsCost,
+				//     uniqueDecorations,
+				//     nameDescription,
+				//     views,
+				//     gallery,
+				//     hideoutVideo,
+				//     hideoutDateSubmit,
+				//     updatedAt,
+				//     hideoutDescription,
+				//     dateSubmitted,
+				//     comments{
+				//         _id
+				//     }
+				//     user{
+				//         Donator,
+				//       username,
+				//       _id
+				//     },
+				//     votes{
+				//         _id,
+				//       score,
+				//       user{
+				//           _id
+				//       }
+				//     }
+				//   }
+				// }
+				//             `;
 				this.loading = true;
-				const { data } = await this.$axios.$post('/api/graphql', { query });
-				this.hideouts = data.hideouts;
+				// const { data } = await this.$axios.$post('/api/graphql', { query });
+				const hideouts = await this.$axios.$get(`/api/hideouts/all?hasThumbnail=${!all}`);
+				this.hideouts = hideouts;
 
 				this.loading = false;
 			} catch (e) {

@@ -146,7 +146,8 @@ export default {
 				}
 			} catch (err) {
 				this.loading = false;
-				this.error = err.message;
+				console.log(err);
+				this.error = err;
 			}
 		},
 		...mapActions({

@@ -1,0 +1,68 @@
+[
+  {
+    "name": "contest",
+    "path": "/contest",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\contest.vue",
+    "chunkName": "pages/contest"
+  },
+  {
+    "name": "data-processing",
+    "path": "/data-processing",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\data-processing.vue",
+    "chunkName": "pages/data-processing"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\login.vue",
+    "chunkName": "pages/login"
+  },
+  {
+    "name": "logout",
+    "path": "/logout",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\logout.vue",
+    "chunkName": "pages/logout"
+  },
+  {
+    "name": "register",
+    "path": "/register",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\register.vue",
+    "chunkName": "pages/register"
+  },
+  {
+    "name": "user",
+    "path": "/user",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\user\\\\index.vue",
+    "chunkName": "pages/user/index"
+  },
+  {
+    "name": "hideout-create",
+    "path": "/hideout/create",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\hideout\\\\create.vue",
+    "chunkName": "pages/hideout/create"
+  },
+  {
+    "name": "hideout-id",
+    "path": "/hideout/:id",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\hideout\\\\_id\\\\index.vue",
+    "chunkName": "pages/hideout/_id/index"
+  },
+  {
+    "name": "user-id",
+    "path": "/user/:id",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\user\\\\_id.vue",
+    "chunkName": "pages/user/_id"
+  },
+  {
+    "name": "hideout-id-edit",
+    "path": "/hideout/:id?/edit",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\hideout\\\\_id\\\\edit.vue",
+    "chunkName": "pages/hideout/_id/edit"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "E:\\\\Web Development\\\\poe.house\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "entry": "server.js",
+  "files": {
+    "pages/contest.js": "pages/contest.js",
+    "pages/data-processing.js": "pages/data-processing.js",
+    "pages/hideout/_id/edit.js": "pages/hideout/_id/edit.js",
+    "pages/hideout/_id/index.js": "pages/hideout/_id/index.js",
+    "pages/hideout/create.js": "pages/hideout/create.js",
+    "pages/index.js": "pages/index.js",
+    "pages/login.js": "pages/login.js",
+    "pages/logout.js": "pages/logout.js",
+    "pages/register.js": "pages/register.js",
+    "pages/user/_id.js": "pages/user/_id.js",
+    "pages/user/index.js": "pages/user/index.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "pages/contest.js": "pages/contest.js.map",
+    "pages/data-processing.js": "pages/data-processing.js.map",
+    "pages/hideout/_id/edit.js": "pages/hideout/_id/edit.js.map",
+    "pages/hideout/_id/index.js": "pages/hideout/_id/index.js.map",
+    "pages/hideout/create.js": "pages/hideout/create.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "pages/login.js": "pages/login.js.map",
+    "pages/logout.js": "pages/logout.js.map",
+    "pages/register.js": "pages/register.js.map",
+    "pages/user/_id.js": "pages/user/_id.js.map",
+    "pages/user/index.js": "pages/user/index.js.map",
+    "server.js": "server.js.map"
+  }
+}

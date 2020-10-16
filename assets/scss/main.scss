@@ -1,4 +1,4 @@
-$theme-colors: ( "primary":#f2c462, "secondary":rgba(34, 34, 34,0.9), "dark":rgba(0, 0, 0, 0.7));
+$theme-colors: ( "primary":#e2b66b, "secondary":rgba(34, 34, 34,0.9), "dark":rgba(0, 0, 0, 0.7));
 $border-radius:0px;
 $dropdown-bg:map-get($theme-colors, secondary);
 $dropdown-link-color: map-get($theme-colors, primary);
@@ -10,10 +10,10 @@ $input-bg:map-get($theme-colors, dark);
 $input-disabled-bg: map-get($theme-colors, secondary);
 $input-color: white;
 @font-face {
-    font-family: 'Copperplate Gothic';
-    src: local('Copperplate Gothic Bold'), local('CopperplateGothic-Bold'),
-        url('../fonts/CopperplateGothic-Bold.woff2') format('woff2'),
-        url('../fonts/CopperplateGothic-Bold.woff') format('woff');
+    font-family: 'Fontin-SmallCaps';
+    src: local('Fontin-SmallCaps'), local('Fontin-SmallCaps'),
+        url('../fonts/Fontin-SmallCaps.woff2') format('woff2'),
+        url('../fonts/Fontin-SmallCaps.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
@@ -25,7 +25,7 @@ body {
     background-color: map-get($theme-colors, dark);
 }
 .font-cinzel{
-    font-family: 'Copperplate Gothic', serif;
+    font-family: 'Fontin-SmallCaps', serif;
 }
 .btn-grey{
     color:rgba(255,255,255,0.6);
@@ -37,7 +37,7 @@ body {
     }
 }
 .main-title{
-    font-family: 'Copperplate Gothic', serif;
+    font-family: 'Fontin-SmallCaps', serif;
     color:map-get($theme-colors, primary)!important;
     
   text-shadow:
@@ -64,8 +64,15 @@ body {
         }
     }
 }
-
+.navbar.bg-secondary{
+    background: linear-gradient(to top, #0c0c0c, #0c0c0c 40%, #131313);
+	box-shadow: 0px 0px 4px 0px #1f1a0f inset;
+	border: 1px solid #050505;
+}
 .card {
+	background: linear-gradient(to left, #0c0c0c, #0c0c0c 40%, #131313);
+	box-shadow: 0px 0px 4px 0px #1f1a0f inset;
+	border: 2px solid #15110c;
     a:hover {
         text-decoration: none;
     }
